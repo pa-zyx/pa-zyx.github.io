@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="5gXbjwP2M2lldOIIKUxUCHGm0ZeANFXrPV6LcJ_UpZo" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Cpp,bool,basic_ios,运算符重载,类型转换,Cpp演化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Microwave. Five minutes." type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="为什么可以 while( cin &amp;gt;&amp;gt; n ) ？这个问题困扰了我很久。每次写出那行代码都在为什么没有输入时它会停，为什么可以这样写，每次写时都有些虚。为了保持我的自信，我想象了很多情况来安抚自己。起初我类比 C 语言，想着应该是 cin 这个鬼东西返回了一个 bool 类型的值。之后在学习了类与对象后，发现 cin 不过是个对象不可能返回什么值。我又给出了新的解释：也许 cin &amp;g">
+<meta name="keywords" content="Cpp,bool,basic_ios,运算符重载,类型转换,Cpp演化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="basic_ios 如何穿上它的 bool">
+<meta property="og:url" content="https://pazyx.xyz/2018/06/29/cin-return/index.html">
+<meta property="og:site_name" content="Microwave. Five minutes.">
+<meta property="og:description" content="为什么可以 while( cin &amp;gt;&amp;gt; n ) ？这个问题困扰了我很久。每次写出那行代码都在为什么没有输入时它会停，为什么可以这样写，每次写时都有些虚。为了保持我的自信，我想象了很多情况来安抚自己。起初我类比 C 语言，想着应该是 cin 这个鬼东西返回了一个 bool 类型的值。之后在学习了类与对象后，发现 cin 不过是个对象不可能返回什么值。我又给出了新的解释：也许 cin &amp;g">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-04T17:33:36.928Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="basic_ios 如何穿上它的 bool">
+<meta name="twitter:description" content="为什么可以 while( cin &amp;gt;&amp;gt; n ) ？这个问题困扰了我很久。每次写出那行代码都在为什么没有输入时它会停，为什么可以这样写，每次写时都有些虚。为了保持我的自信，我想象了很多情况来安抚自己。起初我类比 C 语言，想着应该是 cin 这个鬼东西返回了一个 bool 类型的值。之后在学习了类与对象后，发现 cin 不过是个对象不可能返回什么值。我又给出了新的解释：也许 cin &amp;g">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpI"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pazyx.xyz/2018/06/29/cin-return/"/>
+
+
+
+
+
+  <title>basic_ios 如何穿上它的 bool | Microwave. Five minutes.</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-121622821-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Microwave. Five minutes.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">他大概会说你想得太多</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-code">
+          <a href="/code" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Code
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-other">
+          <a href="/other" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Other
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-demo">
+          <a href="/demo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Demo
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pazyx.xyz/2018/06/29/cin-return/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pazyx.xyz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EBFFFA.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Microwave. Five minutes.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">basic_ios 如何穿上它的 bool</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-29T01:19:17+08:00">
+                2018-06-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言-Cpp/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言 - Cpp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/29/cin-return/" class="leancloud_visitors" data-flag-title="basic_ios 如何穿上它的 bool">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,450
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="为什么可以-while-cin-gt-gt-n-？"><a href="#为什么可以-while-cin-gt-gt-n-？" class="headerlink" title="为什么可以 while( cin &gt;&gt; n ) ？"></a>为什么可以 while( cin &gt;&gt; n ) ？</h1><p>这个问题困扰了我很久。每次写出那行代码都在为什么没有输入时它会停，为什么可以这样写，每次写时都有些虚。<br>为了保持我的自信，我想象了很多情况来安抚自己。<br>起初我类比 C 语言，想着应该是 <code>cin</code> 这个鬼东西返回了一个 <code>bool</code> 类型的值。之后在学习了类与对象后，发现 <code>cin</code> 不过是个对象不可能返回什么值。我又给出了新的解释：也许 <code>cin &gt;&gt; n</code> 这个表达式是个 <code>bool</code> 类型的值吧。再之后我看运算符重载时，刚刚的解释也凉了。表达式 <code>cin &gt;&gt; n</code> 的值是 <code>&lt;&lt;</code> 的运算符重载函数返回的一个 basic_istream 类的对象而已。</p>
+<p><strong>我的想象力有一些枯竭了 … …</strong></p>
+<p>直到这几天我在看《深度探索C++对象模型》书时，书中的例子中提到了 basic_ios 的类型转换函数，又让我想起了之前的问题。我查阅了大量资料，大致搞清楚了 究竟为什么可以？和 解决方案的演变过程。</p>
+<h2 id="while-的括号里能放什么？"><a href="#while-的括号里能放什么？" class="headerlink" title="while 的括号里能放什么？"></a>while 的括号里能放什么？</h2><blockquote>
+<p>任何能按语境转换为 bool 的表达式，或带花括号或等号初始化器的单个变量声明。<br>每次迭代前求值此表达式，而若它产出 <code>false</code> ，则退出循环。若此为声明，则每次迭代前求值初始化器，且若被声明变量的值转换为 <code>false</code> ，则退出循环。</p>
+</blockquote>
+<h2 id="什么可以转换为-bool？"><a href="#什么可以转换为-bool？" class="headerlink" title="什么可以转换为 bool？"></a>什么可以转换为 bool？</h2><p>对于原始数据类型，适用于C++ 标准中的<strong>布尔转换</strong>规则<br>规则如下：</p>
+<blockquote>
+<p><strong>整数</strong>、浮点、无作用域枚举、<strong>指针和指向成员指针类型的纯右值</strong>能转换成 <code>bool</code> 类型纯右值。<br>值零（对于整数、浮点和无作用域枚举）、<strong>空指针值和空成员指针值</strong>变为 <code>false</code> 。所有其他值变为 <code>true</code> 。<br><code>std::nullptr_t</code> 类型纯右值，包括 <code>nullptr</code> ，能在直接初始化的语境中转换成 <code>bool</code> 类型纯右值。结果值为 <code>false</code> 。(C++11 起)</p>
+</blockquote>
+<p>对于用户定义类型，则需要给出 类型转换函数 或 以目标类型为参数的构造函数。</p>
+<h2 id="究竟为什么可以？"><a href="#究竟为什么可以？" class="headerlink" title="究竟为什么可以？"></a>究竟为什么可以？</h2><p>我直接给出答案：basic_istream 的基类 basic_ios 类有一个 bool( ) 的运算符重载函数，也就是类型转换函数。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="keyword">operator</span> <span class="title">bool</span><span class="params">()</span> <span class="keyword">const</span></span>; 		<span class="comment">// C++11 </span></span><br><span class="line"><span class="comment">//若流无错误则为 true ，否则为 false 。</span></span><br></pre></td></tr></table></figure></p>
+<p>这样就解决了上述问题，表达式 <code>cin &gt;&gt; n</code> 的值被转换为 <code>bool</code> 类型当然可以放在 while 的括号内没有任何问题。</p>
+<hr>
+<h1 id="演变过程"><a href="#演变过程" class="headerlink" title="演变过程"></a>演变过程</h1><p>上面的只是 C++11 标准库的解决方案。其实更有意思的是 basic_istream 的对象转换到 bool 类型在实现上的一些历史演变过程。</p>
+<h2 id="operator-int-const"><a href="#operator-int-const" class="headerlink" title="operator int() const;"></a>operator int() const;</h2><p>由于 C++ 早期是没有 <code>bool</code> 类型的，iostream 库的构建者 Jerry Schwarz 希望通过为 basic_ios 类编写一个类型转换函数，提供将 basic_ios 类转换为 <code>int</code> 类型的方式，实现 <code>while( cin &gt;&gt; n )</code>。<br>可这样写后他发现一个问题，就是有人可能写出下面这种代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span> &lt;&lt; intValue; <span class="comment">// 正确的应该为 cin &gt;&gt; Value;</span></span><br></pre></td></tr></table></figure></p>
+<p>由于 <code>&lt;&lt;</code> 和 <code>&gt;&gt;</code> 运算符很容易让程序员用乱，有的人可能会写出上面的错误代码，但当时的编译器没有报错。<br>因为编译器发现 <code>cin</code> 是没有重载 <code>&lt;&lt;</code> ，但 <code>int</code> 是可以做左移 ( <code>&lt;&lt;</code> ) 的，程序将 basic_ios 的对象转换为 <code>int</code> 又进行了左移操作。这算不上错误，但至少将大部分程序员的错误隐藏了，让人难以定位错误。<br>这个错误之后被戏称为“Schwarz Error”，在这之后 Jerry Schwarz 用下面的函数取代了 <code>operator int () const;</code></p>
+<h2 id="operator-void-const"><a href="#operator-void-const" class="headerlink" title="operator void*() const;"></a>operator void*() const;</h2><p>C++ 的标准中 <code>void*</code> 能隐式转换为 <code>bool</code> 类型，Jerry Schwarz 想到了这种方式，<br>并且还为 basic_ios 类重载了 <code>!</code> 运算符，以支持 <code>while( ! ( cin &gt;&gt; n ) )</code>。<br>这个函数一直维持到 C++11 的出现。</p>
+<h2 id="explicit-operator-bool-const"><a href="#explicit-operator-bool-const" class="headerlink" title="explicit operator bool() const;"></a>explicit operator bool() const;</h2><p>之前的 <code>operato void*() const;</code> 其实是有安全风险的。<br>你可以直接给一个 <code>void*</code> 类型的变量赋一个 basic_ios 类的对象，并且没有任何的错误或警告。这是不安全的，这种类型转换应该是显性的才安全。<br>C++11 改变了隐式转换的一些规则，解决了安全 bool 问题。<br>C++11 之前在类型转换运算符重载函数前加上 <code>explicit</code> 关键字，声明它必须显式使用，以强制类型转换的形式去操作。比如：<code>bool b = (bool)cin</code> 才可以使用类型转换函数，而不能做 <code>bool b = cin</code> 这样的操作。<br>而 C++11 标准对目标为 <code>bool</code> 类型的转换，改变了标准。</p>
+<p><strong>具体标准如下：</strong></p>
+<blockquote>
+<p>下列语境中，期待类型 <code>bool</code> ，而若声明 <code>bool t(e)</code>; 为良式则进行隐式转换（即考虑如 <code>explicit T::operator bool() const;</code> 的隐式转换函数）。我们说这种表达式 <code>e</code> 可按语境转换为 <code>bool</code>。</p>
+<ul>
+<li><code>if</code> 、 <code>while</code> 、 <code>for</code> 的控制表达式；</li>
+<li>内建逻辑运算符 <code>!</code> 、 <code>&amp;&amp;</code> 和 <code>||</code> 的运算数；</li>
+<li>条件运算符 <code>?:</code> 的首个运算数；</li>
+<li><code>static_assert</code>  声明中的谓词；(C++11起)</li>
+<li><code>noexcept</code>  指定符中的表达式；</li>
+<li><code>explicit</code>  指定符中的表达式；(C++20 起)</li>
+<li>契约属性 的谓词。(C++20 起)</li>
+</ul>
+</blockquote>
+<p>这样在非上述语境下转换为 <code>bool</code> 类型就需要显式转换，而在控制表达式中可以自动的隐式转换。增强安全性的同时也保证向前兼容。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion" target="_blank" rel="noopener">隐式转换</a></li>
+<li><a href="https://zh.cppreference.com/w/cpp/io/basic_ios" target="_blank" rel="noopener">std::basic_ios</a></li>
+<li><a href="https://zh.cppreference.com/w/cpp/io/basic_ios/operator_bool" target="_blank" rel="noopener">std::basic_ios::operator bool</a></li>
+<li><a href="https://zh.cppreference.com/w/cpp/language/explicit" target="_blank" rel="noopener">explicit 指定符</a></li>
+<li><a href="https://zh.cppreference.com/w/cpp/language/while" target="_blank" rel="noopener">while 循环</a></li>
+<li><a href="https://zh.cppreference.com/w/cpp/language/if" target="_blank" rel="noopener">if 语句</a></li>
+<li>《深度探索C++对象模型》—— Stanley B. Lippman</li>
+<li>《C++语言的设计与演化》—— Bjarne Stroustrup</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+
+
+
+
+
+
+
+<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/06/29/cin-return/">basic_ios 如何穿上它的 bool</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
+  <p><span>发布时间:</span>2018年06月29日 - 01:06</p>
+  <p><span>最后更新:</span>2018年07月05日 - 01:07</p>
+  <p><span>原始链接:</span><a href="/2018/06/29/cin-return/" title="basic_ios 如何穿上它的 bool">https://pazyx.xyz/2018/06/29/cin-return/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://pazyx.xyz/2018/06/29/cin-return/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-SA 4.0)">署名-非商业性使用-相同方式分享 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){SA
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+</div>
+
+
+
+
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="pazyx.xyz 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="pazyx.xyz 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+
+
+
+
+
+            <a href="/tags/Cpp/" rel="tag"><i class="fa fa-tag"></i> Cpp</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/bool/" rel="tag"><i class="fa fa-tag"></i> bool</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/basic-ios/" rel="tag"><i class="fa fa-tag"></i> basic_ios</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/运算符重载/" rel="tag"><i class="fa fa-tag"></i> 运算符重载</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/类型转换/" rel="tag"><i class="fa fa-tag"></i> 类型转换</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/Cpp演化/" rel="tag"><i class="fa fa-tag"></i> Cpp演化</a>
+
+
+
+
+
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/16/System-in/" rel="next" title="System.in">
+                <i class="fa fa-chevron-left"></i> System.in
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/01/cpptojava/" rel="prev" title="Java 与 C++ 细节差异 （一）">
+                Java 与 C++ 细节差异 （一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/EBFFFA.png"
+                alt="pazyx.xyz" />
+            
+              <p class="site-author-name" itemprop="name">pazyx.xyz</p>
+              <p class="site-description motion-element" itemprop="description">他大概会说你想得太多</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pa-zyx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/9953731/jntye" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="pazyx728@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://wszyx.org/" title="wszyx.org" target="_blank">wszyx.org</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wdxtub.com" title="小土刀" target="_blank">小土刀</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://120.79.224.249" title="金明的ACM小队" target="_blank">金明的ACM小队</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://biji.io" title="设计笔记" target="_blank">设计笔记</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么可以-while-cin-gt-gt-n-？"><span class="nav-number">1.</span> <span class="nav-text">为什么可以 while( cin &gt;&gt; n ) ？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#while-的括号里能放什么？"><span class="nav-number">1.1.</span> <span class="nav-text">while 的括号里能放什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么可以转换为-bool？"><span class="nav-number">1.2.</span> <span class="nav-text">什么可以转换为 bool？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#究竟为什么可以？"><span class="nav-number">1.3.</span> <span class="nav-text">究竟为什么可以？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#演变过程"><span class="nav-number">2.</span> <span class="nav-text">演变过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#operator-int-const"><span class="nav-number">2.1.</span> <span class="nav-text">operator int() const;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#operator-void-const"><span class="nav-number">2.2.</span> <span class="nav-text">operator void*() const;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explicit-operator-bool-const"><span class="nav-number">2.3.</span> <span class="nav-text">explicit operator bool() const;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pazyx.xyz</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">全站字数统计&#58;</span>
+    
+    <span title="全站字数统计">45.9k</span>
+  
+
+<!--
+
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://pazyx.xyz/2018/06/29/cin-return/';
+          this.page.identifier = '2018/06/29/cin-return/';
+          this.page.title = 'basic_ios 如何穿上它的 bool';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://pazyx-xyz.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7cTegp3KYMtc2W0V2u63CUlJ-gzGzoHsz", "bDS8nx2LWwUeyou9BfjypwGu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

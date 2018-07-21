@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="5gXbjwP2M2lldOIIKUxUCHGm0ZeANFXrPV6LcJ_UpZo" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,动态规划,背包问题,01背包,公告,Cpp,完全背包,C,Dijkstra,计划,KMP," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Microwave. Five minutes." type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="最短路算法1——Dijkstra描述不清楚： 在时间复杂度最后的总结中，我之前提到“对于稠密图来说有时不优化比利用最小堆优化更高效”。实际上一般的图，甚至是完全图，利用最小堆优化效率都是优于不优化的。只有一种情况是相反的，就是边确实特别多，是顶点数的高次幂（3以上）的情况。一般来说这种图很少见，完全图的边数也就是顶点数的平方量级的，出现高次幂量级的边只有可能是有存在大量重边，在这里我们处理的是最短">
+<meta name="keywords" content="算法,动态规划,背包问题,01背包,公告,Cpp,完全背包,C,Dijkstra,计划,KMP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「公告」 近期文章中的错误and博客计划">
+<meta property="og:url" content="https://pazyx.xyz/2018/04/06/notice-1/index.html">
+<meta property="og:site_name" content="Microwave. Five minutes.">
+<meta property="og:description" content="最短路算法1——Dijkstra描述不清楚： 在时间复杂度最后的总结中，我之前提到“对于稠密图来说有时不优化比利用最小堆优化更高效”。实际上一般的图，甚至是完全图，利用最小堆优化效率都是优于不优化的。只有一种情况是相反的，就是边确实特别多，是顶点数的高次幂（3以上）的情况。一般来说这种图很少见，完全图的边数也就是顶点数的平方量级的，出现高次幂量级的边只有可能是有存在大量重边，在这里我们处理的是最短">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-06T20:09:01.844Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「公告」 近期文章中的错误and博客计划">
+<meta name="twitter:description" content="最短路算法1——Dijkstra描述不清楚： 在时间复杂度最后的总结中，我之前提到“对于稠密图来说有时不优化比利用最小堆优化更高效”。实际上一般的图，甚至是完全图，利用最小堆优化效率都是优于不优化的。只有一种情况是相反的，就是边确实特别多，是顶点数的高次幂（3以上）的情况。一般来说这种图很少见，完全图的边数也就是顶点数的平方量级的，出现高次幂量级的边只有可能是有存在大量重边，在这里我们处理的是最短">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpI"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pazyx.xyz/2018/04/06/notice-1/"/>
+
+
+
+
+
+  <title>「公告」 近期文章中的错误and博客计划 | Microwave. Five minutes.</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-121622821-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Microwave. Five minutes.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">他大概会说你想得太多</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-code">
+          <a href="/code" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Code
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-other">
+          <a href="/other" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Other
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-demo">
+          <a href="/demo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Demo
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pazyx.xyz/2018/04/06/notice-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pazyx.xyz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EBFFFA.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Microwave. Five minutes.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「公告」 近期文章中的错误and博客计划</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T15:38:42+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/泛-公告/" itemprop="url" rel="index">
+                    <span itemprop="name">泛 - 公告</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/06/notice-1/" class="leancloud_visitors" data-flag-title="「公告」 近期文章中的错误and博客计划">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,054
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="最短路算法1——Dijkstra"><a href="#最短路算法1——Dijkstra" class="headerlink" title="最短路算法1——Dijkstra"></a>最短路算法1——Dijkstra</h2><p><strong>描述不清楚：</strong> 在时间复杂度最后的总结中，我之前提到“对于稠密图来说有时不优化比利用最小堆优化更高效”。实际上一般的图，甚至是完全图，利用最小堆优化效率都是优于不优化的。只有一种情况是相反的，就是边确实特别多，是顶点数的高次幂（3以上）的情况。一般来说这种图很少见，完全图的边数也就是顶点数的平方量级的，出现高次幂量级的边只有可能是有存在大量重边，在这里我们处理的是最短路问题我们可以只保留两个顶点之间最短的边，以消除重边。 <strong>补充：</strong> 一般的最短路算法，还有一种问法就是最长路问题。这个可以把所有的边权值都取相反数，初始化时将dist数组初始化为最小值，一般为INT_MIN。将比较符合取相反，结果取相反数。</p>
+<h2 id="C-C-程序中的内存分配"><a href="#C-C-程序中的内存分配" class="headerlink" title="C/C++程序中的内存分配"></a>C/C++程序中的内存分配</h2><p><strong>错误：</strong> 我在“运行中的内存分配回收时机”中提到，代码段、数据段和BSS段在程序刚开始运行时分配。 实际上代码段准确的说是在编译时刻分配，其中的数据写在二进制文件中。数据段和BSS段中的局部静态变量是在第一次运行到定义位置分配，这个我在下文提到。 <strong>错误原因：</strong> 自己想的不够清晰，表达时不够严谨。</p>
+<h2 id="动态规划B1——01背包和动态规划B2——完全背包"><a href="#动态规划B1——01背包和动态规划B2——完全背包" class="headerlink" title="动态规划B1——01背包和动态规划B2——完全背包"></a>动态规划B1——01背包和动态规划B2——完全背包</h2><p><strong>错误：</strong> 存在一些字母大小写问题，引起伪代码歧义。</p>
+<h2 id="串匹配算法2——KMP"><a href="#串匹配算法2——KMP" class="headerlink" title="串匹配算法2——KMP"></a>串匹配算法2——KMP</h2><p><strong>展示问题：</strong> 例子中的字符串对齐我采用了空格和tab对齐，在一些低分辨率的设备上可能对齐会有错误，影响理解。 我本想以图片形式展示，但考虑到例子较多、图片排版不美观等问题，暂时还是以现在这种形式，之后发现什么好的方式我再修改。</p>
+<h1 id="博客计划"><a href="#博客计划" class="headerlink" title="博客计划"></a>博客计划</h1><p>德州扑克的学习笔记一再delay，下周前一定更新。 希望写一些面向对象程序设计的文章。准备写几篇Java面向对象程序设计的文章，关注设计模式和一些实现手法。而C++主要还是想研究一下它的底层实现和准确的标准定义细节问题。结合Java 和 C++学习面向对象的设计模式。 数据结构和算法方面，我的计划是先学习一些对ACM题目实用的算法，对图论和动态规划有些兴趣。基础的数据结构（链表、树…）已经有一定了解，暂时先用STL苟住，之后再研究其各种实现细节。一些高级数据结构广泛了解一下。 题解，一直没更的原因是一直没有写过题了，由于时间不够由于懒惰。之前想写一类题目搞成一整篇发出去。但同一类题我能找到的有限感觉不成篇幅，就先存着草稿了。之后我计划是对于难度较高和有思考难度的题目单独发，简单的算法只给出简单思路和代码写成一整篇打包发。之后我还计划参加一些线上的竞赛，写一些竞赛中的经验体会。 娱乐节目，之前买了一堆可乐准备做个可乐大评测。一直没有写也没有喝，原因在于我一直发现有新的可乐，总想及其后一起体验。我想我估计是集不齐了，实在不行我就开个系列慢慢体验。这个也不是什么大事，我就看看什么时候有时间有心情，写一些吧。 书摘和笔记，我爱什么时候写什么时候写！ 淘宝店计划，店已经开好了，纸还没搞到。大概依旧是性冷淡风，反正也没人买，我就开个玩一下。</p>
+
+      
+    </div>
+    
+    
+    
+
+
+
+
+
+
+
+
+<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/04/06/notice-1/">「公告」 近期文章中的错误and博客计划</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
+  <p><span>发布时间:</span>2018年04月06日 - 15:04</p>
+  <p><span>最后更新:</span>2018年07月07日 - 04:07</p>
+  <p><span>原始链接:</span><a href="/2018/04/06/notice-1/" title="「公告」 近期文章中的错误and博客计划">https://pazyx.xyz/2018/04/06/notice-1/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://pazyx.xyz/2018/04/06/notice-1/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-SA 4.0)">署名-非商业性使用-相同方式分享 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){SA
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+</div>
+
+
+
+
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="pazyx.xyz 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="pazyx.xyz 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+
+
+
+
+
+            <a href="/tags/算法/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/动态规划/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/背包问题/" rel="tag"><i class="fa fa-tag"></i> 背包问题</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/01背包/" rel="tag"><i class="fa fa-tag"></i> 01背包</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/公告/" rel="tag"><i class="fa fa-tag"></i> 公告</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/Cpp/" rel="tag"><i class="fa fa-tag"></i> Cpp</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/完全背包/" rel="tag"><i class="fa fa-tag"></i> 完全背包</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/Dijkstra/" rel="tag"><i class="fa fa-tag"></i> Dijkstra</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/计划/" rel="tag"><i class="fa fa-tag"></i> 计划</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/KMP/" rel="tag"><i class="fa fa-tag"></i> KMP</a>
+
+
+
+
+
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/ccppmemory/" rel="next" title="C/C++程序中的内存分配">
+                <i class="fa fa-chevron-left"></i> C/C++程序中的内存分配
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/15/cpp-class-4/" rel="prev" title="C++类与对象总结（四）访问属性">
+                C++类与对象总结（四）访问属性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/EBFFFA.png"
+                alt="pazyx.xyz" />
+            
+              <p class="site-author-name" itemprop="name">pazyx.xyz</p>
+              <p class="site-description motion-element" itemprop="description">他大概会说你想得太多</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pa-zyx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/9953731/jntye" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="pazyx728@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://wszyx.org/" title="wszyx.org" target="_blank">wszyx.org</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wdxtub.com" title="小土刀" target="_blank">小土刀</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://120.79.224.249" title="金明的ACM小队" target="_blank">金明的ACM小队</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://biji.io" title="设计笔记" target="_blank">设计笔记</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#最短路算法1——Dijkstra"><span class="nav-number">1.</span> <span class="nav-text">最短路算法1——Dijkstra</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-C-程序中的内存分配"><span class="nav-number">2.</span> <span class="nav-text">C/C++程序中的内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划B1——01背包和动态规划B2——完全背包"><span class="nav-number">3.</span> <span class="nav-text">动态规划B1——01背包和动态规划B2——完全背包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#串匹配算法2——KMP"><span class="nav-number">4.</span> <span class="nav-text">串匹配算法2——KMP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#博客计划"><span class="nav-number"></span> <span class="nav-text">博客计划</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pazyx.xyz</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">全站字数统计&#58;</span>
+    
+    <span title="全站字数统计">45.9k</span>
+  
+
+<!--
+
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://pazyx.xyz/2018/04/06/notice-1/';
+          this.page.identifier = '2018/04/06/notice-1/';
+          this.page.title = '「公告」 近期文章中的错误and博客计划';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://pazyx-xyz.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7cTegp3KYMtc2W0V2u63CUlJ-gzGzoHsz", "bDS8nx2LWwUeyou9BfjypwGu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

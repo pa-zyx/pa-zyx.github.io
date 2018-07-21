@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="5gXbjwP2M2lldOIIKUxUCHGm0ZeANFXrPV6LcJ_UpZo" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="汇编语言,Cpp,构造函数,编译器优化,拷贝构造函数,缺省构造函数," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Microwave. Five minutes." type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="构造器Constructor构造器(函数)一种特殊的成员函数，用于对象的初始化。名称与类的名称相同，可以重载，无返回类型。123456789101112131415161718192021#include &amp;lt;iostream&amp;gt;using namespace std;class A&amp;#123;	private:		int a,b;	public:		A(int aa,int bb)		&amp;">
+<meta name="keywords" content="汇编语言,Cpp,构造函数,编译器优化,拷贝构造函数,缺省构造函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++类与对象总结（二）构造函数">
+<meta property="og:url" content="https://pazyx.xyz/2018/02/11/cpp-class-2/index.html">
+<meta property="og:site_name" content="Microwave. Five minutes.">
+<meta property="og:description" content="构造器Constructor构造器(函数)一种特殊的成员函数，用于对象的初始化。名称与类的名称相同，可以重载，无返回类型。123456789101112131415161718192021#include &amp;lt;iostream&amp;gt;using namespace std;class A&amp;#123;	private:		int a,b;	public:		A(int aa,int bb)		&amp;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-04T17:33:53.356Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++类与对象总结（二）构造函数">
+<meta name="twitter:description" content="构造器Constructor构造器(函数)一种特殊的成员函数，用于对象的初始化。名称与类的名称相同，可以重载，无返回类型。123456789101112131415161718192021#include &amp;lt;iostream&amp;gt;using namespace std;class A&amp;#123;	private:		int a,b;	public:		A(int aa,int bb)		&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpI"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pazyx.xyz/2018/02/11/cpp-class-2/"/>
+
+
+
+
+
+  <title>C++类与对象总结（二）构造函数 | Microwave. Five minutes.</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-121622821-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Microwave. Five minutes.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">他大概会说你想得太多</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-code">
+          <a href="/code" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Code
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-other">
+          <a href="/other" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Other
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-demo">
+          <a href="/demo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Demo
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pazyx.xyz/2018/02/11/cpp-class-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pazyx.xyz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EBFFFA.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Microwave. Five minutes.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++类与对象总结（二）构造函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-11T22:36:34+08:00">
+                2018-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言-Cpp/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言 - Cpp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/11/cpp-class-2/" class="leancloud_visitors" data-flag-title="C++类与对象总结（二）构造函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,857
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="构造器Constructor"><a href="#构造器Constructor" class="headerlink" title="构造器Constructor"></a>构造器Constructor</h1><p>构造器(函数)一种特殊的成员函数，用于对象的初始化。名称与类的名称相同，可以重载，无返回类型。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span> a,b;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		A(<span class="keyword">int</span> aa,<span class="keyword">int</span> bb)</span><br><span class="line">		&#123;</span><br><span class="line">            a = aa;</span><br><span class="line">            b = bb;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">A <span class="title">a</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这里我们定义的A类的一个参数为两个int的构造函数，在main函数中a被创建时需要用括号传参。</p>
+<h2 id="初始化列表Initializer-List"><a href="#初始化列表Initializer-List" class="headerlink" title="初始化列表Initializer List"></a>初始化列表Initializer List</h2><p>对于上面的构造函数C++还有其他的做法，像下面代码中的构造函数。 初始化列表的动作是在构造函数体执行<strong>之前</strong>进行的，初始化顺序是<strong>按照成员变量的声明顺序进行的</strong>与初始化列表中的顺序无关。 </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span> a,b;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		A(<span class="keyword">int</span> aa,<span class="keyword">int</span> bb):a(aa),b(bb)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">A <span class="title">a</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里你可以简单的认为两者效果是一致的，但<strong>如果成员不是基础数据类型两者就会有很大不同。</strong> </p>
+<p><strong>举个例子：</strong> </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span> a,b;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		B(<span class="keyword">int</span> aa,<span class="keyword">int</span> bb)</span><br><span class="line">		&#123;</span><br><span class="line">            a = aa;</span><br><span class="line">            b = bb;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span> a,b;</span><br><span class="line">		B c;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		A(<span class="keyword">int</span> aa,<span class="keyword">int</span> bb)</span><br><span class="line">		&#123;</span><br><span class="line">            a = aa;</span><br><span class="line">            b = bb;</span><br><span class="line">            c(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">A <span class="title">a</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们又声明了一个B类，在A类中添加了一个成员c为B类的对象。 我们用g++编译这个程序会得到这样的一条错误：</p>
+<blockquote>
+<p>error: constructor for ‘A’ must explicitly initialize <strong>the</strong> <strong>member ‘c’ which does not have a default constructor</strong></p>
+</blockquote>
+<p>它说我们必须显式初始化成员c，因为<strong>c没有缺省构造函数</strong>（缺省构造函数在下面会讲解）。 这个错误很奇怪，我们明明那么明显的初始化了c，它竟然说我们没有显式初始化，还要什么缺省构造函数。 这里的原因就在于它在进构造函数之前就要进行初始化，如果没有初始化列表编译器会去找缺省构造函数去初始化它。如果B类有缺省构造函数，这个代码仍然是错误的，因为在26行这个不是正确的初始化，初始化一个对象要么在初始化列表中，要么在它定义是地方初始化，26行这种方式编译器会去找()的运算符重载函数。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span> a,b;</span><br><span class="line">		B c;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		A(<span class="keyword">int</span> aa,<span class="keyword">int</span> bb):a(aa),b(bb),c(<span class="number">1</span>,<span class="number">2</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>正确的A类的构造函数应该这样写，在初始化c时它会调用c的构造函数来初始化它。</p>
+<h1 id="特殊的构造函数"><a href="#特殊的构造函数" class="headerlink" title="特殊的构造函数"></a>特殊的构造函数</h1><h2 id="缺省构造函数Default-Constructor"><a href="#缺省构造函数Default-Constructor" class="headerlink" title="缺省构造函数Default Constructor"></a>缺省构造函数Default Constructor</h2><p>对于上面的A类来说如果需要创建一个A类的数组，我们需要这样一句话定义一个三单元的数组里面每个都要用括号给出参数。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A b[<span class="number">3</span>] = &#123;A(<span class="number">1</span>,<span class="number">2</span>),A(<span class="number">2</span>,<span class="number">3</span>),A(<span class="number">3</span>,<span class="number">4</span>)&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>如果我们要创建一个100单元的数组，如果是int的，我们一般是先定义好再用循环赋值。 我们想这样写：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A c[<span class="number">100</span>];</span><br></pre></td></tr></table></figure></p>
+<p>但对于A这样是不可以的，因为它的构造函数需要两个int作为参数而这里创建时并没有给出参数，在定义时它不能初始化这些对象。 我们需要另一种构造函数，缺省构造函数。只要是我们写的没有参数的构造函数就叫做缺省构造函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A()&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重载构造函数就可以创建出c数组。 如果一个类没有声明任何构造函数，编译器会自动生成一个不接受任何参数不做任何操作的缺省构造函数。</p>
+<h2 id="拷贝构造函数Copy-Constructor"><a href="#拷贝构造函数Copy-Constructor" class="headerlink" title="拷贝构造函数Copy Constructor"></a>拷贝构造函数Copy Constructor</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">A <span class="title">a</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">A b = a;</span><br><span class="line"><span class="comment">// A b(a);</span></span><br></pre></td></tr></table></figure>
+<p>如果我们定义了a这个对象，如果在定义初始化b时想直接拿a的值来初始化b（需要明白这里的等号与括号初始化等价，与赋值无关），我们需要用到拷贝构造函数，拷贝构造函数需要拿另一个该类的对象（引用）作为参数，初始化时可以用等号或用括号。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A(<span class="keyword">const</span> A &amp;p)</span><br><span class="line">&#123;</span><br><span class="line">	a = p.a;</span><br><span class="line">	b = p.b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于A类简单的拷贝构造函数就是这样，拷贝构造函数只是说它的参数是该类的对象的引用，函数体里你可以做其他操作。 如果一个类没有声明拷贝构造函数，编译器会自动生成一个隐式的拷贝构造函数(Implicitly Copy Constructor)，它将对做成员拷贝（Memberwise Copy），如果成员是基础数据类型就是基本的初始化，如果成员是其他对象就调用那个对象的拷贝构造函数做初始化，C++中的隐式拷贝构造并不是位拷贝（Bitwise Copy）。  </p>
+<h3 id="拷贝构造函数的参数为什么必须是引用？"><a href="#拷贝构造函数的参数为什么必须是引用？" class="headerlink" title="拷贝构造函数的参数为什么必须是引用？"></a>拷贝构造函数的参数为什么必须是引用？</h3><p>因为函数传值调用需要做一步拷贝构造，如果拷贝构造函数是传值调用，那么就会在传值时再次调用拷贝构造函数，就会引起无限的递归。  </p>
+<h3 id="拷贝构造函数在哪里会被调用？"><a href="#拷贝构造函数在哪里会被调用？" class="headerlink" title="拷贝构造函数在哪里会被调用？"></a>拷贝构造函数在哪里会被调用？</h3><ol>
+<li>对象初始化</li>
+<li>函数的传值调用</li>
+<li>函数的返回值</li>
+</ol>
+<p>第一种情况前面已经有所介绍，后两种情况<strong>需要注意不同的编译器会有不同的表现</strong>，一般来说编译器会把很多不必要的拷贝构造优化掉。 比如这段代码：<br>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/=rCHw4pHhMn/" target="_blank" rel="noopener">https://paste.ubuntu.com/=rCHw4pHhMn/</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        A()&#123;&#125;</span><br><span class="line">        A(<span class="keyword">int</span> aa,<span class="keyword">int</span> bb):a(aa),b(bb)&#123;&#125;</span><br><span class="line">        A(<span class="keyword">const</span> A &amp;p)</span><br><span class="line">        &#123;</span><br><span class="line">            num++;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="string">"copy"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            a = p.a;</span><br><span class="line">            b = p.b;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">A <span class="title">f</span><span class="params">(A a)</span>    <span class="comment">//1</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">A <span class="title">re</span><span class="params">(a)</span></span>;    <span class="comment">//2</span></span><br><span class="line">    <span class="keyword">return</span> re;  <span class="comment">//3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">A <span class="title">a</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">    A b = f(a);     <span class="comment">//4</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果是按刚刚讲的逻辑应该发生四次拷贝构造，我在代码中标注的四处。但如果你用不同编译器或者不同的编译选项编译都会有不同的结果，在这里我使用CentOS下的g++、MacOS下的g++和Windows 10下的DevC++（MinGW）测试的结果都为调用了两次。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[zyx@centos-linux c]$	g++ test.cpp</span><br><span class="line">[zyx@centos-linux c]$	./a.out</span><br><span class="line">1copy</span><br><span class="line">2copy</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">//CentOS g++ 64bit</span><br></pre></td></tr></table></figure></p>
+<p>而在Windows 10的Visual Studio 2013的结果为三次。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1copy</span><br><span class="line">2copy</span><br><span class="line">3copy</span><br><span class="line">3</span><br><span class="line"></span><br><span class="line">//Visual Studio 2013 64bit</span><br></pre></td></tr></table></figure></p>
+<p>对于Visual Studio 2017依然如此 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1copy</span><br><span class="line">2copy</span><br><span class="line">3copy</span><br><span class="line">3</span><br><span class="line"></span><br><span class="line">//Visual Studio 2017 64bit</span><br></pre></td></tr></table></figure>
+<p>Windows下CB的与g++和MinGW相同<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1copy</span><br><span class="line">2copy</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">//CB 64bit</span><br></pre></td></tr></table></figure></p>
+<p>可以说明不同的编译器在拷贝构造上有不同的优化策略。  </p>
+<h3 id="深入探究拷贝构造函数的编译器优化："><a href="#深入探究拷贝构造函数的编译器优化：" class="headerlink" title="深入探究拷贝构造函数的编译器优化："></a>深入探究拷贝构造函数的编译器优化：</h3><p>之前说的调用拷贝构造的规则在编译器的优化面前好像就没了规则，为什么会这样呢？对于发生了三次和两次拷贝构造的情况它们究竟优化掉了哪一次或两次呢？   C++标准(N4527) § 12.8 Copying and moving class objects 第31条（P.293/294）中这样写到：</p>
+<blockquote>
+<p><strong>When certain criteria are met,</strong> an implementation is allowed to omit the copy/move construction of a class object, even if the constructor selected for the copy/move operation and/or the destructor for the object have side eﬀects. In such cases, the implementation treats the source and target of the omitted copy/move operation as simply two diﬀerent ways of referring to the same object. If the ﬁrst parameter of the selected constructor is an rvalue reference to the object’s type, the destruction of that object occurs when the target would have been destroyed; otherwise, the destruction occurs at the later of the times when the two objects would have been destroyed without the optimization. This elision of copy/move operations, called copy elision, is permitted in the following circumstances (<strong>which may be combined to eliminate multiple copies</strong>):</p>
+</blockquote>
+<p>这里只是说编译器可以在一些情况下<strong>不考虑副作用</strong>对拷贝或者移动构造函数进行优化，而且对于标准中的四种情况可以删除多份。 之后列举了四条基本情况，我们只关心第一和第三条：</p>
+<blockquote>
+<p>(31.1) — in a return statement in a function with a class return type, when the expression is the name of a nonvolatile automatic object (other than a function parameter or a variable introduced by the exceptiondeclaration of a handler (15.3)) with the same type (ignoring cv-qualiﬁcation) as the function return type, the copy/move operation can be omitted by constructing the automatic object directly into the function’s return value.   (31.3) — when the exception-declaration of an exception handler (Clause 15) declares an object of the same type (except for cv-qualiﬁcation) as the exception object (15.1), the copy operation can be omitted by treating the exception-declaration as an alias for the exception object if the meaning of the program will be unchanged except for the execution of constructors and destructors for the object declared by the exception-declaration. [ Note: There cannot be a move from the exception object because it is always an lvalue. — end note ]</p>
+</blockquote>
+<p>第一条：函数的 return 语句中的表达式是一个非 volatile 的对象，并且其非const&amp;volatile类型和函数返回值的非const&amp;volatile类型相同，此时可以省略一次拷贝或移动构造函数（移动构造函数为C++11的扩展）。 第三条：对于一个非const&amp;volatile的临时对象且没有绑定引用，它的复制/移动操作，可以省略。 对于第一条明确的标准几乎所有的编译器对此都做了优化，也就是代码中第3号点被优化掉了 对于第三条在G++和CB中第4号点因此被优化，也就是对象b的构造没有调用拷贝构造函数。<br><strong>g++提供了一个编译选项：-fno-elide-constructors 开启这个选项编译器会关闭上述关于拷贝和移动构造函数的优化。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[zyx@centos-linux c]$	g++ -fno-elide-constructors test.cpp</span><br><span class="line">[zyx@centos-linux c]$	./a.out</span><br><span class="line">1copy</span><br><span class="line">2copy</span><br><span class="line">3copy</span><br><span class="line">4copy</span><br><span class="line">4</span><br><span class="line"></span><br><span class="line">//CentOS g++ 64bit</span><br></pre></td></tr></table></figure>
+<p>运行结果确实是4次</p>
+<p>这样我们可以通过对比汇编代码来看具体它在哪里优化了拷贝构造。</p>
+<h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><h5 id="默认优化"><a href="#默认优化" class="headerlink" title="默认优化"></a>默认优化</h5><p>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/=Wm88H4Vhxf/" target="_blank" rel="noopener">https://paste.ubuntu.com/=Wm88H4Vhxf/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">	.globl	__Z1f1A</span><br><span class="line">	.p2align	4, 0x90</span><br><span class="line">__Z1f1A:                                ## @_Z1f1A</span><br><span class="line">	.cfi_startproc</span><br><span class="line">## BB#0:</span><br><span class="line">	pushq	%rbp</span><br><span class="line">Lcfi0:</span><br><span class="line">	.cfi_def_cfa_offset 16</span><br><span class="line">Lcfi1:</span><br><span class="line">	.cfi_offset %rbp, -16</span><br><span class="line">	movq	%rsp, %rbp</span><br><span class="line">Lcfi2:</span><br><span class="line">	.cfi_def_cfa_register %rbp</span><br><span class="line">	subq	$16, %rsp</span><br><span class="line">	movq	%rdi, %rax</span><br><span class="line">	movq	%rax, -8(%rbp)          ## 8-byte Spill</span><br><span class="line">	callq	__ZN1AC1ERKS_</span><br><span class="line">	movq	-8(%rbp), %rax          ## 8-byte Reload</span><br><span class="line">	addq	$16, %rsp</span><br><span class="line">	popq	%rbp</span><br><span class="line">	retq</span><br><span class="line">	.cfi_endproc</span><br><span class="line"></span><br><span class="line">	.globl	__ZN1AC1ERKS_</span><br><span class="line">	.weak_def_can_be_hidden	__ZN1AC1ERKS_</span><br><span class="line">	.p2align	4, 0x90</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">_main:                                  ## @main</span><br><span class="line">	.cfi_startproc</span><br><span class="line">## BB#0:</span><br><span class="line">	pushq	%rbp</span><br><span class="line">Lcfi6:</span><br><span class="line">	.cfi_def_cfa_offset 16</span><br><span class="line">Lcfi7:</span><br><span class="line">	.cfi_offset %rbp, -16</span><br><span class="line">	movq	%rsp, %rbp</span><br><span class="line">Lcfi8:</span><br><span class="line">	.cfi_def_cfa_register %rbp</span><br><span class="line">	subq	$64, %rsp</span><br><span class="line">	leaq	-32(%rbp), %rdi</span><br><span class="line">	movl	$1, %esi</span><br><span class="line">	movl	$2, %edx</span><br><span class="line">	movl	$0, -20(%rbp)</span><br><span class="line">	callq	__ZN1AC1Eii</span><br><span class="line">	leaq	-48(%rbp), %rdi</span><br><span class="line">	leaq	-32(%rbp), %rsi</span><br><span class="line">	callq	__ZN1AC1ERKS_</span><br><span class="line">	leaq	-40(%rbp), %rdi</span><br><span class="line">	leaq	-48(%rbp), %rsi</span><br><span class="line">	callq	__Z1f1A</span><br><span class="line">	movq	__ZNSt3__14coutE@GOTPCREL(%rip), %rdi</span><br><span class="line">	movl	_num(%rip), %esi</span><br><span class="line">	callq	__ZNSt3__113basic_ostreamIcNS_11char_traitsIcEEElsEi</span><br><span class="line">	leaq	__ZNSt3__14endlIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_(%rip), %rdi</span><br><span class="line">	movq	%rax, -8(%rbp)</span><br><span class="line">	movq	%rdi, -16(%rbp)</span><br><span class="line">	movq	-8(%rbp), %rdi</span><br><span class="line">	callq	*-16(%rbp)</span><br><span class="line">	xorl	%edx, %edx</span><br><span class="line">	movq	%rax, -56(%rbp)         ## 8-byte Spill</span><br><span class="line">	movl	%edx, %eax</span><br><span class="line">	addq	$64, %rsp</span><br><span class="line">	popq	%rbp</span><br><span class="line">	retq</span><br><span class="line">	.cfi_endproc</span><br></pre></td></tr></table></figure></p>
+<h5 id="关闭优化"><a href="#关闭优化" class="headerlink" title="关闭优化"></a>关闭优化</h5><p>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/=7CV893KdNY/" target="_blank" rel="noopener">https://paste.ubuntu.com/=7CV893KdNY/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">	.globl	__Z1f1A</span><br><span class="line">	.p2align	4, 0x90</span><br><span class="line">__Z1f1A:                                ## @_Z1f1A</span><br><span class="line">	.cfi_startproc</span><br><span class="line">## BB#0:</span><br><span class="line">	pushq	%rbp</span><br><span class="line">Lcfi0:</span><br><span class="line">	.cfi_def_cfa_offset 16</span><br><span class="line">Lcfi1:</span><br><span class="line">	.cfi_offset %rbp, -16</span><br><span class="line">	movq	%rsp, %rbp</span><br><span class="line">Lcfi2:</span><br><span class="line">	.cfi_def_cfa_register %rbp</span><br><span class="line">	subq	$32, %rsp</span><br><span class="line">	movq	%rdi, %rax</span><br><span class="line">	leaq	-8(%rbp), %rcx</span><br><span class="line">	movq	%rdi, -16(%rbp)         ## 8-byte Spill</span><br><span class="line">	movq	%rcx, %rdi</span><br><span class="line">	movq	%rax, -24(%rbp)         ## 8-byte Spill</span><br><span class="line">	callq	__ZN1AC1ERKS_</span><br><span class="line">	leaq	-8(%rbp), %rsi</span><br><span class="line">	movq	-16(%rbp), %rdi         ## 8-byte Reload</span><br><span class="line">	callq	__ZN1AC1ERKS_</span><br><span class="line">	movq	-24(%rbp), %rax         ## 8-byte Reload</span><br><span class="line">	addq	$32, %rsp</span><br><span class="line">	popq	%rbp</span><br><span class="line">	retq</span><br><span class="line">	.cfi_endproc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	.globl	_main</span><br><span class="line">	.p2align	4, 0x90</span><br><span class="line">_main:                                  ## @main</span><br><span class="line">	.cfi_startproc</span><br><span class="line">## BB#0:</span><br><span class="line">	pushq	%rbp</span><br><span class="line">Lcfi6:</span><br><span class="line">	.cfi_def_cfa_offset 16</span><br><span class="line">Lcfi7:</span><br><span class="line">	.cfi_offset %rbp, -16</span><br><span class="line">	movq	%rsp, %rbp</span><br><span class="line">Lcfi8:</span><br><span class="line">	.cfi_def_cfa_register %rbp</span><br><span class="line">	subq	$64, %rsp</span><br><span class="line">	leaq	-32(%rbp), %rdi</span><br><span class="line">	movl	$1, %esi</span><br><span class="line">	movl	$2, %edx</span><br><span class="line">	movl	$0, -20(%rbp)</span><br><span class="line">	callq	__ZN1AC1Eii</span><br><span class="line">	leaq	-56(%rbp), %rdi</span><br><span class="line">	leaq	-32(%rbp), %rsi</span><br><span class="line">	callq	__ZN1AC1ERKS_</span><br><span class="line">	leaq	-48(%rbp), %rdi</span><br><span class="line">	leaq	-56(%rbp), %rsi</span><br><span class="line">	callq	__Z1f1A</span><br><span class="line">	leaq	-40(%rbp), %rdi</span><br><span class="line">	leaq	-48(%rbp), %rsi</span><br><span class="line">	callq	__ZN1AC1ERKS_</span><br><span class="line">	movq	__ZNSt3__14coutE@GOTPCREL(%rip), %rdi</span><br><span class="line">	movl	_num(%rip), %esi</span><br><span class="line">	callq	__ZNSt3__113basic_ostreamIcNS_11char_traitsIcEEElsEi</span><br><span class="line">	leaq	__ZNSt3__14endlIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_(%rip), %rdi</span><br><span class="line">	movq	%rax, -8(%rbp)</span><br><span class="line">	movq	%rdi, -16(%rbp)</span><br><span class="line">	movq	-8(%rbp), %rdi</span><br><span class="line">	callq	*-16(%rbp)</span><br><span class="line">	xorl	%edx, %edx</span><br><span class="line">	movq	%rax, -64(%rbp)         ## 8-byte Spill</span><br><span class="line">	movl	%edx, %eax</span><br><span class="line">	addq	$64, %rsp</span><br><span class="line">	popq	%rbp</span><br><span class="line">	retq</span><br><span class="line">	.cfi_endproc</span><br></pre></td></tr></table></figure></p>
+<p>默认优化下程序在17和51行调用了A的拷贝构造函数，而在关闭拷贝构造后程序分别在20、23、55、61行调用了拷贝构造函数。<br><strong>这里分析可以发现编译器优化掉了 函数返回值的构造 和 对象b的构造。</strong><br>Visual Studio 2013 64bit 反汇编代码：<br>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/=h3mV88hjrn/" target="_blank" rel="noopener">https://paste.ubuntu.com/=h3mV88hjrn/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">A f(A a)    //1</span><br><span class="line">&#123;</span><br><span class="line">00395850 55                   push        ebp  </span><br><span class="line">00395851 8B EC                mov         ebp,esp  </span><br><span class="line">00395853 81 EC D4 00 00 00    sub         esp,0D4h  </span><br><span class="line">00395859 53                   push        ebx  </span><br><span class="line">0039585A 56                   push        esi  </span><br><span class="line">0039585B 57                   push        edi  </span><br><span class="line">0039585C 8D BD 2C FF FF FF    lea         edi,[ebp-0D4h]  </span><br><span class="line">00395862 B9 35 00 00 00       mov         ecx,35h  </span><br><span class="line">00395867 B8 CC CC CC CC       mov         eax,0CCCCCCCCh  </span><br><span class="line">0039586C F3 AB                rep stos    dword ptr es:[edi]  </span><br><span class="line">0039586E A1 00 00 3A 00       mov         eax,dword ptr ds:[003A0000h]  </span><br><span class="line">00395873 33 C5                xor         eax,ebp  </span><br><span class="line">00395875 89 45 FC             mov         dword ptr [ebp-4],eax  </span><br><span class="line">	A re(a);    //2</span><br><span class="line">00395878 8D 45 0C             lea         eax,[a]  </span><br><span class="line">0039587B 50                   push        eax  </span><br><span class="line">0039587C 8D 4D F0             lea         ecx,[re]  </span><br><span class="line">0039587F E8 37 BB FF FF       call        A::A (03913BBh)  </span><br><span class="line">	return re;  //3</span><br><span class="line">00395884 8D 45 F0             lea         eax,[re]  </span><br><span class="line">00395887 50                   push        eax  </span><br><span class="line">00395888 8B 4D 08             mov         ecx,dword ptr [ebp+8]  </span><br><span class="line">0039588B E8 2B BB FF FF       call        A::A (03913BBh)  </span><br><span class="line">00395890 8B 45 08             mov         eax,dword ptr [ebp+8]  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">00F16060 55                   push        ebp  </span><br><span class="line">00F16061 8B EC                mov         ebp,esp  </span><br><span class="line">00F16063 81 EC F0 00 00 00    sub         esp,0F0h  </span><br><span class="line">00F16069 53                   push        ebx  </span><br><span class="line">00F1606A 56                   push        esi  </span><br><span class="line">00F1606B 57                   push        edi  </span><br><span class="line">00F1606C 8D BD 10 FF FF FF    lea         edi,[ebp-0F0h]  </span><br><span class="line">00F16072 B9 3C 00 00 00       mov         ecx,3Ch  </span><br><span class="line">00F16077 B8 CC CC CC CC       mov         eax,0CCCCCCCCh  </span><br><span class="line">00F1607C F3 AB                rep stos    dword ptr es:[edi]  </span><br><span class="line">00F1607E A1 00 00 F2 00       mov         eax,dword ptr ds:[00F20000h]  </span><br><span class="line">00F16083 33 C5                xor         eax,ebp  </span><br><span class="line">00F16085 89 45 FC             mov         dword ptr [ebp-4],eax  </span><br><span class="line">	A a(1, 2);</span><br><span class="line">00F16088 6A 02                push        2  </span><br><span class="line">00F1608A 6A 01                push        1  </span><br><span class="line">00F1608C 8D 4D F0             lea         ecx,[a]  </span><br><span class="line">00F1608F E8 81 B3 FF FF       call        A::A (0F11415h)  </span><br><span class="line">	A b = f(a);     //4</span><br><span class="line">00F16094 83 EC 08             sub         esp,8  </span><br><span class="line">00F16097 8B CC                mov         ecx,esp  </span><br><span class="line">00F16099 8D 45 F0             lea         eax,[a]  </span><br><span class="line">00F1609C 50                   push        eax  </span><br><span class="line">00F1609D E8 19 B3 FF FF       call        A::A (0F113BBh)  </span><br><span class="line">00F160A2 8D 4D E0             lea         ecx,[b]  </span><br><span class="line">00F160A5 51                   push        ecx  </span><br><span class="line">00F160A6 E8 6D B0 FF FF       call        f (0F11118h)  </span><br><span class="line">00F160AB 83 C4 0C             add         esp,0Ch  </span><br><span class="line">	cout &lt;&lt; num &lt;&lt; endl;</span><br><span class="line">00F160AE 8B F4                mov         esi,esp  </span><br><span class="line">00F160B0 68 E8 13 F1 00       push        0F113E8h  </span><br><span class="line">00F160B5 8B FC                mov         edi,esp  </span><br><span class="line">00F160B7 A1 20 03 F2 00       mov         eax,dword ptr ds:[00F20320h]  </span><br><span class="line">00F160BC 50                   push        eax  </span><br><span class="line">00F160BD 8B 0D A0 10 F2 00    mov         ecx,dword ptr ds:[0F210A0h]  </span><br><span class="line">00F160C3 FF 15 94 10 F2 00    call        dword ptr ds:[0F21094h]  </span><br><span class="line">00F160C9 3B FC                cmp         edi,esp  </span><br><span class="line">00F160CB E8 64 B2 FF FF       call        __RTC_CheckEsp (0F11334h)  </span><br><span class="line">00F160D0 8B C8                mov         ecx,eax  </span><br><span class="line">00F160D2 FF 15 90 10 F2 00    call        dword ptr ds:[0F21090h]  </span><br><span class="line">00F160D8 3B F4                cmp         esi,esp  </span><br><span class="line">00F160DA E8 55 B2 FF FF       call        __RTC_CheckEsp (0F11334h)  </span><br><span class="line">	return 0;</span><br><span class="line">00F160DF 33 C0                xor         eax,eax  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>VS的反汇编代码中有C++代码注释，它分别在20、25、57行调用了A的拷贝构造函数，可以看出<strong>VS只是优化掉了对象b的构造</strong>。</p>
+
+      
+    </div>
+    
+    
+    
+
+
+
+
+
+
+
+
+<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/02/11/cpp-class-2/">C++类与对象总结（二）构造函数</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
+  <p><span>发布时间:</span>2018年02月11日 - 22:02</p>
+  <p><span>最后更新:</span>2018年07月05日 - 01:07</p>
+  <p><span>原始链接:</span><a href="/2018/02/11/cpp-class-2/" title="C++类与对象总结（二）构造函数">https://pazyx.xyz/2018/02/11/cpp-class-2/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://pazyx.xyz/2018/02/11/cpp-class-2/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-SA 4.0)">署名-非商业性使用-相同方式分享 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){SA
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+</div>
+
+
+
+
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="pazyx.xyz 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="pazyx.xyz 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+
+
+
+
+
+            <a href="/tags/汇编语言/" rel="tag"><i class="fa fa-tag"></i> 汇编语言</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/Cpp/" rel="tag"><i class="fa fa-tag"></i> Cpp</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/构造函数/" rel="tag"><i class="fa fa-tag"></i> 构造函数</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/编译器优化/" rel="tag"><i class="fa fa-tag"></i> 编译器优化</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/拷贝构造函数/" rel="tag"><i class="fa fa-tag"></i> 拷贝构造函数</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/缺省构造函数/" rel="tag"><i class="fa fa-tag"></i> 缺省构造函数</a>
+
+
+
+
+
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/05/dfs-bfs/" rel="next" title="DFS与BFS">
+                <i class="fa fa-chevron-left"></i> DFS与BFS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/17/books-0/" rel="prev" title="「书摘」摩托车修理店的未来工作哲学">
+                「书摘」摩托车修理店的未来工作哲学 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/EBFFFA.png"
+                alt="pazyx.xyz" />
+            
+              <p class="site-author-name" itemprop="name">pazyx.xyz</p>
+              <p class="site-description motion-element" itemprop="description">他大概会说你想得太多</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pa-zyx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/9953731/jntye" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="pazyx728@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://wszyx.org/" title="wszyx.org" target="_blank">wszyx.org</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wdxtub.com" title="小土刀" target="_blank">小土刀</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://120.79.224.249" title="金明的ACM小队" target="_blank">金明的ACM小队</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://biji.io" title="设计笔记" target="_blank">设计笔记</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造器Constructor"><span class="nav-number">1.</span> <span class="nav-text">构造器Constructor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化列表Initializer-List"><span class="nav-number">1.1.</span> <span class="nav-text">初始化列表Initializer List</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特殊的构造函数"><span class="nav-number">2.</span> <span class="nav-text">特殊的构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缺省构造函数Default-Constructor"><span class="nav-number">2.1.</span> <span class="nav-text">缺省构造函数Default Constructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拷贝构造函数Copy-Constructor"><span class="nav-number">2.2.</span> <span class="nav-text">拷贝构造函数Copy Constructor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝构造函数的参数为什么必须是引用？"><span class="nav-number">2.2.1.</span> <span class="nav-text">拷贝构造函数的参数为什么必须是引用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝构造函数在哪里会被调用？"><span class="nav-number">2.2.2.</span> <span class="nav-text">拷贝构造函数在哪里会被调用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深入探究拷贝构造函数的编译器优化："><span class="nav-number">2.2.3.</span> <span class="nav-text">深入探究拷贝构造函数的编译器优化：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码："><span class="nav-number">2.2.3.1.</span> <span class="nav-text">代码：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#默认优化"><span class="nav-number">2.2.3.1.1.</span> <span class="nav-text">默认优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关闭优化"><span class="nav-number">2.2.3.1.2.</span> <span class="nav-text">关闭优化</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pazyx.xyz</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">全站字数统计&#58;</span>
+    
+    <span title="全站字数统计">45.9k</span>
+  
+
+<!--
+
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://pazyx.xyz/2018/02/11/cpp-class-2/';
+          this.page.identifier = '2018/02/11/cpp-class-2/';
+          this.page.title = 'C++类与对象总结（二）构造函数';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://pazyx-xyz.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7cTegp3KYMtc2W0V2u63CUlJ-gzGzoHsz", "bDS8nx2LWwUeyou9BfjypwGu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="5gXbjwP2M2lldOIIKUxUCHGm0ZeANFXrPV6LcJ_UpZo" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,优化,KMP,串匹配," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Microwave. Five minutes." type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="概述之前的蛮力匹配法效率太低，这里我们介绍一种更好的串匹配算法。KMP算法，它由Donald Knuth、Vaughan Pratt、James H. Morris三人于1977年联合发表，故以三人姓氏命名此算法。它即便是在最坏的情况下时间复杂度也可以保证在线性以内。 我将从之前的蛮力算法开始，分析蛮力算法的不足，改进它引出KMP算法。文章会有一些串的术语，我在之前的一篇文章 串匹配算法0——蛮力">
+<meta name="keywords" content="算法,优化,KMP,串匹配">
+<meta property="og:type" content="article">
+<meta property="og:title" content="串匹配算法2——KMP">
+<meta property="og:url" content="https://pazyx.xyz/2018/02/22/strkmp-2/index.html">
+<meta property="og:site_name" content="Microwave. Five minutes.">
+<meta property="og:description" content="概述之前的蛮力匹配法效率太低，这里我们介绍一种更好的串匹配算法。KMP算法，它由Donald Knuth、Vaughan Pratt、James H. Morris三人于1977年联合发表，故以三人姓氏命名此算法。它即便是在最坏的情况下时间复杂度也可以保证在线性以内。 我将从之前的蛮力算法开始，分析蛮力算法的不足，改进它引出KMP算法。文章会有一些串的术语，我在之前的一篇文章 串匹配算法0——蛮力">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-04T17:35:08.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="串匹配算法2——KMP">
+<meta name="twitter:description" content="概述之前的蛮力匹配法效率太低，这里我们介绍一种更好的串匹配算法。KMP算法，它由Donald Knuth、Vaughan Pratt、James H. Morris三人于1977年联合发表，故以三人姓氏命名此算法。它即便是在最坏的情况下时间复杂度也可以保证在线性以内。 我将从之前的蛮力算法开始，分析蛮力算法的不足，改进它引出KMP算法。文章会有一些串的术语，我在之前的一篇文章 串匹配算法0——蛮力">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpI"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pazyx.xyz/2018/02/22/strkmp-2/"/>
+
+
+
+
+
+  <title>串匹配算法2——KMP | Microwave. Five minutes.</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-121622821-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Microwave. Five minutes.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">他大概会说你想得太多</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-code">
+          <a href="/code" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Code
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-other">
+          <a href="/other" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Other
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-demo">
+          <a href="/demo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Demo
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pazyx.xyz/2018/02/22/strkmp-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pazyx.xyz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EBFFFA.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Microwave. Five minutes.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">串匹配算法2——KMP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T06:32:19+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/22/strkmp-2/" class="leancloud_visitors" data-flag-title="串匹配算法2——KMP">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,299
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>之前的蛮力匹配法效率太低，这里我们介绍一种更好的串匹配算法。KMP算法，它由Donald Knuth、Vaughan Pratt、James H. Morris三人于1977年联合发表，故以三人姓氏命名此算法。它即便是在最坏的情况下时间复杂度也可以保证在线性以内。 我将从之前的蛮力算法开始，分析蛮力算法的不足，改进它引出KMP算法。文章会有一些串的术语，我在之前的一篇文章 <a href="http://wszyx.org/2018/02/strma0/" target="_blank" rel="noopener">串匹配算法0——蛮力匹配</a> 中已经有所介绍。</p>
+<h1 id="为什么慢？人们是怎样匹配的？"><a href="#为什么慢？人们是怎样匹配的？" class="headerlink" title="为什么慢？人们是怎样匹配的？"></a>为什么慢？人们是怎样匹配的？</h1><p>文本串：00000000…00000001</p>
+<p>模式串：00001</p>
+<p>这是蛮力算法中最坏情况的例子，蛮力算法在匹配这一组字符串时，大部分时间都消耗在了模式串中的前四个0中了，每轮匹配都会在正确匹配四个0后因为最后那个1而失败。 我们再来看一个例子</p>
+<p>文本串：abcabcabcabcabcabc<strong>abcd</strong>abcabc</p>
+<p>模式串：abcd</p>
+<p>如果现在让你来匹配这组字符串你会怎么匹配呢？你会像蛮力算法一样去逐个比对尝试吗？我想大多数人不会，大多数人会发现文本串中有很多abc的重复，而不去比对abc直接去找d去匹配它。当然你还是要扫描过一边文本串，这样比蛮力算法省时间的原因是在于你不用在逐个的比对前三个abc，而且每次右移3个单位，可以将模式串快速右移而且省去很多比对操作。 我们再再来看一个例子</p>
+<p>文本串：abcda<strong>b</strong>cfghijk</p>
+<p>模式串：abcdaf</p>
+<p>我们现在用蛮力算法来匹配这组字符串，我们以开始假设文本串中第一个a为模式串的头，逐个去比对后续字符，我们可以想到模式串会在第二个b处比对失败，接下去我们会假设文本串中的第一个b为模式串的头再去逐个比对。<strong>实际上没有必要，我们在之前的比对中已经遍历了文本串中的前五个字符，已经知道它们都是什么了，为什么还要去尝试b呢？聪明的人应该直接假设文本串中第二个a为模式串的头再去逐个比对。</strong></p>
+<h1 id="计算机的记忆力"><a href="#计算机的记忆力" class="headerlink" title="计算机的记忆力"></a>计算机的记忆力</h1><p>计算机毕竟不是人，那我们来分析人是怎样做到快速匹配的，能否让计算机模仿人的思维去改进之前的算法呢？</p>
+<p>文本串：abcda<strong>b</strong>cfghijk</p>
+<p>模式串：abcdaf</p>
+<p>还是这个的例子，为什么不用再去将bcd假设为模式串的头了呢？这个显而易见，当然是因为bcd不是a呗。这个很简单计算机也是知道的啊，为什么它没有跳过呢？因为计算机记不住啊，它记忆力太差，在蛮力算法的过程中计算机只关注当前比对的两个字符，其他的一概不关心。在要选择向右移几个单位时，它想了想说“我也不知道，保险一点移动一个单位试一下吧。” 作为人类，我们当然可以赋予计算机记忆力，它已经有了优越的条件（很大的内存），只需要我们帮助它一下，要求它记住这些东西就好了。 我们观察 <strong>abcda </strong>这个字符串，它的前缀a和后缀a是一样的，如果计算机知道这件事，它就可以将两个字符串向下面的位置对其继续比对，从b开始比对，因为在 <strong>abcda </strong>中有一个相同的前缀后缀。</p>
+<p>abcda<strong>b</strong>cfghijk</p>
+<p>——-abcdaf</p>
+<p>怎么让计算机知道这件事呢？我们开一个数组int next[P.length()]，每个单元保存该字符前的字符串的最大相同前后缀的长度，对于刚刚那个模式串的第5号位b在next数组中的值就应该为1。 在比对之前我们只需要预处理模式串得到next数组的值即可。为什么只需要处理模式串？有些人会想我们明明是在文本串中比对为什么只需要预处理模式串。我们来看上面绿色标注的位置，在文本串和模式串中两者是一模一样的，因为它们是比对成功的部分，我们只需要处理模式串就可以知道应该将模式串的头移到文本串的什么位置。 怎样预处理呢？只需要模式串自己和自己做一次匹配即可，具体的等接下来上了代码再做介绍。 到此我们已经大概了解了KMP算法的思想和大致实现方式。</p>
+<h1 id="少废话，上代码"><a href="#少废话，上代码" class="headerlink" title="少废话，上代码"></a>少废话，上代码</h1><p>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/p/9wZ3gyZCnP/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/9wZ3gyZCnP/</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">buildNext</span><span class="params">(<span class="built_in">string</span> P)</span>    </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> size_n = P.length(), j = <span class="number">0</span>; <span class="comment">//主指针</span></span><br><span class="line">    <span class="keyword">int</span>* N = <span class="keyword">new</span> <span class="keyword">int</span>[size_n];   <span class="comment">//建表</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> t = N[<span class="number">0</span>] = <span class="number">-1</span>;  <span class="comment">//模式串指针（p[-1]为通配符）</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(j &lt; size_n <span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">0</span> &gt; t || P[j] == P[t])&#123;</span><br><span class="line">            N[++j] = ++t;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            t = N[t];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> N;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">match</span><span class="params">(<span class="built_in">string</span> P, <span class="built_in">string</span> T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *next = buildNext(P);   <span class="comment">//构造next表</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> size_n = T.length(), i = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">int</span> size_m = P.length(), j = <span class="number">0</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>( j &lt; size_m &amp;&amp; i &lt; size_n)&#123; <span class="comment">//从左向右逐个比对字符</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="number">0</span> &gt; j || T[i] == P[i])&#123; i++; j++;&#125;    <span class="comment">//若匹配，则转到下一个字符</span></span><br><span class="line">        <span class="keyword">else</span>&#123; j = next[j];&#125;         <span class="comment">//否则，T不回退，文本串P右移</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">delete</span>[] next;  <span class="comment">//销毁next表</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> i - j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于主函数与蛮力匹配算法几乎是一样的，文本串P右移时用到了next数组。如果不理解这一步的话可以自己用纸笔模拟匹配，应该可以理解。 现在问题的关键在于构造next数组的buildNext这个函数的实现。</p>
+<h2 id="next数组的构造"><a href="#next数组的构造" class="headerlink" title="next数组的构造"></a>next数组的构造</h2><p><strong>这里的思想与KMP的主函数思想是一致的，只不过这次匹配的字符串是两个一样的模式串。</strong> 我们采用递推策略，假设我们已经构造了next数组的前 j 项，如何计算它的 j+1 项呢？ 如果 P[j] == P[N[j]] ，说明前缀和后缀又比对上一项，N[j]就等于上一项的值加1。 如果 P[j] != P[N[j]] ，说明该后缀变短了，那应该怎么找下一个有可能成为相同前后缀的位置呢？这个如果现在t所指位置为一个前缀的末尾，该位置匹配失败了。我们应该保证 j 不动，将t替换为next[t]，也就是之前t所在前缀的前缀的末尾继续与 j 所指的位置比对。</p>
+<h2 id="哨兵"><a href="#哨兵" class="headerlink" title="哨兵"></a>哨兵</h2><p>大家或许有疑问，t为什么要初始化为0？if语句中0 &gt; t这个条件是什么意思？ 这个-1实际上是一个哨兵，我们想象next数组有next[-1]这个单元，它里面放着一个通配符。它可以帮助我们在程序里面省去一个判断分支。如果不理解一样是可以用纸笔模拟一下。</p>
+<h2 id="优化-优化-优化…"><a href="#优化-优化-优化…" class="headerlink" title="优化 优化 优化…"></a>优化 优化 优化…</h2><p>我们再再再来看一个例子</p>
+<p>文本串：000100001</p>
+<p>模式串：00001</p>
+<p>如果用之前给出的算法运行，它会在第一个1处匹配失败，之后再用前一个0比对依然失败，比对3次后遇到-1处的通配符后成功匹配，文本串和模式串的指针同时向右移动一位，再从文本串的第4个单元开始比对。 这个好像还是有点傻啊，人不会这样无用的用1和0比对3次。这3次比对实际上是可以优化掉的。实际上KMP算法主函数的主要是受next数组的影响的，我们只需要改进buildNext函数即可。<br>改进后的bulidNext函数如下：<br>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/p/RftpTzKsVX/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/RftpTzKsVX/</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">buildNext</span><span class="params">(<span class="built_in">string</span> P)</span>    </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> size_n = P.length(), j = <span class="number">0</span>; <span class="comment">//主指针</span></span><br><span class="line">    <span class="keyword">int</span>* N = <span class="keyword">new</span> <span class="keyword">int</span>[size_n];   <span class="comment">//建表</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> t = N[<span class="number">0</span>] = <span class="number">-1</span>;  <span class="comment">//模式串指针（p[-1]为通配符）</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(j &lt; size_n <span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">0</span> &gt; t || P[j] == P[t])&#123;</span><br><span class="line">            j++; t++;</span><br><span class="line">            N[j] = P[j] != P[t] ? t : N[t]; <span class="comment">//*</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            t = N[t];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> N;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样优化后对于上面的例子就不会出现多次的重复比对，一次比对失败后，模式串会整体右移4个单位继续比对。</p>
+<h1 id="整体复杂度分析"><a href="#整体复杂度分析" class="headerlink" title="整体复杂度分析"></a>整体复杂度分析</h1><p>主函数中的指向文本串的指针 i 一直在递增，即便是在最坏情况下主函数中的while循环不过执行了T.length()次，是线性的复杂度。 对于buildNext函数，它与主函数思想是一致的，复杂度也是线性的。 所以整体的复杂度就是 O(P.length() + T.length())。 一般 P.length() 是远远小于 T.length() 的所以它的复杂度可以忽略不计。最终复杂度为O(T.length())。得出结论：KMP算法在最坏情况下也能保证复杂度在线性以内。</p>
+
+      
+    </div>
+    
+    
+    
+
+
+
+
+
+
+
+
+<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/02/22/strkmp-2/">串匹配算法2——KMP</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
+  <p><span>发布时间:</span>2018年02月22日 - 06:02</p>
+  <p><span>最后更新:</span>2018年07月05日 - 01:07</p>
+  <p><span>原始链接:</span><a href="/2018/02/22/strkmp-2/" title="串匹配算法2——KMP">https://pazyx.xyz/2018/02/22/strkmp-2/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://pazyx.xyz/2018/02/22/strkmp-2/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-SA 4.0)">署名-非商业性使用-相同方式分享 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){SA
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+</div>
+
+
+
+
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="pazyx.xyz 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="pazyx.xyz 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+
+
+
+
+
+            <a href="/tags/算法/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/优化/" rel="tag"><i class="fa fa-tag"></i> 优化</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/KMP/" rel="tag"><i class="fa fa-tag"></i> KMP</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/串匹配/" rel="tag"><i class="fa fa-tag"></i> 串匹配</a>
+
+
+
+
+
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/21/strma-1/" rel="next" title="串匹配算法1——蛮力匹配">
+                <i class="fa fa-chevron-left"></i> 串匹配算法1——蛮力匹配
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/23/01-bp/" rel="prev" title="动态规划B1——01背包">
+                动态规划B1——01背包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/EBFFFA.png"
+                alt="pazyx.xyz" />
+            
+              <p class="site-author-name" itemprop="name">pazyx.xyz</p>
+              <p class="site-description motion-element" itemprop="description">他大概会说你想得太多</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pa-zyx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/9953731/jntye" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="pazyx728@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://wszyx.org/" title="wszyx.org" target="_blank">wszyx.org</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wdxtub.com" title="小土刀" target="_blank">小土刀</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://120.79.224.249" title="金明的ACM小队" target="_blank">金明的ACM小队</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://biji.io" title="设计笔记" target="_blank">设计笔记</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么慢？人们是怎样匹配的？"><span class="nav-number">2.</span> <span class="nav-text">为什么慢？人们是怎样匹配的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机的记忆力"><span class="nav-number">3.</span> <span class="nav-text">计算机的记忆力</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#少废话，上代码"><span class="nav-number">4.</span> <span class="nav-text">少废话，上代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#next数组的构造"><span class="nav-number">4.1.</span> <span class="nav-text">next数组的构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哨兵"><span class="nav-number">4.2.</span> <span class="nav-text">哨兵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化-优化-优化…"><span class="nav-number">4.3.</span> <span class="nav-text">优化 优化 优化…</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#整体复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">整体复杂度分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pazyx.xyz</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">全站字数统计&#58;</span>
+    
+    <span title="全站字数统计">45.9k</span>
+  
+
+<!--
+
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://pazyx.xyz/2018/02/22/strkmp-2/';
+          this.page.identifier = '2018/02/22/strkmp-2/';
+          this.page.title = '串匹配算法2——KMP';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://pazyx-xyz.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7cTegp3KYMtc2W0V2u63CUlJ-gzGzoHsz", "bDS8nx2LWwUeyou9BfjypwGu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[POJ 3254 Corn Fields（状压DP）]]></title>
+    <url>%2F2018%2F07%2F07%2Fpoj-3254-corn-fields%2F</url>
+    <content type="text"><![CDATA[题目链接：http://poj.org/problem?id=3254 Corn FieldsTime Limit: 2000MS Memory Limit: 65536K DescriptionFarmer John has purchased a lush new rectangular pasture composed of M by N (1 ≤ M ≤ 12; 1 ≤ N ≤ 12) square parcels. He wants to grow some yummy corn for the cows on a number of squares. Regrettably, some of the squares are infertile and can’t be planted. Canny FJ knows that the cows dislike eating close to each other, so when choosing which squares to plant, he avoids choosing squares that are adjacent; no two chosen squares share an edge. He has not yet made the final choice as to which squares to plant. Being a very open-minded man, Farmer John wants to consider all possible options for how to choose the squares for planting. He is so open-minded that he considers choosing no squares as a valid option! Please help Farmer John determine the number of ways he can choose the squares to plant. InputLine 1: Two space-separated integers: M and NLines 2..M+1: Line i+1 describes row i of the pasture with N space-separated integers indicating whether a square is fertile (1 for fertile, 0 for infertile) OutputLine 1: One integer: the number of ways that FJ can choose the squares modulo 100,000,000. Sample Input1232 31 1 10 1 0 Sample Output19 HintNumber the squares as follows: 121 2 3 4 There are four ways to plant only on one squares (1, 2, 3, or 4), three ways to plant on two squares (13, 14, or 34), 1 way to plant on three squares (134), and one way to plant on no squares. 4+3+1+1=9. 题解题目大意有 M×N 的玉米地，但其中有些是不肥沃的，不能种植。用 1 来代表肥沃，0 代表不肥沃。另外奶牛不喜欢挨着吃玉米，也就是说要间隔着种植，求有几种种植方式，并将计算结果对 100000000 取模。 解题思路状压DP入门题目。题目中要求不能挨着种，也就是行内不允许有相邻的地，行内比较好控制，而行间思考一下其实只需要考虑相邻两行的玉米地是否有冲突。使用一个二进制数表示一行的玉米种植情况状态：某行的玉米地分布情况 转移方程：dp[i][j] = (dp[i][j] + dp[i - 1][k])%mod第 i 行种植方案为 j 的种植方式数为等于其本身加上第 i-1 行种植方案为 k 的种植方式数，j 和 k 方案不冲突，且 j 和 k 方案本身行内不冲突，且种植土地都为肥沃的土地。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include &lt;iostream&gt;#include &lt;string.h&gt;using namespace std;const int MAX_N = 20;const int MAX_M = 20;int state[MAX_N + 1];int dp[MAX_N + 1][1 &lt;&lt; MAX_M];const int mod = 100000000;bool fit(int now, int flag)&#123; return (now | flag) == flag;&#125; //是否都是肥沃的土地bool ok (int x) &#123; return (x &amp; (x / 2)) == 0;&#125; //判断行内是否冲突bool not_intersect(int now,int prev)&#123; return (now &amp; prev) == 0;&#125; //判断两行间是否冲突int main() &#123; int n,m; cin &gt;&gt; n &gt;&gt; m; for( int i = 1; i &lt;= n; ++i)&#123; for( int j = 0; j &lt; m; ++j)&#123; int flag; cin &gt;&gt; flag; state[i] |= (1 &lt;&lt; j) * flag; &#125; &#125; for( int i = 0; i &lt;= 20; i++)&#123; if(ok(i)) dp[0][i] = 1; &#125; for( int i = 1; i &lt;= n; ++i)&#123; for( int j = 0; j &lt; (1 &lt;&lt; m); ++j)&#123; //枚举当前行 if(!ok(j) || !fit(j,state[i]))&#123; continue; &#125; for( int k = 0; k &lt; (1 &lt;&lt; m); ++k)&#123; //枚举下一行 if(ok(k) &amp;&amp; fit(k,state[i-1]) &amp;&amp; not_intersect(j,k))&#123; dp[i][j] = (dp[i][j] + dp[i - 1][k]) % mod; &#125; &#125; &#125; &#125; int ans = 0; for( int i = 0; i &lt; (1 &lt;&lt; m); ++i)&#123; ans = (ans + dp[n][i]) % mod; &#125; cout &lt;&lt; ans &lt;&lt; endl; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>动态规划</tag>
+        <tag>题解</tag>
+        <tag>POJ</tag>
+        <tag>状压DP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「周记」0x01 可乐]]></title>
+    <url>%2F2018%2F07%2F04%2Fcola_a%2F</url>
+    <content type="text"><![CDATA[考试周终于过去 我想写点什么 想写点自由的东西 因为考试周实在太过压抑 我已经一个月没去厦门放纵了 身体和心理都受到了折磨在为数不多的几门需要大量写字的考试中 我多次提到自由和可乐 因为我渴望自由 我想在一堆答案里写点心里话自由一下事实上我今天想写一写 可乐 我本想写的正经一点 因为我要发到我的博客上 一直以来我希望我的博客能够严谨认真 写完一篇检查多次 有什么错误马上打开电脑修改提交今天我觉得既然要谈自由 我就自由一点吧 我也不想写什么标点符号 随便写写 反正这是我的博客 我来决定它的风格 我也不分段落和什么乱七八糟的 markdown 语法了 就按我想的来吧 其中可能有错别字（我已经看到了）我也不想改了 一切都波普 说到可乐 我已经在很多地方写过很多篇了 我想在这里总结一下 别回来都没了 2017年8月28日 23:23 去楼下超市买罐装可乐 发现罐装的雪碧和芬达都在唯独少了我的可乐 我很难过 之后我在罐装的雪碧芬达面前犹豫了一会儿 又看了看瓶装的可乐 我感觉那些都不是我想要的 你们知道我是个贵族非常讲究 瓶装和罐装的可乐完全是两个味儿 我走出那个超市决定去远方那个超市闯荡一次 之后我探访了两家超市结果它们只有瓶装的 最后我鼓足勇气走进了一家火锅店 问老板有罐装的可乐吗 他犹豫了一下说只有…… 说到这儿我心凉了 心想肯定是只有瓶装的 交谈间老板带着我走到了冰柜前 老板愣了一下说只有绿茶 他估计是在想怎么瓶装的可乐也没了 突然 我看到了冰柜上层的北冰洋 我想去他妈的罐装可乐 真够麻烦的 给我来瓶北冰洋 我喝着我的北冰洋走上了回家的路 感觉味道还可以 只是我感觉今天我有点儿不讲究了 所以说今天我这个贵族落魄了 我们等待明天 明天我带你们看看我的罐装可乐 带你们体验那种自由的味道 2017年10月24日 11:25 自由的阳光 自由的可乐 军训让我体验了自由 唯一的遗憾就是为什么中区食堂的党员示范岗窗口的菜最好吃 我想如果我再多吃几天 也许我也能发现它不如人意的一面 2018年3月16日 知乎问题：为什么有人愿意买 2.5 元 330ml 的易拉罐汽水，而不买 3 元 500ml 的瓶装？回答 太巧了？我就是你说的那种买罐装可乐的人，而且我只买罐装的，更夸张的是我们学校罐装和瓶装都是3块。每次我买瓶装可乐都会剩一半以上后扔掉。我想说啊，罐装的和瓶装的可乐它完全是两个味道。罐装的一般你需要一次喝完，汽很足。而瓶装的，打开放半个小时那口感是完全不能被接受的，只能扔掉。对于我每天在食堂吃饭的情况来说，一罐罐装的可乐刚刚好，而瓶装的500ml显得略多，我还需要把它带回宿舍并且不能马上扔掉，因为那显得我很浪费。那样我就需要把它放上一段时间（一般是几个小时）得到一个足以安慰我内心的理由（它真的没汽了）再把它扔掉。我这个人很懒，不想那么麻烦。还有就是在我喝完罐装可乐并扔掉罐的时候，我会有一种奇妙的感觉，就是我感觉到了自由。因为它不像瓶装可乐每次剩下的那些给我一种束缚感，我不需要为它找一个理由再扔掉。要知道自由在我们这个社会是很稀缺的，我很享受这种感觉，我很需要罐装可乐。注意！我之前说的瓶装都是指塑料瓶装的，玻璃瓶装的那真是好味道，我可以保证它比塑料瓶装的和罐装的都更好喝并且更能让你感觉到那种自由的状态。 2018年6月27日 我想这可乐可能也没多自由 我一想象到可口可乐中国公司里的党支部开会的场面就浑身难受 这可乐代表不了自由 考完试我一定去买一瓶进口可乐感受一下自由 此刻请让我在外面溜达一会儿 让我吹一吹太平洋的风 今晚就是我的波普时间 要说我最喜欢这其中的哪篇 我觉得是第一篇 那篇写的很自由 很有现场感 也很有Andy Warhol的风格 而且它象征着我会写故事了好了 言归正传 可乐为什么能代表自由？ 我也纳闷 我仔细回忆了一下应该是我瞎编的吧 高中我看了一些Andy Warhol的书他说啊 What’s great about this country is America started the tradition where the richest consumers buy essentially the same things as the poorest. You can be watching TV and see Coca-Cola, and you can know that the President drinks Coke, Liz Taylor drinks Coke, and just think, you can drink Coke, too. A Coke is a Coke and no amount of money can get you a better Coke than the one the bum on the corner is drinking. All the Cokes are the same and all the Cokes are good.翻译：这个国家的伟大之处在于，美国开始了这样的传统:最富有的消费者买的东西基本上和最穷的人买的一样。你可以看电视，看可口可乐，你可以知道总统喝可乐，莉兹·泰勒喝可乐，想想，你也可以喝可乐。可口可乐就是可乐，再多的钱也买不到比街角的流浪汉喝的更好的可乐。所有的可乐都是一样的，所有的可乐都一样好。 现实 表面 瞬间 感性 快乐 平等 简单 机械 重复 大众 这是波普精神 可乐全占了 但就是没有自由 我也不知道 这个精神是谁想的 要是我就给它加上自由写到这儿我大概明白了 可乐代表自由也许是因为快乐 我在自由的时刻最快乐 而且喝可乐也许这世上最简单的自由方式了 电影 肖申克的救赎 里他们在监狱房顶喝着啤酒 感受到了难得的自由我想我喝可乐的时候跟他们一样 我感觉这个社会管得实在是太多了 各种网络社交媒体不能评论 不能发不能发的 各种好的网站都需要翻墙 媒体都在宣传正能量 说点其他都不行 我讨厌政治 但现在哪都是政治 可能我写了这一段我的网站就被封禁了 而且它们是合法的 因为我没备案 反正啊 我是托管在国外服务器上的 域名也是在国外买的也没备案 我也有了自己的梯子 封了我也可以自己写自己看我还是希望人民们意识到自己的自由在一点一点被剥夺 实际上我们也无力反抗 如果不能像安迪一样逃出肖申克的话 还是与我一起共饮可乐吧]]></content>
+      <categories>
+        <category>泛 - 周记</category>
+      </categories>
+      <tags>
+        <tag>周记</tag>
+        <tag>可乐</tag>
+        <tag>自由</tag>
+        <tag>波普</tag>
+        <tag>Andy Warhol</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「笔记」Effective C++ 读书笔记（二）]]></title>
+    <url>%2F2018%2F07%2F03%2Feffective-cpp02%2F</url>
+    <content type="text"><![CDATA[注意！这只是我的读书笔记，帮助我记录。其中可能有一些不严谨的解释或没有做很详细的解释，大家学习还是建议直接看书（虽然书中也有不严谨的解释）。 2 构造 / 析构 / 赋值运算条款05：了解 C++ 默默编写并调用哪些函数一个 class 如果没有声明任何构造函数和析构函数，编译器会帮你声明以下的函数 default 构造函数 copy 构造函数 copy assignment 操作符 析构函数所有这些编译器为你生成的函数都是 public 的、大多数都是 inline 的（ Effective C++ 写的是都是 inline ），且只在需要时生成。 当你声明了任何一个构造函数，编译器将不再为你声明 default 构造函数。 对于两个要做拷贝的函数，它们可能是 bitwise 或者 memberwise。具体的 Effective C++ 只做了简略的解释。想深入了解的可以看《深度探索C++对象模型》，之后我也会写读书笔记或书摘。 如果类中存在不可重新赋值的成员将报错。 比如下面的类 12345678template&lt;class T&gt;class NamedObject &#123;public: NamedObject(std::string&amp; name, const T&amp; value):nameValue(name),objectValue(value)&#123;&#125;private: std::string&amp; nameValue; const T objectValue;&#125;; 引用类型和 const 修饰的成员不可被重新赋值，如果存在两个 NamedObject&lt;int&gt; 类的对象 a 和 b ，做 a = b 将直接报错。编译器无法为它声明拷贝函数。如果基类的 copy assignment 操作符被声明为 private 也是会导致编译失败。 条款06：若不想使用编译器自动生成的函数，就该明确拒绝可以将构造函数声明为 private 禁止调用。比如有些类不希望被拷贝，可以将 copy 构造函数和 copy assignment 操作符声明为 private 。12345678class Uncopyable&#123;protected: Uncopyable()&#123;&#125; ~Uncopyable()&#123;&#125;private: Uncopyable(const Uncopyable&amp;); Uncopyable&amp; operator=(const Uncopyable&amp;);&#125;; 也可以让不希望被拷贝的类直接继承 Uncopyable 类。Boost 库中也提供了名为 noncopyable 的class 保证被继承的类不被拷贝。 条款07：为多态基类声明 virtual 析构函数基类无虚析构函数，会导致向上造型后被部分销毁导致内存泄露。 谨慎继承不带虚析构函数的类，如：string、STL 库中的所有容器… 不是所有的类都需要虚析构函数，vptr 和 vtbl 会占有大量空间，且降低了可移植性（不可传给其他语言）。 许多人的心得时：只有当 class 内含至少一个 virtual 函数 才为它声明 virtual 析构函数。 条款08：别让异常逃离析构函数C++ 不能同时处理多个异常，主要原因是被抛出的元素的内存空间是分配在栈区的，抛出异常后会跳出那一层括号，栈区应该被清理。如果你在存在一个异常的情况下去处理另一个异常很可能会覆盖掉之前异常抛出的元素，导致程序过早结束或出现不明确行为。如果你的类中析构会抛出异常，那这个类的容器或数组在析构时很可能遇到多个异常，造成严重的后果。 有时我们类的析构函数必须执行一个可能抛出异常的行为时怎么办？比如关闭各种连接。书中提供了三种方案1234try&#123; A.close(); &#125;catch(...)&#123; std::abort();&#125; //调用 abort 结束程序 1234try&#123; A.close(); &#125;catch(...)&#123; //记下运转记录，记下对 close 的调用失败&#125; //吞下异常 123456789101112void close()&#123; db.close(); closed = true;&#125;//析构if(!closed)&#123; try&#123; db.close(); &#125; catch(...)&#123; //记下运转记录，记下对 close 的调用失败 &#125;&#125; 第三种就是直接将 close 函数开放给使用者，让使用者在析构前调用。 条款09：绝不在构造和析构过程中调用 virtual 函数在构造函数和析构函数中调用虚成员函数，可能得不到你想要的结果，它实际上会调用基类的那个函数。 解释构造过程构造过程进入基类的构造函数时，派生类的成员还没被初始化，如果调用派生类的虚函数可能会用到派生类部分的成员，所以编译器将构造过程中的对象当做 当前进入的构造函数所属的类的一个对象，当然只能调用与当前构造函数同属一个类的函数了。 析构过程进入析构函数，先销毁掉派生类的成员，在刚进入析构函数时这个对象已经不是完整的一个派生类的对象了，编译器只能把它当做它的基类的一个对象来看待。 在构造和析构期间不要调用 virtual 函数，因为这个类调用从不下降至 drived class (比起当前执行构造函数和析构函数的那层)。 条款10：令 operator= 返回一个 reference to *this返回 *this 的引用，可以让你的类的对象实现连锁赋值。如：x = y = z = 15; 条款11：在 operator= 中处理“自我赋值”如果类中存在一个指向堆中元素的成员，那就要注意赋值时的自我赋值。123456789101112class A&#123;public: string *s; A():s(new string())&#123;&#125; A&amp; operator= (const A rhs) &#123; delete s; s = new string(*rhs.s); return *this; &#125;&#125;; 如果 this 和 &amp;rhs 相等就尴尬了，它会先 delete 自己的 s ，实际上 *this 和 rhs 里的 s 指向的 string 对象都被销毁了。数据丢失而去之后也没办法使用成员 s 了。 相对安全的版本是1234567891011121314class A&#123;public: string *s; A():s(new string())&#123;&#125; A&amp; operator= (const A&amp; rhs) &#123; if(this == &amp;rhs) return *this; delete s; s = new string(*rhs.s); return *this; &#125;&#125;; 加入认同测试，保证了 “自我赋值” 的安全性，但还不具备 “异常安全性”。如果在 s = new string(*rhs.s); 这一步导致异常，那 s 将指向一块已被删除的 string 。12345678A&amp; operator= (const A&amp; rhs)&#123; string* pOrig = pb; s = new string(*rhs.s); delete pOrig; return *this;&#125; 这样即使抛出异常，赋值失败也不会造成其他副作用，可以将 s 保持原状。 copy and swap 技术123456789void swap(A&amp; rhs); //交换*this 和 rhs 的数据 见条款29A&amp; operator= (const A&amp; rhs)&#123; A temp(rhs); swap(temp); return *this;&#125; by value 传值方式的 copy and swap 技术12345678void swap(A&amp; rhs); //交换*this 和 rhs 的数据 见条款29A&amp; operator= (const A rhs)&#123; swap(rhs); return *this;&#125; 条款12：复制对象时勿忘其每个成分12345678910111213141516171819202122232425class A&#123;private: int a;public: A()&#123;&#125; A(A &amp;rhs):a(rhs.a)&#123;&#125; A&amp; operator= (A &amp;rhs)&#123; a = rhs.a; return *this; &#125; &#125;;class B : public A&#123;private: int b;public: B()&#123;&#125; B(B &amp;rhs):b(rhs.b)&#123;&#125; B&amp; operator= (B &amp;rhs)&#123; b = rhs.b; return *this; &#125; &#125;; 小心这样的代码，B 的两个 Copying 函数，都没有拷贝基类的数据( int a )。 Copying 函数应该确保赋值“对象内的所有成员变量” 及 “所有 base class 成分”。 12345678910111213class B : public A&#123;private: int b;public: B()&#123;&#125; B(B &amp;rhs):b(rhs.b),A(rhs)&#123;&#125; // + ! B&amp; operator= (B &amp;rhs)&#123; A::operator=(rhs); // + ! b = rhs.b; return *this; &#125; &#125;; 两个 Copying 函数一般有相近的代码，但不要在一个 Copying 函数内调用另一个 Copying 函数。 应该将共同机能放进第三个函数中，并由两个 Copying 函数共同调用。]]></content>
+      <categories>
+        <category>泛 - 笔记</category>
+      </categories>
+      <tags>
+        <tag>读书</tag>
+        <tag>Cpp</tag>
+        <tag>运算符重载</tag>
+        <tag>构造函数</tag>
+        <tag>拷贝构造函数</tag>
+        <tag>缺省构造函数</tag>
+        <tag>笔记</tag>
+        <tag>Effective C++</tag>
+        <tag>virtual 函数</tag>
+        <tag>自我赋值</tag>
+        <tag>异常</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java 与 C++ 细节差异 （一）]]></title>
+    <url>%2F2018%2F07%2F01%2Fcpptojava%2F</url>
+    <content type="text"><![CDATA[注释相比 C++，Java提供了三种注释方式分别为 // 单行注释 /* ... */ 多行注释 /** ... */ 文档注释前两种与 C++ 相同，最后一种可以自动将注释内容生成文档。供使用者直接查看。 基本数据类型整数 Java 存储空间 C++ 存储空间 int 4 字节 int 至少 4 字节，且大于等于 short short 2 字节 short 至少 2 字节 long 8 字节 long 至少 4 字节，且大于等于 int byte 1 字节 long long 至少 8 字节，且大于等于 long Java 提供了 4 种整数类型，与 C++ 相比 Java 的规范更为严格。可以看出 C++ 更在乎效率，而 Java 更在乎可移植性。 十六进制数和八进制数两种语言均可以使用 0x 和 0 为前缀来表示，而 Java 还提供了前缀 0b 来表示二进制数。 浮点数 Java 存储空间 C++ 存储空间 float 4 字节 float 4 字节 double 8 字节 double 8 字节 long double ( Intel ) 16 字节 两者都遵循 IEEE-754 标准 C++ 直接提供了 80 位的扩展精度浮点数，而 Java 没有提供。Java 没有提供的原因还是对可移植性的考虑，值得注意的是如果 JVM 运行在 Intel 的处理器上时，浮点数的中间运算结果默认是采用扩展精度存储的。这是因为截断会使效率大幅降低，但 Java 也提供了截断的可能性，使用 strictfp 关键字标记的方法（函数）必须严格的对中间结果截断，保证在任何处理器环境的结果的一致性。例：public static strictfp void main(String[] args) 初始化Java 禁止使用未初始化的本地变量，C++ 可以。 常量修饰符不同，Java 使用 final 修饰常量，但 const 也是 Java 的保留字。 Java C++ final type const type 常量可以不在定义出初始化，但必须保证在第一次使用前被初始化，且只初始化一次。 数组Java 没有 C++ 中在栈区分配到数组，你不可以写出这样的代码1int a[10]; 所有的数组，都需要使用 new 在堆上分配空间。 Java 提供了两种定义数组的方式12int[] a = new int[size];int a[] = new int[size]; 如果你没有初始化数组，Java 会帮你做数组的初始化。数字数组将所有元素初始化为 0 ，boolean 数组初始化为 false，对象数组初始化为 null 。 Java 中 []运算符被定义为检查数组边界，而且 Java 没有指针运算，不可以通过 a + 1 得到下一个元素。 命名规则 Java C++ 一个以字母开头的由字母或数字组成的序列，字母包括{‘A’ ~ ‘Z’、’a’ ~ ‘z’、’_’、’$’ 或在某种语言中代表字母的任何 Unicode 字符 }。 一个由数字，下划线，小写和大写拉丁字母，和大多数 Unicode 字符组成的任意长度的序列。有效的标识符必须以一个非数字字符（拉丁语字母，下划线或 Unicode 非数字字符）开头。 注：Java 中在某种语言中代表字母的任何 Unicode 字符，比如德国用户可以用 ä 。可以使用 Character 类的 isJavaIdentifierStart 和 isJavaIdentifierPart 方法检测。 C++ 中大多数 Unicode 字符是指除下表中的字符以外的 Unicode 字符。 代码点 说明 U+0300 - U+036F 组合用抑音符 - 组合用拉丁文小写字母 X U+1DC0 - U+1DFF 组合用带点抑音符 - 组合用下右箭头尖和向下箭头尖 U+20D0 - U+20FF 组合用上左鱼叉 - 组合用上星号 U+FE20 - U+FE2F 组合用连字左半 - 组合用西里尔文 Titlo 右半 重名问题在 C++ 中你可以写出这样的代码12345int a;&#123; int a;&#125; 这样进入大括号后，外层的整数 a 就被隐藏了，看不到了无法访问了，出大括号就可以继续访问外层的整数 a 了。 而在 Java 中编译器是不允许你写出这样的代码的。Java 和 C++ 大体上相同，本地变量的生存期是由其所在的大括号决定的。它们两者的不同之处在于 Java 是完全不允许在一个变量的生存期内出现另一个重名的变量，而 C++ 允许在内层定义新的重名变量隐藏外层变量。 例：12int a;int a; 这样的代码在两种语言中都是错误的。 12345&#123; int a;&#125;int a; 这样的代码在两种语言中都是正确的。 二者唯一的差别就是我在最开始的那个例子，Java 在外层 a 的生存期还没结束前不可以定义新的重名变量，而 C++ 可以。 String 与 stringString 和 string 分别为 Java 和 C++ 库里的字符串，虽然只是差一个字母大小写，实际上它们有着巨大的差异。string 更像是 char 的数组，它的每个单位都是可以直接这样 s[index] 访问的，而且可以进行修改。String 就没有那么方便了，Java 没有运算符重载只能通过 s.charAt( index ) 来转换成 char 再读。注意！String 没有提供写操作的方法。String 在 Java 中是一种不可修改的字符串。 这实际上是效率优化上的不同想法，C++ 中每个 string 的对象都独占一块内存空间，Java 的 String 不可修改就可以将多个相同的字符串变量共享一块内存空间，复制操作效率也变得很高。但这样就要在字符串比较时特别注意，Java 的对象变量都是对象的管理者，且 Java 没有运算符重载，如果你有两个 String 的对象 a 和 b ，a == b 只是在判断它们管理的是不是一块内存空间。Java 相同字符串的共享内存空间的分配方案也不是 100% 的，它只是在合适的情况下共享空间，所以两个内容相同的字符串也不一定指向同一个内存空间。它的比较有时相等有时不相等都是很有可能的，所以不要那么做！比较操作 a.equals(b) 使用 String 的 equals 方法即可。 那到底怎么修改字符串呢？你可以使用 + 运算符和 substring 方法进行拼接和切割字符串最后再赋值给原字符串。但这会有很大的开销，因为中间结果要生成很多不可改变的 String 对象。可以使用 StringBuilder 或者 StringBuffer。 参考资料C++ 基础类型标准C++ 标识符标准The Java® Language SpecificationJava 核心技术 卷I —— Cay S. Horstmann、Gary Cornell深入理解 Java 虚拟机 —— 周志明]]></content>
+      <categories>
+        <category>编程语言 - Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Cpp</tag>
+        <tag>整数</tag>
+        <tag>浮点数</tag>
+        <tag>命名规则</tag>
+        <tag>String</tag>
+        <tag>string</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[basic_ios 如何穿上它的 bool]]></title>
+    <url>%2F2018%2F06%2F29%2Fcin-return%2F</url>
+    <content type="text"><![CDATA[为什么可以 while( cin &gt;&gt; n ) ？这个问题困扰了我很久。每次写出那行代码都在为什么没有输入时它会停，为什么可以这样写，每次写时都有些虚。为了保持我的自信，我想象了很多情况来安抚自己。起初我类比 C 语言，想着应该是 cin 这个鬼东西返回了一个 bool 类型的值。之后在学习了类与对象后，发现 cin 不过是个对象不可能返回什么值。我又给出了新的解释：也许 cin &gt;&gt; n 这个表达式是个 bool 类型的值吧。再之后我看运算符重载时，刚刚的解释也凉了。表达式 cin &gt;&gt; n 的值是 &lt;&lt; 的运算符重载函数返回的一个 basic_istream 类的对象而已。 我的想象力有一些枯竭了 … … 直到这几天我在看《深度探索C++对象模型》书时，书中的例子中提到了 basic_ios 的类型转换函数，又让我想起了之前的问题。我查阅了大量资料，大致搞清楚了 究竟为什么可以？和 解决方案的演变过程。 while 的括号里能放什么？ 任何能按语境转换为 bool 的表达式，或带花括号或等号初始化器的单个变量声明。每次迭代前求值此表达式，而若它产出 false ，则退出循环。若此为声明，则每次迭代前求值初始化器，且若被声明变量的值转换为 false ，则退出循环。 什么可以转换为 bool？对于原始数据类型，适用于C++ 标准中的布尔转换规则规则如下： 整数、浮点、无作用域枚举、指针和指向成员指针类型的纯右值能转换成 bool 类型纯右值。值零（对于整数、浮点和无作用域枚举）、空指针值和空成员指针值变为 false 。所有其他值变为 true 。std::nullptr_t 类型纯右值，包括 nullptr ，能在直接初始化的语境中转换成 bool 类型纯右值。结果值为 false 。(C++11 起) 对于用户定义类型，则需要给出 类型转换函数 或 以目标类型为参数的构造函数。 究竟为什么可以？我直接给出答案：basic_istream 的基类 basic_ios 类有一个 bool( ) 的运算符重载函数，也就是类型转换函数。12explicit operator bool() const; // C++11 //若流无错误则为 true ，否则为 false 。 这样就解决了上述问题，表达式 cin &gt;&gt; n 的值被转换为 bool 类型当然可以放在 while 的括号内没有任何问题。 演变过程上面的只是 C++11 标准库的解决方案。其实更有意思的是 basic_istream 的对象转换到 bool 类型在实现上的一些历史演变过程。 operator int() const;由于 C++ 早期是没有 bool 类型的，iostream 库的构建者 Jerry Schwarz 希望通过为 basic_ios 类编写一个类型转换函数，提供将 basic_ios 类转换为 int 类型的方式，实现 while( cin &gt;&gt; n )。可这样写后他发现一个问题，就是有人可能写出下面这种代码：1cin &lt;&lt; intValue; // 正确的应该为 cin &gt;&gt; Value; 由于 &lt;&lt; 和 &gt;&gt; 运算符很容易让程序员用乱，有的人可能会写出上面的错误代码，但当时的编译器没有报错。因为编译器发现 cin 是没有重载 &lt;&lt; ，但 int 是可以做左移 ( &lt;&lt; ) 的，程序将 basic_ios 的对象转换为 int 又进行了左移操作。这算不上错误，但至少将大部分程序员的错误隐藏了，让人难以定位错误。这个错误之后被戏称为“Schwarz Error”，在这之后 Jerry Schwarz 用下面的函数取代了 operator int () const; operator void*() const;C++ 的标准中 void* 能隐式转换为 bool 类型，Jerry Schwarz 想到了这种方式，并且还为 basic_ios 类重载了 ! 运算符，以支持 while( ! ( cin &gt;&gt; n ) )。这个函数一直维持到 C++11 的出现。 explicit operator bool() const;之前的 operato void*() const; 其实是有安全风险的。你可以直接给一个 void* 类型的变量赋一个 basic_ios 类的对象，并且没有任何的错误或警告。这是不安全的，这种类型转换应该是显性的才安全。C++11 改变了隐式转换的一些规则，解决了安全 bool 问题。C++11 之前在类型转换运算符重载函数前加上 explicit 关键字，声明它必须显式使用，以强制类型转换的形式去操作。比如：bool b = (bool)cin 才可以使用类型转换函数，而不能做 bool b = cin 这样的操作。而 C++11 标准对目标为 bool 类型的转换，改变了标准。 具体标准如下： 下列语境中，期待类型 bool ，而若声明 bool t(e); 为良式则进行隐式转换（即考虑如 explicit T::operator bool() const; 的隐式转换函数）。我们说这种表达式 e 可按语境转换为 bool。 if 、 while 、 for 的控制表达式； 内建逻辑运算符 ! 、 &amp;&amp; 和 || 的运算数； 条件运算符 ?: 的首个运算数； static_assert 声明中的谓词；(C++11起) noexcept 指定符中的表达式； explicit 指定符中的表达式；(C++20 起) 契约属性 的谓词。(C++20 起) 这样在非上述语境下转换为 bool 类型就需要显式转换，而在控制表达式中可以自动的隐式转换。增强安全性的同时也保证向前兼容。 参考资料 隐式转换 std::basic_ios std::basic_ios::operator bool explicit 指定符 while 循环 if 语句 《深度探索C++对象模型》—— Stanley B. Lippman 《C++语言的设计与演化》—— Bjarne Stroustrup]]></content>
+      <categories>
+        <category>编程语言 - Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>bool</tag>
+        <tag>basic_ios</tag>
+        <tag>运算符重载</tag>
+        <tag>类型转换</tag>
+        <tag>Cpp演化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[System.in]]></title>
+    <url>%2F2018%2F06%2F16%2FSystem-in%2F</url>
+    <content type="text"><![CDATA[Scanner in = new Scanner(System.in) 2018.6.10]]></content>
+      <categories>
+        <category>泛 - 计算机</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>省赛</tag>
+        <tag>ACM题目</tag>
+        <tag>纪念</tag>
+        <tag>Java</tag>
+        <tag>Scanner</tag>
+        <tag>System.in</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[GCC LD DD 命令选项]]></title>
+    <url>%2F2018%2F05%2F11%2Fgcc-ld-dd-cmd%2F</url>
+    <content type="text"><![CDATA[概述此篇仅介绍一些我在 ucore 操作系统的 makefile 文件中遇到的命令选项，作为 lab_1 实验报告的一部分。 GCC -c 进行预处理、编译、汇编，生成目标代码文件，不进行链接 -S 仅进行预处理、编译，生成汇编代码文件 -E 仅进行预处理 -o file 指定输出文件名 GCC 8.1 manuals 摘录 -I (大写 i ) 指定头文件位置 -L (大写 L ) 指定库文件位置 -l (小写 L) 指定库名字 -I -L -l 选项的详解分别在 GCC 8.1 manuals 的第 200、201、195 页 -Wall 开启大部分警告，列表如下。一些不常用的警告可加 -Wextra 选项配合 - Wall 全部打开 选项 -Waddress -Warray-bounds=1 (only with ‘-O2’) -Wbool-compare -Wbool-operation -Wc++11-compat -Wc++14-compat -Wcatch-value (C++ and Objective-C++ only) -Wchar-subscripts -Wcomment -Wduplicate-decl-specifier (C and Objective-C only) -Wenum-compare (in C/ObjC; this is on by default in C++) -Wformat -Wint-in-bool-context -Wimplicit (C and Objective-C only) -Wimplicit-int (C and Objective-C only) -Wimplicit-function-declaration (C and Objective-C only) -Winit-self (only for C++) -Wlogical-not-parentheses -Wmain (only for C/ObjC and unless ‘-ffreestanding’) -Wmaybe-uninitialized -Wmemset-elt-size -Wmemset-transposed-args -Wmisleading-indentation (only for C/C++) -Wmissing-attributes -Wmissing-braces (only for C/ObjC) -Wmultistatement-macros -Wnarrowing (only for C++) -Wnonnull -Wnonnull-compare -Wopenmp-simd -Wparentheses -Wpointer-sign -Wreorder -Wreorder -Wrestrict -Wreturn-type -Wsequence-point -Wsign-compare (only in C++) -Wsizeof-pointer-div -Wsizeof-pointer-memaccess -Wstrict-aliasing -Wstrict-overflow=1 -Wswitch -Wtautological-compare -Wtrigraphs -Wuninitialized -Wunknown-pragmas -Wunused-function -Wunused-label -Wunused-value -Wunused-variable -Wvolatile-register-var -fno-builtin 不承认不以 __builtin_ 开头的内建 ( built-in ) 函数。 -ggdb 生成用于GDB的调试信息 -gstabs 使用stabs格式生成调试信息， -nostdinc 不搜索头文件的标准系统目录 -fno-stack-protector 禁用堆栈保护机制 GNU linker ( ld ) 命令选项 -m emulation 模拟仿真链接器 如：-m elf_i386 -nostdlib 只用在命令行中显式指定的搜索库目录 -N 设置代码段和数据段均可读写 -e 指定入口 -Ttext 连接时重定向初始地址 dd 命令参数 if 代表输入文件。如果不指定if，默认就会从stdin中读取输入。 of 代表输出文件。如果不指定of，默认就会将stdout作为默认输出。 bs 代表字节为单位的块大小。 count 代表被复制的块数。 /dev/zero 是一个字符设备，会不断返回0值字节（\0） 参考资料 GCC 8.1 manuals ld GNU Development Tools ( man ld ) Linux dd 命令详解]]></content>
+      <categories>
+        <category>泛 - 计算机</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>C</tag>
+        <tag>gcc</tag>
+        <tag>ld</tag>
+        <tag>dd</tag>
+        <tag>操作系统</tag>
+        <tag>linker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[X86 计算机启动流程]]></title>
+    <url>%2F2018%2F05%2F03%2Fx86-cpu-boot%2F</url>
+    <content type="text"><![CDATA[硬件加电后寄存器初始值加电后 CPU 进入实模式（为了兼容早期的8086处理器），实模式下 CPU 只有 1M 的寻址空间，地址计算为: $EA = Base + EIP$ 即加电后的起始地址为 $CS:EIP = FFFF0000H+0000FFF0H = FFFFFFF0H$ 从 FFFFFFF0H 到 00007C00HFFFFFFF0H 中有什么呢？这里放着的是 CPU 要执行的第一条指令，通常是一条长跳转指令，它会设置 CS 和 EIP 将控制权交给 BIOS 做初始化工作。 BIOS 的执行过程 硬件自检 检测关键部件的存在和工作状态 查找并执行接口卡的 BIOS 进行设备初始化 执行系统 BIOS 进行系统检测，检测和配置即插即用设备 更新 CMOS 的扩展系统配置数据 ESCD (系统配置表) 按指定顺序从软盘、硬盘或光驱启动 读取主引导扇区代码，拿到主引导记录 主引导扇区代码读取活动分区的引导扇区代码 活动分区的引导扇区代码读取文件系统的加载程序到内存中的 00007C00H 处 将 CS:EIP 设置为 00007C00H 控制权交给加载程序( bootloader ) 至此计算机的控制权已经交给操作系统的 bootloader 程序。 bootloader 启动过程 切换到保护模式，启用分段机制 读磁盘中 ELF 执行文件格式的操作系统到内存 显示字符串信息 把控制权交给操作系统 bootloader 代码ucore asm.h bootasm.S bootmain.c xv6 bootasm.S bootmain.c]]></content>
+      <categories>
+        <category>泛 - 计算机</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+        <tag>寄存器</tag>
+        <tag>CPU</tag>
+        <tag>硬件</tag>
+        <tag>bootloader</tag>
+        <tag>BIOS</tag>
+        <tag>启动流程</tag>
+        <tag>X86</tag>
+        <tag>Intel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[AT&T 与 Intel 汇编主要语法差异]]></title>
+    <url>%2F2018%2F04%2F23%2Fatt-intel-differents%2F</url>
+    <content type="text"><![CDATA[操作数顺序在一般的二元指令（如 mov、add …）中，两个操作数分为源操作数和目的操作数。AT&amp;T 与 Intel操作数的顺序正好相反。 “Op-code dst src” in Intel syntax. “Op-code src dst” in AT&amp;T syntax. 寄存器名称AT&amp;T 语法中寄存器名称需要加前缀 ’%’ ，而 Intel 不需要。 立即数AT&amp;T 语法中立即数需要加前缀 ’$’ ，对于静态 ‘C’ 变量也一样。Intel的语法标准不需要。 操作数大小AT&amp;T 语法中，操作数大小由指令的最后一个字符决定，“b”、“w” 和 “l” 的指令后缀分别表示字节(8位)、word(16位)和长(32位)内存引用。 Intel 语法中，由操作数的前缀 ’byte ptr’, ’word ptr’, 和 ’dword ptr’ 决定。 “mov al, byte ptr foo” in Intel syntax “movb foo, %al” in AT&amp;T syntax 寻址方式AT&amp;T 语法中基指寄存器被 ( ) 括起来，而 Intel 语法中使用 [ ] 。 地址表示： section:[base + index*scale + disp] in Intel syntax section:disp(base, index, scale) in AT&amp;T syntax section：段地址 disp：偏移地址 index：变址 scale：比例因子 计算公式：[EA = base + ( index * scale ) + disp] 对比 Intel Code AT&amp;T Code mov eax,1 movl $1,%eax mov ebx,0ffh movl $0xff,%ebx int 80h int $0x80 mov ebx,eax movl %eax,%ebx mov eax,[ecx] movl (%ecx),%eax mov eax,[ebx+3] movl 3(%ebx),%eax mov eax,[ebx+20h] movl 0x20(%ebx),%eax add eax,[ebx+ecx*2h] addl (%ebx,%ecx,0x2),%eax lea eax,[ebx+ecx] leal (%ebx,%ecx),%eax sub eax,[ebx+ecx*4h-20h] subl -0x20(%ebx,%ecx,0x4),%eax 参考资料GCC-Inline-Assembly-HOWTO : http://ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html#s3]]></content>
+      <categories>
+        <category>编程语言 - Assembly</category>
+      </categories>
+      <tags>
+        <tag>汇编语言</tag>
+        <tag>编程语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++类与对象总结（四）访问属性]]></title>
+    <url>%2F2018%2F04%2F15%2Fcpp-class-4%2F</url>
+    <content type="text"><![CDATA[概述C++的访问属性我在本系列的第一篇 C++类与对象总结（一） 已经有了一些介绍，但那时没有介绍继承中的访问属性问题，而且最近对 C++的保护模型也有了一些新的理解。此篇为 C++类与对象总结（一） 在访问属性方面的补充。 概念在 C++ 语言中有 public、protected 和 private 这三种访问属性。 public：任何地方都可以访问 protected：只有这个类和它的派生类可以访问 private：只有这个类可以访问 概念 1 保护是通过编译时的机制提供的，目标防止发生意外事件，而不是防止欺骗或者有意侵犯。 2 保护的单位是类，而不是某个对象。 3 受控制的是访问权，而不是可见性。 这其中的前两条我已经在 C++类与对象总结（一） 中讲解并搭配了实验。 讲解清楚第三条之前，我们需要弄清楚什么是可见性。 可见性： 这个概念很常见，比如下面的代码：123456789101112#include &lt;iostream&gt;using namespace std;int i = 1;int main()&#123; int i = 2; cout &lt;&lt; i &lt;&lt; endl; return 0;&#125; 这段程序的输出显然是 2，因为在 main 函数中第 4 行的全局的整数 i 是不可见的，它被第 8 行的局部整数 i 所遮蔽了。 我们再来看这个程序12345678910111213141516171819202122232425262728#include &lt;iostream&gt;using namespace std;int a = 2;class AA&#123;private: int a;&#125;;class AAB : public AA&#123;public: void fun() &#123; a = 1; &#125;&#125;;int main()&#123; AAB x; x.fun(); cout &lt;&lt; a &lt;&lt; endl; return 0;&#125; 在 AA 类中有一个私有的成员 a ，AAB 类 public 继承了 AA 类。显然现在 AAB 类的对象有了一个私有成员 a ，但这个 a 是 AA 类私有的，a 对于 AAB 类的 fun 函数有可能是不可见的，也有可能是不可访问的。 如果是不可见的：我们可以看到代码中有一个全局变量 a ，不可见的话 fun 函数中会修改全局的 a 。 如果是不可访问的：那编译应该通不过，因为它在访问修改一个 private 的成员。 尝试编译得到下面的结果12345temp.cpp: In member function &apos;void AAB:fun()&apos;:temp.cpp:17:3 error: &apos;int AA:a&apos; is private within this context a = 1;temp.cpp:9:6: note: declared private here; int a; 它说 AA 类中的 a 是私有的。所以说这三个关键字限制的是访问属性而不是可见性。 访问权限究竟是在限制谁？它是在限制该类后续的使用者，而不是在限制该类现在的设计者！在后面的组合和继承中的访问权限会出现访问权限的多次限制，很多初学者会分不清楚类内和类外访问权限的区别，所以在这里先说明一下。访问权限我们关心的是我们做的这个类在未来的使用者手中的访问权限。因为三种访问权限均允许在类内访问，类内的访问权限只由其中的成员之前设计访问权限有关，与当前要设计的类赋予的访问权限无关。 类会在哪些地方被使用？ 作为变量被使用 在其派生类中被使用 向上造型，是否可以做指针或引用的类型转换 对象组合中的访问属性问题在讲继承中的访问权限之前我想先介绍组合中的访问权限。它们很相近，区别也会在下面讲到。1234567891011class AA&#123;public: int a;&#125;;class AAB&#123;private: AA b;&#125;; 如果在 AAB 类外访问成员 b 中的成员的 a，会怎么样呢？当然是编译错误。因为在访问成员 b 中的成员 a 实际上是在访问成员 b ，而成员 b 是私有的不可访问。 这里访问权限发生了叠加，成员 a 的访问权限 AA 类赋予它的 public 再加上 AAB 类赋予成员 b 的 private 。这里发生了访问权限的叠加。 访问权限叠加时会怎么样？ 我们再来看一下这三种访问权限的特点，从 public 任何地方都可以访问，上升到 protected 只能在类内和其子子孙孙的类中可以访问，再上升到 private 只能在类内访问。不难发现这三种访问权限的严格程度逐级递增，在发生访问权限叠加时应选择最严格的访问权限声明去限制其访问权限。因为访问是逐层进行的。 这就比如你现在需要乘坐很多种交通工具回家，假设一路上要乘坐船、地铁、飞机、汽车。你的行李中有一个打火机，你会想一下坐飞机不让携带打火机而选择不带它，而不会因为坐船、汽车、地铁都可以携带打火机而带上它。因为是否可以携带这些行李取决于你这一路上要接受的所有安检中最严格的那一个。 继承中的访问属性问题常见三种继承就对应于这三种访问权限，继承的分类也由这三种访问属性产生的。1234567891011121314151617181920212223242526272829303132class Base1&#123;private: int a1;protected: int b1;public: int c1;&#125;;class Base2&#123;private: int a1;protected: int b1;public: int c1;&#125;;class Base3&#123;private: int a1;protected: int b1;public: int c1;&#125;;class Y : public Base1, protected Base2, private Base3&#123;&#125;; 我们讨论这段代码中 Y 类每个成员的范围属性。 再次提醒初学者！我们讨论的是在之后用到 Y 类时的访问属性，比如：从由 Y 类所定义的对象对其中成员的访问、在 Y 类的派生类中对其成员的访问。初学者可能会想知道在 Y 类内部对这些成员的访问属性问题。这里说明一下在 Y 类内部访问继承得到的成员是否受限与继承方式无关，只与基类声明的访问属性有关。比如在 Y 类内部访问成员 c3 是可以的，因为在 Base3 中声明其是 public 的访问属性，而这与它是以 private 方式继承无关。 这就与对象组合中的访问属性问题很相似了，我们再来看一段代码。123456789class Y&#123;public: Base1 a;protected: Base2 b;private: Base3 c;&#125;; 如果把 Y 类改写成这个样子，其所有成员的访问属性与之前的 Y 类相同。虽然它们的访问属性是一致的，但因为现在 Y 类不再是三个Base类的派生类了，所以在 Base 类中访问属性为 protected 的成员将不能在 Y 类和其派生类中被访问。 判断一个成员在继承过程中的访问属性时，可以通过将其转变为对象组合时的访问属性问题判断。注意这样判断的是它究竟是哪种访问属性，而不是它能不能被访问。能不能被访问应根据访问属性和是否为派生类判断。 其他问题向上造型 这里要分为两个位置： 一、在该类的 public 派生类中 public：可以 protected：可以 private：当做无子父类关系，无法做指针或引用的类型转换 二、在其他位置 public：可以 protected：当做无子父类关系，无法做指针或引用的类型转换 private：当做无子父类关系，无法做指针或引用的类型转换 内部类问题 在内部类中对该类中的成员访问与在该类的成员函数访问一致，与内部类声明的访问属性无关。 模板类问题 模板类只是声明，编译器会根据每次指定的类型每次定义一个新的类，所以同一个模板是使用两个不同的类型定义的类是属于两个不同的类。1234567891011121314151617181920template&lt;typename T&gt;class X&#123;private: int member;public: template&lt;typename U&gt; void Method(X&lt;U&gt;&amp; y) &#123; &amp;y.member; &#125;&#125;;int main()&#123; X&lt;int&gt; x; X&lt;float&gt; y; x.Method(x); // 可以 x.Method(y); // 不可以&#125; 这里的 18 和 19 行作为对比，x 的 Method 传入它自己（相同类型）访问其 private 成员不会报错，而 x 的 Method 传入它的模板根据 float 定义的对象 y 再访问其 private 成员则会报错。]]></content>
+      <categories>
+        <category>编程语言 - Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>访问属性</tag>
+        <tag>对象组合</tag>
+        <tag>继承</tag>
+        <tag>多态</tag>
+        <tag>可见性</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「公告」 近期文章中的错误and博客计划]]></title>
+    <url>%2F2018%2F04%2F06%2Fnotice-1%2F</url>
+    <content type="text"><![CDATA[最短路算法1——Dijkstra描述不清楚： 在时间复杂度最后的总结中，我之前提到“对于稠密图来说有时不优化比利用最小堆优化更高效”。实际上一般的图，甚至是完全图，利用最小堆优化效率都是优于不优化的。只有一种情况是相反的，就是边确实特别多，是顶点数的高次幂（3以上）的情况。一般来说这种图很少见，完全图的边数也就是顶点数的平方量级的，出现高次幂量级的边只有可能是有存在大量重边，在这里我们处理的是最短路问题我们可以只保留两个顶点之间最短的边，以消除重边。 补充： 一般的最短路算法，还有一种问法就是最长路问题。这个可以把所有的边权值都取相反数，初始化时将dist数组初始化为最小值，一般为INT_MIN。将比较符合取相反，结果取相反数。 C/C++程序中的内存分配错误： 我在“运行中的内存分配回收时机”中提到，代码段、数据段和BSS段在程序刚开始运行时分配。 实际上代码段准确的说是在编译时刻分配，其中的数据写在二进制文件中。数据段和BSS段中的局部静态变量是在第一次运行到定义位置分配，这个我在下文提到。 错误原因： 自己想的不够清晰，表达时不够严谨。 动态规划B1——01背包和动态规划B2——完全背包错误： 存在一些字母大小写问题，引起伪代码歧义。 串匹配算法2——KMP展示问题： 例子中的字符串对齐我采用了空格和tab对齐，在一些低分辨率的设备上可能对齐会有错误，影响理解。 我本想以图片形式展示，但考虑到例子较多、图片排版不美观等问题，暂时还是以现在这种形式，之后发现什么好的方式我再修改。 博客计划德州扑克的学习笔记一再delay，下周前一定更新。 希望写一些面向对象程序设计的文章。准备写几篇Java面向对象程序设计的文章，关注设计模式和一些实现手法。而C++主要还是想研究一下它的底层实现和准确的标准定义细节问题。结合Java 和 C++学习面向对象的设计模式。 数据结构和算法方面，我的计划是先学习一些对ACM题目实用的算法，对图论和动态规划有些兴趣。基础的数据结构（链表、树…）已经有一定了解，暂时先用STL苟住，之后再研究其各种实现细节。一些高级数据结构广泛了解一下。 题解，一直没更的原因是一直没有写过题了，由于时间不够由于懒惰。之前想写一类题目搞成一整篇发出去。但同一类题我能找到的有限感觉不成篇幅，就先存着草稿了。之后我计划是对于难度较高和有思考难度的题目单独发，简单的算法只给出简单思路和代码写成一整篇打包发。之后我还计划参加一些线上的竞赛，写一些竞赛中的经验体会。 娱乐节目，之前买了一堆可乐准备做个可乐大评测。一直没有写也没有喝，原因在于我一直发现有新的可乐，总想及其后一起体验。我想我估计是集不齐了，实在不行我就开个系列慢慢体验。这个也不是什么大事，我就看看什么时候有时间有心情，写一些吧。 书摘和笔记，我爱什么时候写什么时候写！ 淘宝店计划，店已经开好了，纸还没搞到。大概依旧是性冷淡风，反正也没人买，我就开个玩一下。]]></content>
+      <categories>
+        <category>泛 - 公告</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>动态规划</tag>
+        <tag>背包问题</tag>
+        <tag>01背包</tag>
+        <tag>公告</tag>
+        <tag>Cpp</tag>
+        <tag>完全背包</tag>
+        <tag>C</tag>
+        <tag>Dijkstra</tag>
+        <tag>计划</tag>
+        <tag>KMP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C/C++程序中的内存分配]]></title>
+    <url>%2F2018%2F04%2F03%2Fccppmemory%2F</url>
+    <content type="text"><![CDATA[C/C++程序中内存分为五个区域名称及其储存的数据如下 代码段：可执行代码、字符串常量 数据段：已初始化的全局变量（包括所有静态变量）、常量 BSS段：未初始化的全局变量（包括所有静态变量）、常量 栈：局部变量（包括函数参数） 堆：动态内存分配 需要注意这其中的代码段是只读的，其他区域都是可读可写的。 比如这种操作就是错误的！ 12345678910111213#include &lt;iostream&gt;using namespace std;int main()&#123; char *s = "Hello"; //char ss[] = "Hello"; printf("%s",s); s[1] = 'E'; printf("%s",s); return 0;&#125; 在Unix-like的系统中运行时会产生 Bus error: 10 的错误，原因就在于”Hello”为字符串常量它在代码段，它是不可写的。 第 7 行中给出了另一种的写法，这种写法就不会有问题，原因是编译器会给这个数组在栈中分配一块内存把代码段中的”Hello”拷贝过来。 运行中的内存分配回收时机代码段的空间在编译时刻分配，数据段和BSS段中的全局变量在程序开始运行时被分配，而栈、堆和静态变量的内存分配就会相对复杂一些。 栈123456789101112131415#include &lt;iostream&gt;using namespace std;int f(int b)&#123; int c = 1; return b + c;&#125;int main()&#123; int a; a = f(2); return 0;&#125; 比如这段程序中所有的变量都为局部变量，都存放在栈区。栈区的内存分配发生在进大括号时，回收发生在出大括号时。 变量 a 在 12 行被定义，而它的内存空间已经在 11 行进大括号时就分配好了，内存的回收会在 main 函数结束前的 14 行发生。 f 函数中的参数变量 b 在 13 行分配空间并初始化，在离开 f 函数时回收空间。 变量 c 在第 6 行被定义，它的内存分配和回收与变量 a 类似。 临时变量 b + c 作为返回值在第 13 行调用 f 函数时分配，回收应在出 main 函数结束前。（临时变量的地址，可通过 C++11 的右值引用查看。） static局部变量1234void f()&#123; static int c = 2;&#125; 像这样的静态局部变量 c 它的内存分配只会在第一次进入 f 函数时分配，内存回收与已初始化的全局变量一样放在全局数据区（数据段）中（若未初始化或初始化的值在编译时刻不可得到则在分配在BSS段中），它的内存回收与其他全局变量一致在程序结束之前回收。关于如何保证局部静态变量只初始化一次的问题可以看这里：https://www.cnblogs.com/novice-dxx/p/7094690.html vector的内存回收vector可以通过 clear() 函数清空，但其内存空间却并没有回收。根据栈中内存回收的机制，我们可以以下面这种方式进行内存回收。123456vector&lt;int&gt; v;&#123; vector&lt;int&gt; x; v.swap(x);&#125; 在内层括号中定义一个空 vector x 交换两者后，出括号后临时的 vector x会析构并回收内存空间。 堆堆中的内存用于动态内存分配，动态申请像 C 中的 malloc 和 C++中的 new 运算符都可完成。 堆中的内存分配只发生在调用内存申请函数或使用 new 运算符时 堆中的内存回收在 delete 时或程序结束时发生 测试代码Ubuntu Pastebin : https://paste.ubuntu.com/p/WXScjfWQ3z/12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include &lt;cstdio&gt;using namespace std;int global_initialized_0 = 0;int global_initialized_1 = 0;int global_0;int global_1;int main()&#123; char *const_string_0 = "Hello"; char *const_string_1 = "World"; static int static_local_initialized_0 = 0; static int static_local_initialized_1 = 0; static int static_local_0; static int static_local_1; int local_0; int local_1; int *p_0 = new int [100]; int *p_1 = new int [100]; printf("代码段:\n"); printf("main = %p\n",main); printf("const_string_0 = %p\n",const_string_0); printf("const_string_1 = %p\n",const_string_1); printf("\n"); printf("数据段:\n"); printf("global_initialized_0 = %p\n",&amp;global_initialized_0); printf("global_initialized_1 = %p\n",&amp;global_initialized_1); printf("static_local_initialized_0 = %p\n",&amp;static_local_initialized_0); printf("static_local_initialized_1 = %p\n",&amp;static_local_initialized_1); printf("\n"); printf("BSS:\n"); printf("global_0 = %p\n",&amp;global_0); printf("global_1 = %p\n",&amp;global_1); printf("static_local_0 = %p\n",&amp;static_local_0); printf("static_local_1 = %p\n",&amp;static_local_1); printf("\n"); printf("堆:\n"); printf("p_0 = %p\n", p_0); printf("p_1 = %p\n", p_1); printf("\n"); printf("栈:\n"); printf("local_0 = %p\n", &amp;local_0); printf("local_1 = %p\n", &amp;local_1); printf("\n"); delete[] p_0; delete[] p_1; return 0;&#125; Mac OS 64bit 输出结果Ubuntu Pastebin : https://paste.ubuntu.com/p/5z3Kb5SZrk/123456789101112131415161718192021222324代码段:main = 0x1066afb80const_string_0 = 0x1066afe56const_string_1 = 0x1066afe5c数据段:global_initialized_0 = 0x1066b0028global_initialized_1 = 0x1066b002cstatic_local_initialized_0 = 0x1066b0038static_local_initialized_1 = 0x1066b003cBSS:global_0 = 0x1066b0030global_1 = 0x1066b0034static_local_0 = 0x1066b0040static_local_1 = 0x1066b0044堆:p_0 = 0x7fcd6f4028f0p_1 = 0x7fcd6f402a80栈:local_0 = 0x7ffee95507e4local_1 = 0x7ffee95507e0]]></content>
+      <categories>
+        <category>编程语言 - Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>C</tag>
+        <tag>内存分配</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[最短路算法1——Dijkstra]]></title>
+    <url>%2F2018%2F03%2F23%2Fdijkstra%2F</url>
+    <content type="text"><![CDATA[概述最短路径问题有众多的算法，对于无权图的最短路径 DFS与BFS 就可以轻松解决。而对于有权图来说就相对复杂一些，接下来要介绍的就是一种求有权图的单源最短路径的算法—— Dijkstra 算法。需要注意的是这里的 Dijkstra 算法要求图中不能出现负值圈。 思想无权图可以认为是特殊的有权图，只是它的边权全都为 1 。想一想 BFS 是怎么找到最短路径的，它是通过一层一层的扩展，按照非递减的顺序去收录每个点。Dijkstra 算法的思想也是按照非递减的顺序收录每个点，最终找到最短路径。 与 BFS 不同的是，有权图中什么算一层呢？实际上 BFS 说是按层扩展，另一种理解可以是按照距离的从近到远去扩展。Dijkstra 算法就是每次收录一个距离最近且未被收录的点。这里还有一些小问题，比如收进来的点会不会影响其他点到起始点的距离？怎么初始化？怎么找出最近的点？我们先上代码之后给出答案。 实现代码：Ubuntu Pastebin : https://paste.ubuntu.com/p/WjHPFqMqpc/123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657const int MAX_N = 100;int map[MAX_N][MAX_N]; // 使用邻接矩阵表示图bool collected[MAX_N]; // 每个结点是否被收录int dist[MAX_N]; // 每个结点到起始点的距离int path[MAX_N]; // 最短路径中的每个结点的上一个节点的下标int n; // 结点个数void init() // 初始化&#123; for( int i = 1; i &lt;= n; i++)&#123; collected[i] = false; dist[i] = INT_MAX; path[i] = -1; for( int j = 1; j &lt;= n; j++)&#123; map[i][j] = -1; &#125; &#125;&#125;void Dijkstra(int start)&#123; init(); collected[start] = true; //将起始点收录 dist[start] = 0; for( int i = 1; i &lt;= n; i++)&#123; if(map[start][i] != -1)&#123; dist[i] = map[1][i]; &#125; &#125; while(true)&#123; int min = INT_MAX; int min_index = -1; for( int i = 1; i &lt;= n; i++)&#123; if(min &gt; dist[i] &amp;&amp; !collected[i])&#123; min = dist[i]; min_index = i; &#125; &#125; //34-41行为找出最近的未被收录的点 if(min_index == -1)&#123; //如果找不到，跳出循环 break; &#125; collected[min_index] = true; //将该点收录， for( int i = 1; i &lt;= n; i++)&#123; //遍历该点的邻接点 if(map[min_index][i] != -1 &amp;&amp; !collected[i])&#123; int temp = dist[min_index] + map[min_index][i]; if(temp &lt; dist[i])&#123; dist[i] = temp; path[i] = min_index; &#125; &#125; &#125; &#125;&#125; dist 数组中保存着什么？它保存的是从起点开始经过已被收录的点到达每个点的最短距离，初始状态下没有任何点被收录所以全为正无穷。 当程序将一个最近的点收录进来时，该点是有可能会影响其他的点到起始点的距离。比如这个图，从1走到3。我们先收录了1点，更新 2 的距离为 1 ，3 的距离为5，下一步我们将收录 2 ，收录之后就会影响到它的邻接点（也就是 3 ）的距离。我们会把 3 的距离更新为 2 。这就是 47-55 行的意义。 初始化问题： 一开始将所有点的距离初始化为正无穷，将路径数组初始化为-1。如果最终某点的距离仍为正无穷或路径数组仍为-1，说明该点到起始点之间不连通。 重边问题：如果图用邻接表来表示的话不会有重边问题，而邻接矩阵的话如果两点间有很多条边，它只会保存最后插入的边。如果是最短路问题的话我们可以在插入边时检查当前这条边的权重是否小于之前插入的边，是则插入覆盖，否则不插入当前边。 输出路径问题：一般的可以用一个栈依次压入 path 数组中的值，再将它们依次弹出输出。有些题目给的是一个无向图且只问起点与终点的最短路径，这样的话我们可以颠倒起点和终点，path 数组也就被颠倒就不用栈就输出最短路径了。 优化我们上面的代码最浪费时间的就是找出未收录的点中最近的点的操作，每次都要遍历所有的点去查找。我们可以用一个优先队列或最小堆去优化它。接下来我先给出利用优先队列优化后的代码，此代码将用邻接表来保存图以区别于之前的代码，帮助大家更好的了解 Dijkstra 算法的各种实现。 利用STL库中的优先队列优化代码：Ubuntu Pastebin : https://paste.ubuntu.com/p/ttngrNMyf7/123456789101112131415161718192021222324252627282930313233343536373839const int MAX_N = 100;struct edge &#123; int next, weight;&#125;;typedef pair&lt;int ,int&gt; P;vector&lt;edge&gt;G[MAX_N]; //邻接表表示的图int dist[MAX_N];int path[MAX_N];void Dijkstra(int start)&#123; priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt; &gt;que; //建立一个以小数值为高优先级的的优先队列 dist[start] = 0; que.push(P(0,start)); //将起始点入队 while(!que.empty())&#123; //如果队列为空，说明所有点都已被收录，结束该算法 P p = que.top(); que.pop(); int v = p.second; if(dist[v] &lt; p.first)&#123; //如果找到的节点不符合非递减规则，找下一个队列中的节点 continue; &#125; for( int i = 0; i &lt; G[v].size(); i++)&#123; edge e = G[v][i]; if(dist[e.next] &gt; dist[v] + e.weight)&#123; dist[e.next] = dist[v] + e.weight; path[e.next] = v; que.push(P(dist[e.next],e.next)); //将邻接点入队 &#125; &#125; &#125;&#125; 这里我们看到跟之前的代码逻辑可能有一些不太一样，按照之前的逻辑while循环应该按下面的方式实现。1234567891011121314151617181920212223while(!que.empty())&#123; //如果队列为空，说明所有点都已被收录，结束该算法 P p = que.top(); que.pop(); int v = p.second; collected[v] = true; for( int i = 0; i &lt; G[v].size(); i++)&#123; edge e = G[v][i]; if(!collected[e.next] &amp;&amp; dist[e.next] &gt; dist[v] + e.weight) &#123; dist[e.next] = dist[v] + e.weight; path[e.next] = v; if(!in_que[e.next])&#123; //在定义一个全局的bool数组标记点是否入队 que.push(P(dist[e.next],e.next)); //将邻接点入队 in_que[e.next] = true; &#125; &#125; &#125;&#125; 这是很常见的一种错误优化，我之前也写出过这样的代码。错误是因为已入队的元素是无法实时更新，无法保证更新 dist 数组时同时更新队列中的元素，所以我们改为允许结点多次入队不收录它，像之前的代码虽然效率有所下降但保证了代码的正确性。 利用最小堆优化使用优先队列优化时遇到的问题是不能及时更新队列中元素的信息，而最小堆可以快速的查找删除再插入可以随时更新想更新的结点的信息，解决之前使用STL库中的优先队列所遇到的问题。代码：Ubuntu Pastebin : https://paste.ubuntu.com/p/thKfPjDRvd/12345678910111213141516171819202122232425262728293031323334353637383940const int MAX_N = 100;struct edge &#123; int next, weight;&#125;;typedef pair&lt;int ,int&gt; P;vector&lt;edge&gt;G[MAX_N]; //邻接表表示的图int dist[MAX_N];int path[MAX_N];bool collected[MAX_N]; //标记每个顶点是否被收录void Dijkstra(int start)&#123; set&lt;P, less&lt;P&gt; &gt; min_heap; //用 set 来伪实现一个小根堆，并具有映射二叉堆的功能。 dist[start] = 0; min_heap.insert(make_pair(0, start)); collected[start] = true; while(min_heap.size())&#123; //如果堆为空，说明所有点都已被收录，结束该算法 auto iter = min_heap.begin(); int v = iter-&gt;second; min_heap.erase(*iter); collected[v] = true; for( int i = 0; i &lt; G[v].size(); i++)&#123; edge e = G[v][i]; if(!collected[e.next] &amp;&amp; dist[e.next] &gt; dist[v] + e.weight) &#123; min_heap.erase(make_pair(dist[e.next], e.next)); //删除之前插入堆中的数据 dist[e.next] = dist[v] + e.weight; path[e.next] = v; min_heap.insert(make_pair(dist[e.next], e.next)); //更新之后重修插入该结点 &#125; &#125; &#125;&#125; 时间复杂度分析V 代表结点的个数，E 代表边的个数。 完全没有优化的算法：每个顶点被收录一次，所以外层的while循环是O( V )的，while中每次需要遍历一次所有的顶点，又是一个 O( V ) 的扫描。再加上每条边都要被访问一次时间复杂度为 O( V^2 + E )。 利用优先队列优化：虽然节点会多次入队，但每条边最多导致一次入队，所以其时间复杂度为 O( E*logE )。 利用最小堆优化：利用最小堆之后我们不用在内层需要进行O( V )的扫描了，获得最近的结点的操作时间复杂度变为 O( logV )，而每次更新 dist 数组的操作因为要删除再插入堆中复杂度从 O( 1 ) 变为 O( logV )。总体的时间复杂度为 O( V*logV + E*logV )。 对于一个稀疏图来说利用最小堆做优化会效率会高很多，而对于一个稠密图来说两者效率是差不多的。利用优先队列的优化方式编程复杂度相对最小堆优化的方式会低一些，方便快速实现该算法。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>优化</tag>
+        <tag>Dijkstra</tag>
+        <tag>最短路径</tag>
+        <tag>最小堆</tag>
+        <tag>优先队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「笔记」Effective C++ 读书笔记（一）]]></title>
+    <url>%2F2018%2F03%2F16%2Feffective-cpp01%2F</url>
+    <content type="text"><![CDATA[注意！这只是我的读书笔记，帮助我记录。其中可能有一些不严谨的解释或没有做很详细的解释，大家学习还是建议直接看书（虽然书中也有不严谨的解释）。 1 让自己习惯C++条款01：视 C++ 为语言联邦C++ 是一个多重范型编程语言，一个同时支持过程形式、对象形式、函数形式、泛型编程、元编程形式的语言。 将 C++ 的理解为一个由相关语言组成的联邦而非单一语言。记住以下四个次语言你就会发现C++p容易理解很多。 C++ 主要的四种次语言： C：C++以C为基础，基本的语句、基础数据类型、预处理器等等都来自于 C，许多时候 C++ 对问题的解法其实不过就是高级的C语言解法。 Objective-Oriented C++：C++ 诞生之初就是想在 C 语言高效的基础上，增加 Simula 语言的特性。Class、封装、继承、多态、virtual 函数等等，改善了 C 的代码可读性、并发性、编译错误的提示等等。 Template C++：泛型编程，大多数程序员经验最少的部分。它带来的崭新的编程范型，所谓的模板元编程。TMP 相关规则很少与 C++ 主流编程互相影响。 STL：STL 是个 Template 程序库。它对容器、迭代器、算法、函数对象的规约有极佳的紧密配合与协调。STL有自己特殊的办事方式，当你同 STL 一起工作，你必须遵守它的规约。 C++高效编程守则视状况而变化，取决于你使用C++的哪一部分。 条款02：尽量以 const、enum、inline 替换 #define降低对编译预处理的使用。 #define 的缺点： 让编译器的错误提示不易定位 缺乏类型检查 不重视作用域，除非在某处 #undef，不能用来定义class专属常量，不能提供任何封装 未记入符号表，增大目标代码文件 旧式的编译器不支持“in-class 初值设定”，可以用枚举来替换常量。 相比 const，enum 更像 #define，可以对 const 常量取地址，而不可以对 enum 的地址。如果不想用指针和引用值指向你的某个常量，enum 可以帮助你实现这个约束。 对于宏函数，可读性差、写宏函数时需要小心注意带上很多括号，一不小心就会出现难以检查的错误。我们可以使用 inline 关键词代替宏函数，提高代码可读性和安全性。 对于单纯常量，最好以 const 对象或 enums 代替 #defines。 对于形似函数的宏，最好改用 inline 函数替换 #defines。 条款03：尽可能使用 const令函数的返回值为 const ，往往可以降低因用户错误而造成的意外，而又不至于放弃安全性和高效性。 两个成员函数如果只是常量性不同可以被重载，传入函数参数是 const 和非 const 时要区分处理，如在重载运算符 [] 时，非 const 要返回其单元的引用，const 时要返回其单元的 const 引用。 成员函数是 const 意味着它在某种程度上是不可以修改对象中的任何成员变量，但对于成员变量是指针时，它不能保证该成员函数不修改指针成员指向位置的数据。 可以使用 mutable（可变的）释放掉非 staic 成员变量的 bitwise constness 约束。 为 const 重载的函数，会造成代码复制的情况。可以通过单独写一个私有函数运行不冲突的部分，只重载与 const 相关的部分。也可以通过在 non-const里用 const_cast 去除 const 属性再返回的方式减少代码复制。但不要用在 const 函数中调 non-const 函数再返回的方式实现，这样会违背你在 const 版本中绝不改变其对象的逻辑状态的承诺，因为 non-const 版本没有做过此承诺。 将某些东西声明为 const 可帮助编译器侦测出错误用法。const可被施加于任何作用域内的对象、函数参数、函数返回类型、成员函数主体。 编译器强制实施 bitwise constness ，但你变形程序时应该使用“概念上的常量性”（conceptual constness）。 当 const 和 non-const 成员函数有着实质等价的实现时，令 non-const 版本调用 const 版本可避免代码重复。 条款04：确定对象被使用前已先被初始化不要混淆赋值和初始化，一定要在初始化列表中初始化成员。在我之前的博文 C++类与对象总结（二）构造函数 中对构造函数中的赋值和初始化问题有一定的解释。 继承关系的初始化顺序：基类（base classes）更早于其派生类（derived classes）被初始化。 对于某个编译单元内的某个 non-local static 对象的初始化动作使用了另一个编译单元内的某个 non-local static 对象，它所用到的这个对象可能尚未被初始化，因为 C++ 对“定义于不同编译单元内的 non-local static 对象” 的初始化次序并无明确定义。可以将有初始化依赖的几个 non-local static 对象放在一个编译单元解决。 书中的解决方案为：将每个 non-local static 对象搬到自己的专属函数内（该对象在此函数内被声明为 static ）。这些函数返回一个 reference 指向它所含的对象。我们将这些函数称为 reference-returning 函数。 为内置型对象进行手工初始化，因为 C++ 不保证初始化它们。 构造函数最好使用成员初值列，而不要在构造函数本体内使用赋值操作。初值列列出的成员变量，其排列次序应该和它们在 class 中的声明次序相同。 为免除“跨编译单元之初始化次序”问题，请以 local staic 对象替换 non-local static 对象。]]></content>
+      <categories>
+        <category>泛 - 笔记</category>
+      </categories>
+      <tags>
+        <tag>读书</tag>
+        <tag>Cpp</tag>
+        <tag>笔记</tag>
+        <tag>Effective C++</tag>
+        <tag>多重范型</tag>
+        <tag>const</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[求质数表3——增量式筛法]]></title>
+    <url>%2F2018%2F03%2F14%2Fisprimes-3%2F</url>
+    <content type="text"><![CDATA[增量式筛法之前的筛法都需要事先指定一个N，然后求N以内的质数，但没办法求N以上的质数。我们想要一种算法不用事先指定N一直求下去，如试除法就是增量式运行的。 增量式算法可以在简易欧拉筛进行改进的。简易欧拉筛限制它不能增量式运行的问题是在于它的空间。比如增量式运行筛选到 11 时你需要划掉 121 ，这样你就需要维持 N^2 的空间，这样就很成问题，想象如果 N 到1亿时，那空间将是不可接受的。我们将不再枚举p和f，而是依次检查每个数，检查到一个数时划去下一个数，并再下一个数处做标记。比如我们检查到 10 ，我们通过某种方式计算出它的下一个要被划掉的数为 15 ，我们划掉 15 并在 15 处做标记，保证检查到 15 时我们可以轻松的算出 25 。由 Bertrand’s postulate 这个数学结论得出相邻两个质数相差不会超过两倍，所以我们只需将数组维持在当前检查的数的两倍即可。这样空间复杂度就将为了 O(N) 。 这个标记需要干什么，它需要帮助我们在拿到一个数时迅速找出它的p和f。我们用一个数组保存当前被检查的数的最小质因子在质数表的位置即可。这样比如我们在拿到 15 时，我们找到它的最小质因子p为 3 ，15/3 算出 f 为 5，我们就可以用 f 乘下一个质数去找到 25 划掉它并继续传递标记了。标记从每个偶数处（因为第一个素数为 2 ）产生的，到列末尾消失（p 最大增长到 f 的最小质因子）。 代码Ubuntu Pastebin : https://paste.ubuntu.com/p/DtN2WPpppf/1234567891011121314151617181920212223242526int bengalloun(int N)&#123; int nPrimes = 0; flag[2] = true; for( int i = 2; i &lt;= N; i++)&#123; flag[i * 2 - 1] = true; //假设它为质数 flag[i * 2] = false; //偶数一定为合数 lpfindex[i * 2] = 0; //建立列首标记 if(flag[i])&#123; primes[nPrimes++] = i; //如果还没被筛掉加入质数表 &#125;else&#123; //如果是合数 int u = lpfindex[i]; int p = primes[u]; int f = i / p; //计算p和f if(f % p != 0)&#123; //如果没有到列尾就传递标记 int j = primes[u + 1] * f; flag[j] = false; lpfindex[j] = u + 1; &#125; &#125; &#125; return nPrimes;&#125; 复杂度分析时间复杂度：与思想与简易欧拉筛相同，依然为O(N)。因为要为增量式运行做准备实际要比简易欧拉筛多花一倍的时间。 空间复杂度flag和lpfindex数组都为O(N)的复杂度。总体空间复杂度为O(N)。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>质数</tag>
+        <tag>求质数表</tag>
+        <tag>优化</tag>
+        <tag>增量式筛法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[求质数表2——线性筛法]]></title>
+    <url>%2F2018%2F03%2F09%2Fisprimes-2%2F</url>
+    <content type="text"><![CDATA[合数的标准分解每个合数可以分解质因数，对于60，最小质因子（LPF）为 2，最大质因子（GPF）为 5。 根据 LPF 和 GPF，可以将 60 分解为 2 30 或 5 12。这里的30为LPF的补，12为GPF的补。 欧拉筛对于60之前的埃氏筛法最大的问题就是在 2、3、5 都会划去一次，浪费了很多时间。欧拉筛的改进方法就是保证每个合数只被划掉一次。 枚举最小质因子（LPF），把它与未筛掉的各数相乘，筛掉乘积。 那怎么找到未筛掉的数呢？我们不能再用一个 bool 数组来保存是否被筛掉了，因为那样你依然是在遍历数组看看那个数是否被划掉，如果没有的话就将它与最小质因子的积划掉。这样还是遍历了所有的数，我们只想要遍历没有被划掉的数。 我们需要一个数据结构可以高效的进行遍历、查找、删除操作。链表的遍历和删除都可以满足我们的需求，但查找过慢。 我们用数组模拟链表来保证这三个操作的高效。12345678910int prev[MAX_N + 2]; //保存每个节点的前一个节点的值int next[MAX_N + 2]; //保存每个节点的后一个节点的值for( int i = 2; i &lt;= N; i++)&#123; //初始化 prev[i] = i - 1; prev[i] = i + 1;&#125;next[prev[x]] = next[x];prev[next[x]] = prev[x]; //删除 x 节点的操作 数组模拟的链表的实现及相关操作解决“链表”问题后，我们在埃氏筛法的基础上改进划掉的操作就可以。 代码Ubuntu Pastebin : https://paste.ubuntu.com/p/CCWTJHjSYJ/123456789101112131415161718192021222324int prev[MAX_N + 2];int next[MAX_N + 2];int euler(int N)&#123; for( int i = 2; i &lt;= N; i++)&#123; prev[i] = i - 1; prev[i] = i + 1; &#125; int nPrimes = 0; for( int p = 2; p * p &lt;= N; p = next[p])&#123; for( int f = p; p * f &lt;= N; f = next[f])&#123; int x = p * f; next[prev[x]] = next[x]; prev[next[x]] = prev[x]; &#125; &#125; for( int p = 2; p &lt;= N; p = next[p])&#123; primes[nPrimes++] = p; &#125; return nPrimes;&#125; 但此代码有个大BUG，因为我们在选定一个 p 时想划去的是当时在它之后没有被划掉的数与它的积，但选定 p 是在找没有被划掉的数之前的。会发生这样的事情，比如我们 p 为 2，我们划掉了 4，那我们就没办法通过 2 * 4 划掉 8。 为了解决这个问题，人们想出了两种解决方案。 第一种：从大到小的去划掉需要划掉的数，这个方案需要解决的问题是需要定位链表的最后一个节点。 第二种：为什么 8 不能通过 2 4 划掉，因为 8 存在多个质因子为 2，所以我们在划去p\f时，可以顺便划掉p*p*f，p*p*p*f…… 解决。 第一种Ubuntu Pastebin : https://paste.ubuntu.com/p/4cPKvKw6ys/ 12345678910111213141516171819202122232425262728int prev[MAX_N + 2];int next[MAX_N + 2];int euler(int N)&#123; for( int i = 2; i &lt;= N; i++)&#123; prev[i] = i - 1; prev[i] = i + 1; &#125; int nPrimes = 0; for( int p = 2; p * p &lt;= N; p = next[p])&#123; primes[nPrimes++] = p; int f = p; while(p * next[f] &lt;= N)&#123; //遍历链表找到最大的f f = next[f]; &#125; while(f &gt;= p)&#123; //反向遍历链表划去p * f int x = p * f; next[prev[x]] = next[x]; prev[next[x]] = prev[x]; f = prev[f]; &#125; &#125; return nPrimes;&#125; 第二种Ubuntu Pastebin :https://paste.ubuntu.com/p/rnjmh7vTPF/1234567891011121314151617181920212223242526int prev[MAX_N + 2];int next[MAX_N + 2];int euler(int N)&#123; for( int i = 2; i &lt;= N; i++)&#123; prev[i] = i - 1; prev[i] = i + 1; &#125; int nPrimes = 0; for( int p = 2; p * p &lt;= N; p = next[p])&#123; for( int f = p; p * f &lt;= N; f = next[f])&#123; for( int x = p * f; ; x *= p)&#123; next[prev[x]] = next[x]; prev[next[x]] = prev[x]; if(x &gt; N / p) break; //x增长较快，防止x溢出 &#125; &#125; &#125; for( int p = 2; p &lt;= N; p = next[p])&#123; primes[nPrimes++] = p; &#125; return nPrimes;&#125; 时间复杂度每个数只被划掉一次所以是O(N)。但划掉的速度要通过链表，其实导致速度通常还不如埃氏筛法。 空间复杂度只开了两个链表的数组和一个primes数组，O(N)。 简易欧拉筛再考虑欧拉筛的缺点，它时间复杂度已经达到线性，但链表操作太慢。怎么可以不使用链表实现欧拉筛呢？ 我们为什么要用到链表？因为 f 是动态变化的。我们换一种方式，考虑枚举LPF的补也就是先枚举 p （从质数表primes数组中取即可）再枚举 f 。根据LPF的定义我们给定 p 后，f 只需枚举到第一个整除 p 的数。 代码Ubuntu Pastebin : https://paste.ubuntu.com/p/xfVS3ctQWr/12345678910111213141516171819202122232425bool flag[MAX_N + 1];int simple_euler(int N)&#123; memset(flag, true, (N + 1) * sizeof(bool)); int nPrimes = 0; for( int f = 2; f &lt;= N / 2; f++)&#123; if(flag[f])&#123; primes[nPrimes++] = f; &#125; for( int u = 0; u &lt; nPrimes; u++)&#123; int p = primes[u]; if(p * f &gt; N) break; flag[p * f] = false; if(f % p == 0) break; &#125; &#125; for( int i = N / 2 + 1; i &lt;= N; i++)&#123; if(flag[i])&#123; primes[nPrimes++] = i; &#125; &#125; return nPrimes;&#125; 时间复杂度依然是O(N)，但没有了复杂操作，效率优于之前的埃氏筛和枚举LPF的欧拉筛。 空间复杂度：O(N)与欧拉筛相同。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>质数</tag>
+        <tag>求质数表</tag>
+        <tag>优化</tag>
+        <tag>欧拉筛法</tag>
+        <tag>简易欧拉筛法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[求质数表1——朴素算法]]></title>
+    <url>%2F2018%2F03%2F08%2Fisprimes-1%2F</url>
+    <content type="text"><![CDATA[试除法对每个整数 i ，用 2 到 √i 的所有质数去试除它。 代码Ubuntu Pastebin : https://paste.ubuntu.com/p/wmGwPfGvGW/12345678910111213141516171819int primes[MAX_PRIMES];int trial_division(int N)&#123; int nPrimes = 0; for( int i = 2; i &lt;= N; i++)&#123; bool ok = true; for( int u = 0; u &lt; nPrimes; u++)&#123; int p = primes[u]; if(p * p &gt; i) break; if(i % p == 0)&#123; ok = false; break; &#125; &#125; if(ok) primes[nPrimes++] = i; &#125; return nPrimes;&#125; 时间复杂度O[ N√N / (logN)^2 ] 检查N个数每个数检查到它的平方根，1 / logN是质数的密度，只用质数去试除所以乘1 / logN，只有质数可以完全经受住考验再乘1 / logN。 O[ N√N / (logN)^2 ] ≈ N^1.5。 空间复杂度N以内质数的密度为 1 / logN ，所以primes数组需要开到 O( N / logN)。 埃氏筛法埃拉托色尼筛选法(the Sieve of Eratosthenes)简称埃氏筛法，是古希腊数学家埃拉托色尼(Eratosthenes 274B.C.～194B.C.)提出的一种筛选法。 枚举每个因子，看哪些数可以整除它，划掉它。 动画演示图片来自维基百科 代码Ubuntu Pastebin : https://paste.ubuntu.com/p/cymfGPHgMW/123456789101112131415161718192021bool flag[MAX_N + 1];int eratosthenes(int N)&#123; memset( flag, true, (N + 1) * sizeof(bool)); for( int p = 2; p * p &lt;= N; p++)&#123; if(flag[p])&#123; for( int x = p * p; x &lt;= N; x += p)&#123; flag[x] = false; &#125; &#125; &#125; int nPrimes = 0; for( int i = 2; i &lt;= N; i++)&#123; if(flag[i])&#123; primes[nPrimes++] = i; &#125; &#125; return nPrimes;&#125; 为什么x从 p * p 开始呢？因为p (p-i) ( 1 ≤ i ≤ p ) 的数已经在之前划掉过了，比如在检查 3 时，不需要划掉 3 2 因为在检查 2 的时候已经划过了。 为什么 p 到 √N 截止？ 因为内层循环中的 x 是从 p * p 开始的，p 大于 √N 时就不能划掉更多的数了，没有意义。 时间复杂度N/2 + N/3 + N/5 + N/7 + …… = O( N logN logN ) 证明参考 https://www.zhihu.com/question/21105642 https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes 空间复杂度N 个单位的 bool 数组，空间复杂度为 O(N) 。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>质数</tag>
+        <tag>求质数表</tag>
+        <tag>试除法</tag>
+        <tag>埃氏筛法</tag>
+        <tag>优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++类与对象总结（三）析构函数]]></title>
+    <url>%2F2018%2F03%2F07%2Fcpp-class-3%2F</url>
+    <content type="text"><![CDATA[析构函数Destructor析构函数与构造函数相似，都是特殊的成员函数。不同在于构造函数用于对象的初始化，析构函数用于对象的清理工作。 名称为~加类的名称，不可以重载，无返回类型。12345678class A&#123;private: int a;public: A():a(10)&#123;&#125; //A的构造函数 ~A()&#123;&#125; //A的析构函数&#125; 与构造函数相似，如果我们没有定义析构函数，编译器会自动生成一个什么都不做的析构函数。 析构函数的调用时机 栈中定义的对象，离开作用域前或程序结束前调用。 堆中定义的对象，在delete时调用。 析构的顺序对于栈中直接定义的对象，析构顺序由构造顺序决定。顺序是一种栈的思想，先构造的对象后析构。12345678910111213141516171819202122232425#include &lt;iostream&gt;using namespace std;class A&#123;private: int a;public: A(int i):a(i)//A的构造函数 &#123; cout &lt;&lt; a &lt;&lt; " Constructor" &lt;&lt; endl; &#125; ~A()//A的析构函数 &#123; cout &lt;&lt; a &lt;&lt; " Destructor" &lt;&lt; endl; &#125;&#125;;int main()&#123; A a(1); A b(2); return 0;&#125; 输出信息为：12341 Constructor2 Constructor2 Destructor1 Destructor 可以看出它是一种“先进后出”的顺序去构造和析构。 对于没有构造的对象，不会进行析构。 delete与delete[]1234int *p = new int[10];delete p;delete[] p; 对于上面代码中基础数据类型的数组的回收空间来说，后面两行的delete效果是一样的。 但如果是用户定义的类型就会有所不同。 1234A *p = new A[10];delete p;delete[] p; 像这样的情况下，第三行的delete和第四行的delete[]都会回收new时分配的空间，但第三行的delete只会调用一次A的析构函数，而第四行的delete[]会调用10次A的析构函数。 delete和delete[]都会回收空间，但delete[]会逐个调用每个对象的构造函数。特别是对于成员函数中有new操作的类来说，必须在析构函数中去delete，delete时要注意区分delete和delete[]，否则可能会造成内存泄漏。]]></content>
+      <categories>
+        <category>编程语言 - Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>析构函数</tag>
+        <tag>delete</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「笔记」许岑：有效训练你的研究能力]]></title>
+    <url>%2F2018%2F03%2F07%2Fxcxx-02%2F</url>
+    <content type="text"><![CDATA[研究和学习的区别依靠模仿而进行的学习或者说练习，最高境界也就是达到跟你的学习对象一样好，而要超越它，就需要研究能力了。 有时候是获取更扎实的知识，有时候是掌握更先进的技能。 与学习相比，研究不包含练习，研究需要更加主动，研究的文本更加宽泛。研究仅仅对文本进行剖析，而不用去掌握文本。 三种意识 作品意识：建立研究的驱动，作品意识是研究精神的起点。告诉自己“我要从事这件事了”，不是做这件事，而是从事。 目标意识：研究的过程当中要时刻盯住自己初始的研究目标，并时刻问自己，我正在做的事情会不会影响研究的主线。用一种上帝的视角来俯视整个事情的全貌，才能守住目标不跑偏。 局外意识：避免过度沉溺于文本；对人的研究要去粉丝化；避免情绪化。 搜集资料：足量，但节制足量 主动性是足量的保障 宽泛性能让你评判足量的程度 研究资料的搜集做不到足量，往往是研究者自己的主动性不够。超强的主动性是资料搜集做到足量的保障。 跳出单一维度，带有目标意识的多 节制 避免过度沉溺于文本，避免跑题 对人进行研究的时候，一定要去粉丝行为。在搜集资料的时候要多视角，求客观 “无情”是做研究的高贵品质，情绪化是做研究的天敌 处理资料把握好两个重要的方向，一个是抓本质，另一个就是找规律。 抓本质就是找不同，要找不同就需要做对比；给你的研究对象树立一个相似对象或者是竞争对手，去找研究对象和类似对象的不同。通过不同认清事物的本质。 找规律则是求相似，要求相似就需要做类比。求相似，是为了提高效率，确保自己接下来在面对这样的事物和类似事物的时候能更快地把握。找到规律以求更快地认清它们。 创造输出如果研究让你有了新的发现和收获，应该把它写成一篇系统的、有文本支持的、逻辑论证严密的好文章。这对你和别人都有非常大的价值。 用写作促进你的研究 用学术的标准来要求自己。学术性的三个基本的特征，足够系统、有相关的文本支撑、有严密的逻辑论证。 储存信息量要足够大，所以说信息搜集要“足量”。 学术性需要文本支持。在研究的过程中要有自己的判断，但这种判断不能是凭想象的。 好文章要有严密的逻辑论证。 给你的写作找一个“导师”，导师在学术研究中的作用是什么，一方面是他比你的学术信息量和文本支持能力更大，另一方面他会在你的逻辑论证过程中指出你的错误。]]></content>
+      <categories>
+        <category>泛 - 笔记</category>
+      </categories>
+      <tags>
+        <tag>许岑</tag>
+        <tag>美貌大王</tag>
+        <tag>学习</tag>
+        <tag>研究</tag>
+        <tag>搜集资料</tag>
+        <tag>创造</tag>
+        <tag>输出</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「公告」关于采用CC协议的说明]]></title>
+    <url>%2F2018%2F03%2F01%2Fcc-by-nc-sa%2F</url>
+    <content type="text"><![CDATA[本博客将采用署名(BY)-非商业性(NC)-相同方式分享(SA)协议发布，并注明于关于…页面。 为什么采用CC协议？之前的文章 动态规划B1——完全背包 中引用了《背包问题九讲》中的一些内容。因为其采用了署名(BY)-非商业性(NC)-相同方式分享(SA)发布，为了遵守SA条款，同时也是为了保护我的版权，本博客将采用CC协议发布。 协议所有允许的行为 分享 – 在任何媒介或格式下再分发、传播本创作。 修改 – 重混、转换、依据本创作进行再创作。 只要遵守条款规定，授权人将不能撤回你使用本创作的自由。 协议所有限制的行为 署名（BY） – 你必须以给予姓名标注，并提供本许可证的链接。同时你需要声明公开的创作是否经过修改。你可以采用恰当的形式将相关信息表述出来，但不得以任何形式暗示授权人已正式认可了你以及你的使用行为。 非商业性（NC） – 你不得将本创作运用于商业目的。 相同方式共享（SA） – 如果你对本创作进行了重混、转换、依据本创作进行再创作，你必须依据本创作采用的许可证来分发你的创作。 不得增加额外限制 – 你不能增设任何法律限制或是技术限制，来限制他人进行本许可证已经允许的行为。]]></content>
+      <categories>
+        <category>泛 - 公告</category>
+      </categories>
+      <tags>
+        <tag>公告</tag>
+        <tag>CC协议</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[动态规划B2——完全背包]]></title>
+    <url>%2F2018%2F03%2F01%2Fcp-bp%2F</url>
+    <content type="text"><![CDATA[问题有一个容量为 V 的背包和 N 种物品。每种物品的价值为 Wi 体积为 Ci ，每种物品有无限件，问最大背包价值。 分析此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是 ⌊V/Ci⌋ 件。 由 动态规划B0——01背包 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。F[i, v] = max{ F[i − 1, v − kCi] + kWi | 0 ≤ kCi ≤ v }只需在01背包代码的基础上加一层循环即可，对于状态 F[i, v] 求解的时间复杂度为 O(V/Ci) 所以总的时间复杂度为 O(N∑V/Ci) ，这种解法实际上就是把每种物品拆分为多个物品转化为01背包。 优化0 预处理数据若两件物品 i、j 满足 Ci ≤ Cj 且 Wi ≥ Wj ，则将可以将物品 j 直接去掉，不用考虑。在进入主算法前预处理一遍物品数据即可。对于随机生成的数据，这个方法往往会大大减少物品的件数，从而加快速度。然而这个并不能改善最坏情况的复杂度，因为有可能特别设计的数据可以一件物品也去不掉。 1 二进制思想任何二进制可以表示任何十进制的数，我们可以想一下二进制是如何转成十进制的呢？ 101001 如果你拿到一个这样的二进制数，只需将二进制第 k 位的数乘2的 k-1 次方再求和即可。这样我们可以发现所有的数都可以拆分为若干个2的k次方的和。 有了上面的理论支持，我们可以不必将物品一个一个拆开放入背包，我们可以将它们拆成若干个2的k次方个物品打包放入。 这样我们可以将时间复杂度优化到 O(log ⌊V/Ci⌋ ) ，比之前的 O(N∑V/Ci) 好了很多。 之后的多重背包也有基于此思想的优化。 2 O(VN)###伪代码12for i 1 -&gt; N for j Ci -&gt; V F[i][j] = max&#123;F[j], F[j-Ci] + Wi&#125; 看上去好像与01背包的伪代码几乎一样，只是第二次循环的方向做了变化。 起初我在写背包题目时在网上看到这个算法时，很是不理解。之后在看完 《背包问题九讲》 的讲解和自己手动调试几次后感觉很深刻。我觉得对此算法不理解的可以在充分理解01背包算法后手动调试运行这个算法去理解。 背包九讲中的解释我很喜欢，以我现在的文采我感觉不足以写出更好的解释，我在此引用其中的一段。 为什么这个算法就可行呢？首先想想为什么 01 背包中要按照 v 递减的次序来循环。 让 v 递减是为了保证第 i 次循环中的状态 F[i, v] 是由状态 F[i − 1, v − Ci] 递推而来。 换句话说，这正是为了保证每件物品只选一次，保证在考虑“选入第 i 件物品”这件策略时，依据的是一个绝无已经选入第 i 件物品的子结果 F[i − 1, v − Ci]。而现在完全背 包的特点恰是每种物品可选无限件，所以在考虑“加选一件第 i 种物品”这种策略时，却正需要一个可能已选入第 i 种物品的子结果 F[i, v − Ci]，所以就可以并且必须采用 v 递增的顺序循环。这就是这个简单的程序为何成立的道理。 背包问题九讲 2.0 beta1.2 第6页 这个解释我认为只是在人的思维层面的解释，真正要理解它的运行过程我觉得没有什么比自己跑几遍来的实在。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>动态规划</tag>
+        <tag>背包问题</tag>
+        <tag>完全背包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[动态规划B1——01背包]]></title>
+    <url>%2F2018%2F02%2F23%2F01-bp%2F</url>
+    <content type="text"><![CDATA[问题有一个容量为 V 的背包和 N 件物品。每件物品的价值为 Wi 体积为 Ci ，问最大背包价值。 分析此问题的特点是每件物品只有一件，只能选择放或不放。 动态规划设计有一定的模式，一般分为以下几个步骤，我们按照一般的模式解决此问题。 划分阶段：分解为小的子问题，用 F[i, v] 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。 选择状态：对第 i 件物品是否放入选择。 确定状态转移方程：F[i, v] = max{ F[i−1, v], F[i−1, v−Ci] + Wi } 确定边界：对于每个物品我们只需要更新大于等于其体积的背包容量的状态。 具体实现由状态转移方程，我们可以得出它有两个状态参数，显然我们开一个二维数组记录每个状态的值。 两层循环，外层循环遍历N物品，内层背包容量状态。 伪代码12for i 1 -&gt; N for j Ci -&gt; V F[i][j] = max&#123;F[i-1][j], F[i-1][j-Ci] + Wi&#125; 优化简单分析上面的伪代码可以得出时间复杂度和空间复杂度都为O(NV)，对于空间复杂度我们还可以优化到O(V)。 我们观察状态转移方程，发现当前需要更新的状态只与i-1行的一个状态有关，我们只需保留i-1行中的数据即可。 也就是我们只需要一个一维大小为V+1的数组，我们不断的维护它就可以得到最终答案。这样空间复杂度就可以降到O(V)。 这里需要注意的是这样优化后我们要以递减的顺序去遍历这个数组。因为我们需要 v - ci 的状态，这个状态是在当前 v 之前的，我们以递减顺序去更新它才能取到 i-1 行的 v - ci 的状态数据。 伪代码12for i 1 -&gt; N for j V -&gt; Ci F[j] = max&#123;F[j], F[j-Ci] + Wi&#125; 初始化问题对于背包问题一般会有两种情况，一种是有要求背包“恰好放满”的，另一种是没有要求的。 没有此要求的我们把F数组全部初始化为0，因为初始时也就是不放任何东西时，任何容量的背包价值都为0。 要求“恰好放满”的，我们将F0初始化为0，其他的单元初始化为-∞。负无穷表示不能恰好放满。因为不放任何东西时，容量为0的背包价值刚刚好为0，其他的都不能放满。 为什么是-∞而不是-1呢？这个问题可以自己模拟运行理解。 这里的初始化方案适用于大多数背包问题，之后的背包问题讲解将不再说明初始化方式。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>动态规划</tag>
+        <tag>背包问题</tag>
+        <tag>01背包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[串匹配算法2——KMP]]></title>
+    <url>%2F2018%2F02%2F22%2Fstrkmp-2%2F</url>
+    <content type="text"><![CDATA[概述之前的蛮力匹配法效率太低，这里我们介绍一种更好的串匹配算法。KMP算法，它由Donald Knuth、Vaughan Pratt、James H. Morris三人于1977年联合发表，故以三人姓氏命名此算法。它即便是在最坏的情况下时间复杂度也可以保证在线性以内。 我将从之前的蛮力算法开始，分析蛮力算法的不足，改进它引出KMP算法。文章会有一些串的术语，我在之前的一篇文章 串匹配算法0——蛮力匹配 中已经有所介绍。 为什么慢？人们是怎样匹配的？文本串：00000000…00000001 模式串：00001 这是蛮力算法中最坏情况的例子，蛮力算法在匹配这一组字符串时，大部分时间都消耗在了模式串中的前四个0中了，每轮匹配都会在正确匹配四个0后因为最后那个1而失败。 我们再来看一个例子 文本串：abcabcabcabcabcabcabcdabcabc 模式串：abcd 如果现在让你来匹配这组字符串你会怎么匹配呢？你会像蛮力算法一样去逐个比对尝试吗？我想大多数人不会，大多数人会发现文本串中有很多abc的重复，而不去比对abc直接去找d去匹配它。当然你还是要扫描过一边文本串，这样比蛮力算法省时间的原因是在于你不用在逐个的比对前三个abc，而且每次右移3个单位，可以将模式串快速右移而且省去很多比对操作。 我们再再来看一个例子 文本串：abcdabcfghijk 模式串：abcdaf 我们现在用蛮力算法来匹配这组字符串，我们以开始假设文本串中第一个a为模式串的头，逐个去比对后续字符，我们可以想到模式串会在第二个b处比对失败，接下去我们会假设文本串中的第一个b为模式串的头再去逐个比对。实际上没有必要，我们在之前的比对中已经遍历了文本串中的前五个字符，已经知道它们都是什么了，为什么还要去尝试b呢？聪明的人应该直接假设文本串中第二个a为模式串的头再去逐个比对。 计算机的记忆力计算机毕竟不是人，那我们来分析人是怎样做到快速匹配的，能否让计算机模仿人的思维去改进之前的算法呢？ 文本串：abcdabcfghijk 模式串：abcdaf 还是这个的例子，为什么不用再去将bcd假设为模式串的头了呢？这个显而易见，当然是因为bcd不是a呗。这个很简单计算机也是知道的啊，为什么它没有跳过呢？因为计算机记不住啊，它记忆力太差，在蛮力算法的过程中计算机只关注当前比对的两个字符，其他的一概不关心。在要选择向右移几个单位时，它想了想说“我也不知道，保险一点移动一个单位试一下吧。” 作为人类，我们当然可以赋予计算机记忆力，它已经有了优越的条件（很大的内存），只需要我们帮助它一下，要求它记住这些东西就好了。 我们观察 abcda 这个字符串，它的前缀a和后缀a是一样的，如果计算机知道这件事，它就可以将两个字符串向下面的位置对其继续比对，从b开始比对，因为在 abcda 中有一个相同的前缀后缀。 abcdabcfghijk ——-abcdaf 怎么让计算机知道这件事呢？我们开一个数组int next[P.length()]，每个单元保存该字符前的字符串的最大相同前后缀的长度，对于刚刚那个模式串的第5号位b在next数组中的值就应该为1。 在比对之前我们只需要预处理模式串得到next数组的值即可。为什么只需要处理模式串？有些人会想我们明明是在文本串中比对为什么只需要预处理模式串。我们来看上面绿色标注的位置，在文本串和模式串中两者是一模一样的，因为它们是比对成功的部分，我们只需要处理模式串就可以知道应该将模式串的头移到文本串的什么位置。 怎样预处理呢？只需要模式串自己和自己做一次匹配即可，具体的等接下来上了代码再做介绍。 到此我们已经大概了解了KMP算法的思想和大致实现方式。 少废话，上代码Ubuntu Pastebin : https://paste.ubuntu.com/p/9wZ3gyZCnP/12345678910111213141516171819202122232425262728293031323334int* buildNext(string P) &#123; int size_n = P.length(), j = 0; //主指针 int* N = new int[size_n]; //建表 int t = N[0] = -1; //模式串指针（p[-1]为通配符） while(j &lt; size_n -1)&#123; if(0 &gt; t || P[j] == P[t])&#123; N[++j] = ++t; &#125;else&#123; t = N[t]; &#125; &#125; return N;&#125;int match(string P, string T)&#123; int *next = buildNext(P); //构造next表 int size_n = T.length(), i = 0; int size_m = P.length(), j = 0; while( j &lt; size_m &amp;&amp; i &lt; size_n)&#123; //从左向右逐个比对字符 if(0 &gt; j || T[i] == P[i])&#123; i++; j++;&#125; //若匹配，则转到下一个字符 else&#123; j = next[j];&#125; //否则，T不回退，文本串P右移 &#125; delete[] next; //销毁next表 return i - j;&#125; 对于主函数与蛮力匹配算法几乎是一样的，文本串P右移时用到了next数组。如果不理解这一步的话可以自己用纸笔模拟匹配，应该可以理解。 现在问题的关键在于构造next数组的buildNext这个函数的实现。 next数组的构造这里的思想与KMP的主函数思想是一致的，只不过这次匹配的字符串是两个一样的模式串。 我们采用递推策略，假设我们已经构造了next数组的前 j 项，如何计算它的 j+1 项呢？ 如果 P[j] == P[N[j]] ，说明前缀和后缀又比对上一项，N[j]就等于上一项的值加1。 如果 P[j] != P[N[j]] ，说明该后缀变短了，那应该怎么找下一个有可能成为相同前后缀的位置呢？这个如果现在t所指位置为一个前缀的末尾，该位置匹配失败了。我们应该保证 j 不动，将t替换为next[t]，也就是之前t所在前缀的前缀的末尾继续与 j 所指的位置比对。 哨兵大家或许有疑问，t为什么要初始化为0？if语句中0 &gt; t这个条件是什么意思？ 这个-1实际上是一个哨兵，我们想象next数组有next[-1]这个单元，它里面放着一个通配符。它可以帮助我们在程序里面省去一个判断分支。如果不理解一样是可以用纸笔模拟一下。 优化 优化 优化…我们再再再来看一个例子 文本串：000100001 模式串：00001 如果用之前给出的算法运行，它会在第一个1处匹配失败，之后再用前一个0比对依然失败，比对3次后遇到-1处的通配符后成功匹配，文本串和模式串的指针同时向右移动一位，再从文本串的第4个单元开始比对。 这个好像还是有点傻啊，人不会这样无用的用1和0比对3次。这3次比对实际上是可以优化掉的。实际上KMP算法主函数的主要是受next数组的影响的，我们只需要改进buildNext函数即可。改进后的bulidNext函数如下：Ubuntu Pastebin : https://paste.ubuntu.com/p/RftpTzKsVX/123456789101112131415161718int* buildNext(string P) &#123; int size_n = P.length(), j = 0; //主指针 int* N = new int[size_n]; //建表 int t = N[0] = -1; //模式串指针（p[-1]为通配符） while(j &lt; size_n -1)&#123; if(0 &gt; t || P[j] == P[t])&#123; j++; t++; N[j] = P[j] != P[t] ? t : N[t]; //* &#125;else&#123; t = N[t]; &#125; &#125; return N;&#125; 这样优化后对于上面的例子就不会出现多次的重复比对，一次比对失败后，模式串会整体右移4个单位继续比对。 整体复杂度分析主函数中的指向文本串的指针 i 一直在递增，即便是在最坏情况下主函数中的while循环不过执行了T.length()次，是线性的复杂度。 对于buildNext函数，它与主函数思想是一致的，复杂度也是线性的。 所以整体的复杂度就是 O(P.length() + T.length())。 一般 P.length() 是远远小于 T.length() 的所以它的复杂度可以忽略不计。最终复杂度为O(T.length())。得出结论：KMP算法在最坏情况下也能保证复杂度在线性以内。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>优化</tag>
+        <tag>KMP</tag>
+        <tag>串匹配</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[串匹配算法1——蛮力匹配]]></title>
+    <url>%2F2018%2F02%2F21%2Fstrma-1%2F</url>
+    <content type="text"><![CDATA[概述串匹配问题有很多的算法，我们这里要介绍的蛮力匹配法在应用中一般不会用到，因为它的效率相对后面高级的算法是很低的。但后续高级的算法都可以理解为基于这种蛮力匹配算法的改进和优化，理解它才能更好的学习后续的算法。 我们首先介绍字符串相关的术语和它的基本接口，之后再介绍具体的算法。 术语 相等：长度相等，且每个对应字符都相等 子串：从S[I]起的连续k个字符 S.substr(i, k) 前缀：S中最靠前的k个字符 S.prefix(k) = S.substr(0, k) 后缀：S中最靠后的k个字符 S.suffix(k) = S.substr(n - k, k) 文本串P：需要被查找的字符串 模式串T：需要找的字符串（关键词） 接口 length() 返回串的长度 charAt(i) 返回给定下标位置的字符 substr(i, k) 截取 [i, i + k) 位置的字符串 prefix(k) S中最靠前的k个字符 suffix(k) S中最靠后的k个字符 concat(T) 在当前字符串后面连接一个字符串 equal(T) 比较两个字符串是否相等 问题 模式串是否出现？ 首次在哪里出现？ 总共出现几次？ 各出现在哪里？ 串匹配算法效率评测标准我们可以随机生成文本串和模式串进行匹配来评测串匹配算法的效率吗？ 我们应该将随机生成的数据的匹配结果分为匹配成功和匹配失败，分别测试。这是因为随机生成的数据对于串匹配来说失败的概率很大，失败时的效率会掩盖成功时的效率。随机生成的数据匹配成功与否一般还与字符的种类相关，比如二进制的字符串就比字母组合的字符串较容易匹配成功。 蛮力匹配算法对于有一定编程基础的人遇到这个问题，都很容易想到这个算法。很简单，我们需要假定文本串的某个位置是模式串的头，向后匹配两者，如果遇到不匹配的字符就说明这个头不对。我们遍历文本串上所有可能成为模式串头的位置（下标在S.length()-P.length()之前的字符），最终就可以得出结果。 版本1Ubuntu Pastebin : https://paste.ubuntu.com/p/y6QZ2sFY8Q/123456789101112131415int match(string P, string T)&#123; int size_n = T.length(), i = 0; int size_m = P.length(), j = 0; while( j &lt; size_m &amp;&amp; i &lt; size_n)&#123; //从左向右逐个比对字符 if(T[i] == P[i])&#123; i++; j++;&#125; //若匹配，则转到下一个字符 else&#123; i -= j-1; j = 0;&#125; //否则，模式串T回退，文本串P复位 &#125; return i - j;&#125; 如果匹配成功返回 i - j ，即模式串头在文本串中的位置下标。如果没有匹配成功，说明循环因为i &lt; size_n退出，此时i = size_n 而，返回值 i - j 将大于 size_n - size_m。调用者只需一步判断即可。 版本2Ubuntu Pastebin : https://paste.ubuntu.com/p/n88Jkz2ypM/1234567891011121314151617int match(string P, string T)&#123; int size_n = T.length(), i; int size_m = P.length(), j; for( i = 0; i &lt; size_n - size_m + 1; i++)&#123; //遍历所有可能成为模式串头的元素 for( j = 0; j &lt; size_m; j++)&#123; //假设T[i]为P[i]头逐个比对 if(T[i + j] != P[j]) break; //如果有一个失配，说明此假设不对 &#125; if(j &gt;= size_m) break; //找到匹配子串 &#125; return i;&#125; 版本2的实现更容易理解，它就如之前讲解的想法是一样的。 时间复杂度分析这两种实现其实思想和效率都是一样的。接下来我们分析一下它们的时间复杂度 最好情况（只经过一轮比对，即可确定匹配成功）：O(size_m) 最坏情况（每轮都对比至P的末字符，且反复如此）：O(m (size_n - size_m + 1)) 一般 m &lt;&lt; n 复杂度近似为 O(n m) 最坏情况是否会出现？这里举个例子： 文本串：00000000…00000001 模式串：00001 最坏情况的特点 最坏情况出现的概率与字母表的大小有关，字母表越小越容易出现局部匹配的情况导致浪费大量时间 size_m 越大，最坏情况出现的后果越严重]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>串匹配</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「笔记」许岑：如何成为有效学习的高手]]></title>
+    <url>%2F2018%2F02%2F18%2Fxcxx-01%2F</url>
+    <content type="text"><![CDATA[自然主义与结构主义 自然主义核心它是模仿，遇到什么学什么，学习过程可以是碎片化的，积少成多，注重量的积累 比如：语言、乐器、书法 结构主义学东西更注重结构，体系化的去学，学会之后的目的是创造。为的是一种质变。选择了正确的学习方法之后，把这个目标拆碎，针对细节进行反复的练习 比如：医学、艺术、编程、经济学 速度和效率 避免无效学习 将目标拆碎，针对细节进行反复练习 不要一开始就照顾全局 碎片化学习 带着困惑和问题进行学习 基于搜索 最终的效果要把碎片链接起来 小孩子可能不适合碎片化学习 假的碎片化学习：收藏 驱动力 成年人的学习不需要培养兴趣，应该以任务为驱动 没有任务我们自己来制造任务 带着职业强迫去练习 自己聘请自己 以教为学，一方面可以是自己对自己设置的一个任务，设定的一个目标，解决了任务驱动的问题。另一方面，以教为学，其实会让你学的更好 拖延症 将任务“严峻化” 一生当中不可能只做自己喜欢的事，怎么把自己不喜欢，却必须要做的事给做了，才是我们需要解决的难题 你要向所有认识你的人交代 设定小目标，形成惯性 专注力培养 在平常的生活当中营造仪式感 购买昂贵的学习工具 便宜东西本来就不是靠专注力制造出来的，你把一样东西买来自己用，这样东西要使你感知到那种专注力，才能够对你自己的专注力形成一种训练。 图便宜绝对会分散我们的注意力。 如果我们有一笔钱用来买东西，买一样贵的东西，好处还有另外一个方面，就是我们没钱再去买那些便宜的东西了。也就是说，我们拥有的东西少一些，东西越多越不能使人专注 学会一个人好好吃饭 尽量吃点好的，少吃速食，少点外卖，尽量少吃自助餐 我们每个人真的要学会自己认认真真的吃一顿火锅。最好，能学会好好做一顿饭给自己吃。这是营造仪式感非常好的行为活动 使用射灯 进入高质量的睡眠 睡眠不够，人很难做到专注 不要已经困得不行了，还要硬撑着做事，这个效率是非常低的。不如立即进入到高质量的睡眠 运动 设定有效的目标 一定要有一个明确的目标，并且找准学习的切入点 直奔大师，不必从基础开始。当然这个大师在这里边它指代的是一种特定的一种情境，这个大师不一定是指一个人了，而是你的最终目标 要去到哪里就从哪里开始 怯场是最糟糕的自觉。一个人他胆子变的比之前大一点，能走的路可能就会长一点 对于要用结构主义方法去研究的东西，还是要踏踏实实从初级开始 反馈 自己给自己制造反馈 制造文字，语音和肢体的反馈 当学习特别容易犯错的东西时，最需要及时反馈 突破学习瓶颈 瓶颈不是极限 突破瓶颈可能是需要方法的调整，也可能是需要心态的调整。心态调整的好，做一些事会相对比较容易 增强信心 扩大涉猎范围 更加专注，请教名师 把注意力集中在一个更狭窄的范围内，以做到不去分心 有些事真的是一通百通，你把一个东西拿下了，再去拿别的，会相对比较容易。这可能是自信带来的幻觉，也可能不是幻觉。如果自信来自于自律，那就是扎扎实实的自信。如果自信来源于想象，那就是盲目自信了。]]></content>
+      <categories>
+        <category>泛 - 笔记</category>
+      </categories>
+      <tags>
+        <tag>许岑</tag>
+        <tag>美貌大王</tag>
+        <tag>有效学习</tag>
+        <tag>拖延症</tag>
+        <tag>自然主义</tag>
+        <tag>结构主义</tag>
+        <tag>专注力</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「书摘」摩托车修理店的未来工作哲学]]></title>
+    <url>%2F2018%2F02%2F17%2Fbooks-0%2F</url>
+    <content type="text"><![CDATA[手艺人的实用艺术 修理工在做每一件工作时，都要先抛开自己的想法，专注于要修理的东西上：他必须仔细去看、去听。 当我的电路安装工作完成得美观漂亮时，我总会感到自豪。也许某天会有其他电工看到我的工作成绩。 工匠的骄傲是有凭据的，完全不是教育者传授给学生的那种毫无根据的“自负”。 我曾不惜代价地自己做了一个红木的咖啡桌。当时我还没有想过要做父亲，但我却想象这个桌子能给我的孩子留下难以磨灭的印象，他会知道这是自己父亲的作品。 工匠惯有的偏差不是偏向新事物，而是偏向他的可观工艺标准。 技术型的体力劳动需要对物质世界有系统的了解，正是这种了解推动了自然科学的诞生和发展。 经验的缺乏削弱了我们全面审视公认事实的能力。 手工艺实践和手工艺消费的精神模式和象征模式代表了对程式化的、官僚主义化的工作新模式的补偿，一种调适。 在现实世界中，问题本身并不会被预先简化；通常会出现信息过多的情况，使人难以辨别哪些相关，哪些不相关。要懂得自己面对的是何种问题，也就意味着必须清楚哪些情况可以被忽略。 修理工的价值和工作稳定性就在于他拥有一手的知识和经验。 动手与动脑 工作的退化终究是认知问题，根植于动脑与动手的脱节。 木料不应该是机器的牺牲品，它特有的优点应该留给懂得如何雕琢它的人。 雇主们懂得要促使工人们更勤奋地工作，唯一的办法就是借助想象力，刺激新的需求和欲望。消费和生产一样，需要进行科学的欲望管理。 如果知识被集中到规模越来越小的精英手中，真正的知识工作数量就不是在增长，而是在萎缩。 导致判断力水平远低于专业人士的并不一定是利润因素，有时公共政策也会影响判断力。标准化考试让教师失去了对课程的判断力，严格的审判指导方针让法官失去了对违法行为的判断力。 创造力是精通的副产品，而精通只能通过长期的实践来培养。 做自己物品的主人 要做自己物品的主人，首先要有一定的勇气，然后还要有探索的精神。这是令人骄傲的事情，也是自力更生的基础。 通过借助某种费解的文化逻辑，傻瓜化变成了人人向往的东西。 直接与我们使用的机器打交道，虽然会把指甲弄脏，但会给我们带来一种主体感。然而随着科技进步，这种直接接触减少，尽管推动科技进步的初衷是增加自主权。这中间是否存在矛盾？ 选择、自由、没有极限的时间、超越可能性，以及消费主义其他令人陶醉的存在主义式口号引发的此起彼伏的压迫感，好像已经形成了一个戒律体系。不知何故，对自我实现和自由的追求，促使我们去购买新东西，扔掉旧东西。 在所有具有难度的专业领域，不管是园艺、结构工程还是俄语，人们都要屈服于该领域那些棘手的对象。 音响是一种设备，与身为物品的乐器不同。我所指的“物品”，其特性需要使用者去领悟和接触，需要一定的技巧，也需要积极地参与。“物品”必须被实践，而“设备”只需要被消费。物品具有指挥型的现实特征，而设备只有被支配型的现实特征。 个体的主体性可以通过一系列的选择得以实现，但是选择并不等于创造。 对于早期的哲学家海德格尔来说，“上手状态”是世界万物呈现在我们面前的最初模式：“最亲密的接触并非感性认知，而是去把玩、使用和照顾那些有自己‘知识’的东西。” 黑手的教育 优秀的钻石切割工人与优秀的训犬师在性情上肯定不同：前者非常谨慎，后者则更善于发号施令。 当年轻人思考他可以谋生的各种方法，以及这些方法如何能帮助他更好地生活时，最重要的问题也许并非他的智商有多高，而是像“他究竟是个谨慎的人，还是一个喜欢发号施令的人”这样的问题。如果他的目标是找到适合自己的工作，就应该在接受邀约之前停下来好好思考。 不同的工作会吸引不同的人，那么反过来工作也会塑造人。 机械艺术对我们这个时代而言具有特别的意义，因为它们培养的不是我们的创造力，而是注意倾听的能力。 物品需要修理和照顾，就像它需要被创造。 现代科学关于我们如何了解自然的观点脱离了我们所在的世界：通过思维结构来了解自然比通过物质世界更容易操作，而且可以用数学表达式进行验算。通过此类转换，我们成为了大自然的主人，但基于理想化的思考令我们失望，因为它没有充分考虑到细节问题。 修理工和医生每天都会与失败打交道，即使成为专家后也无法幸免；但建筑工不用，这是因为修理工和医生修理的东西并非由自己打造，所以他们无法全面或彻底地了解它。 规划是一个极其耗时的过程，而且难以确切地划分哪一段属于认真的装配工作，哪一段又属于规划工作，因为改造旧马达在一开始就涉及大量的测量和判断。 要想成为一名优秀的修理工，一方面，你必须真正地投入，从内心深处认同“我是一个修理工”；另一方面，你要有敏锐的感觉，能够突破自我的、独有的世界。 在寻找解决方案的过程中暂停一下，反思自己对问题的理解是否充分。 作为优秀的修理工，你必须不断留意自己犯错的可能性——这是一种美德。 任何处理可靠而独立的现实情况的学问，都需要诚实和谦虚。 从业余到专业 在这个世界上，想对一切事物正确地做出回应，就必须清晰明了地看穿它，而实现这点的前提是达到“无我”的境界。 独立工匠的生活美好而自由，让人开始思考自己要选择什么样的生活方式。 英文中的“自由”(liberal)一词，最早被用来区分“自由艺术”(liberal arts)和“功利艺术”(servile arts)。前者追求的是适合自由人的艺术，而后者被视为机械性的艺术。 修理摩托车的真实时间与应该收费的时间之间的差距，正是摩托车维修伦理道德发挥作用的地方。 修理工面临的挑战就是突破自己的想法。 好奇心受限于好奇对象，而好奇对象常常会被孤立起来考虑；好奇心引导我们去了解一些事情，就好像那些东西是我们在这世上唯一想要拥有的东西。 实践智慧需要“我们充分了解所处特定环境的显著的道德特色，对这些特色的了解将帮助我们做出正确的反应”。因此，要获得实践智慧，就要克服白痴般的自我专注，突破好奇之人的狭隘视线。 格子间的矛盾 你对特定状况的反应更多地出于自我意识，还是更多地为“做对事”？先彻底想清楚这个问题。如果你发现自己的反应背后是自我意识在作祟，那请将它放到一旁…… 高等教育的过度扩张导致劳动力市场供过于求，由此导致白领工人“薪水比待遇不错的劳动工人还差”。此外，“这可能会导致某种令人不安的失业情况。大学毕业生不一定能找到专业对口的工作，心理上却又无法接受体力工作”。 我们的适应能力极强，环境会产生自己的道德规范，而人们内心的道德准则会因某些敏感性和敏锐性做出让步。 人们的个性多种多样，并不是所有性格的人都适合上大学，事实上，有些非常聪明的人完全不适合接受高等教育，也不适合从事那些人们认为拥有学位的人应该从事的工作，但大家并未意识到这点。将每个人都送入大学会导致劳动力市场出现异常。 对文凭的要求越来越高，造成了“这是一个前所未有的知识化的社会，其成员的认知水准是他们那些没有上过学的父母们无法想象的。”的假象。 学校教育的形式特征（例如成绩、奖惩和学位等）变得比其本质特征更重要。在学校学习期间，争取奖励变得比切实学到东西更重要……教学被排到了学校排名的后面，后者的社会效应更为明显；打分更看重的是其社会影响，而非实现教学的目标。 人们常说的普及高等教育的理由是，社会对拥有丰富知识的员工的需求越来越迫切，其实这种情况基于一个反常的理由：大学让年轻人习惯于接受形式和内容的不匹配，接受官方言论和现实情况的不相符。 培养年轻人自尊，似乎是为了帮助他们适应缺少客观标准的工作，保证他们围着团队打转。当自尊是被人为培养出来时，就很容易被操纵。它是一种社会技巧的产物，而不是建立在自身成就上的一种保障。 孩子们得到的表扬越多，就越会努力维持自己心目中的自我形象；那些被他人称赞聪明的孩子在被分配新任务时，会选择相对简单的处理方法。他们会开始逃避风险，依赖他人。 边做边想 建立在通用、命题式知识上的职业含金量比较高，但也面临着来自全球的竞争，因为一方面，在全球经济中，书本知识的传播范围越来越广。另一方面，实用技术始终与个人的经验密切相连。它无法通过下载获得，只能从实践中获取。 通常情况下，我们不能对事物做到不偏不倚。原因很简单：那些与我们无关的事情不好引起我们的注意，而且我们的注意力也是有限的。 相互作用的变量数量太大，因此人脑无法同时正确处理……直觉判断是对直觉的因果关系的反应，这正是简单系统的特点。 国际象棋大师之所以是大师，并不是因为他记忆力比他人强，而是因为他们见过那些国际象棋的布局模式。 “行家们懂得去察觉那些新手们注意不到的事物，例如特定情况下的某些特征。” 在编写维修手册的人看来，修理工就是智力技术和相应的社会技术中的小齿轮，而不是独立思考的人。 编写维修手册的应该是那些同机器一起工作和生活的人。他们使用的语言让人感觉有一个真实的人存在，你愿意和他坐下来，向他学习。 技工为了把他的工作做好，有时候必须采取合理行动；而知识科技断言，用分工来取代个人知识是一种伪装的合理行动。 工作、休闲与全心投入 人们选择休闲活动常常是为了“追求真正的自我”。与此相应，所谓“好工作”就是能让人民拥有最大的财力，来追求那些能让生命变得有意义的休闲活动。 重要的不在于你能跑多快，而在于你用什么方法跑得快。 人类与动物的区别在于动物在一开始就知道预期要达到的效果，然后才会去寻找能满足要求的工具；而我们人类能够将所有东西视作潜在的工具。 猪喜欢在泥巴里打滚，海豚在水里嬉戏，这些看上去都像休闲活动。但许多动物做的事情很像工作，这些事情在改变着自然的形态，发挥着作用。 要想在活动中找到快乐，就要参与并全心投入活动中，这种投入是一心一意、全神贯注的，使整个活动值得被追求……如果只是在乎活动的工具价值……其对价值的关注就会从活动本身转移到预期结果上，即不再关心正在做什么。这种关注……让我们在活动中心不在焉，使活动变成一种负担。 如果我们让自己的行动回归根本，就能更好地理解什么是美好的生活。]]></content>
+      <categories>
+        <category>泛 - 书摘</category>
+      </categories>
+      <tags>
+        <tag>工匠精神</tag>
+        <tag>书摘</tag>
+        <tag>读书</tag>
+        <tag>摩托车修理店的未来工作哲学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++类与对象总结（二）构造函数]]></title>
+    <url>%2F2018%2F02%2F11%2Fcpp-class-2%2F</url>
+    <content type="text"><![CDATA[构造器Constructor构造器(函数)一种特殊的成员函数，用于对象的初始化。名称与类的名称相同，可以重载，无返回类型。123456789101112131415161718192021#include &lt;iostream&gt;using namespace std;class A&#123; private: int a,b; public: A(int aa,int bb) &#123; a = aa; b = bb; &#125;&#125;;int main()&#123; A a(1,2); return 0;&#125; 在这里我们定义的A类的一个参数为两个int的构造函数，在main函数中a被创建时需要用括号传参。 初始化列表Initializer List对于上面的构造函数C++还有其他的做法，像下面代码中的构造函数。 初始化列表的动作是在构造函数体执行之前进行的，初始化顺序是按照成员变量的声明顺序进行的与初始化列表中的顺序无关。 1234567891011121314151617#include &lt;iostream&gt;using namespace std;class A&#123; private: int a,b; public: A(int aa,int bb):a(aa),b(bb)&#123;&#125;&#125;;int main()&#123; A a(1,2); return 0;&#125; 在这里你可以简单的认为两者效果是一致的，但如果成员不是基础数据类型两者就会有很大不同。 举个例子： 1234567891011121314151617181920212223242526272829303132333435#include &lt;iostream&gt;using namespace std;class B&#123; private: int a,b; public: B(int aa,int bb) &#123; a = aa; b = bb; &#125;&#125;;class A&#123; private: int a,b; B c; public: A(int aa,int bb) &#123; a = aa; b = bb; c(1,2); &#125;&#125;;int main()&#123; A a(1,2); return 0;&#125; 这里我们又声明了一个B类，在A类中添加了一个成员c为B类的对象。 我们用g++编译这个程序会得到这样的一条错误： error: constructor for ‘A’ must explicitly initialize the member ‘c’ which does not have a default constructor 它说我们必须显式初始化成员c，因为c没有缺省构造函数（缺省构造函数在下面会讲解）。 这个错误很奇怪，我们明明那么明显的初始化了c，它竟然说我们没有显式初始化，还要什么缺省构造函数。 这里的原因就在于它在进构造函数之前就要进行初始化，如果没有初始化列表编译器会去找缺省构造函数去初始化它。如果B类有缺省构造函数，这个代码仍然是错误的，因为在26行这个不是正确的初始化，初始化一个对象要么在初始化列表中，要么在它定义是地方初始化，26行这种方式编译器会去找()的运算符重载函数。12345678class A&#123; private: int a,b; B c; public: A(int aa,int bb):a(aa),b(bb),c(1,2)&#123;&#125;&#125;; 正确的A类的构造函数应该这样写，在初始化c时它会调用c的构造函数来初始化它。 特殊的构造函数缺省构造函数Default Constructor对于上面的A类来说如果需要创建一个A类的数组，我们需要这样一句话定义一个三单元的数组里面每个都要用括号给出参数。1A b[3] = &#123;A(1,2),A(2,3),A(3,4)&#125;; 如果我们要创建一个100单元的数组，如果是int的，我们一般是先定义好再用循环赋值。 我们想这样写：1A c[100]; 但对于A这样是不可以的，因为它的构造函数需要两个int作为参数而这里创建时并没有给出参数，在定义时它不能初始化这些对象。 我们需要另一种构造函数，缺省构造函数。只要是我们写的没有参数的构造函数就叫做缺省构造函数。1A()&#123;&#125; 重载构造函数就可以创建出c数组。 如果一个类没有声明任何构造函数，编译器会自动生成一个不接受任何参数不做任何操作的缺省构造函数。 拷贝构造函数Copy Constructor123A a(1,2);A b = a;// A b(a); 如果我们定义了a这个对象，如果在定义初始化b时想直接拿a的值来初始化b（需要明白这里的等号与括号初始化等价，与赋值无关），我们需要用到拷贝构造函数，拷贝构造函数需要拿另一个该类的对象（引用）作为参数，初始化时可以用等号或用括号。12345A(const A &amp;p)&#123; a = p.a; b = p.b;&#125; 对于A类简单的拷贝构造函数就是这样，拷贝构造函数只是说它的参数是该类的对象的引用，函数体里你可以做其他操作。 如果一个类没有声明拷贝构造函数，编译器会自动生成一个隐式的拷贝构造函数(Implicitly Copy Constructor)，它将对做成员拷贝（Memberwise Copy），如果成员是基础数据类型就是基本的初始化，如果成员是其他对象就调用那个对象的拷贝构造函数做初始化，C++中的隐式拷贝构造并不是位拷贝（Bitwise Copy）。 拷贝构造函数的参数为什么必须是引用？因为函数传值调用需要做一步拷贝构造，如果拷贝构造函数是传值调用，那么就会在传值时再次调用拷贝构造函数，就会引起无限的递归。 拷贝构造函数在哪里会被调用？ 对象初始化 函数的传值调用 函数的返回值 第一种情况前面已经有所介绍，后两种情况需要注意不同的编译器会有不同的表现，一般来说编译器会把很多不必要的拷贝构造优化掉。 比如这段代码：Ubuntu Pastebin : https://paste.ubuntu.com/=rCHw4pHhMn/123456789101112131415161718192021222324252627282930313233#include &lt;iostream&gt;using namespace std;int num = 0;class A&#123; private: int a,b; public: A()&#123;&#125; A(int aa,int bb):a(aa),b(bb)&#123;&#125; A(const A &amp;p) &#123; num++; cout &lt;&lt; num &lt;&lt; "copy" &lt;&lt; endl; a = p.a; b = p.b; &#125;&#125;;A f(A a) //1&#123; A re(a); //2 return re; //3&#125;int main()&#123; A a(1,2); A b = f(a); //4 cout &lt;&lt; num &lt;&lt; endl; return 0;&#125; 如果是按刚刚讲的逻辑应该发生四次拷贝构造，我在代码中标注的四处。但如果你用不同编译器或者不同的编译选项编译都会有不同的结果，在这里我使用CentOS下的g++、MacOS下的g++和Windows 10下的DevC++（MinGW）测试的结果都为调用了两次。1234567[zyx@centos-linux c]$ g++ test.cpp[zyx@centos-linux c]$ ./a.out1copy2copy2//CentOS g++ 64bit 而在Windows 10的Visual Studio 2013的结果为三次。1234561copy2copy3copy3//Visual Studio 2013 64bit 对于Visual Studio 2017依然如此 1234561copy2copy3copy3//Visual Studio 2017 64bit Windows下CB的与g++和MinGW相同123451copy2copy2//CB 64bit 可以说明不同的编译器在拷贝构造上有不同的优化策略。 深入探究拷贝构造函数的编译器优化：之前说的调用拷贝构造的规则在编译器的优化面前好像就没了规则，为什么会这样呢？对于发生了三次和两次拷贝构造的情况它们究竟优化掉了哪一次或两次呢？ C++标准(N4527) § 12.8 Copying and moving class objects 第31条（P.293/294）中这样写到： When certain criteria are met, an implementation is allowed to omit the copy/move construction of a class object, even if the constructor selected for the copy/move operation and/or the destructor for the object have side eﬀects. In such cases, the implementation treats the source and target of the omitted copy/move operation as simply two diﬀerent ways of referring to the same object. If the ﬁrst parameter of the selected constructor is an rvalue reference to the object’s type, the destruction of that object occurs when the target would have been destroyed; otherwise, the destruction occurs at the later of the times when the two objects would have been destroyed without the optimization. This elision of copy/move operations, called copy elision, is permitted in the following circumstances (which may be combined to eliminate multiple copies): 这里只是说编译器可以在一些情况下不考虑副作用对拷贝或者移动构造函数进行优化，而且对于标准中的四种情况可以删除多份。 之后列举了四条基本情况，我们只关心第一和第三条： (31.1) — in a return statement in a function with a class return type, when the expression is the name of a nonvolatile automatic object (other than a function parameter or a variable introduced by the exceptiondeclaration of a handler (15.3)) with the same type (ignoring cv-qualiﬁcation) as the function return type, the copy/move operation can be omitted by constructing the automatic object directly into the function’s return value. (31.3) — when the exception-declaration of an exception handler (Clause 15) declares an object of the same type (except for cv-qualiﬁcation) as the exception object (15.1), the copy operation can be omitted by treating the exception-declaration as an alias for the exception object if the meaning of the program will be unchanged except for the execution of constructors and destructors for the object declared by the exception-declaration. [ Note: There cannot be a move from the exception object because it is always an lvalue. — end note ] 第一条：函数的 return 语句中的表达式是一个非 volatile 的对象，并且其非const&amp;volatile类型和函数返回值的非const&amp;volatile类型相同，此时可以省略一次拷贝或移动构造函数（移动构造函数为C++11的扩展）。 第三条：对于一个非const&amp;volatile的临时对象且没有绑定引用，它的复制/移动操作，可以省略。 对于第一条明确的标准几乎所有的编译器对此都做了优化，也就是代码中第3号点被优化掉了 对于第三条在G++和CB中第4号点因此被优化，也就是对象b的构造没有调用拷贝构造函数。g++提供了一个编译选项：-fno-elide-constructors 开启这个选项编译器会关闭上述关于拷贝和移动构造函数的优化。 123456789[zyx@centos-linux c]$ g++ -fno-elide-constructors test.cpp[zyx@centos-linux c]$ ./a.out1copy2copy3copy4copy4//CentOS g++ 64bit 运行结果确实是4次 这样我们可以通过对比汇编代码来看具体它在哪里优化了拷贝构造。 代码：默认优化Ubuntu Pastebin : https://paste.ubuntu.com/=Wm88H4Vhxf/123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869 .globl __Z1f1A .p2align 4, 0x90__Z1f1A: ## @_Z1f1A .cfi_startproc## BB#0: pushq %rbpLcfi0: .cfi_def_cfa_offset 16Lcfi1: .cfi_offset %rbp, -16 movq %rsp, %rbpLcfi2: .cfi_def_cfa_register %rbp subq $16, %rsp movq %rdi, %rax movq %rax, -8(%rbp) ## 8-byte Spill callq __ZN1AC1ERKS_ movq -8(%rbp), %rax ## 8-byte Reload addq $16, %rsp popq %rbp retq .cfi_endproc .globl __ZN1AC1ERKS_ .weak_def_can_be_hidden __ZN1AC1ERKS_ .p2align 4, 0x90_main: ## @main .cfi_startproc## BB#0: pushq %rbpLcfi6: .cfi_def_cfa_offset 16Lcfi7: .cfi_offset %rbp, -16 movq %rsp, %rbpLcfi8: .cfi_def_cfa_register %rbp subq $64, %rsp leaq -32(%rbp), %rdi movl $1, %esi movl $2, %edx movl $0, -20(%rbp) callq __ZN1AC1Eii leaq -48(%rbp), %rdi leaq -32(%rbp), %rsi callq __ZN1AC1ERKS_ leaq -40(%rbp), %rdi leaq -48(%rbp), %rsi callq __Z1f1A movq __ZNSt3__14coutE@GOTPCREL(%rip), %rdi movl _num(%rip), %esi callq __ZNSt3__113basic_ostreamIcNS_11char_traitsIcEEElsEi leaq __ZNSt3__14endlIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_(%rip), %rdi movq %rax, -8(%rbp) movq %rdi, -16(%rbp) movq -8(%rbp), %rdi callq *-16(%rbp) xorl %edx, %edx movq %rax, -56(%rbp) ## 8-byte Spill movl %edx, %eax addq $64, %rsp popq %rbp retq .cfi_endproc 关闭优化Ubuntu Pastebin : https://paste.ubuntu.com/=7CV893KdNY/12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576 .globl __Z1f1A .p2align 4, 0x90__Z1f1A: ## @_Z1f1A .cfi_startproc## BB#0: pushq %rbpLcfi0: .cfi_def_cfa_offset 16Lcfi1: .cfi_offset %rbp, -16 movq %rsp, %rbpLcfi2: .cfi_def_cfa_register %rbp subq $32, %rsp movq %rdi, %rax leaq -8(%rbp), %rcx movq %rdi, -16(%rbp) ## 8-byte Spill movq %rcx, %rdi movq %rax, -24(%rbp) ## 8-byte Spill callq __ZN1AC1ERKS_ leaq -8(%rbp), %rsi movq -16(%rbp), %rdi ## 8-byte Reload callq __ZN1AC1ERKS_ movq -24(%rbp), %rax ## 8-byte Reload addq $32, %rsp popq %rbp retq .cfi_endproc .globl _main .p2align 4, 0x90_main: ## @main .cfi_startproc## BB#0: pushq %rbpLcfi6: .cfi_def_cfa_offset 16Lcfi7: .cfi_offset %rbp, -16 movq %rsp, %rbpLcfi8: .cfi_def_cfa_register %rbp subq $64, %rsp leaq -32(%rbp), %rdi movl $1, %esi movl $2, %edx movl $0, -20(%rbp) callq __ZN1AC1Eii leaq -56(%rbp), %rdi leaq -32(%rbp), %rsi callq __ZN1AC1ERKS_ leaq -48(%rbp), %rdi leaq -56(%rbp), %rsi callq __Z1f1A leaq -40(%rbp), %rdi leaq -48(%rbp), %rsi callq __ZN1AC1ERKS_ movq __ZNSt3__14coutE@GOTPCREL(%rip), %rdi movl _num(%rip), %esi callq __ZNSt3__113basic_ostreamIcNS_11char_traitsIcEEElsEi leaq __ZNSt3__14endlIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_(%rip), %rdi movq %rax, -8(%rbp) movq %rdi, -16(%rbp) movq -8(%rbp), %rdi callq *-16(%rbp) xorl %edx, %edx movq %rax, -64(%rbp) ## 8-byte Spill movl %edx, %eax addq $64, %rsp popq %rbp retq .cfi_endproc 默认优化下程序在17和51行调用了A的拷贝构造函数，而在关闭拷贝构造后程序分别在20、23、55、61行调用了拷贝构造函数。这里分析可以发现编译器优化掉了 函数返回值的构造 和 对象b的构造。Visual Studio 2013 64bit 反汇编代码：Ubuntu Pastebin : https://paste.ubuntu.com/=h3mV88hjrn/123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778A f(A a) //1&#123;00395850 55 push ebp 00395851 8B EC mov ebp,esp 00395853 81 EC D4 00 00 00 sub esp,0D4h 00395859 53 push ebx 0039585A 56 push esi 0039585B 57 push edi 0039585C 8D BD 2C FF FF FF lea edi,[ebp-0D4h] 00395862 B9 35 00 00 00 mov ecx,35h 00395867 B8 CC CC CC CC mov eax,0CCCCCCCCh 0039586C F3 AB rep stos dword ptr es:[edi] 0039586E A1 00 00 3A 00 mov eax,dword ptr ds:[003A0000h] 00395873 33 C5 xor eax,ebp 00395875 89 45 FC mov dword ptr [ebp-4],eax A re(a); //200395878 8D 45 0C lea eax,[a] 0039587B 50 push eax 0039587C 8D 4D F0 lea ecx,[re] 0039587F E8 37 BB FF FF call A::A (03913BBh) return re; //300395884 8D 45 F0 lea eax,[re] 00395887 50 push eax 00395888 8B 4D 08 mov ecx,dword ptr [ebp+8] 0039588B E8 2B BB FF FF call A::A (03913BBh) 00395890 8B 45 08 mov eax,dword ptr [ebp+8] &#125;int main()&#123;00F16060 55 push ebp 00F16061 8B EC mov ebp,esp 00F16063 81 EC F0 00 00 00 sub esp,0F0h 00F16069 53 push ebx 00F1606A 56 push esi 00F1606B 57 push edi 00F1606C 8D BD 10 FF FF FF lea edi,[ebp-0F0h] 00F16072 B9 3C 00 00 00 mov ecx,3Ch 00F16077 B8 CC CC CC CC mov eax,0CCCCCCCCh 00F1607C F3 AB rep stos dword ptr es:[edi] 00F1607E A1 00 00 F2 00 mov eax,dword ptr ds:[00F20000h] 00F16083 33 C5 xor eax,ebp 00F16085 89 45 FC mov dword ptr [ebp-4],eax A a(1, 2);00F16088 6A 02 push 2 00F1608A 6A 01 push 1 00F1608C 8D 4D F0 lea ecx,[a] 00F1608F E8 81 B3 FF FF call A::A (0F11415h) A b = f(a); //400F16094 83 EC 08 sub esp,8 00F16097 8B CC mov ecx,esp 00F16099 8D 45 F0 lea eax,[a] 00F1609C 50 push eax 00F1609D E8 19 B3 FF FF call A::A (0F113BBh) 00F160A2 8D 4D E0 lea ecx,[b] 00F160A5 51 push ecx 00F160A6 E8 6D B0 FF FF call f (0F11118h) 00F160AB 83 C4 0C add esp,0Ch cout &lt;&lt; num &lt;&lt; endl;00F160AE 8B F4 mov esi,esp 00F160B0 68 E8 13 F1 00 push 0F113E8h 00F160B5 8B FC mov edi,esp 00F160B7 A1 20 03 F2 00 mov eax,dword ptr ds:[00F20320h] 00F160BC 50 push eax 00F160BD 8B 0D A0 10 F2 00 mov ecx,dword ptr ds:[0F210A0h] 00F160C3 FF 15 94 10 F2 00 call dword ptr ds:[0F21094h] 00F160C9 3B FC cmp edi,esp 00F160CB E8 64 B2 FF FF call __RTC_CheckEsp (0F11334h) 00F160D0 8B C8 mov ecx,eax 00F160D2 FF 15 90 10 F2 00 call dword ptr ds:[0F21090h] 00F160D8 3B F4 cmp esi,esp 00F160DA E8 55 B2 FF FF call __RTC_CheckEsp (0F11334h) return 0;00F160DF 33 C0 xor eax,eax &#125; VS的反汇编代码中有C++代码注释，它分别在20、25、57行调用了A的拷贝构造函数，可以看出VS只是优化掉了对象b的构造。]]></content>
+      <categories>
+        <category>编程语言 - Cpp</category>
+      </categories>
+      <tags>
+        <tag>汇编语言</tag>
+        <tag>Cpp</tag>
+        <tag>构造函数</tag>
+        <tag>编译器优化</tag>
+        <tag>拷贝构造函数</tag>
+        <tag>缺省构造函数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DFS与BFS]]></title>
+    <url>%2F2018%2F02%2F05%2Fdfs-bfs%2F</url>
+    <content type="text"><![CDATA[简介DFS（深度优先搜索）和BFS（广度优先搜索）都是应用广泛的搜索算法，同属于图算法。两种算法实际上就是两种不同的搜索策略。 区别 DFS的访问顺序：1 -&gt; 2 -&gt; 4 -&gt; 7 -&gt; 8 -&gt; 3 -&gt; 5 -&gt; 6 BFS的访问顺序：1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; 7 -&gt; 8 DFS沿着一个分支一直递归到最后，而BFS从起点一层一层向外扩展。DFS用栈来实现，BFS用队列来实现。 实现下面给出两种算法的伪代码 DFS12345678910void dfs(int deep)&#123; if(到达边界)&#123; // 做一些处理后返回 &#125;else&#123; for(所有可能的选择)&#123; dfs(deep + 1); &#125; &#125;&#125; BFS1234567891011121314void bfs(起始点) &#123; 将起始点放⼊队列中; while(如果队列不为空)&#123; 访问队列中队⾸元素x; 删除队⾸元素; for(x 所有相邻点)&#123; if(该点未被访问过且合法)&#123; 将该点加⼊队列末尾; &#125; &#125; &#125; 队列为空，⼴搜结束;&#125; 例子为了便于理解这两种算法的优缺点，我在我的题库中给出一题“走迷宫”，此题为一道无权图的最短路题。 DFS和BFS算法都可以轻松解决此题，下面我直接给出代码后分析优缺点。 DFS实现Ubuntu Pastebin : https://paste.ubuntu.com/26527945/1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283#include &lt;iostream&gt;#include &lt;climits&gt;using namespace std;#define MAX_MAP 20int minP = INT_MAX;char map[MAX_MAP][MAX_MAP];bool collected[MAX_MAP][MAX_MAP];struct dir&#123; int x,y;&#125;dir[4] = &#123;&#123;0,1&#125;,&#123;1,0&#125;,&#123;-1,0&#125;,&#123;0,-1&#125;&#125;;struct point&#123; point()&#123;&#125; point(int xx,int yy,int s):x(xx),y(yy),step(s)&#123;&#125; int x; int y; int step;&#125;;void dfs(point now)&#123; if(map[now.x][now.y] == 'T')&#123; if(now.step &lt; minP)&#123; minP = now.step; &#125; return; &#125; collected[now.x][now.y] = true; for( int i = 0; i &lt; 4; i++)&#123; if(!collected[now.x+dir[i].x][now.y+dir[i].y])&#123; point next(now.x+dir[i].x,now.y+dir[i].y,now.step+1); dfs(next); &#125; &#125; collected[now.x][now.y] = false; return;&#125;int main()&#123; int n,m; cin &gt;&gt; n &gt;&gt; m; for( int i = 0 ; i &lt; MAX_MAP; i++)&#123; for( int j = 0; j &lt; MAX_MAP; j++)&#123; map[i][j] = '#'; collected[i][j] = true; &#125; &#125; point begin; for( int i = 1; i &lt;= n; i++)&#123; for( int j = 1; j &lt;= m; j++)&#123; cin &gt;&gt; map[i][j]; if(map[i][j] != '#')&#123; collected[i][j] = false; &#125; if(map[i][j] == 'S')&#123; begin.x = i; begin.y = j; begin.step = 0; &#125; &#125; &#125; dfs(begin); if(minP &lt; INT_MAX)&#123; cout &lt;&lt; minP; &#125;else&#123; cout &lt;&lt; -1; &#125; return 0;&#125; BFS实现Ubuntu Pastebin : https://paste.ubuntu.com/26527953/1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374#include &lt;iostream&gt;#include &lt;queue&gt;using namespace std;#define MAX_MAP 20int n,m;char map[MAX_MAP][MAX_MAP];bool collected[MAX_MAP][MAX_MAP];struct Dir&#123; int x,y;&#125;dir[] = &#123;&#123;1,0&#125;,&#123;-1,0&#125;,&#123;0,1&#125;,&#123;0,-1&#125;&#125;;struct point&#123; int x; int y; int step;&#125;;int bfs(point begin)&#123; queue&lt;point&gt; Q; collected[begin.x][begin.y] = true; Q.push(begin); while(!Q.empty())&#123; point temp = Q.front(); Q.pop(); if(map[temp.x][temp.y] == 'T')&#123; return temp.step; &#125; for( int i = 0; i &lt; 4; i++)&#123; int x = temp.x + dir[i].x; int y = temp.y + dir[i].y; if(!collected[x][y] &amp;&amp; map[x][y] != '#')&#123; collected[x][y] = true; point rd; rd.x = x; rd.y = y; rd.step = temp.step + 1; Q.push(rd); &#125; &#125; &#125; return -1;&#125;int main()&#123; cin &gt;&gt; n &gt;&gt; m; for( int i = 0; i &lt; MAX_MAP; i++)&#123; for( int j = 0; j &lt; MAX_MAP; j++)&#123; map[i][j] = '#'; collected[i][j] = true; &#125; &#125; point begin; for( int i = 1; i &lt;= n; i++)&#123; for( int j = 1; j &lt;= m; j++)&#123; cin &gt;&gt; map[i][j]; collected[i][j] = false; if(map[i][j] == 'S')&#123; begin.x = i; begin.y = j; begin.step = 0; &#125; &#125; &#125; cout &lt;&lt; bfs(begin); return 0;&#125; 在此题中BFS算法是很占优势的，因为它不需要枚举所有情况，如果在某一层遇到终点那最小步数必然是当前层数，而DFS算法需要枚举所有情况来更新最小步数最后才能确定。特殊情况下如果起点和终点是邻居，BFS只需一层搜索就可以解决，而DFS仍然需要枚举所有结果。当然DFS可以进行剪枝优化但在此题中效率明显是不如BFS的。 如果将此题改为问通过迷宫的方法数，那么此题就不能用BFS解决，因为BFS求的只是最短路并没有枚举所有的路线。此图中，如果题目问从1走到3有多少种方法。 如果是DFS它会找到两种路线：1 -&gt; 3 和 1 -&gt; 2 -&gt; 3。 而BFS在第一层时找到1 -&gt; 3这条路后就将3标记为已访问，之后所有点都已被访问就不存在第二层了也就不存在1 -&gt; 2 -&gt; 3这条路了。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>题解</tag>
+        <tag>DFS</tag>
+        <tag>BFS</tag>
+        <tag>图搜索</tag>
+        <tag>图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[并查集]]></title>
+    <url>%2F2018%2F01%2F31%2Funion-find-sets%2F</url>
+    <content type="text"><![CDATA[概述并查集是一种树形数据结构，用于处理集合的合并及查询问题，常常以森林的形式表示。这里需要注意并查集虽然可以进行合并操作，但无法进行分割操作。 并查集一般用数组来实现，如果是无权并查集只需要一个保存每个节点的父节点的数组就可以实现。 接口并查集一般提供三个接口，初始化，查询，合并。 初始化初始状态时，每个元素各为一棵树，其父节点初始为它本身。（图1） 初始化函数代码123456void init()&#123; for( int i = 1; i &lt;= n; i++)&#123; pre[i] = i; &#125;&#125; pre数组保存每个元素的父节点。 查询查询是指查询给出节点所在的集合的根节点。 递归思想：如果它的父节点就是它本身，那当然它自己就是它的根节点。如果不是那它父亲的根节点就是它的跟节点。 查询函数代码123456789int get(int x)&#123; if(pre[x] == x)&#123; //x 节点就是根节点 return x; &#125; return get(pre[x]); //返回父节点的根节点&#125; 这里的查询函数（包括下面的合并函数）都可以用循环方式实现。 合并： 合并就是把两个集合合并成一个，也就是将两棵树合并为一棵树。 （图2） 合并函数代码12345678void merge(int x,int y)&#123; x = get(x); y = get(y); if(x != y)&#123; // 不住同一个集合 pre[y] = x; &#125;&#125; 这里我们先是找出两课树的根节点，再将一个节点的根节点的父节点设置为另一个节点的跟节点即可。 路径压缩并查集最重要的操作就是查找，我们关心的是每个节点在哪棵树上，并不需要知道树具体的形状，像图2中的6、5、7节点如果将6号节点继续和4或8号节点合并会产生一棵偏树，最坏情况下导致查询的时间复杂度达到O(n)。 我们可以将6、5、7号节点换为图3中的树效果是一样的。我们只需调整get函数，在每次调用get函数时压缩一次路径，不断的维护这个并查集。优化后的查询代码：123456789int get(int x)&#123; if(pre[x] == x)&#123; //x 节点就是根节点 return x; &#125; return pre[x] = get(pre[x]); //返回父节点的根节点，并另当前节点父节点直接为根节点&#125; 这样优化之后的并查集效率非常高。执行一次查询操作的时间复杂度仅为O(α(n))，这里的α(n)是阿克曼函数的反函数，总的时间复杂度将比O(logn)还要快。 带权并查集带权并查集是指存有权值的并查集，节点的权值一般保存与根节点的关系信息，比如权值可以保存该节点与跟节点的距离。这里为了便于讲解我们以一道题为例： POJ 1182 食物链题目链接：http://poj.org/problem?id=1182Ubuntu Pastebin : https://paste.ubuntu.com/26527937/12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include &lt;cstdio&gt;#define N 500000using namespace std;int pre[N],weight[N];int ans,c;int get(int x)&#123; if(x != pre[x]) &#123; int temp = pre[x]; pre[x] = get(temp); weight[x]=(weight[x] + weight[temp]) % 3; &#125; return pre[x];&#125;void merge(int x,int y)&#123; int xRoot = get(x); int yRoot = get(y); if(xRoot != yRoot)&#123; pre[xRoot] = yRoot; weight[xRoot] = (weight[y]-weight[x] + c + 3) % 3; &#125;else if((weight[x]-weight[y] + 3) % 3 != c)&#123; ans++; &#125;&#125;void init(int n)&#123; for( int i = 0; i &lt;= n+10; i++)&#123; pre[i] = i; weight[i] = 0; &#125; ans = 0; &#125;int main()&#123; int n,m; scanf("%d%d",&amp;n,&amp;m); init(n); for( int i = 0; i &lt; m; i++)&#123; int a,b; scanf("%d%d%d",&amp;c,&amp;a,&amp;b); if(a &gt; n || b &gt; n || (c == 2 &amp;&amp; a == b) )&#123; ans++; &#125;else&#123; c--; merge(a,b); &#125; &#125; printf("%d\n",ans);&#125; 此题只需维护每个节点到其根节点的距离对3取余的结果即可，路径压缩时需要注意维护权值。 其他一些简单的并查集题目我会之后在我的vijos题库中给出作为练习。此题的详细题解我也许会之后在我的博客更新。]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>题解</tag>
+        <tag>优化</tag>
+        <tag>POJ</tag>
+        <tag>数据结构</tag>
+        <tag>并查集</tag>
+        <tag>带权并查集</tag>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++类与对象总结（一）]]></title>
+    <url>%2F2018%2F01%2F26%2Fcpp-class-1%2F</url>
+    <content type="text"><![CDATA[类与对象的关系类是一种标准，而对象是类的实体，就如int是一种数据类型（类），而int i;是int类型的一个实体变量（对象）。 成员变量与成员函数一个类中可以包含多个成员函数，类的每个对象可以包含多个成员变量（也可以是其他的类），比如下面的这个A类的声明中就声明了A类有一个成员函数b，它每个对象中包含一个int类型的变量i。1234class A&#123; int i; void b();&#125; 这里要注意的是成员函数是属于类的，成员变量（静态变量除外）是属于对象的。 访问属性在类声明中我们可以声明每个成员的访问属性（如果不声明其访问属性，默认为private），在C++中有 public、protected 和 private 这三种访问属性。声明的方法见代码1234567class A&#123;private: int i;public: void b();&#125;; public：任何地方都可以访问 protected：只有这个类和它的派生类可以访问 private：只有这个类可以访问 需要说明的是C++的这种访问限制是类的访问属性而不是对象的。1234567891011121314151617181920212223#include &lt;iostream&gt;using namespace std;class A&#123;private: int i;public: A()&#123;&#125; A(int i):i(i)&#123;&#125; void c(A *p) &#123; cout &lt;&lt; p-&gt;i &lt;&lt; endl; &#125;&#125;;int main()&#123; A a(1),b(2); a.c(&amp;b); //输出2 return 0;&#125; 像这段代码，我们拿到了b的地址就可以访问b的私有成员。 C++的这种访问限制只是编译器级别的限制，只是编译器在检查访问属性，如果骗过编译器一样可以访问其他类的对象的private的成员。Ubuntu Pastebin : https://paste.ubuntu.com/26535160/123456789101112131415161718192021222324252627282930313233#include &lt;iostream&gt;using namespace std;class B&#123;private: int i;public: B()&#123;&#125; B(int ii):i(ii)&#123;&#125;&#125;;class A&#123;private: int i;public: A()&#123;&#125; A(int ii):i(ii)&#123;&#125; void d(B *p) &#123; cout &lt;&lt; *(int*)p &lt;&lt; endl; &#125;&#125;;int main()&#123; A a(1); B b(3); a.d(&amp;b); //输出3 return 0;&#125; 这段代码中我们定义了两个类，我们把B类的对象b的地址传到A类的d函数中通过强制类型转换一样可以访问b的private的成员，这就说明了访问属性的限制只是编译器级别的，在运行时如果你拿到它的地址还是可以为所欲为的。 friend关键字上述非法的手段只是作为了解，如果在程序中确实有上面演示中的场景，C++也有其他的方案。Ubuntu Pastebin : https://paste.ubuntu.com/26535171/1234567891011121314151617181920212223242526272829303132333435#include &lt;iostream&gt;using namespace std;class B;class A&#123;private: int i;public: A()&#123;&#125; A(int ii):i(ii)&#123;&#125; void d(B *p) &#123; cout &lt;&lt; *(int*)p &lt;&lt; endl; &#125;&#125;;class B&#123;private: int i;public: B()&#123;&#125; B(int ii):i(ii)&#123;&#125; friend void A::d(B*p);&#125;;int main()&#123; A a(1); B b(3); a.d(&amp;b); //输出3 return 0;&#125; friend关键字可以声明别的类（也可以是别的函数或者别的类的成员函数）是你这个类的朋友，声明之后它就可以访问你这个类所有的成员。这样也就合法的实现了上面我们非法实现的功能。同样的friend的授权也是编译器级别的。 class和struct的区别struct在C语言中就存在，在C语言结构与数组类似，数组是存储多个相同类型的变量，结构可以存储不同类型的变量。而到了C++中struct有了更多的功能与class基本一致。只是在默认访问属性有所差别。如果在class中不声明访问属性则默认为private，在struct中默认为public。]]></content>
+      <categories>
+        <category>编程语言 - Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>类成员</tag>
+        <tag>访问属性</tag>
+        <tag>类与对象</tag>
+        <tag>class</tag>
+        <tag>struct</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[POJ 3253 Fence Repair（贪心）]]></title>
+    <url>%2F2018%2F01%2F24%2Fpoj-3253-fence-repair%2F</url>
+    <content type="text"><![CDATA[题目链接：http://poj.org/problem?id=3253 Fence RepairTime Limit: 2000MS Memory Limit: 65536K DescriptionFarmer John wants to repair a small length of the fence around the pasture. He measures the fence and finds that he needs _N_ (1 ≤ _N_ ≤ 20,000) planks of wood, each having some integer length _Li_ (1 ≤ _Li_ ≤ 50,000) units. He then purchases a single long board just long enough to saw into the _N_planks (i.e., whose length is the sum of the lengths _Li_). FJ is ignoring the “kerf”, the extra length lost to sawdust when a sawcut is made; you should ignore it, too. FJ sadly realizes that he doesn’t own a saw with which to cut the wood, so he mosies over to Farmer Don’s Farm with this long board and politely asks if he may borrow a saw. Farmer Don, a closet capitalist, doesn’t lend FJ a saw but instead offers to charge Farmer John for each of the _N_-1 cuts in the plank. The charge to cut a piece of wood is exactly equal to its length. Cutting a plank of length 21 costs 21 cents. Farmer Don then lets Farmer John decide the order and locations to cut the plank. Help Farmer John determine the minimum amount of money he can spend to create the _N_ planks. FJ knows that he can cut the board in various different orders which will result in different charges since the resulting intermediate planks are of different lengths. InputLine 1: One integer _N_, the number of planks Lines 2.._N_+1: Each line contains a single integer describing the length of a needed plank OutputLine 1: One integer: the minimum amount of money he must spend to make _N_-1 cuts Sample Input3858 Sample Output34 HintHe wants to cut a board of length 21 into pieces of lengths 8, 5, and 8. The original board measures 8+5+8=21. The first cut will cost 21, and should be used to cut the board into pieces measuring 13 and 8. The second cut will cost 13, and should be used to cut the 13 into 8 and 5. This would cost 21+13=34. If the 21 was cut into 16 and 5 instead, the second cut would cost 16 for a total of 37 (which is more than 34). 题解题目大意将一块木板切割成N块，每次切割木板时的开销为这块木板的长度。例如长度为21的木板要切成长度为5、8、8的三块木板。长21的木板切成为13和8的板时，开销为21。再将长度为13的板切成5和8的板时，开销是13。于是合计开销为34。求按照目标要求切割木板最小的开销。 解题思路可以逆向的组合木板，计算把输入的多个木板数据最终组合为一个长木板的开销，与切割开销相同。如果想要组合开销最小，每次从所有的木板中选择两个最短的组合即可。 代码Ubuntu Pastebin : https://paste.ubuntu.com/26527927/12345678910111213141516171819202122232425262728293031323334353637383940//POJ 3253 Fence Repair（贪心）//2018-01-24#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std; class Int &#123; public: int num; Int(int a):num(a) &#123;&#125; &#125;; bool operator &gt; (const Int &amp;t1, const Int &amp;t2) &#123; return t1.num &gt; t2.num; &#125; //定义一个Int类代替int，因为要将优先队列逆序需要做运算符重载int main()&#123; int n; cin &gt;&gt; n; priority_queue&lt;Int, vector&lt;Int&gt;, greater&lt;Int&gt; &gt; q; for( int i = 0; i &lt; n; i++)&#123; //把n块木板的长度入队 int temp; cin &gt;&gt; temp; q.push((Int)temp); &#125; long long sum = 0; //合计开销 while(q.size() &gt; 1)&#123; //如果还没有合成一块木板就继续合并 int minOne,minTwo; minOne = q.top().num; q.pop(); minTwo = q.top().num; q.pop(); //从队头拿出两个最短的木板 sum += (minOne + minTwo); //加上这次合并的开销 q.push((Int)(minOne+minTwo)); //将合并后的木板入队 &#125; cout &lt;&lt; sum; return 0; &#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>题解</tag>
+        <tag>DFS</tag>
+        <tag>运算符重载</tag>
+        <tag>优先队列</tag>
+        <tag>POJ</tag>
+        <tag>贪心法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[排序算法1——冒泡排序]]></title>
+    <url>%2F2018%2F01%2F18%2Fbubble-sort%2F</url>
+    <content type="text"><![CDATA[冒泡排序冒泡排序是一种实现起来很简单的排序算法，适合初学者入门。 由于它的时间复杂度较高在实际使用中很少用到。但它也有存在的价值，比如待排序列存储在一个单向链表中时其他的排序算法实现起来就相对比较困难，而且冒泡排序相等的元素不会进行交换所以它也是一种稳定的排序算法。 演示冒泡排序在每一趟排序中从上到下拿两个相同元素比较如果不符合我们的预期就交换它（比如要求从小到大排序，如果相邻两个元素不满足前面小后面大就交换它），在完成一趟排序后可以确定最下面的元素一定是最大的（按从小到大排序）。每一趟排序可以确定一个元素的位置，我们通过n-1趟排序就可以将数据排好序。 代码Ubuntu Pastebin : https://paste.ubuntu.com/26535079/12345678910111213void BubbleSort(int a[],int size)&#123; for( int i = size-1; i &gt;= 0; i--)&#123; for( int j = 0; j &lt; i; j++)&#123; if(a[j] &gt; a[j+1])&#123; swap(a[j],a[j+1]); &#125; &#125; &#125;&#125; 实际上该代码还可以再进行优化，如果在一趟排序中没有交换过就说明序列已经有序，我们就不需要再比较下去。 优化后的代码Ubuntu Pastebin : https://paste.ubuntu.com/26535087/12345678910111213void BubbleSort(int a[],int size)&#123; for( int i = size-1; i &gt;= 0; i--)&#123; bool flag = false; //记录在一趟排序中是否有交换 for( int j = 0; j &lt; i; j++)&#123; if(a[j] &gt; a[j+1])&#123; swap(a[j],a[j+1]); flag = true; &#125; &#125; if(!flag) break; &#125;&#125; 由此我们可以分析得出最好情况（已有序）下其时间复杂度为O(n)，在最坏情况（逆序）下时间复杂度为O(n^2)。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>排序算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[XUJCOJ 1065 走迷宫-2（BFS多状态无权图最短路径）]]></title>
+    <url>%2F2018%2F01%2F16%2Fxujcoj-1065-maze2%2F</url>
+    <content type="text"><![CDATA[题目链接：http://www.xujcoj.org/Home/Problems/status/pro_id/1065/ 走迷宫-2描述五毒教总坛有一个复杂的迷宫用于阻挡外人进入，但复杂的迷宫并不会阻碍草原教主通过。为了能够更快地穿越迷宫，除了走迷宫正常的上下左右四个方向一次移动一格外，草原教主随身带了一个火箭背包，可以让她能够跳过一格障碍（当然中间没有障碍也能跳），跳的方向可以是上下左右四个方向之一。例如在下图中，红色表示障碍，灰色表示通路，那么从A点可以跳到B点，也可以从A点跳到C点，但不能从C点跳到D点。不过火箭背包的能量有限，最多只能跳3次，并且火箭背包的质量很好，可以跳完一次以后立即跳下一次。假设走一格和跳一次花费的时间都是1秒，那么从指定的某个起点到达某个终点，最快需要花费多少秒时间？ 输入只有一组案例。 两个正整数m和n（m&lt;=100，n&lt;=100），表示迷宫的高度和宽度。 然后是m行数据，每行数据有n个整数，以空格相隔。每个数字代表的含义是：-1表示该点是障碍物，1表示该点是通路，0表示该点是起点或者终点。这m*n个数字中只会有2个数字是0。 输出一个整数，表示从起点到终点最快需要多少秒。如果从起点无法到达终点则输出-1。不要换行。 样例输入4 4 0 -1 1 1 1 -1 1 1 1 -1 -1 0 1 1 1 1 样例输出3 HINT从左上角的0处向右跳、向右、向下跳，到达终点。 题解解题分析此题难点在于节点有多种状态，在一个节点可能有不同的火箭背包数量。 解题思路如果没有火箭背包此题与最短路径题目差不多，对于有权图我们一般使用Dijkstra算法或SPFA算法，对于无权图我们可以考虑用BFS（广度优先搜索）去探索该图。对于节点的火箭状态在实现过程中我考虑将现实中的一个节点在程序中分为多个（在本题中为3个）递推。 代码Ubuntu Pastebin : https://paste.ubuntu.com/26527922/ 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990//XUJCOJ 1065 走迷宫-2//2018-01-15#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;queue&gt;using namespace std;int Y,X,rocket; //矩阵大小 火箭个数int map[210][210]; //节点是否有墙 可以改为bool优化内存bool collected[105][105][4]; //节点的火箭状态是否被收录struct quNode //声明一个结构方便节点的状态入队&#123; int r,c,rocketNums,time; //包含四个参数：位置rc、剩余火箭个数、已用时间 quNode(int rr,int cc,int timee,int rocketNumss):r(rr),c(cc),rocketNums(rocketNumss),time(timee) &#123; &#125;; quNode()&#123;&#125; //以上为该结构的构造函数&#125;;queue&lt;quNode&gt; Queue;struct Dir //四个方向方便后期用循环遍历一个节点的旁边的节点&#123; int dr,dc;&#125;dir[4] = &#123; &#123;0,1&#125;,&#123;0,-1&#125;,&#123;1,0&#125;,&#123;-1,0&#125;&#125;,dirJump[4] = &#123; &#123;0,2&#125;,&#123;0,-2&#125;,&#123;2,0&#125;,&#123;-2,0&#125;&#125;;//dir为走一格的情况 dirJump为跳一次的情况（走两个） int main()&#123; scanf("%d%d",&amp;Y,&amp;X); //输入矩阵大小 rocket = 3; //设置火箭个数 quNode origin,finish; //声明两个可入队节点保存起点和终点 memset(collected,true,sizeof(collected)); bool flag = true; //由于起点终点都为0 设个flag分开保存它们 for( int i = 1;i &lt;= Y; i++)&#123; for( int j = 1; j &lt;= X; j++)&#123; scanf("%d",&amp;map[i][j]); if(map[i][j] == 0 &amp;&amp; flag)&#123; //保存起点 origin = quNode(i,j,0,rocket); flag = false; &#125;else if(map[i][j] == 0 &amp;&amp; !flag)&#123; //保存终点 map[i][j] = 1; finish = quNode(i,j,-1,-1); &#125; for( int t = 0; t &lt;= rocket; t++) //初始化所有节点的所有状态都为未收录 collected[i][j][t] = false; &#125; &#125; collected[origin.r][origin.c][rocket] = true; //将起点收录 Queue.push(origin); //将起点入队 while(!Queue.empty())&#123; //如果队列为空说明图被完全遍历退出循环 quNode nowP = Queue.front(); //从队头拿一个节点 if( nowP.r == finish.r &amp;&amp; nowP.c == finish.c)&#123; //如果是终点则输出最短时间并结束程序 printf("%d",nowP.time); return 0; &#125; Queue.pop(); //队头元素出队 for( int i = 0;i &lt; 4; i++)&#123; //遍历该节点四个方向 //走一步 int newR = nowP.r + dir[i].dr; //四个方向的rc int newC = nowP.c + dir[i].dc; //如果该节点未被收录且不为墙 就录该节点 将time+1 将其入队 if(map[newR][newC] == 1 &amp;&amp; !collected[newR][newC][nowP.rocketNums])&#123; collected[newR][newC][nowP.rocketNums] = true; Queue.push(quNode(newR,newC,nowP.time+1,nowP.rocketNums)); &#125; //跳一步 int newRJump = nowP.r + dirJump[i].dr; int newCJump = nowP.c + dirJump[i].dc; //如果该节点未被收录且火箭还有剩余 就收录该节点 将time+1 将火箭数-1 将其入队 if((map[newRJump][newCJump] == -1 || map[newRJump][newCJump] == 1) &amp;&amp; nowP.rocketNums &gt; 0 &amp;&amp; !collected[newRJump][newCJump][nowP.rocketNums-1])&#123; collected[newRJump][newCJump][nowP.rocketNums-1] = true; Queue.push(quNode(newRJump,newCJump,nowP.time+1,nowP.rocketNums-1)); &#125; &#125; &#125; printf("%d",-1); //如果没有在while循环中return 说明没有遍历到终点 说明不连通 输出-1 return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>题解</tag>
+        <tag>BFS</tag>
+        <tag>图</tag>
+        <tag>最短路径</tag>
+        <tag>XUJCOJ</tag>
+        <tag>多状态</tag>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[百练 2815 城堡问题（DFS极大连通子图）]]></title>
+    <url>%2F2018%2F01%2F15%2Fbl-2815%2F</url>
+    <content type="text"><![CDATA[题目链接：http://bailian.openjudge.cn/practice/2815/ 城堡问题总时间限制：1000ms 内存限制：65536kB 描述123456789101112131415 1 2 3 4 5 6 7 #############################1 # | # | # | | # #####---#####---#---#####---#2 # # | # # # # # #---#####---#####---#####---#3 # | | # # # # # #---#########---#####---#---#4 # # | | | | # # ############################# (图 1) # = Wall | = No wall \- = No wall 图1是一个城堡的地形图。请你编写一个程序，计算城堡一共有多少房间，最大的房间有多大。城堡被分割成mn(m≤50，n≤50)个方块，每个方块可以有0~4面墙。 输入程序从标准输入设备读入数据。第一行是两个整数，分别是南北向、东西向的方块数。在接下来的输入行里，每个方块用一个数字(0≤p≤50)描述。用一个数字表示方块周围的墙，1表示西墙，2表示北墙，4表示东墙，8表示南墙。每个方块用代表其周围墙的数字之和表示。城堡的内墙被计算两次，方块(1,1)的南墙同时也是方块(2,1)的北墙。输入的数据保证城堡至少有两个房间。 输出城堡的房间数、城堡中最大房间所包括的方块数。结果显示在标准输出设备上。 样例输入4711 6 11 6 3 10 67 9 6 13 5 15 51 10 12 7 13 7 513 11 10 8 10 12 13 样例输出59 题解解题分析这是一个典型的求极大连通子图的问题，可以把每个方块当做一个图节点，没有墙的方向有一条边。 解题思路因为要求出极大连通子图的节点个数我们考虑用DFS（深度优先搜索）递归的去探索每个房间得出面积。探索完一个房间，看有没有未被访问过的方块，如果有说明一定存在另一个房间我们再用DFS的方法去探索它，直至所有的节点都被访问。 代码Ubuntu Pastebin : https://paste.ubuntu.com/26527902/12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364//百练 2815 城堡问题（DFS极大连通子图）//2018-01-15#include&lt;iostream&gt;using namespace std;int mapNode[55][55]; //图节点数组，保存墙信息bool collected[55][55]; //每个节点是否被访问int roomNum; //房间数量int roomNowArea; //当前搜索的房间的面积void dfs(int x,int y) &#123; if(collected[x][y])&#123; //如果该节点已被访问就返回上一层 return; &#125; collected[x][y] = true; //访问它 roomNowArea++; //找到一个未被访问的节点将当前房间面积加一 /* 因为1，2，4，8的二进制表达分别为：0001、0010、0100、1000 所以可以运用位运算看它的那一位上是不是1， 如果不是则说明没有墙，可以向这个方向继续搜索。 */ if((mapNode[x][y] &amp; 2) == 0) dfs(x-1,y); //如果没有北墙就搜索左边 if((mapNode[x][y] &amp; 8) == 0) dfs(x+1,y); //南墙 if((mapNode[x][y] &amp; 1) == 0) dfs(x,y-1); //西墙 if((mapNode[x][y] &amp; 4) == 0) dfs(x,y+1); //东墙&#125;int main()&#123; int x,y; cin &gt;&gt; x &gt;&gt; y; for( int i = 0; i &lt; x; i++)&#123; for( int j = 0; j &lt; y; j++)&#123; cin &gt;&gt; mapNode[i][j]; collected[i][j] = false; &#125; &#125; //以上为输入阶段 int maxRoomArea = 0; //最大房间面积 roomNum = 0; //房间数量初始化 for( int i = 0; i &lt; x; i++)&#123; for( int j = 0; j &lt; y; j++)&#123; if(!collected[i][j])&#123; //找到没有被访问的节点 roomNum++; //找到一个新的就说明有一个新的房间 roomNowArea = 0; //重置当前房间的面积 dfs(i,j); //从该节点开始搜索该房间 if(roomNowArea &gt; maxRoomArea) maxRoomArea = roomNowArea; //保存最大房间面积 &#125; &#125; &#125; cout &lt;&lt; roomNum &lt;&lt; endl //输出 &lt;&lt; maxRoomArea; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>算法</tag>
+        <tag>题解</tag>
+        <tag>百练</tag>
+        <tag>DFS</tag>
+        <tag>极大连通子图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[常用bash命令]]></title>
+    <url>%2F2018%2F01%2F13%2Fbash%2F</url>
+    <content type="text"><![CDATA[关于文本的程序 命令 解释 cp 复制一个或多个文件 diff 显示两个文件的不同之处 file 显示与文件内容相关的信息 grep 在文件中查找某个字符串 head 显示文件开头部分的内容 lpq 显示在打印队列中的作业 lpr 将文件放入打印队列中 lprm 从打印队列中删除某个作业 mv 将文件重命名或移动到其他目录 sort 将文件按行排序 tail 显示文件末尾的内容 uniq 显示文件内容，忽略连续重复的行 文件压缩、解压缩、归档程序 命令 解释 bunzip2 将 bzip 压缩的文件恢复为原来大小和格式 bzcat 显示 bzip2 压缩过的文件 bzip2 压缩文件 compress 压缩文件（但效率没有 bzip2 或 gzip 高） gunzip 将 gzip 压缩的文件恢复为原来大小和格式 gzip 压缩文件 unzip 解压 zip 包，与WindowsPKZIP 兼容 zcat 显示 gzip 压缩过的文件 zip 创建zip包，与 Windows PKZIP 兼容 tar 将归档文件打包和解包 定位程序 命令 解释 locate/mlocate 在本地系统上搜索文件 whereis 显示实用程序、源代码或 man 页的完整路径名 which 显示可运行命令的完整路径名 显示系统和用户信息的程序 命令 解释 finger 显示用户的详细信息，包括全名 free 显示内存使用信息 hostname 显示本地系统名 uptime 显示系统负载和运行信息 w 显示登录本地系统的用户的详细信息 who 显示登录本地系统的用户的信息 用户通信程序 命令 解释 mesg 接受或拒绝 write 发送的消息 write 给登录的用户发送消息 其他程序 命令 解释 date 显示当前日期和时间 echo 复制自身参数并在屏幕上显示]]></content>
+      <categories>
+        <category>泛 - 计算机</category>
+      </categories>
+      <tags>
+        <tag>Bash</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[POJ 2956 Repeatless Numbers（枚举）]]></title>
+    <url>%2F2018%2F01%2F13%2Fpoj-2956-repeatless-numbers%2F</url>
+    <content type="text"><![CDATA[题目链接：http://poj.org/problem?id=2956 Repeatless NumbersTime Limit: 1000MS Memory Limit: 65536K DescriptionA repeatless number is a positive integer containing no repeated digits. For instance, the first 25 repeatless numbers are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, … Given an integer _n_, your goal is to compute the _n_th repeatless number. InputThe input test file will contain multiple test cases, each consisting of a single line containing the integer _n_, where 1 ≤ _n_ ≤ 1000000. The end-of-file is marked by a test case with _n_ = 0 and should not be processed. OutputFor each input case, the program should print the _n_th repeatless number on a single line. Sample Input25100000 Sample Output2726057 题解题目大意每位的数字都不相同的数字为Repeatless Number，输入一个数n输出第n个这种数字的值。 解题分析可以考虑一个一个数字去尝试看它是不是Repeatless Numbers，遇到第n个就输出并跳出循环。然而这样会超时。我们考虑用DFS枚举数字的每位打表实现。 解题思路从小到大枚举每一位，前面可用0占位，先进行打表，读入每个n直接输出表中第n项。具体的实现见代码，有详细注释。 代码Ubuntu Pastebin : https://paste.ubuntu.com/26527896/123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960//POJ 2956 Repeatless Numbers（枚举）//2018-01-13#include &lt;iostream&gt;#define max 10000000 //打表的范围using namespace std;int a[max+10]; //第n个数字保存在a[n]中bool digitMap[10]; //10个数字是否可用int n = 0; //从0开始遍历void dfs(int nowNum,int digit,int flag) //参数表中 nowNum数字的值 nowNum枚举到第几位了，0是否可以占位使用&#123; //如果flag为1位0不能占位使用 0时反之 if(n &gt; max)&#123; //如果n大于最大值就不要继续打表了 跳出函数 return; &#125; if(digit == 8)&#123; //当位数等于8时找到一个8位（因为我们要打表到max，max为8位）的没有重复位的数 a[n++] = nowNum; //nowNum为第n个符合要求的数字 return; &#125; for( int i = 0; i &lt; 10; i++)&#123; //遍历0-9十个数字在当前位上的情况 if(i == 0 &amp;&amp; flag == 0)&#123; //如果该位为0且0可以继续站位使用 dfs(0,digit+1,0); &#125;else&#123; if(digitMap[i])&#123; //如果这数还没被用过 digitMap[i] = false; //标记它为用了 dfs(nowNum*10+i,digit+1,1); //递归解决后面的位 digitMap[i] = true; //把该数字标记为没用过 继续遍历 （回溯法） &#125; &#125; &#125;&#125;int main()&#123; for( int i = 0; i &lt; 10; i++)&#123; digitMap[i] = true; //将10个数字都标记为可用 &#125; dfs(0,0,0); //从0开始遍历 while(true)&#123; int m; cin &gt;&gt; m; if(m == 0)&#123; //如果输入数据为0 退出 break; &#125; cout &lt;&lt; a[m] &lt;&lt; endl; //输出表中的值 &#125; return 0;&#125; 一点思考我认为此题可用dp不用递归的解决，我准备之后尝试一下，之后也会在本篇文章中继续更新。 参考资料 http://blog.sina.com.cn/s/blog_738dc7850101mmd8.html http://blog.csdn.net/u011686226/article/details/14497975]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>题解</tag>
+        <tag>DFS</tag>
+        <tag>POJ</tag>
+        <tag>枚举法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LeetCode 1 Two Sum]]></title>
+    <url>%2F2018%2F01%2F13%2Fleetcode-1-two-sum%2F</url>
+    <content type="text"><![CDATA[题目链接：https://leetcode.com/problems/two-sum/description/ Two SumGiven an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same element twice. Example: Given nums = [2, 7, 11, 15], target = 9, Because nums[0] + nums[1] = 2 + 7 = 9,return [0, 1]. 题解题目大意给出一个整数数组，和一个整数，数组中存在两个数的和等于那个给定的整数，以一个两单元数组的形式返回那两个数在数组中的下标。 解题分析此题很简单，只需要用二重循环枚举所有的和的情况就可以实现。 代码Ubuntu Pastebin : https://paste.ubuntu.com/26527959/123456789101112131415161718192021class Solution &#123;public: vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) &#123; vector&lt;int&gt;a(2); cout &lt;&lt; nums.size(); bool find = true; for( int i = 0; i &lt; nums.size()&amp;&amp;find; i++)&#123; for( int j = 0; j &lt; nums.size()&amp;&amp;find; j++)&#123; if(i == j)&#123; continue; &#125; if(nums[i]+nums[j] == target)&#123; a[0] = j; a[1] = i; find = false; &#125; &#125; &#125; return a; &#125;&#125;; 优化此题如果以简单枚举的方式实现我们很容易得出它的时间复杂度为O(n^2)。当然我们有更好的实现，可以把时间复杂度降到O(n)。把元素存到一个hash_map中，单重循环遍历（target-每个元素）是否在hash_map中存在，如果存在则返回它们的下标。hash_map.find()是时间复杂度为O(1)乘上数组的遍历时间复杂度为O(n)。这样优化可以把运行时间从319 ms降到6 ms。 优化后的代码Ubuntu Pastebin : https://paste.ubuntu.com/26527963/123456789101112131415161718class Solution &#123;public: vector&lt;int&gt; twoSum(vector&lt;int&gt; &amp;numbers, int target) &#123; unordered_map&lt;int, int&gt; hash; vector&lt;int&gt; result; for (int i = 0; i &lt; numbers.size(); i++) &#123; int numberToFind = target - numbers[i]; if (hash.find(numberToFind) != hash.end()) &#123; result.push_back(hash[numberToFind] ); result.push_back(i ); return result; &#125; hash[numbers[i]] = i; &#125; return result; &#125;&#125;; 参考资料： 《LEETCODE 50 COMMON INTERVIEW QUESTIONS》hash_map.find()介绍：http://www.cplusplus.com/reference/unordered_map/unordered_map/find/ hash_map与map的性能分析：http://blog.csdn.net/blues1021/article/details/45054159]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>优化</tag>
+        <tag>LeetCode</tag>
+        <tag>hash_map</tag>
+        <tag>map</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[POJ 1753 Flip Game（DFS枚举）]]></title>
+    <url>%2F2018%2F01%2F13%2Fpoj-1753-flip-game%2F</url>
+    <content type="text"><![CDATA[题目链接http://poj.org/problem?id=1753 Flip GameTime Limit: 1000MS Memory Limit: 65536K DescriptionFlip game is played on a rectangular 4x4 field with two-sided pieces placed on each of its 16 squares. One side of each piece is white and the other one is black and each piece is lying either it’s black or white side up. Each round you flip 3 to 5 pieces, thus changing the color of their upper side from black to white and vice versa. The pieces to be flipped are chosen every round according to the following rules: Choose any one of the 16 pieces. Flip the chosen piece and also all adjacent pieces to the left, to the right, to the top, and to the bottom of the chosen piece (if there are any). Consider the following position as an example: bwbw wwww bbwb bwwb Here “b” denotes pieces lying their black side up and “w” denotes pieces lying their white side up. If we choose to flip the 1st piece from the 3rd row (this choice is shown at the picture), then the field will become: bwbw bwww wwwb wwwb The goal of the game is to flip either all pieces white side up or all pieces black side up. You are to write a program that will search for the minimum number of rounds needed to achieve this goal. InputThe input consists of 4 lines with 4 characters “w” or “b” each that denote game field position. OutputWrite to the output file a single integer number - the minimum number of rounds needed to achieve the goal of the game from the given position. If the goal is initially achieved, then write 0. If it’s impossible to achieve the goal, then write the word “Impossible” (without quotes). Sample Inputbwwbbbwbbwwbbwww Sample Output4 题解题目大意有4*4的棋盘，每个棋子有黑白两种颜色，当把一个棋子的颜色反转(黑-&gt;白或者白-&gt;黑)时，其周围上下左右(如果存在的话)的棋子的颜色也被反转，问至少翻转几次棋子可以将棋盘上的棋子变为同一种颜色。 解题分析 一个棋子第二次被翻转会抵消第一次翻转一个棋子的效果，一个棋子多次翻转是无意义的，每个棋子只有翻转和不翻转两种情况。 棋子被翻转的先后顺序对结果无影响。 解题思路棋盘上一共有16个棋子，我们最多只能翻转16次棋子，我们可以考虑枚举翻转的次数，之后在给定翻转次数的情况下枚举被翻转的棋子。 此题从枚举思路与XUJCOJ 16级线上比赛（2017/03/05）4:老徐追妹纸v2 的思路基本一致，可以当做额外练习。题目链接：http://www.xujcoj.org/Home/Contest/problem/cid/63/match_id/4/ctype/0 代码Ubuntu Pastebin : https://paste.ubuntu.com/26527872/123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103//POJ 1753 Flip Game（DFS枚举）//2018-01-12#include &lt;iostream&gt;using namespace std;bool a[4][4]; //棋盘数组bool ok = false; //是否找到方案int step; //当前要枚举的翻转次数bool isComplete() //检查是否全为同色&#123; bool re = true; for( int i = 0; i &lt; 4 &amp;&amp; re; i++)&#123; for( int j = 0; j &lt; 4 &amp;&amp; re; j++)&#123; if(a[i][j] != a[0][0])&#123; re = false; &#125; &#125; &#125; return re;&#125;void filp(int x,int y) //翻转一个棋子&#123; a[x][y] = !a[x][y]; //翻转它本身 if(x &gt; 0)&#123; //左边的棋子如果存在则翻转它 a[x-1][y] = !a[x-1][y]; &#125; if(x &lt; 3)&#123; //右边 a[x+1][y] = !a[x+1][y]; &#125; if(y &gt; 0)&#123; //上边 a[x][y-1] = !a[x][y-1]; &#125; if(y &lt; 3)&#123; //下边 a[x][y+1] = !a[x][y+1]; &#125;&#125;void dfs(int x,int y,int nowStep)//当前枚举到的棋子的坐标 nowStep为已经翻转了多少棋子&#123; if(nowStep == step)&#123; //如果翻转棋子的次数达到当前要枚举的翻转次数 ok = isComplete(); //棋盘是否同色 return; &#125; if(y == 4 || ok)&#123; //如果棋盘被遍历完或者已找到方案就退出函数 return; &#125; //以下是一个用递归代替n层循环的思路 filp(x,y); //如果翻转当前棋子 if(x &lt; 3)&#123; //遍历其他棋子 从左到右从上到下 dfs(x+1,y,nowStep+1); &#125;else&#123; dfs(0,y+1,nowStep+1); &#125; filp(x,y); //如果不翻转当前棋子 再翻转一次当前棋子抵消上次翻转的效果继续枚举 if(x &lt; 3)&#123; dfs(x+1,y,nowStep); &#125;else&#123; dfs(0,y+1,nowStep); &#125;&#125;int main()&#123; for( int i = 0; i &lt; 4; i++)&#123; for( int j = 0; j &lt; 4; j++)&#123; char temp; cin &gt;&gt; temp; if(temp == 'b')&#123; a[i][j] = true; &#125;else &#123; a[i][j] = false; &#125; &#125; &#125; //以上为输入阶段 黑色在数组中为true白色为false int i; for( i = 0; i &lt;= 16; i++)&#123; step = i; dfs(0,0,0); //从左上角的棋子开始枚举 if(ok)&#123; //如果找到一种方案 break; &#125; &#125; if(i &lt;= 16)&#123; //如果i小于等于16说明找到一种方案 输出步数即可 cout &lt;&lt; i; &#125;else&#123; //如果没有找到输出"Impossible" cout &lt;&lt; "Impossible"; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>题解</tag>
+        <tag>DFS</tag>
+        <tag>POJ</tag>
+        <tag>枚举法</tag>
+      </tags>
+  </entry>
+</search>
