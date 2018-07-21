@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="5gXbjwP2M2lldOIIKUxUCHGm0ZeANFXrPV6LcJ_UpZo" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Markdown,标记语言,写作工具," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Microwave. Five minutes." type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Markdown 是什么？ Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的 XHTML（或者 HTML ）文档”。  注意！Markdown是标记语言，而不是样式表。它只是在标注说明文本中每一块是什么。比如标题、引用、代码。最终它显示的是什么样子的取决于你浏览它的工具，如果转成 HTML">
+<meta name="keywords" content="Markdown,标记语言,写作工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown 指南">
+<meta property="og:url" content="https://pazyx.xyz/2018/07/15/markdown_guide/index.html">
+<meta property="og:site_name" content="Microwave. Five minutes.">
+<meta property="og:description" content="Markdown 是什么？ Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的 XHTML（或者 HTML ）文档”。  注意！Markdown是标记语言，而不是样式表。它只是在标注说明文本中每一块是什么。比如标题、引用、代码。最终它显示的是什么样子的取决于你浏览它的工具，如果转成 HTML">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://pazyx.xyz/2018/07/15/markdown_guide/markdown_basic/logo.png">
+<meta property="og:updated_time" content="2018-07-20T07:38:21.910Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Markdown 指南">
+<meta name="twitter:description" content="Markdown 是什么？ Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的 XHTML（或者 HTML ）文档”。  注意！Markdown是标记语言，而不是样式表。它只是在标注说明文本中每一块是什么。比如标题、引用、代码。最终它显示的是什么样子的取决于你浏览它的工具，如果转成 HTML">
+<meta name="twitter:image" content="https://pazyx.xyz/2018/07/15/markdown_guide/markdown_basic/logo.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpI"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pazyx.xyz/2018/07/15/markdown_guide/"/>
+
+
+
+
+
+  <title>Markdown 指南 | Microwave. Five minutes.</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-121622821-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Microwave. Five minutes.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">他大概会说你想得太多</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-code">
+          <a href="/code" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Code
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-other">
+          <a href="/other" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Other
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-demo">
+          <a href="/demo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Demo
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pazyx.xyz/2018/07/15/markdown_guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pazyx.xyz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EBFFFA.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Microwave. Five minutes.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Markdown 指南</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-15T00:53:18+08:00">
+                2018-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/泛/" itemprop="url" rel="index">
+                    <span itemprop="name">泛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/15/markdown_guide/" class="leancloud_visitors" data-flag-title="Markdown 指南">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  790
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Markdown-是什么？"><a href="#Markdown-是什么？" class="headerlink" title="Markdown 是什么？"></a>Markdown 是什么？</h1><blockquote>
+<p><strong>Markdown</strong> 是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的 XHTML（或者 HTML ）文档”。</p>
+</blockquote>
+<p><strong>注意！</strong>Markdown是标记语言，而不是样式表。<strong>它只是在标注说明文本中每一块是什么。</strong>比如标题、引用、代码。最终它显示的是什么样子的取决于你浏览它的工具，如果转成 HTML 那就由浏览器决定，你想改变它的样式就需要添加 CSS（层叠样式表）。</p>
+<h1 id="我为什么学-Markdown？"><a href="#我为什么学-Markdown？" class="headerlink" title="我为什么学 Markdown？"></a>我为什么学 Markdown？</h1><p>主要是博客写作需要用到，用 Markdown 写作最大的好处是自由，你的文本是独立的。如果你使用WordPress 自带的编辑器写作，它的可移植性是很低的，导出 XML 文件后转换成其他格式后很多地方都需要手动调整。还有就是项目中 Readme 文件一般用 Markdown 写，你写作时不需要任何鼠标操作。</p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一级标题</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br><span class="line"><span class="section">### 三级标题</span></span><br><span class="line"><span class="section">#### 四级标题</span></span><br><span class="line"><span class="section">##### 五级标题</span></span><br><span class="line"><span class="section">###### 六级标题</span></span><br></pre></td></tr></table></figure>
+<h2 id="文本基础样式"><a href="#文本基础样式" class="headerlink" title="文本基础样式"></a>文本基础样式</h2><h3 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**加粗**</span></span><br></pre></td></tr></table></figure>
+<p><strong>效果：**</strong>加粗**</p>
+<h3 id="斜体"><a href="#斜体" class="headerlink" title="斜体"></a>斜体</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**斜体**</span></span><br></pre></td></tr></table></figure>
+<p><strong>效果：*</strong>斜体*</p>
+<h3 id="斜体加粗"><a href="#斜体加粗" class="headerlink" title="斜体加粗"></a>斜体加粗</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">***斜体加粗**</span>*</span><br></pre></td></tr></table></figure>
+<p><strong>效果：***</strong>斜体加粗***</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~删除~~</span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong><del>删除</del></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="quote">&gt; 引用的内容</span></span><br><span class="line">&gt;&gt; 引用的内容</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 引用的内容</span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong></p>
+<blockquote>
+<p>引用的内容</p>
+<blockquote>
+<p>引用的内容</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>引用的内容</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>可以多级嵌套引用</p>
+<h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">----</span><br><span class="line"><span class="emphasis">***</span></span><br><span class="line"><span class="strong">*****</span></span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong></p>
+<hr>
+<hr>
+<hr>
+<hr>
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">超链接名</span>](<span class="link">超链接地址 "超链接title"</span>)</span><br><span class="line">title可缺省</span><br><span class="line"><span class="strong">**效果：**</span></span><br><span class="line">[<span class="string">Home</span>](<span class="link">https//pazyx.xyz "pazyx"</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong><br><a href="https//pazyx.xyz" title="pazyx">Home</a></p>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">图片alt</span>](<span class="link">图片地址 ''图片title''</span>)</span><br><span class="line">title可缺省</span><br><span class="line"><span class="strong">**效果：**</span></span><br><span class="line">![<span class="string">logo</span>](<span class="link">/markdown_basic/logo.png ''blogLogo''</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong><br><img src="/2018/07/15/markdown_guide/markdown_basic/logo.png" alt="logo" title="&#39;blogLogo&#39;"><br>图片地址可以是相对地址也可以是超链接</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>列表内容</span><br><span class="line"><span class="bullet">+ </span>列表内容</span><br><span class="line"><span class="bullet">* </span>列表内容</span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong></p>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.列表内容</span><br><span class="line">2.列表内容</span><br><span class="line">3.列表内容</span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong></p>
+<p>1.列表内容<br>2.列表内容<br>3.列表内容</p>
+<h3 id="列表嵌套"><a href="#列表嵌套" class="headerlink" title="列表嵌套"></a>列表嵌套</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>一级列表内容</span><br><span class="line">  - 二级列表内容</span><br><span class="line"><span class="code">    - 三级列表内容</span></span><br><span class="line"><span class="code">      - 四级列表内容</span></span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong></p>
+<ul>
+<li>一级列表内容<ul>
+<li>二级列表内容<ul>
+<li>三级列表内容<ul>
+<li>四级列表内容</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>两级之间差两个空格即可</p>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|表头|表头|表头|</span><br><span class="line">| - | :-: | :- |</span><br><span class="line">|内容|内容|内容|</span><br><span class="line">|内容|内容|内容|</span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong></p>
+<table>
+<thead>
+<tr>
+<th>表头</th>
+<th>表头</th>
+<th>表头</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内容</td>
+<td>内容</td>
+<td>内容</td>
+</tr>
+<tr>
+<td>内容</td>
+<td>内容</td>
+<td>内容</td>
+</tr>
+</tbody>
+</table>
+<p>默认为左对齐，在 “-” 右边加上 “:” 为右对齐，在 “-” 两侧同时加上 “:” 为居中对齐。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="行内代码"><a href="#行内代码" class="headerlink" title="行内代码"></a>行内代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">行内 `code` 行内</span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong></p>
+<p>行内 <code>code</code> 行内</p>
+<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">\<span class="code">`\`</span>\`cpp</span><br><span class="line"><span class="section">#include &lt;iostream&gt;</span></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"><span class="code">    std::cout &lt;&lt; "Hello World." &lt;&lt; endl;</span></span><br><span class="line"><span class="code">    return 0;</span></span><br><span class="line">&#125;</span><br><span class="line">\<span class="code">`\`</span>\`</span><br></pre></td></tr></table></figure>
+<p><strong>效果：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">markdown基本语法</a></li>
+<li><a href="https://www.jianshu.com/p/2df05f279331" target="_blank" rel="noopener">Markdown插入表格语法</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="noopener">Markdown维基百科</a></li>
+<li><a href="http://www.markdown.cn" target="_blank" rel="noopener">Markdown中文官网</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+
+
+
+
+
+
+
+<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/07/15/markdown_guide/">Markdown 指南</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
+  <p><span>发布时间:</span>2018年07月15日 - 00:07</p>
+  <p><span>最后更新:</span>2018年07月20日 - 15:07</p>
+  <p><span>原始链接:</span><a href="/2018/07/15/markdown_guide/" title="Markdown 指南">https://pazyx.xyz/2018/07/15/markdown_guide/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://pazyx.xyz/2018/07/15/markdown_guide/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-SA 4.0)">署名-非商业性使用-相同方式分享 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){SA
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+</div>
+
+
+
+
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="pazyx.xyz 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="pazyx.xyz 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+
+
+
+
+
+            <a href="/tags/Markdown/" rel="tag"><i class="fa fa-tag"></i> Markdown</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/标记语言/" rel="tag"><i class="fa fa-tag"></i> 标记语言</a>
+
+
+
+
+
+          
+
+
+
+
+
+            <a href="/tags/写作工具/" rel="tag"><i class="fa fa-tag"></i> 写作工具</a>
+
+
+
+
+
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/14/mathematical_modeling_dp/" rel="next" title="数学建模——动态规划">
+                <i class="fa fa-chevron-left"></i> 数学建模——动态规划
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/21/mac_os_disaster/" rel="prev" title="macOS 灾难">
+                macOS 灾难 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/EBFFFA.png"
+                alt="pazyx.xyz" />
+            
+              <p class="site-author-name" itemprop="name">pazyx.xyz</p>
+              <p class="site-description motion-element" itemprop="description">他大概会说你想得太多</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">131</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pa-zyx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/9953731/jntye" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="pazyx728@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://wszyx.org/" title="wszyx.org" target="_blank">wszyx.org</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wdxtub.com" title="小土刀" target="_blank">小土刀</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://120.79.224.249" title="金明的ACM小队" target="_blank">金明的ACM小队</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://biji.io" title="设计笔记" target="_blank">设计笔记</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Markdown-是什么？"><span class="nav-number">1.</span> <span class="nav-text">Markdown 是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我为什么学-Markdown？"><span class="nav-number">2.</span> <span class="nav-text">我为什么学 Markdown？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#语法"><span class="nav-number">3.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标题"><span class="nav-number">3.1.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本基础样式"><span class="nav-number">3.2.</span> <span class="nav-text">文本基础样式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加粗"><span class="nav-number">3.2.1.</span> <span class="nav-text">加粗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#斜体"><span class="nav-number">3.2.2.</span> <span class="nav-text">斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#斜体加粗"><span class="nav-number">3.2.3.</span> <span class="nav-text">斜体加粗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">3.2.4.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">3.3.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分割线"><span class="nav-number">3.4.</span> <span class="nav-text">分割线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超链接"><span class="nav-number">3.5.</span> <span class="nav-text">超链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片"><span class="nav-number">3.6.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">3.7.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无序列表"><span class="nav-number">3.7.1.</span> <span class="nav-text">无序列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序列表"><span class="nav-number">3.7.2.</span> <span class="nav-text">有序列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表嵌套"><span class="nav-number">3.7.3.</span> <span class="nav-text">列表嵌套</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格"><span class="nav-number">3.8.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.9.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行内代码"><span class="nav-number">3.9.1.</span> <span class="nav-text">行内代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块"><span class="nav-number">3.9.2.</span> <span class="nav-text">代码块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pazyx.xyz</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">全站字数统计&#58;</span>
+    
+    <span title="全站字数统计">48.0k</span>
+  
+
+<!--
+
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://pazyx.xyz/2018/07/15/markdown_guide/';
+          this.page.identifier = '2018/07/15/markdown_guide/';
+          this.page.title = 'Markdown 指南';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://pazyx-xyz.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7cTegp3KYMtc2W0V2u63CUlJ-gzGzoHsz", "bDS8nx2LWwUeyou9BfjypwGu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

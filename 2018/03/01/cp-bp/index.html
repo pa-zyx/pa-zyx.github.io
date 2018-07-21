@@ -90,18 +90,18 @@
 
 
 
-<meta name="description" content="问题有一个容量为 V 的背包和 N 种物品。每种物品的价值为 Wi 体积为 Ci ，每种物品有无限件，问最大背包价值。 分析此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是 ⌊V/Ci⌋ 件。 由 动态规划B0——01背包 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。F[i, v] = max{ F[i">
+<meta name="description" content="问题有一个容量为 V 的背包和 N 种物品。每种物品的价值为 \(W_i\) 体积为 \(C_i\) ，每种物品有无限件，问最大背包价值。 分析此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是\( ⌊V/C_i⌋\) 件。 由 动态规划B0——01背包 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。\[F[">
 <meta name="keywords" content="算法,动态规划,背包问题,完全背包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态规划B2——完全背包">
 <meta property="og:url" content="https://pazyx.xyz/2018/03/01/cp-bp/index.html">
 <meta property="og:site_name" content="Microwave. Five minutes.">
-<meta property="og:description" content="问题有一个容量为 V 的背包和 N 种物品。每种物品的价值为 Wi 体积为 Ci ，每种物品有无限件，问最大背包价值。 分析此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是 ⌊V/Ci⌋ 件。 由 动态规划B0——01背包 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。F[i, v] = max{ F[i">
+<meta property="og:description" content="问题有一个容量为 V 的背包和 N 种物品。每种物品的价值为 \(W_i\) 体积为 \(C_i\) ，每种物品有无限件，问最大背包价值。 分析此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是\( ⌊V/C_i⌋\) 件。 由 动态规划B0——01背包 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。\[F[">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-04T17:33:45.119Z">
+<meta property="og:updated_time" content="2018-07-14T10:34:04.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态规划B2——完全背包">
-<meta name="twitter:description" content="问题有一个容量为 V 的背包和 N 种物品。每种物品的价值为 Wi 体积为 Ci ，每种物品有无限件，问最大背包价值。 分析此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是 ⌊V/Ci⌋ 件。 由 动态规划B0——01背包 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。F[i, v] = max{ F[i">
+<meta name="twitter:description" content="问题有一个容量为 V 的背包和 N 种物品。每种物品的价值为 \(W_i\) 体积为 \(C_i\) ，每种物品有无限件，问最大背包价值。 分析此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是\( ⌊V/C_i⌋\) 件。 由 动态规划B0——01背包 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。\[F[">
 
 
 
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,049
+                  1,052
                 </span>
               
 
@@ -423,16 +423,16 @@
       
 
       
-        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>有一个容量为 V 的背包和 N 种物品。每种物品的价值为 Wi 体积为 Ci ，每种物品有无限件，问最大背包价值。</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是 ⌊V/Ci⌋ 件。 由 <a href="http://wszyx.org/2018/02/01-bp/" target="_blank" rel="noopener">动态规划B0——01背包</a> 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。<br><strong>F[i, v] = max{ F[i − 1, v − kCi] + kWi | 0 ≤ kCi ≤ v }</strong><br>只需在01背包代码的基础上加一层循环即可，对于状态 F[i, v] 求解的时间复杂度为 O(V/Ci) 所以总的时间复杂度为 O(N∑V/Ci) ，这种解法实际上就是把每种物品拆分为多个物品转化为01背包。</p>
-<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><h2 id="0-预处理数据"><a href="#0-预处理数据" class="headerlink" title="0 预处理数据"></a>0 预处理数据</h2><p>若两件物品 i、j 满足 Ci ≤ Cj 且 Wi ≥ Wj ，则将可以将物品 j 直接去掉，不用考虑。在进入主算法前预处理一遍物品数据即可。对于随机生成的数据，这个方法往往会大大减少物品的件数，从而加快速度。然而这个并不能改善最坏情况的复杂度，因为有可能特别设计的数据可以一件物品也去不掉。 </p>
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>有一个容量为 V 的背包和 N 种物品。每种物品的价值为 \(W_i\) 体积为 \(C_i\) ，每种物品有无限件，问最大背包价值。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是\( ⌊V/C_i⌋\) 件。 由 <a href="http://wszyx.org/2018/02/01-bp/" target="_blank" rel="noopener">动态规划B0——01背包</a> 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。<br>\[F[i, v] = max{ F[i − 1, v − kC_i] + kW_i \ \ |\ \  0 ≤ kC_i ≤ v }\]<br>只需在01背包代码的基础上加一层循环即可，对于状态 \(F[i, v]\) 求解的时间复杂度为 \(O(V/C_i)\) 所以总的时间复杂度为 \(O(N\sum V/C_i)\) ，这种解法实际上就是把每种物品拆分为多个物品转化为01背包。</p>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><h2 id="0-预处理数据"><a href="#0-预处理数据" class="headerlink" title="0 预处理数据"></a>0 预处理数据</h2><p>若两件物品 i、j 满足 \(C_i ≤ C_j 且 W_i ≥ W_j\) ，则将可以将物品 j 直接去掉，不用考虑。在进入主算法前预处理一遍物品数据即可。对于随机生成的数据，这个方法往往会大大减少物品的件数，从而加快速度。然而这个并不能改善最坏情况的复杂度，因为有可能特别设计的数据可以一件物品也去不掉。 </p>
 <h2 id="1-二进制思想"><a href="#1-二进制思想" class="headerlink" title="1 二进制思想"></a>1 二进制思想</h2><p>任何二进制可以表示任何十进制的数，我们可以想一下二进制是如何转成十进制的呢？</p>
 <p><strong>101001</strong></p>
-<p>如果你拿到一个这样的二进制数，只需将二进制第 k 位的数乘2的 k-1 次方再求和即可。这样我们可以发现所有的数都可以拆分为若干个2的k次方的和。 有了上面的理论支持，我们可以不必将物品一个一个拆开放入背包，我们可以将它们拆成若干个2的k次方个物品打包放入。 这样我们可以将时间复杂度优化到 O(log ⌊V/Ci⌋ ) ，比之前的 O(N∑V/Ci) 好了很多。 之后的多重背包也有基于此思想的优化。</p>
-<h2 id="2-O-VN"><a href="#2-O-VN" class="headerlink" title="2 O(VN)"></a>2 O(VN)</h2><p>###伪代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i 1 -&gt; N</span><br><span class="line">	for j Ci -&gt; V	F[i][j] = max&#123;F[j], F[j-Ci] + Wi&#125;</span><br></pre></td></tr></table></figure></p>
-<p>看上去好像与01背包的伪代码几乎一样，只是第二次循环的方向做了变化。 起初我在写背包题目时在网上看到这个算法时，很是不理解。之后在看完 <a href="https://github.com/tianyicui/pack" target="_blank" rel="noopener">《背包问题九讲》</a> 的讲解和自己手动调试几次后感觉很深刻。我觉得对此算法不理解的可以在充分理解01背包算法后手动调试运行这个算法去理解。 背包九讲中的解释我很喜欢，以我现在的文采我感觉不足以写出更好的解释，我在此引用其中的一段。</p>
+<p>如果你拿到一个这样的二进制数，只需将二进制第 k 位的数乘 2 的 k-1 次方再求和即可。这样我们可以发现所有的数都可以拆分为若干个 2 的 k 次方的和。 有了上面的理论支持，我们可以不必将物品一个一个拆开放入背包，我们可以将它们拆成若干个2的k次方个物品打包放入。 这样我们可以将时间复杂度优化到 \(O(log ⌊V/C_i⌋ )\) ，比之前的 \(O(N\sum V/C_i)\) 好了很多。 之后的多重背包也有基于此思想的优化。</p>
+<h2 id="2-O-VN"><a href="#2-O-VN" class="headerlink" title="2 O(VN)"></a>2 O(VN)</h2><h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i 1 -&gt; N</span><br><span class="line">	for j Ci -&gt; V	F[i][j] = max&#123;F[j], F[j-Ci] + Wi&#125;</span><br></pre></td></tr></table></figure>
+<p>看上去好像与 01 背包的伪代码几乎一样，只是第二次循环的方向做了变化。 起初我在写背包题目时在网上看到这个算法时，很是不理解。之后在看完 <a href="https://github.com/tianyicui/pack" target="_blank" rel="noopener">《背包问题九讲》</a> 的讲解和自己手动调试几次后感觉很深刻。我觉得对此算法不理解的可以在充分理解 01 背包算法后手动调试运行这个算法去理解。 背包九讲中的解释我很喜欢，以我现在的文采我感觉不足以写出更好的解释，我在此引用其中的一段。</p>
 <blockquote>
-<p>为什么这个算法就可行呢？首先想想为什么 01 背包中要按照 v 递减的次序来循环。 让 v 递减是为了保证第 i 次循环中的状态 F[i, v] 是由状态 F[i − 1, v − Ci] 递推而来。 换句话说，这正是为了保证每件物品只选一次，保证在考虑“选入第 i 件物品”这件策略时，依据的是一个绝无已经选入第 i 件物品的子结果 F[i − 1, v − Ci]。而现在完全背 包的特点恰是每种物品可选无限件，所以在考虑“加选一件第 i 种物品”这种策略时，却正需要一个可能已选入第 i 种物品的子结果 F[i, v − Ci]，所以就可以并且必须采用 v 递增的顺序循环。这就是这个简单的程序为何成立的道理。</p>
+<p>为什么这个算法就可行呢？首先想想为什么 01 背包中要按照 v 递减的次序来循环。 让 v 递减是为了保证第 i 次循环中的状态 \(F[i, v]\) 是由状态 \(F[i − 1, v − Ci]\) 递推而来。 换句话说，这正是为了保证每件物品只选一次，保证在考虑“选入第 i 件物品”这件策略时，依据的是一个绝无已经选入第 i 件物品的子结果 \(F[i − 1, v − Ci]\)。而现在完全背 包的特点恰是每种物品可选无限件，所以在考虑“加选一件第 i 种物品”这种策略时，却正需要一个可能已选入第 i 种物品的子结果 \(F[i, v − Ci]\)，所以就可以并且必须采用 v 递增的顺序循环。这就是这个简单的程序为何成立的道理。</p>
 <p>背包问题九讲 2.0 beta1.2 第6页</p>
 </blockquote>
 <p>这个解释我认为只是在人的思维层面的解释，真正要理解它的运行过程我觉得没有什么比自己跑几遍来的实在。</p>
@@ -462,7 +462,7 @@
   <p><span>本文标题:</span><a href="/2018/03/01/cp-bp/">动态规划B2——完全背包</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
   <p><span>发布时间:</span>2018年03月01日 - 20:03</p>
-  <p><span>最后更新:</span>2018年07月05日 - 01:07</p>
+  <p><span>最后更新:</span>2018年07月14日 - 18:07</p>
   <p><span>原始链接:</span><a href="/2018/03/01/cp-bp/" title="动态规划B2——完全背包">https://pazyx.xyz/2018/03/01/cp-bp/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://pazyx.xyz/2018/03/01/cp-bp/"  aria-label="复制成功！"></i></span>
   </p>
@@ -691,7 +691,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -702,7 +702,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -713,7 +713,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-count">131</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -807,7 +807,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化"><span class="nav-number">3.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-预处理数据"><span class="nav-number">3.1.</span> <span class="nav-text">0 预处理数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-二进制思想"><span class="nav-number">3.2.</span> <span class="nav-text">1 二进制思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-O-VN"><span class="nav-number">3.3.</span> <span class="nav-text">2 O(VN)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化"><span class="nav-number">3.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-预处理数据"><span class="nav-number">3.1.</span> <span class="nav-text">0 预处理数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-二进制思想"><span class="nav-number">3.2.</span> <span class="nav-text">1 二进制思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-O-VN"><span class="nav-number">3.3.</span> <span class="nav-text">2 O(VN)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#伪代码"><span class="nav-number">3.3.1.</span> <span class="nav-text">伪代码</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -841,7 +841,7 @@
     
       <span class="post-meta-item-text">全站字数统计&#58;</span>
     
-    <span title="全站字数统计">45.9k</span>
+    <span title="全站字数统计">48.0k</span>
   
 
 <!--

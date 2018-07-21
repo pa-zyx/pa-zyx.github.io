@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[macOS 灾难]]></title>
+    <url>%2F2018%2F07%2F21%2Fmac_os_disaster%2F</url>
+    <content type="text"><![CDATA[macOS 10.14 beta3 灾难性的数据丢失事故，博客数据险些全部丢失！ 2018.7.21 凌晨 博客数据在废纸篓里找到了，历劫度人。。。调整一下继续～]]></content>
+      <categories>
+        <category>泛 - 计算机</category>
+      </categories>
+      <tags>
+        <tag>灾难</tag>
+        <tag>MacOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Markdown 指南]]></title>
+    <url>%2F2018%2F07%2F15%2Fmarkdown_guide%2F</url>
+    <content type="text"><![CDATA[Markdown 是什么？ Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的 XHTML（或者 HTML ）文档”。 注意！Markdown是标记语言，而不是样式表。它只是在标注说明文本中每一块是什么。比如标题、引用、代码。最终它显示的是什么样子的取决于你浏览它的工具，如果转成 HTML 那就由浏览器决定，你想改变它的样式就需要添加 CSS（层叠样式表）。 我为什么学 Markdown？主要是博客写作需要用到，用 Markdown 写作最大的好处是自由，你的文本是独立的。如果你使用WordPress 自带的编辑器写作，它的可移植性是很低的，导出 XML 文件后转换成其他格式后很多地方都需要手动调整。还有就是项目中 Readme 文件一般用 Markdown 写，你写作时不需要任何鼠标操作。 语法标题123456# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题 文本基础样式加粗1**加粗** 效果：**加粗** 斜体1**斜体** 效果：*斜体* 斜体加粗1***斜体加粗*** 效果：***斜体加粗*** 删除1~~删除~~ 效果：删除 引用123&gt; 引用的内容&gt;&gt; 引用的内容&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 引用的内容 效果： 引用的内容 引用的内容 引用的内容 可以多级嵌套引用 分割线1234-------******** 效果： 超链接1234[超链接名](超链接地址 "超链接title")title可缺省**效果：**[Home](https//pazyx.xyz "pazyx") 效果：Home 图片1234![图片alt](图片地址 ''图片title'')title可缺省**效果：**![logo](/markdown_basic/logo.png ''blogLogo'') 效果：图片地址可以是相对地址也可以是超链接 列表无序列表123- 列表内容+ 列表内容* 列表内容 效果： 列表内容 列表内容 列表内容 有序列表1231.列表内容2.列表内容3.列表内容 效果： 1.列表内容2.列表内容3.列表内容 列表嵌套1234- 一级列表内容 - 二级列表内容 - 三级列表内容 - 四级列表内容 效果： 一级列表内容 二级列表内容 三级列表内容 四级列表内容 两级之间差两个空格即可 表格1234|表头|表头|表头|| - | :-: | :- ||内容|内容|内容||内容|内容|内容| 效果： 表头 表头 表头 内容 内容 内容 内容 内容 内容 默认为左对齐，在 “-” 右边加上 “:” 为右对齐，在 “-” 两侧同时加上 “:” 为居中对齐。 代码行内代码1行内 `code` 行内 效果： 行内 code 行内 代码块123456789\`\`\`cpp#include &lt;iostream&gt;int main()&#123; std::cout &lt;&lt; "Hello World." &lt;&lt; endl; return 0;&#125;\`\`\` 效果： 1234567#include &lt;iostream&gt;int main()&#123; std::cout &lt;&lt; "Hello World." &lt;&lt; endl; return 0;&#125; 参考资料 markdown基本语法 Markdown插入表格语法 Markdown维基百科 Markdown中文官网]]></content>
+      <categories>
+        <category>泛</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+        <tag>标记语言</tag>
+        <tag>写作工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数学建模——动态规划]]></title>
+    <url>%2F2018%2F07%2F14%2Fmathematical_modeling_dp%2F</url>
+    <content type="text"><![CDATA[概述之前在学算法时接触过不少动态规划的题目，但最近实践周在上数学建模的课，发现自己在动态规划算法上欠缺很多。步骤不规范、思路不清晰、数学推导欠缺，大多数时候我都是靠直觉推状态转移方程的。这篇我希望从数学建模的角度重新总结一下动态规划（算法中的动态规划也会继续更新，最近将更新状压DP）。算法竞赛和数学建模竞赛中动态规划，在数据和方程的表示上有很大不同。算法竞赛中一般以数组单元的形式表示一个状态并用其推导状态转移方程，并且不对指标函数与最优值函数的单独推导。其形式更接近伪代码，方便将模型快速转换为代码。数学建模竞赛中步骤相当严谨很多，各个方程相互独立，各个方程也更注重数学的严谨性。 标准步骤 阶段 状态变量（无后效性） \(s_k\) 决策变量 \(x_k\) 状态转移方程 \(s_{k+1} = T_k(s_k,x_k)\) 指标函数 \(V_{k,n} = V_{k,n}(s_k,x_k,s_{k+1},…,s_{n+1},k = 1,2,…,n\) 最优值函数 \[f_k(s_k) = \max_{\{x_k,…,x_n\}} V_{k,n}\] 边界条件 例题一个简单的完全背包问题，其算法我在动态规划B2——完全背包给出。 有一个容量为 V 的背包和 N 种物品。每种物品的价值为 \(W_k\) 体积为 \(C_k\) ，每种物品有无限件，问最大背包价值。 阶段N 种物品按编号排序，视为 N 个阶段。 状态变量\(s_k\) 第 k 阶段初可装载的质量 决策变量装入第k种物品的数量：\(x_i\) 状态转移方程\[s_{k+1} = s_k - C_kx_k\] 指标函数装入的第 k 种物品到第 N 种物品总价值：\(v_k\) 最优值函数\[f_k(s_k) = \max_{0≤x_k≤[s_k/a_k]} \{C_kx_k + f_k(s_{k+1})\ \ (k = 1…n)\] 边界条件 \(s_1 = V\) \(f_{n+1}(s_{n+1}) = 0\) 与算法竞赛中的动态规划对比 算法竞赛\[F[i, v] = max \{ F[i − 1, v − kC_i] + kW_i \ \ 0 ≤ kC_i ≤ v \} \] 数学建模竞赛$$\begin{cases}f_k(s_k) = \max_{0≤x_k≤[s_k/a_k]} \{C_kx_k + f_k(s_{k+1})\} &amp;\text{(k = 1…n)} \\f_{n+1}(s_{n+1}) = 0\end{cases}$$ 连续型动态规划在大多数算法竞赛的题目中，决策点都是离散的。而在数学建模竞赛中可能出现连续型的动态规划问题，这种题目写出具体算法相当困难，多大需要笔算。 例题100 台某种机器可在高低两种不同的负荷下进行生产，设机器在高负荷下生产的产量函数为 g = 9x ，其中 x 为投入生产的机器数量，季度完好率为 a = 0.65 。在低负荷下生产的产量函数为 h = 4y ，其中 y 为投入生产的机器数量,季度完好率为 b = 0.95 。 建模 把4个季度看成是4个阶段，用k表示。 状态变量\(s_k\)：表示第k季度初拥有的完好机器数量。(\(s_1\) = 100) 决策变量\(x_k\)：表示第k季度分配高负荷下生产的机器数量，于是\(s_k-x_k\)为该季度分配在低负荷下生产的机器数量。\(s_k\),\(x_k\)为连续变量，其小数部分表示一台机器正常工作时间所占的比例。允许决策集合:\(D_k(s_k) = \{ x_k \ \ |\ \ 0≤x_k≤s_k \}\) 状态转移方程：\[s_{k+1} = ax_k + b( s_k - x_k ) = 0.65x_k + (s_k - x_k ) \ \ (k = 1,2,3,4) \] 指标函数：\(v_k\) 表示第 k 季度的产量 \(v_k = 9x_k + 4(s_k+x_k)\) 最优值函数：$$\begin{cases}f_k(s_k) = \max_{0≤x_k≤s_k} \{ v_k + f_{k+1}(s_{k+1}) \} = \max_{0≤x_k≤s_k} \{ 9x_k + 4(s_k-x_k) + f_{k+1}(s_{k+1}) \}\\f_5(s_5) = 0\end{cases}$$ 解当 k = 4 时 $$\begin{align}f_4(s_4)&amp; = \max_{0≤x_4≤s_4} \{ 9x_4 + 4(s_4-x_4) + f_5(s_5) \} \\&amp; = \max_{0≤x_4≤s_4} \{ 9x_4 + 4(s_4-x_4) \} \\&amp; = \max_{0≤x_4≤s_4} \{ 5x_4 + 4s_4 \}\end{align}$$\[x^*_4 = s_4 ,f_4(s_4) = 9s_4\] 当 k = 3 时 $$\begin{align}f_3(s_3)&amp; = \max_{0≤x_3≤s_3} \{ 9x_3 + 4(s_3-x_3) + f_4(s_4) \} \\&amp; = \max_{0≤x_3≤s_3} \{ 9x_3 + 4(s_3-x_3)+9[0.65x_3+0.95(s_3-x_3)] \} \\&amp; = \max_{0≤x_3≤s_3} \{ 2.3x_3 + 12.55s_3 \}\end{align}$$\[x^*_3 = s_3 ,f_3(s_3) = 14.85s_3\] 当 k = 2 时 $$\begin{align}f_2(s_2)&amp; = \max_{0≤x_2≤s_2} \{ 9x_2 + 4(s_2-x_2) + f_3(s_3) \} \\&amp; = \max_{0≤x_2≤s_2} \{ 9x_2 + 4(s_2-x_2)+14.85[0.65x_2+0.95(s_2-x_2)] \} \\&amp; = \max_{0≤x_2≤s_2} \{ 0.545x_2 + 18.1075s_3 \}\end{align}$$\[x^*_2 = s_2 ,f_2(s_2) = 18.6525s_2\] 当 k = 1 时 $$\begin{align}f_1(s_1)&amp; = \max_{0≤x_1≤s_1} \{ 9x_1 + 4(s_1-x_1) + f_2(s_2) \} \\&amp; = \max_{0≤x_1≤s_1} \{ 9x_1 + 4(s_1-x_1)+18.6525[0.65x_1+0.95(s_1-x_1)] \} \\&amp; = \max_{0≤x_1≤s_1} \{ -0.596x_1 + 21.72s_1 \}\end{align}$$ \[ x^*_1 = 0 , s_1 = 100 , y^*_1 = s_1 - x^*_1 = 100 , f_1(s_1) = 21.72s_1 = 2172 \] 反推 $$\begin{cases}s_2 &amp; = 0.65x_1 + 0.95(s_1 - x_1) = 95; x_2^* = s_2 = 95,y_2^* = 0 \\s_3 &amp; = 0.65x_2 + 0.95(s_2 - x_2) = 61.75,取整得61,x_3^* = s_3 = 61,y_3^* = 0 \\s_4 &amp; = 0.65x_3 + 0.95(s_3 - x_3) = 39.65,取整得39,x_4^* = s_4 = 39,y_4^* = 0\end{cases}$$]]></content>
+      <categories>
+        <category>数学</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>完全背包</tag>
+        <tag>数学建模</tag>
+        <tag>连续型动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[POJ 3254 Corn Fields（状压DP）]]></title>
     <url>%2F2018%2F07%2F07%2Fpoj-3254-corn-fields%2F</url>
     <content type="text"><![CDATA[题目链接：http://poj.org/problem?id=3254 Corn FieldsTime Limit: 2000MS Memory Limit: 65536K DescriptionFarmer John has purchased a lush new rectangular pasture composed of M by N (1 ≤ M ≤ 12; 1 ≤ N ≤ 12) square parcels. He wants to grow some yummy corn for the cows on a number of squares. Regrettably, some of the squares are infertile and can’t be planted. Canny FJ knows that the cows dislike eating close to each other, so when choosing which squares to plant, he avoids choosing squares that are adjacent; no two chosen squares share an edge. He has not yet made the final choice as to which squares to plant. Being a very open-minded man, Farmer John wants to consider all possible options for how to choose the squares for planting. He is so open-minded that he considers choosing no squares as a valid option! Please help Farmer John determine the number of ways he can choose the squares to plant. InputLine 1: Two space-separated integers: M and NLines 2..M+1: Line i+1 describes row i of the pasture with N space-separated integers indicating whether a square is fertile (1 for fertile, 0 for infertile) OutputLine 1: One integer: the number of ways that FJ can choose the squares modulo 100,000,000. Sample Input1232 31 1 10 1 0 Sample Output19 HintNumber the squares as follows: 121 2 3 4 There are four ways to plant only on one squares (1, 2, 3, or 4), three ways to plant on two squares (13, 14, or 34), 1 way to plant on three squares (134), and one way to plant on no squares. 4+3+1+1=9. 题解题目大意有 M×N 的玉米地，但其中有些是不肥沃的，不能种植。用 1 来代表肥沃，0 代表不肥沃。另外奶牛不喜欢挨着吃玉米，也就是说要间隔着种植，求有几种种植方式，并将计算结果对 100000000 取模。 解题思路状压DP入门题目。题目中要求不能挨着种，也就是行内不允许有相邻的地，行内比较好控制，而行间思考一下其实只需要考虑相邻两行的玉米地是否有冲突。使用一个二进制数表示一行的玉米种植情况状态：某行的玉米地分布情况 转移方程：dp[i][j] = (dp[i][j] + dp[i - 1][k])%mod第 i 行种植方案为 j 的种植方式数为等于其本身加上第 i-1 行种植方案为 k 的种植方式数，j 和 k 方案不冲突，且 j 和 k 方案本身行内不冲突，且种植土地都为肥沃的土地。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include &lt;iostream&gt;#include &lt;string.h&gt;using namespace std;const int MAX_N = 20;const int MAX_M = 20;int state[MAX_N + 1];int dp[MAX_N + 1][1 &lt;&lt; MAX_M];const int mod = 100000000;bool fit(int now, int flag)&#123; return (now | flag) == flag;&#125; //是否都是肥沃的土地bool ok (int x) &#123; return (x &amp; (x / 2)) == 0;&#125; //判断行内是否冲突bool not_intersect(int now,int prev)&#123; return (now &amp; prev) == 0;&#125; //判断两行间是否冲突int main() &#123; int n,m; cin &gt;&gt; n &gt;&gt; m; for( int i = 1; i &lt;= n; ++i)&#123; for( int j = 0; j &lt; m; ++j)&#123; int flag; cin &gt;&gt; flag; state[i] |= (1 &lt;&lt; j) * flag; &#125; &#125; for( int i = 0; i &lt;= 20; i++)&#123; if(ok(i)) dp[0][i] = 1; &#125; for( int i = 1; i &lt;= n; ++i)&#123; for( int j = 0; j &lt; (1 &lt;&lt; m); ++j)&#123; //枚举当前行 if(!ok(j) || !fit(j,state[i]))&#123; continue; &#125; for( int k = 0; k &lt; (1 &lt;&lt; m); ++k)&#123; //枚举下一行 if(ok(k) &amp;&amp; fit(k,state[i-1]) &amp;&amp; not_intersect(j,k))&#123; dp[i][j] = (dp[i][j] + dp[i - 1][k]) % mod; &#125; &#125; &#125; &#125; int ans = 0; for( int i = 0; i &lt; (1 &lt;&lt; m); ++i)&#123; ans = (ans + dp[n][i]) % mod; &#125; cout &lt;&lt; ans &lt;&lt; endl; return 0;&#125;]]></content>
@@ -33,19 +72,19 @@
   <entry>
     <title><![CDATA[「笔记」Effective C++ 读书笔记（二）]]></title>
     <url>%2F2018%2F07%2F03%2Feffective-cpp02%2F</url>
-    <content type="text"><![CDATA[注意！这只是我的读书笔记，帮助我记录。其中可能有一些不严谨的解释或没有做很详细的解释，大家学习还是建议直接看书（虽然书中也有不严谨的解释）。 2 构造 / 析构 / 赋值运算条款05：了解 C++ 默默编写并调用哪些函数一个 class 如果没有声明任何构造函数和析构函数，编译器会帮你声明以下的函数 default 构造函数 copy 构造函数 copy assignment 操作符 析构函数所有这些编译器为你生成的函数都是 public 的、大多数都是 inline 的（ Effective C++ 写的是都是 inline ），且只在需要时生成。 当你声明了任何一个构造函数，编译器将不再为你声明 default 构造函数。 对于两个要做拷贝的函数，它们可能是 bitwise 或者 memberwise。具体的 Effective C++ 只做了简略的解释。想深入了解的可以看《深度探索C++对象模型》，之后我也会写读书笔记或书摘。 如果类中存在不可重新赋值的成员将报错。 比如下面的类 12345678template&lt;class T&gt;class NamedObject &#123;public: NamedObject(std::string&amp; name, const T&amp; value):nameValue(name),objectValue(value)&#123;&#125;private: std::string&amp; nameValue; const T objectValue;&#125;; 引用类型和 const 修饰的成员不可被重新赋值，如果存在两个 NamedObject&lt;int&gt; 类的对象 a 和 b ，做 a = b 将直接报错。编译器无法为它声明拷贝函数。如果基类的 copy assignment 操作符被声明为 private 也是会导致编译失败。 条款06：若不想使用编译器自动生成的函数，就该明确拒绝可以将构造函数声明为 private 禁止调用。比如有些类不希望被拷贝，可以将 copy 构造函数和 copy assignment 操作符声明为 private 。12345678class Uncopyable&#123;protected: Uncopyable()&#123;&#125; ~Uncopyable()&#123;&#125;private: Uncopyable(const Uncopyable&amp;); Uncopyable&amp; operator=(const Uncopyable&amp;);&#125;; 也可以让不希望被拷贝的类直接继承 Uncopyable 类。Boost 库中也提供了名为 noncopyable 的class 保证被继承的类不被拷贝。 条款07：为多态基类声明 virtual 析构函数基类无虚析构函数，会导致向上造型后被部分销毁导致内存泄露。 谨慎继承不带虚析构函数的类，如：string、STL 库中的所有容器… 不是所有的类都需要虚析构函数，vptr 和 vtbl 会占有大量空间，且降低了可移植性（不可传给其他语言）。 许多人的心得时：只有当 class 内含至少一个 virtual 函数 才为它声明 virtual 析构函数。 条款08：别让异常逃离析构函数C++ 不能同时处理多个异常，主要原因是被抛出的元素的内存空间是分配在栈区的，抛出异常后会跳出那一层括号，栈区应该被清理。如果你在存在一个异常的情况下去处理另一个异常很可能会覆盖掉之前异常抛出的元素，导致程序过早结束或出现不明确行为。如果你的类中析构会抛出异常，那这个类的容器或数组在析构时很可能遇到多个异常，造成严重的后果。 有时我们类的析构函数必须执行一个可能抛出异常的行为时怎么办？比如关闭各种连接。书中提供了三种方案1234try&#123; A.close(); &#125;catch(...)&#123; std::abort();&#125; //调用 abort 结束程序 1234try&#123; A.close(); &#125;catch(...)&#123; //记下运转记录，记下对 close 的调用失败&#125; //吞下异常 123456789101112void close()&#123; db.close(); closed = true;&#125;//析构if(!closed)&#123; try&#123; db.close(); &#125; catch(...)&#123; //记下运转记录，记下对 close 的调用失败 &#125;&#125; 第三种就是直接将 close 函数开放给使用者，让使用者在析构前调用。 条款09：绝不在构造和析构过程中调用 virtual 函数在构造函数和析构函数中调用虚成员函数，可能得不到你想要的结果，它实际上会调用基类的那个函数。 解释构造过程构造过程进入基类的构造函数时，派生类的成员还没被初始化，如果调用派生类的虚函数可能会用到派生类部分的成员，所以编译器将构造过程中的对象当做 当前进入的构造函数所属的类的一个对象，当然只能调用与当前构造函数同属一个类的函数了。 析构过程进入析构函数，先销毁掉派生类的成员，在刚进入析构函数时这个对象已经不是完整的一个派生类的对象了，编译器只能把它当做它的基类的一个对象来看待。 在构造和析构期间不要调用 virtual 函数，因为这个类调用从不下降至 drived class (比起当前执行构造函数和析构函数的那层)。 条款10：令 operator= 返回一个 reference to *this返回 *this 的引用，可以让你的类的对象实现连锁赋值。如：x = y = z = 15; 条款11：在 operator= 中处理“自我赋值”如果类中存在一个指向堆中元素的成员，那就要注意赋值时的自我赋值。123456789101112class A&#123;public: string *s; A():s(new string())&#123;&#125; A&amp; operator= (const A rhs) &#123; delete s; s = new string(*rhs.s); return *this; &#125;&#125;; 如果 this 和 &amp;rhs 相等就尴尬了，它会先 delete 自己的 s ，实际上 *this 和 rhs 里的 s 指向的 string 对象都被销毁了。数据丢失而去之后也没办法使用成员 s 了。 相对安全的版本是1234567891011121314class A&#123;public: string *s; A():s(new string())&#123;&#125; A&amp; operator= (const A&amp; rhs) &#123; if(this == &amp;rhs) return *this; delete s; s = new string(*rhs.s); return *this; &#125;&#125;; 加入认同测试，保证了 “自我赋值” 的安全性，但还不具备 “异常安全性”。如果在 s = new string(*rhs.s); 这一步导致异常，那 s 将指向一块已被删除的 string 。12345678A&amp; operator= (const A&amp; rhs)&#123; string* pOrig = pb; s = new string(*rhs.s); delete pOrig; return *this;&#125; 这样即使抛出异常，赋值失败也不会造成其他副作用，可以将 s 保持原状。 copy and swap 技术123456789void swap(A&amp; rhs); //交换*this 和 rhs 的数据 见条款29A&amp; operator= (const A&amp; rhs)&#123; A temp(rhs); swap(temp); return *this;&#125; by value 传值方式的 copy and swap 技术12345678void swap(A&amp; rhs); //交换*this 和 rhs 的数据 见条款29A&amp; operator= (const A rhs)&#123; swap(rhs); return *this;&#125; 条款12：复制对象时勿忘其每个成分12345678910111213141516171819202122232425class A&#123;private: int a;public: A()&#123;&#125; A(A &amp;rhs):a(rhs.a)&#123;&#125; A&amp; operator= (A &amp;rhs)&#123; a = rhs.a; return *this; &#125; &#125;;class B : public A&#123;private: int b;public: B()&#123;&#125; B(B &amp;rhs):b(rhs.b)&#123;&#125; B&amp; operator= (B &amp;rhs)&#123; b = rhs.b; return *this; &#125; &#125;; 小心这样的代码，B 的两个 Copying 函数，都没有拷贝基类的数据( int a )。 Copying 函数应该确保赋值“对象内的所有成员变量” 及 “所有 base class 成分”。 12345678910111213class B : public A&#123;private: int b;public: B()&#123;&#125; B(B &amp;rhs):b(rhs.b),A(rhs)&#123;&#125; // + ! B&amp; operator= (B &amp;rhs)&#123; A::operator=(rhs); // + ! b = rhs.b; return *this; &#125; &#125;; 两个 Copying 函数一般有相近的代码，但不要在一个 Copying 函数内调用另一个 Copying 函数。 应该将共同机能放进第三个函数中，并由两个 Copying 函数共同调用。]]></content>
+    <content type="text"><![CDATA[注意！这只是我的读书笔记，帮助我记录。其中可能有一些不严谨的解释或没有做很详细的解释，大家学习还是建议直接看书（虽然书中也有不严谨的解释）。 构造 / 析构 / 赋值运算条款05：了解 C++ 默默编写并调用哪些函数一个 class 如果没有声明任何构造函数和析构函数，编译器会帮你声明以下的函数 default 构造函数 copy 构造函数 copy assignment 操作符 析构函数所有这些编译器为你生成的函数都是 public 的、大多数都是 inline 的（ Effective C++ 写的是都是 inline ），且只在需要时生成。 当你声明了任何一个构造函数，编译器将不再为你声明 default 构造函数。 对于两个要做拷贝的函数，它们可能是 bitwise 或者 memberwise。具体的 Effective C++ 只做了简略的解释。想深入了解的可以看《深度探索C++对象模型》，之后我也会写读书笔记或书摘。 如果类中存在不可重新赋值的成员将报错。 比如下面的类 12345678template&lt;class T&gt;class NamedObject &#123;public: NamedObject(std::string&amp; name, const T&amp; value):nameValue(name),objectValue(value)&#123;&#125;private: std::string&amp; nameValue; const T objectValue;&#125;; 引用类型和 const 修饰的成员不可被重新赋值，如果存在两个 NamedObject&lt;int&gt; 类的对象 a 和 b ，做 a = b 将直接报错。编译器无法为它声明拷贝函数。如果基类的 copy assignment 操作符被声明为 private 也是会导致编译失败。 条款06：若不想使用编译器自动生成的函数，就该明确拒绝可以将构造函数声明为 private 禁止调用。比如有些类不希望被拷贝，可以将 copy 构造函数和 copy assignment 操作符声明为 private 。12345678class Uncopyable&#123;protected: Uncopyable()&#123;&#125; ~Uncopyable()&#123;&#125;private: Uncopyable(const Uncopyable&amp;); Uncopyable&amp; operator=(const Uncopyable&amp;);&#125;; 也可以让不希望被拷贝的类直接继承 Uncopyable 类。Boost 库中也提供了名为 noncopyable 的class 保证被继承的类不被拷贝。 条款07：为多态基类声明 virtual 析构函数基类无虚析构函数，会导致向上造型后被部分销毁导致内存泄露。 谨慎继承不带虚析构函数的类，如：string、STL 库中的所有容器… 不是所有的类都需要虚析构函数，vptr 和 vtbl 会占有大量空间，且降低了可移植性（不可传给其他语言）。 许多人的心得时：只有当 class 内含至少一个 virtual 函数 才为它声明 virtual 析构函数。 条款08：别让异常逃离析构函数C++ 不能同时处理多个异常，主要原因是被抛出的元素的内存空间是分配在栈区的，抛出异常后会跳出那一层括号，栈区应该被清理。如果你在存在一个异常的情况下去处理另一个异常很可能会覆盖掉之前异常抛出的元素，导致程序过早结束或出现不明确行为。如果你的类中析构会抛出异常，那这个类的容器或数组在析构时很可能遇到多个异常，造成严重的后果。 有时我们类的析构函数必须执行一个可能抛出异常的行为时怎么办？比如关闭各种连接。书中提供了三种方案1234try&#123; A.close(); &#125;catch(...)&#123; std::abort();&#125; //调用 abort 结束程序 1234try&#123; A.close(); &#125;catch(...)&#123; //记下运转记录，记下对 close 的调用失败&#125; //吞下异常 123456789101112void close()&#123; db.close(); closed = true;&#125;//析构if(!closed)&#123; try&#123; db.close(); &#125; catch(...)&#123; //记下运转记录，记下对 close 的调用失败 &#125;&#125; 第三种就是直接将 close 函数开放给使用者，让使用者在析构前调用。 条款09：绝不在构造和析构过程中调用 virtual 函数在构造函数和析构函数中调用虚成员函数，可能得不到你想要的结果，它实际上会调用基类的那个函数。 解释构造过程构造过程进入基类的构造函数时，派生类的成员还没被初始化，如果调用派生类的虚函数可能会用到派生类部分的成员，所以编译器将构造过程中的对象当做 当前进入的构造函数所属的类的一个对象，当然只能调用与当前构造函数同属一个类的函数了。 析构过程进入析构函数，先销毁掉派生类的成员，在刚进入析构函数时这个对象已经不是完整的一个派生类的对象了，编译器只能把它当做它的基类的一个对象来看待。 在构造和析构期间不要调用 virtual 函数，因为这个类调用从不下降至 drived class (比起当前执行构造函数和析构函数的那层)。 条款10：令 operator= 返回一个 reference to *this返回 *this 的引用，可以让你的类的对象实现连锁赋值。如：x = y = z = 15; 条款11：在 operator= 中处理“自我赋值”如果类中存在一个指向堆中元素的成员，那就要注意赋值时的自我赋值。123456789101112class A&#123;public: string *s; A():s(new string())&#123;&#125; A&amp; operator= (const A rhs) &#123; delete s; s = new string(*rhs.s); return *this; &#125;&#125;; 如果 this 和 &amp;rhs 相等就尴尬了，它会先 delete 自己的 s ，实际上 *this 和 rhs 里的 s 指向的 string 对象都被销毁了。数据丢失而去之后也没办法使用成员 s 了。 相对安全的版本是1234567891011121314class A&#123;public: string *s; A():s(new string())&#123;&#125; A&amp; operator= (const A&amp; rhs) &#123; if(this == &amp;rhs) return *this; delete s; s = new string(*rhs.s); return *this; &#125;&#125;; 加入认同测试，保证了 “自我赋值” 的安全性，但还不具备 “异常安全性”。如果在 s = new string(*rhs.s); 这一步导致异常，那 s 将指向一块已被删除的 string 。12345678A&amp; operator= (const A&amp; rhs)&#123; string* pOrig = pb; s = new string(*rhs.s); delete pOrig; return *this;&#125; 这样即使抛出异常，赋值失败也不会造成其他副作用，可以将 s 保持原状。 copy and swap 技术123456789void swap(A&amp; rhs); //交换*this 和 rhs 的数据 见条款29A&amp; operator= (const A&amp; rhs)&#123; A temp(rhs); swap(temp); return *this;&#125; by value 传值方式的 copy and swap 技术12345678void swap(A&amp; rhs); //交换*this 和 rhs 的数据 见条款29A&amp; operator= (const A rhs)&#123; swap(rhs); return *this;&#125; 条款12：复制对象时勿忘其每个成分12345678910111213141516171819202122232425class A&#123;private: int a;public: A()&#123;&#125; A(A &amp;rhs):a(rhs.a)&#123;&#125; A&amp; operator= (A &amp;rhs)&#123; a = rhs.a; return *this; &#125; &#125;;class B : public A&#123;private: int b;public: B()&#123;&#125; B(B &amp;rhs):b(rhs.b)&#123;&#125; B&amp; operator= (B &amp;rhs)&#123; b = rhs.b; return *this; &#125; &#125;; 小心这样的代码，B 的两个 Copying 函数，都没有拷贝基类的数据( int a )。 Copying 函数应该确保赋值“对象内的所有成员变量” 及 “所有 base class 成分”。 12345678910111213class B : public A&#123;private: int b;public: B()&#123;&#125; B(B &amp;rhs):b(rhs.b),A(rhs)&#123;&#125; // + ! B&amp; operator= (B &amp;rhs)&#123; A::operator=(rhs); // + ! b = rhs.b; return *this; &#125; &#125;; 两个 Copying 函数一般有相近的代码，但不要在一个 Copying 函数内调用另一个 Copying 函数。 应该将共同机能放进第三个函数中，并由两个 Copying 函数共同调用。]]></content>
       <categories>
         <category>泛 - 笔记</category>
       </categories>
       <tags>
-        <tag>读书</tag>
         <tag>Cpp</tag>
         <tag>运算符重载</tag>
+        <tag>读书</tag>
+        <tag>笔记</tag>
+        <tag>Effective C++</tag>
         <tag>构造函数</tag>
         <tag>拷贝构造函数</tag>
         <tag>缺省构造函数</tag>
-        <tag>笔记</tag>
-        <tag>Effective C++</tag>
         <tag>virtual 函数</tag>
         <tag>自我赋值</tag>
         <tag>异常</tag>
@@ -178,11 +217,11 @@
         <tag>背包问题</tag>
         <tag>01背包</tag>
         <tag>公告</tag>
+        <tag>C</tag>
         <tag>Cpp</tag>
         <tag>完全背包</tag>
-        <tag>C</tag>
-        <tag>Dijkstra</tag>
         <tag>计划</tag>
+        <tag>Dijkstra</tag>
         <tag>KMP</tag>
       </tags>
   </entry>
@@ -194,8 +233,8 @@
         <category>编程语言 - Cpp</category>
       </categories>
       <tags>
-        <tag>Cpp</tag>
         <tag>C</tag>
+        <tag>Cpp</tag>
         <tag>内存分配</tag>
       </tags>
   </entry>
@@ -207,25 +246,25 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>ACM</tag>
         <tag>算法</tag>
+        <tag>ACM</tag>
         <tag>优化</tag>
         <tag>Dijkstra</tag>
+        <tag>优先队列</tag>
         <tag>最短路径</tag>
         <tag>最小堆</tag>
-        <tag>优先队列</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[「笔记」Effective C++ 读书笔记（一）]]></title>
     <url>%2F2018%2F03%2F16%2Feffective-cpp01%2F</url>
-    <content type="text"><![CDATA[注意！这只是我的读书笔记，帮助我记录。其中可能有一些不严谨的解释或没有做很详细的解释，大家学习还是建议直接看书（虽然书中也有不严谨的解释）。 1 让自己习惯C++条款01：视 C++ 为语言联邦C++ 是一个多重范型编程语言，一个同时支持过程形式、对象形式、函数形式、泛型编程、元编程形式的语言。 将 C++ 的理解为一个由相关语言组成的联邦而非单一语言。记住以下四个次语言你就会发现C++p容易理解很多。 C++ 主要的四种次语言： C：C++以C为基础，基本的语句、基础数据类型、预处理器等等都来自于 C，许多时候 C++ 对问题的解法其实不过就是高级的C语言解法。 Objective-Oriented C++：C++ 诞生之初就是想在 C 语言高效的基础上，增加 Simula 语言的特性。Class、封装、继承、多态、virtual 函数等等，改善了 C 的代码可读性、并发性、编译错误的提示等等。 Template C++：泛型编程，大多数程序员经验最少的部分。它带来的崭新的编程范型，所谓的模板元编程。TMP 相关规则很少与 C++ 主流编程互相影响。 STL：STL 是个 Template 程序库。它对容器、迭代器、算法、函数对象的规约有极佳的紧密配合与协调。STL有自己特殊的办事方式，当你同 STL 一起工作，你必须遵守它的规约。 C++高效编程守则视状况而变化，取决于你使用C++的哪一部分。 条款02：尽量以 const、enum、inline 替换 #define降低对编译预处理的使用。 #define 的缺点： 让编译器的错误提示不易定位 缺乏类型检查 不重视作用域，除非在某处 #undef，不能用来定义class专属常量，不能提供任何封装 未记入符号表，增大目标代码文件 旧式的编译器不支持“in-class 初值设定”，可以用枚举来替换常量。 相比 const，enum 更像 #define，可以对 const 常量取地址，而不可以对 enum 的地址。如果不想用指针和引用值指向你的某个常量，enum 可以帮助你实现这个约束。 对于宏函数，可读性差、写宏函数时需要小心注意带上很多括号，一不小心就会出现难以检查的错误。我们可以使用 inline 关键词代替宏函数，提高代码可读性和安全性。 对于单纯常量，最好以 const 对象或 enums 代替 #defines。 对于形似函数的宏，最好改用 inline 函数替换 #defines。 条款03：尽可能使用 const令函数的返回值为 const ，往往可以降低因用户错误而造成的意外，而又不至于放弃安全性和高效性。 两个成员函数如果只是常量性不同可以被重载，传入函数参数是 const 和非 const 时要区分处理，如在重载运算符 [] 时，非 const 要返回其单元的引用，const 时要返回其单元的 const 引用。 成员函数是 const 意味着它在某种程度上是不可以修改对象中的任何成员变量，但对于成员变量是指针时，它不能保证该成员函数不修改指针成员指向位置的数据。 可以使用 mutable（可变的）释放掉非 staic 成员变量的 bitwise constness 约束。 为 const 重载的函数，会造成代码复制的情况。可以通过单独写一个私有函数运行不冲突的部分，只重载与 const 相关的部分。也可以通过在 non-const里用 const_cast 去除 const 属性再返回的方式减少代码复制。但不要用在 const 函数中调 non-const 函数再返回的方式实现，这样会违背你在 const 版本中绝不改变其对象的逻辑状态的承诺，因为 non-const 版本没有做过此承诺。 将某些东西声明为 const 可帮助编译器侦测出错误用法。const可被施加于任何作用域内的对象、函数参数、函数返回类型、成员函数主体。 编译器强制实施 bitwise constness ，但你变形程序时应该使用“概念上的常量性”（conceptual constness）。 当 const 和 non-const 成员函数有着实质等价的实现时，令 non-const 版本调用 const 版本可避免代码重复。 条款04：确定对象被使用前已先被初始化不要混淆赋值和初始化，一定要在初始化列表中初始化成员。在我之前的博文 C++类与对象总结（二）构造函数 中对构造函数中的赋值和初始化问题有一定的解释。 继承关系的初始化顺序：基类（base classes）更早于其派生类（derived classes）被初始化。 对于某个编译单元内的某个 non-local static 对象的初始化动作使用了另一个编译单元内的某个 non-local static 对象，它所用到的这个对象可能尚未被初始化，因为 C++ 对“定义于不同编译单元内的 non-local static 对象” 的初始化次序并无明确定义。可以将有初始化依赖的几个 non-local static 对象放在一个编译单元解决。 书中的解决方案为：将每个 non-local static 对象搬到自己的专属函数内（该对象在此函数内被声明为 static ）。这些函数返回一个 reference 指向它所含的对象。我们将这些函数称为 reference-returning 函数。 为内置型对象进行手工初始化，因为 C++ 不保证初始化它们。 构造函数最好使用成员初值列，而不要在构造函数本体内使用赋值操作。初值列列出的成员变量，其排列次序应该和它们在 class 中的声明次序相同。 为免除“跨编译单元之初始化次序”问题，请以 local staic 对象替换 non-local static 对象。]]></content>
+    <content type="text"><![CDATA[注意！这只是我的读书笔记，帮助我记录。其中可能有一些不严谨的解释或没有做很详细的解释，大家学习还是建议直接看书（虽然书中也有不严谨的解释）。 让自己习惯C++条款01：视 C++ 为语言联邦C++ 是一个多重范型编程语言，一个同时支持过程形式、对象形式、函数形式、泛型编程、元编程形式的语言。 将 C++ 的理解为一个由相关语言组成的联邦而非单一语言。记住以下四个次语言你就会发现C++p容易理解很多。 C++ 主要的四种次语言： C：C++以C为基础，基本的语句、基础数据类型、预处理器等等都来自于 C，许多时候 C++ 对问题的解法其实不过就是高级的C语言解法。 Objective-Oriented C++：C++ 诞生之初就是想在 C 语言高效的基础上，增加 Simula 语言的特性。Class、封装、继承、多态、virtual 函数等等，改善了 C 的代码可读性、并发性、编译错误的提示等等。 Template C++：泛型编程，大多数程序员经验最少的部分。它带来的崭新的编程范型，所谓的模板元编程。TMP 相关规则很少与 C++ 主流编程互相影响。 STL：STL 是个 Template 程序库。它对容器、迭代器、算法、函数对象的规约有极佳的紧密配合与协调。STL有自己特殊的办事方式，当你同 STL 一起工作，你必须遵守它的规约。 C++高效编程守则视状况而变化，取决于你使用C++的哪一部分。 条款02：尽量以 const、enum、inline 替换 #define降低对编译预处理的使用。 #define 的缺点： 让编译器的错误提示不易定位 缺乏类型检查 不重视作用域，除非在某处 #undef，不能用来定义class专属常量，不能提供任何封装 未记入符号表，增大目标代码文件 旧式的编译器不支持“in-class 初值设定”，可以用枚举来替换常量。 相比 const，enum 更像 #define，可以对 const 常量取地址，而不可以对 enum 的地址。如果不想用指针和引用值指向你的某个常量，enum 可以帮助你实现这个约束。 对于宏函数，可读性差、写宏函数时需要小心注意带上很多括号，一不小心就会出现难以检查的错误。我们可以使用 inline 关键词代替宏函数，提高代码可读性和安全性。 对于单纯常量，最好以 const 对象或 enums 代替 #defines。 对于形似函数的宏，最好改用 inline 函数替换 #defines。 条款03：尽可能使用 const令函数的返回值为 const ，往往可以降低因用户错误而造成的意外，而又不至于放弃安全性和高效性。 两个成员函数如果只是常量性不同可以被重载，传入函数参数是 const 和非 const 时要区分处理，如在重载运算符 [] 时，非 const 要返回其单元的引用，const 时要返回其单元的 const 引用。 成员函数是 const 意味着它在某种程度上是不可以修改对象中的任何成员变量，但对于成员变量是指针时，它不能保证该成员函数不修改指针成员指向位置的数据。 可以使用 mutable（可变的）释放掉非 staic 成员变量的 bitwise constness 约束。 为 const 重载的函数，会造成代码复制的情况。可以通过单独写一个私有函数运行不冲突的部分，只重载与 const 相关的部分。也可以通过在 non-const里用 const_cast 去除 const 属性再返回的方式减少代码复制。但不要用在 const 函数中调 non-const 函数再返回的方式实现，这样会违背你在 const 版本中绝不改变其对象的逻辑状态的承诺，因为 non-const 版本没有做过此承诺。 将某些东西声明为 const 可帮助编译器侦测出错误用法。const可被施加于任何作用域内的对象、函数参数、函数返回类型、成员函数主体。 编译器强制实施 bitwise constness ，但你变形程序时应该使用“概念上的常量性”（conceptual constness）。 当 const 和 non-const 成员函数有着实质等价的实现时，令 non-const 版本调用 const 版本可避免代码重复。 条款04：确定对象被使用前已先被初始化不要混淆赋值和初始化，一定要在初始化列表中初始化成员。在我之前的博文 C++类与对象总结（二）构造函数 中对构造函数中的赋值和初始化问题有一定的解释。 继承关系的初始化顺序：基类（base classes）更早于其派生类（derived classes）被初始化。 对于某个编译单元内的某个 non-local static 对象的初始化动作使用了另一个编译单元内的某个 non-local static 对象，它所用到的这个对象可能尚未被初始化，因为 C++ 对“定义于不同编译单元内的 non-local static 对象” 的初始化次序并无明确定义。可以将有初始化依赖的几个 non-local static 对象放在一个编译单元解决。 书中的解决方案为：将每个 non-local static 对象搬到自己的专属函数内（该对象在此函数内被声明为 static ）。这些函数返回一个 reference 指向它所含的对象。我们将这些函数称为 reference-returning 函数。 为内置型对象进行手工初始化，因为 C++ 不保证初始化它们。 构造函数最好使用成员初值列，而不要在构造函数本体内使用赋值操作。初值列列出的成员变量，其排列次序应该和它们在 class 中的声明次序相同。 为免除“跨编译单元之初始化次序”问题，请以 local staic 对象替换 non-local static 对象。]]></content>
       <categories>
         <category>泛 - 笔记</category>
       </categories>
       <tags>
-        <tag>读书</tag>
         <tag>Cpp</tag>
+        <tag>读书</tag>
         <tag>笔记</tag>
         <tag>Effective C++</tag>
         <tag>多重范型</tag>
@@ -324,7 +363,7 @@
   <entry>
     <title><![CDATA[动态规划B2——完全背包]]></title>
     <url>%2F2018%2F03%2F01%2Fcp-bp%2F</url>
-    <content type="text"><![CDATA[问题有一个容量为 V 的背包和 N 种物品。每种物品的价值为 Wi 体积为 Ci ，每种物品有无限件，问最大背包价值。 分析此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是 ⌊V/Ci⌋ 件。 由 动态规划B0——01背包 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。F[i, v] = max{ F[i − 1, v − kCi] + kWi | 0 ≤ kCi ≤ v }只需在01背包代码的基础上加一层循环即可，对于状态 F[i, v] 求解的时间复杂度为 O(V/Ci) 所以总的时间复杂度为 O(N∑V/Ci) ，这种解法实际上就是把每种物品拆分为多个物品转化为01背包。 优化0 预处理数据若两件物品 i、j 满足 Ci ≤ Cj 且 Wi ≥ Wj ，则将可以将物品 j 直接去掉，不用考虑。在进入主算法前预处理一遍物品数据即可。对于随机生成的数据，这个方法往往会大大减少物品的件数，从而加快速度。然而这个并不能改善最坏情况的复杂度，因为有可能特别设计的数据可以一件物品也去不掉。 1 二进制思想任何二进制可以表示任何十进制的数，我们可以想一下二进制是如何转成十进制的呢？ 101001 如果你拿到一个这样的二进制数，只需将二进制第 k 位的数乘2的 k-1 次方再求和即可。这样我们可以发现所有的数都可以拆分为若干个2的k次方的和。 有了上面的理论支持，我们可以不必将物品一个一个拆开放入背包，我们可以将它们拆成若干个2的k次方个物品打包放入。 这样我们可以将时间复杂度优化到 O(log ⌊V/Ci⌋ ) ，比之前的 O(N∑V/Ci) 好了很多。 之后的多重背包也有基于此思想的优化。 2 O(VN)###伪代码12for i 1 -&gt; N for j Ci -&gt; V F[i][j] = max&#123;F[j], F[j-Ci] + Wi&#125; 看上去好像与01背包的伪代码几乎一样，只是第二次循环的方向做了变化。 起初我在写背包题目时在网上看到这个算法时，很是不理解。之后在看完 《背包问题九讲》 的讲解和自己手动调试几次后感觉很深刻。我觉得对此算法不理解的可以在充分理解01背包算法后手动调试运行这个算法去理解。 背包九讲中的解释我很喜欢，以我现在的文采我感觉不足以写出更好的解释，我在此引用其中的一段。 为什么这个算法就可行呢？首先想想为什么 01 背包中要按照 v 递减的次序来循环。 让 v 递减是为了保证第 i 次循环中的状态 F[i, v] 是由状态 F[i − 1, v − Ci] 递推而来。 换句话说，这正是为了保证每件物品只选一次，保证在考虑“选入第 i 件物品”这件策略时，依据的是一个绝无已经选入第 i 件物品的子结果 F[i − 1, v − Ci]。而现在完全背 包的特点恰是每种物品可选无限件，所以在考虑“加选一件第 i 种物品”这种策略时，却正需要一个可能已选入第 i 种物品的子结果 F[i, v − Ci]，所以就可以并且必须采用 v 递增的顺序循环。这就是这个简单的程序为何成立的道理。 背包问题九讲 2.0 beta1.2 第6页 这个解释我认为只是在人的思维层面的解释，真正要理解它的运行过程我觉得没有什么比自己跑几遍来的实在。]]></content>
+    <content type="text"><![CDATA[问题有一个容量为 V 的背包和 N 种物品。每种物品的价值为 \(W_i\) 体积为 \(C_i\) ，每种物品有无限件，问最大背包价值。 分析此问题与01背包的差别只在于物品是无限件的，但由于背包容量 V 的限制，实际上物品依然可以理解为有限件，只是件数不再是1而是\( ⌊V/C_i⌋\) 件。 由 动态规划B0——01背包 中给出的状态转移方程加以修改就可以得出完全背包的状态转移方程。\[F[i, v] = max{ F[i − 1, v − kC_i] + kW_i \ \ |\ \ 0 ≤ kC_i ≤ v }\]只需在01背包代码的基础上加一层循环即可，对于状态 \(F[i, v]\) 求解的时间复杂度为 \(O(V/C_i)\) 所以总的时间复杂度为 \(O(N\sum V/C_i)\) ，这种解法实际上就是把每种物品拆分为多个物品转化为01背包。 优化0 预处理数据若两件物品 i、j 满足 \(C_i ≤ C_j 且 W_i ≥ W_j\) ，则将可以将物品 j 直接去掉，不用考虑。在进入主算法前预处理一遍物品数据即可。对于随机生成的数据，这个方法往往会大大减少物品的件数，从而加快速度。然而这个并不能改善最坏情况的复杂度，因为有可能特别设计的数据可以一件物品也去不掉。 1 二进制思想任何二进制可以表示任何十进制的数，我们可以想一下二进制是如何转成十进制的呢？ 101001 如果你拿到一个这样的二进制数，只需将二进制第 k 位的数乘 2 的 k-1 次方再求和即可。这样我们可以发现所有的数都可以拆分为若干个 2 的 k 次方的和。 有了上面的理论支持，我们可以不必将物品一个一个拆开放入背包，我们可以将它们拆成若干个2的k次方个物品打包放入。 这样我们可以将时间复杂度优化到 \(O(log ⌊V/C_i⌋ )\) ，比之前的 \(O(N\sum V/C_i)\) 好了很多。 之后的多重背包也有基于此思想的优化。 2 O(VN)伪代码12for i 1 -&gt; N for j Ci -&gt; V F[i][j] = max&#123;F[j], F[j-Ci] + Wi&#125; 看上去好像与 01 背包的伪代码几乎一样，只是第二次循环的方向做了变化。 起初我在写背包题目时在网上看到这个算法时，很是不理解。之后在看完 《背包问题九讲》 的讲解和自己手动调试几次后感觉很深刻。我觉得对此算法不理解的可以在充分理解 01 背包算法后手动调试运行这个算法去理解。 背包九讲中的解释我很喜欢，以我现在的文采我感觉不足以写出更好的解释，我在此引用其中的一段。 为什么这个算法就可行呢？首先想想为什么 01 背包中要按照 v 递减的次序来循环。 让 v 递减是为了保证第 i 次循环中的状态 \(F[i, v]\) 是由状态 \(F[i − 1, v − Ci]\) 递推而来。 换句话说，这正是为了保证每件物品只选一次，保证在考虑“选入第 i 件物品”这件策略时，依据的是一个绝无已经选入第 i 件物品的子结果 \(F[i − 1, v − Ci]\)。而现在完全背 包的特点恰是每种物品可选无限件，所以在考虑“加选一件第 i 种物品”这种策略时，却正需要一个可能已选入第 i 种物品的子结果 \(F[i, v − Ci]\)，所以就可以并且必须采用 v 递增的顺序循环。这就是这个简单的程序为何成立的道理。 背包问题九讲 2.0 beta1.2 第6页 这个解释我认为只是在人的思维层面的解释，真正要理解它的运行过程我觉得没有什么比自己跑几遍来的实在。]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -338,7 +377,7 @@
   <entry>
     <title><![CDATA[动态规划B1——01背包]]></title>
     <url>%2F2018%2F02%2F23%2F01-bp%2F</url>
-    <content type="text"><![CDATA[问题有一个容量为 V 的背包和 N 件物品。每件物品的价值为 Wi 体积为 Ci ，问最大背包价值。 分析此问题的特点是每件物品只有一件，只能选择放或不放。 动态规划设计有一定的模式，一般分为以下几个步骤，我们按照一般的模式解决此问题。 划分阶段：分解为小的子问题，用 F[i, v] 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。 选择状态：对第 i 件物品是否放入选择。 确定状态转移方程：F[i, v] = max{ F[i−1, v], F[i−1, v−Ci] + Wi } 确定边界：对于每个物品我们只需要更新大于等于其体积的背包容量的状态。 具体实现由状态转移方程，我们可以得出它有两个状态参数，显然我们开一个二维数组记录每个状态的值。 两层循环，外层循环遍历N物品，内层背包容量状态。 伪代码12for i 1 -&gt; N for j Ci -&gt; V F[i][j] = max&#123;F[i-1][j], F[i-1][j-Ci] + Wi&#125; 优化简单分析上面的伪代码可以得出时间复杂度和空间复杂度都为O(NV)，对于空间复杂度我们还可以优化到O(V)。 我们观察状态转移方程，发现当前需要更新的状态只与i-1行的一个状态有关，我们只需保留i-1行中的数据即可。 也就是我们只需要一个一维大小为V+1的数组，我们不断的维护它就可以得到最终答案。这样空间复杂度就可以降到O(V)。 这里需要注意的是这样优化后我们要以递减的顺序去遍历这个数组。因为我们需要 v - ci 的状态，这个状态是在当前 v 之前的，我们以递减顺序去更新它才能取到 i-1 行的 v - ci 的状态数据。 伪代码12for i 1 -&gt; N for j V -&gt; Ci F[j] = max&#123;F[j], F[j-Ci] + Wi&#125; 初始化问题对于背包问题一般会有两种情况，一种是有要求背包“恰好放满”的，另一种是没有要求的。 没有此要求的我们把F数组全部初始化为0，因为初始时也就是不放任何东西时，任何容量的背包价值都为0。 要求“恰好放满”的，我们将F0初始化为0，其他的单元初始化为-∞。负无穷表示不能恰好放满。因为不放任何东西时，容量为0的背包价值刚刚好为0，其他的都不能放满。 为什么是-∞而不是-1呢？这个问题可以自己模拟运行理解。 这里的初始化方案适用于大多数背包问题，之后的背包问题讲解将不再说明初始化方式。]]></content>
+    <content type="text"><![CDATA[问题有一个容量为 V 的背包和 N 件物品。每件物品的价值为 \(W_i\) 体积为 \(C_i\) ，问最大背包价值。 分析此问题的特点是每件物品只有一件，只能选择放或不放。 动态规划设计有一定的模式，一般分为以下几个步骤，我们按照一般的模式解决此问题。 划分阶段：分解为小的子问题，用 \(F[i, v]\) 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。 选择状态：对第 i 件物品是否放入选择。 确定状态转移方程：\(F[i, v] = max{ F[i−1, v], F[i−1, v − C_i] + W_i } \) 确定边界：对于每个物品我们只需要更新大于等于其体积的背包容量的状态。 具体实现由状态转移方程，我们可以得出它有两个状态参数，显然我们开一个二维数组记录每个状态的值。 两层循环，外层循环遍历N物品，内层背包容量状态。 伪代码12for i 1 -&gt; N for j Ci -&gt; V F[i][j] = max&#123;F[i-1][j], F[i-1][j-Ci] + Wi&#125; 优化简单分析上面的伪代码可以得出时间复杂度和空间复杂度都为 O(NV)，对于空间复杂度我们还可以优化到 O(V)。 我们观察状态转移方程，发现当前需要更新的状态只与 \(i - 1\) 行的一个状态有关，我们只需保留 \(i - 1\) 行中的数据即可。 也就是我们只需要一个一维大小为 \(V + 1\) 的数组，我们不断的维护它就可以得到最终答案。这样空间复杂度就可以降到 O(V)。 这里需要注意的是这样优化后我们要以递减的顺序去遍历这个数组。因为我们需要 \(v - C_i\) 的状态，这个状态是在当前 v 之前的，我们以递减顺序去更新它才能取到 \(i - 1\) 行的 \(v - C_i\) 的状态数据。 伪代码12for i 1 -&gt; N for j V -&gt; Ci F[j] = max&#123;F[j], F[j-Ci] + Wi&#125; 初始化问题对于背包问题一般会有两种情况，一种是有要求背包“恰好放满”的，另一种是没有要求的。 没有此要求的我们把F数组全部初始化为 0，因为初始时也就是不放任何东西时，任何容量的背包价值都为 0。 要求“恰好放满”的，我们将 F0 初始化为 0，其他的单元初始化为 -∞。负无穷表示不能恰好放满。因为不放任何东西时，容量为 0 的背包价值刚刚好为 0，其他的都不能放满。 为什么是 -∞ 而不是 -1 呢？这个问题可以自己模拟运行理解。 这里的初始化方案适用于大多数背包问题，之后的背包问题讲解将不再说明初始化方式。]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -400,9 +439,9 @@
         <category>泛 - 书摘</category>
       </categories>
       <tags>
+        <tag>读书</tag>
         <tag>工匠精神</tag>
         <tag>书摘</tag>
-        <tag>读书</tag>
         <tag>摩托车修理店的未来工作哲学</tag>
       </tags>
   </entry>
@@ -417,9 +456,9 @@
         <tag>汇编语言</tag>
         <tag>Cpp</tag>
         <tag>构造函数</tag>
-        <tag>编译器优化</tag>
         <tag>拷贝构造函数</tag>
         <tag>缺省构造函数</tag>
+        <tag>编译器优化</tag>
       </tags>
   </entry>
   <entry>
@@ -430,8 +469,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>ACM</tag>
         <tag>算法</tag>
+        <tag>ACM</tag>
         <tag>题解</tag>
         <tag>DFS</tag>
         <tag>BFS</tag>
@@ -485,9 +524,9 @@
         <tag>题解</tag>
         <tag>DFS</tag>
         <tag>运算符重载</tag>
-        <tag>优先队列</tag>
         <tag>POJ</tag>
         <tag>贪心法</tag>
+        <tag>优先队列</tag>
       </tags>
   </entry>
   <entry>
@@ -514,9 +553,9 @@
         <tag>题解</tag>
         <tag>BFS</tag>
         <tag>图</tag>
-        <tag>最短路径</tag>
         <tag>XUJCOJ</tag>
         <tag>多状态</tag>
+        <tag>最短路径</tag>
         <tag>队列</tag>
       </tags>
   </entry>
@@ -528,8 +567,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>ACM</tag>
         <tag>算法</tag>
+        <tag>ACM</tag>
         <tag>题解</tag>
         <tag>百练</tag>
         <tag>DFS</tag>

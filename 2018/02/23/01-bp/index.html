@@ -90,18 +90,18 @@
 
 
 
-<meta name="description" content="问题有一个容量为 V 的背包和 N 件物品。每件物品的价值为 Wi 体积为 Ci ，问最大背包价值。 分析此问题的特点是每件物品只有一件，只能选择放或不放。 动态规划设计有一定的模式，一般分为以下几个步骤，我们按照一般的模式解决此问题。  划分阶段：分解为小的子问题，用 F[i, v] 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。 选择状态：对第 i 件物品是否放入选择。 确定">
+<meta name="description" content="问题有一个容量为 V 的背包和 N 件物品。每件物品的价值为 \(W_i\) 体积为 \(C_i\) ，问最大背包价值。 分析此问题的特点是每件物品只有一件，只能选择放或不放。 动态规划设计有一定的模式，一般分为以下几个步骤，我们按照一般的模式解决此问题。  划分阶段：分解为小的子问题，用 \(F[i, v]\) 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。 选择状态：对第 i">
 <meta name="keywords" content="算法,动态规划,背包问题,01背包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态规划B1——01背包">
 <meta property="og:url" content="https://pazyx.xyz/2018/02/23/01-bp/index.html">
 <meta property="og:site_name" content="Microwave. Five minutes.">
-<meta property="og:description" content="问题有一个容量为 V 的背包和 N 件物品。每件物品的价值为 Wi 体积为 Ci ，问最大背包价值。 分析此问题的特点是每件物品只有一件，只能选择放或不放。 动态规划设计有一定的模式，一般分为以下几个步骤，我们按照一般的模式解决此问题。  划分阶段：分解为小的子问题，用 F[i, v] 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。 选择状态：对第 i 件物品是否放入选择。 确定">
+<meta property="og:description" content="问题有一个容量为 V 的背包和 N 件物品。每件物品的价值为 \(W_i\) 体积为 \(C_i\) ，问最大背包价值。 分析此问题的特点是每件物品只有一件，只能选择放或不放。 动态规划设计有一定的模式，一般分为以下几个步骤，我们按照一般的模式解决此问题。  划分阶段：分解为小的子问题，用 \(F[i, v]\) 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。 选择状态：对第 i">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-04T17:33:06.615Z">
+<meta property="og:updated_time" content="2018-07-14T17:04:29.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态规划B1——01背包">
-<meta name="twitter:description" content="问题有一个容量为 V 的背包和 N 件物品。每件物品的价值为 Wi 体积为 Ci ，问最大背包价值。 分析此问题的特点是每件物品只有一件，只能选择放或不放。 动态规划设计有一定的模式，一般分为以下几个步骤，我们按照一般的模式解决此问题。  划分阶段：分解为小的子问题，用 F[i, v] 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。 选择状态：对第 i 件物品是否放入选择。 确定">
+<meta name="twitter:description" content="问题有一个容量为 V 的背包和 N 件物品。每件物品的价值为 \(W_i\) 体积为 \(C_i\) ，问最大背包价值。 分析此问题的特点是每件物品只有一件，只能选择放或不放。 动态规划设计有一定的模式，一般分为以下几个步骤，我们按照一般的模式解决此问题。  划分阶段：分解为小的子问题，用 \(F[i, v]\) 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。 选择状态：对第 i">
 
 
 
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  761
+                  764
                 </span>
               
 
@@ -423,24 +423,24 @@
       
 
       
-        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>有一个容量为 V 的背包和 N 件物品。每件物品的价值为 Wi 体积为 Ci ，问最大背包价值。</p>
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>有一个容量为 V 的背包和 N 件物品。每件物品的价值为 \(W_i\) 体积为 \(C_i\) ，问最大背包价值。</p>
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>此问题的特点是每件物品只有一件，只能选择放或不放。 动态规划设计有一定的模式，一般分为以下几个步骤，我们按照一般的模式解决此问题。</p>
 <ul>
-<li>划分阶段：分解为小的子问题，用 F[i, v] 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。</li>
+<li>划分阶段：分解为小的子问题，用 \(F[i, v]\) 表示前 i 件物品放入一个容量为 v 的背包可以获得的最大价值。</li>
 <li>选择状态：对第 i 件物品是否放入选择。</li>
-<li>确定状态转移方程：F[i, v] = max{ F[i−1, v], F[i−1, v−Ci] + Wi }</li>
+<li>确定状态转移方程：\(F[i, v] = max{ F[i−1, v], F[i−1, v − C_i] + W_i } \)</li>
 <li>确定边界：对于每个物品我们只需要更新大于等于其体积的背包容量的状态。</li>
 </ul>
 <h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><p>由状态转移方程，我们可以得出它有两个状态参数，显然我们开一个二维数组记录每个状态的值。 两层循环，外层循环遍历N物品，内层背包容量状态。</p>
-<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i 1 -&gt; N</span><br><span class="line">	for j Ci -&gt; V	F[i][j] = max&#123;F[i-1][j], F[i-1][j-Ci] + Wi&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>简单分析上面的伪代码可以得出时间复杂度和空间复杂度都为O(NV)，对于空间复杂度我们还可以优化到O(V)。 我们观察状态转移方程，发现当前需要更新的状态只与i-1行的一个状态有关，我们只需保留i-1行中的数据即可。 也就是我们只需要一个一维大小为V+1的数组，我们不断的维护它就可以得到最终答案。这样空间复杂度就可以降到O(V)。 这里需要注意的是这样优化后我们要以递减的顺序去遍历这个数组。因为我们需要 v - ci 的状态，这个状态是在当前 v 之前的，我们以递减顺序去更新它才能取到 i-1 行的 v - ci 的状态数据。 </p>
-<h3 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i 1 -&gt; N</span><br><span class="line">	for j V -&gt; Ci	F[j] = max&#123;F[j], F[j-Ci] + Wi&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>伪代码</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i 1 -&gt; N</span><br><span class="line">	for j Ci -&gt; V	F[i][j] = max&#123;F[i-1][j], F[i-1][j-Ci] + Wi&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>简单分析上面的伪代码可以得出时间复杂度和空间复杂度都为 O(NV)，对于空间复杂度我们还可以优化到 O(V)。 我们观察状态转移方程，发现当前需要更新的状态只与 \(i - 1\) 行的一个状态有关，我们只需保留 \(i - 1\) 行中的数据即可。 也就是我们只需要一个一维大小为 \(V + 1\) 的数组，我们不断的维护它就可以得到最终答案。这样空间复杂度就可以降到 O(V)。 这里需要注意的是这样优化后我们要以递减的顺序去遍历这个数组。因为我们需要 \(v - C_i\) 的状态，这个状态是在当前 v 之前的，我们以递减顺序去更新它才能取到 \(i - 1\) 行的 \(v - C_i\) 的状态数据。 </p>
+<p><strong>伪代码</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i 1 -&gt; N</span><br><span class="line">	for j V -&gt; Ci	F[j] = max&#123;F[j], F[j-Ci] + Wi&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="初始化问题"><a href="#初始化问题" class="headerlink" title="初始化问题"></a>初始化问题</h1><p>对于背包问题一般会有两种情况，一种是有要求背包“恰好放满”的，另一种是没有要求的。</p>
 <ul>
-<li>没有此要求的我们把F数组全部初始化为0，因为初始时也就是不放任何东西时，任何容量的背包价值都为0。</li>
-<li>要求“恰好放满”的，我们将F0初始化为0，其他的单元初始化为-∞。负无穷表示不能恰好放满。因为不放任何东西时，容量为0的背包价值刚刚好为0，其他的都不能放满。</li>
+<li>没有此要求的我们把F数组全部初始化为 0，因为初始时也就是不放任何东西时，任何容量的背包价值都为 0。</li>
+<li>要求“恰好放满”的，我们将 F0 初始化为 0，其他的单元初始化为 -∞。负无穷表示不能恰好放满。因为不放任何东西时，容量为 0 的背包价值刚刚好为 0，其他的都不能放满。</li>
 </ul>
-<p>为什么是-∞而不是-1呢？这个问题可以自己模拟运行理解。 这里的初始化方案适用于大多数背包问题，之后的背包问题讲解将不再说明初始化方式。</p>
+<p>为什么是 -∞ 而不是 -1 呢？这个问题可以自己模拟运行理解。 这里的初始化方案适用于大多数背包问题，之后的背包问题讲解将不再说明初始化方式。</p>
 
       
     </div>
@@ -467,7 +467,7 @@
   <p><span>本文标题:</span><a href="/2018/02/23/01-bp/">动态规划B1——01背包</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
   <p><span>发布时间:</span>2018年02月23日 - 02:02</p>
-  <p><span>最后更新:</span>2018年07月05日 - 01:07</p>
+  <p><span>最后更新:</span>2018年07月15日 - 01:07</p>
   <p><span>原始链接:</span><a href="/2018/02/23/01-bp/" title="动态规划B1——01背包">https://pazyx.xyz/2018/02/23/01-bp/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://pazyx.xyz/2018/02/23/01-bp/"  aria-label="复制成功！"></i></span>
   </p>
@@ -696,7 +696,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -707,7 +707,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -718,7 +718,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-count">131</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -812,7 +812,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体实现"><span class="nav-number">3.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#伪代码"><span class="nav-number">3.0.1.</span> <span class="nav-text">伪代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化"><span class="nav-number">4.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#伪代码-1"><span class="nav-number">4.0.1.</span> <span class="nav-text">伪代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化问题"><span class="nav-number">5.</span> <span class="nav-text">初始化问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体实现"><span class="nav-number">3.</span> <span class="nav-text">具体实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化"><span class="nav-number">4.</span> <span class="nav-text">优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化问题"><span class="nav-number">5.</span> <span class="nav-text">初始化问题</span></a></li></ol></div>
             
 
           </div>
@@ -846,7 +846,7 @@
     
       <span class="post-meta-item-text">全站字数统计&#58;</span>
     
-    <span title="全站字数统计">45.9k</span>
+    <span title="全站字数统计">48.0k</span>
   
 
 <!--
