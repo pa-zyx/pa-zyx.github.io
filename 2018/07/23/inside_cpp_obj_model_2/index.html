@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="5gXbjwP2M2lldOIIKUxUCHGm0ZeANFXrPV6LcJ_UpZo" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Microwave. Five minutes." type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="构造函数语义学英文术语表    英文 中文     implicit 暗中的、隐式的（通常意指并非在程序源代码中出现的）   explicit 显式的（通常意指程序源代码中所出现的）   trivial 没用的   nontrivial 有用的   memberwise 对每个 member 施以……   bitwise 对每个 bit 施以……   semantics 语意    关于 C++">
+<meta name="keywords" content="他大概会说你想得太多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「书摘」深度探索 C++ 对象模型（二）">
+<meta property="og:url" content="https://pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/index.html">
+<meta property="og:site_name" content="Microwave. Five minutes.">
+<meta property="og:description" content="构造函数语义学英文术语表    英文 中文     implicit 暗中的、隐式的（通常意指并非在程序源代码中出现的）   explicit 显式的（通常意指程序源代码中所出现的）   trivial 没用的   nontrivial 有用的   memberwise 对每个 member 施以……   bitwise 对每个 bit 施以……   semantics 语意    关于 C++">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-23T05:09:05.472Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「书摘」深度探索 C++ 对象模型（二）">
+<meta name="twitter:description" content="构造函数语义学英文术语表    英文 中文     implicit 暗中的、隐式的（通常意指并非在程序源代码中出现的）   explicit 显式的（通常意指程序源代码中所出现的）   trivial 没用的   nontrivial 有用的   memberwise 对每个 member 施以……   bitwise 对每个 bit 施以……   semantics 语意    关于 C++">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpI"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/"/>
+
+
+
+
+
+  <title>「书摘」深度探索 C++ 对象模型（二） | Microwave. Five minutes.</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-121622821-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Microwave. Five minutes.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">他大概会说你想得太多</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-code">
+          <a href="/code" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Code
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-other">
+          <a href="/other" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Other
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-demo">
+          <a href="/demo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Demo
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pazyx.xyz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EBFFFA.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Microwave. Five minutes.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「书摘」深度探索 C++ 对象模型（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T13:08:42+08:00">
+                2018-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/泛/" itemprop="url" rel="index">
+                    <span itemprop="name">泛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/23/inside_cpp_obj_model_2/" class="leancloud_visitors" data-flag-title="「书摘」深度探索 C++ 对象模型（二）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,081
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="构造函数语义学"><a href="#构造函数语义学" class="headerlink" title="构造函数语义学"></a>构造函数语义学</h1><p><strong>英文术语表</strong></p>
+<table>
+<thead>
+<tr>
+<th>英文</th>
+<th>中文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>implicit</td>
+<td>暗中的、隐式的（通常意指并非在程序源代码中出现的）</td>
+</tr>
+<tr>
+<td>explicit</td>
+<td>显式的（通常意指程序源代码中所出现的）</td>
+</tr>
+<tr>
+<td>trivial</td>
+<td>没用的</td>
+</tr>
+<tr>
+<td>nontrivial</td>
+<td>有用的</td>
+</tr>
+<tr>
+<td>memberwise</td>
+<td>对每个 member 施以……</td>
+</tr>
+<tr>
+<td>bitwise</td>
+<td>对每个 bit 施以……</td>
+</tr>
+<tr>
+<td>semantics</td>
+<td>语意</td>
+</tr>
+</tbody>
+</table>
+<p>关于 C++ ，最常听到的一个抱怨就是，编译器背着程序员做了太多事情。</p>
+<p>关键词 <strong>explicit</strong> 之所以被导入这个语言，就是为了给程序员提供一种方法，使他们能够制止 “单一参数的 constructor“ 被当作一个 conversion 运算符。</p>
+<p>“Schwarz Error” -&gt; <a href="/2018/06/29/cin-return/">basic_ios 如何穿上它的 bool</a></p>
+<p>Conversion 运算符的引入应该是明智的，而其测试应该是严酷的，并且中程序一出现不寻常活动的第一个症候时，就发出疑问。</p>
+<h2 id="Default-Constructor-的构造操作"><a href="#Default-Constructor-的构造操作" class="headerlink" title="Default Constructor 的构造操作"></a>Default Constructor 的构造操作</h2><p>程序的需要、编译器的需要。程序如果有需要，那是程序员的责任。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &#123;</span> <span class="keyword">public</span>: <span class="keyword">int</span> val; Foo *pnext; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo_bar</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Foo bar;</span><br><span class="line">    <span class="keyword">if</span> ( bar.val || bar.pnext )</span><br><span class="line">    	<span class="comment">// ... do something</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>C++ Standard [ISO-C++95] Section 12.1 :<br>对于 class X，如果没用任何 user-declared constructor，那么会有一个 default constructor 被隐式的（ implicitly ）声明出来……一个被隐式声明出来的 default constructor 将是一个 trivial constructor……</p>
+</blockquote>
+<h3 id="“带有-Default-Constructor”-的-Member-Class-Object"><a href="#“带有-Default-Constructor”-的-Member-Class-Object" class="headerlink" title="“带有 Default Constructor” 的 Member Class Object"></a>“带有 Default Constructor” 的 Member Class Object</h3><p>如果一个 class 没有任何 constructor，但它内含一个 member object，而后者有 default constructor，那么这个 class 的 implicit default constructor 就是 “nontrivial” ，编译器需要为改 class 合成出一个 default constructor。<strong>不过这个合成操作只有中 constructor 真正需要被调用时才会发生。</strong></p>
+<p>编译器如何避免合成出多个 default constructor ？<strong>把合成的 default constructor、copy constructor、destructor、assignment copy operator 都以 inline 的方式完成。</strong>如果函数太复杂，不适合做成 inline，就会合成出一个 explicit non-inline static 实例（4.5节有详细说明）</p>
+<p>编译器会扩张已存在的 constructors，在其中安插一些代码，使得 user code 被执行之前，先调用必要的 default constructors。</p>
+<p>C++ 语言要求以 “member objects 在 class 中的声明顺序” 来调用各个 constructors。</p>
+<h3 id="“带有-Default-Constructor”-的-Base-Class"><a href="#“带有-Default-Constructor”-的-Base-Class" class="headerlink" title="“带有 Default Constructor” 的 Base Class"></a>“带有 Default Constructor” 的 Base Class</h3><p>如果一个没有任何 constructor 的 class 派生自一个 “带有 Default Constructor” 的 base class，那么这个 derived class 的 default constructor 会被视为 nontrivial，并因此需要被合成出来。<strong>它将调用上一层 base classes 的 default constructor（根据它们的声明顺序）。对一个后继派生的 class 而言，这个合成的 constructor 和一个 “被显式提供的 default constructor” 没有什么差异。</strong></p>
+<h3 id="“带有-Virtual-Function”-的-Class"><a href="#“带有-Virtual-Function”-的-Class" class="headerlink" title="“带有 Virtual Function” 的 Class"></a>“带有 Virtual Function” 的 Class</h3><p>当 class 声明（或继承）一个 virtual function ，需要合成 nontrivial 的 default constructor。</p>
+<p>“带有 Virtual Function” 的 class 的 default constructor 会有两个扩张行动在编译期间发生：</p>
+<ul>
+<li>一个 virtual function table（在 cfront 中被称为 vtbl ）会被编译器产生出来，内放 class 的  virtual functions 地址。</li>
+<li>在每一个 class object 中，一个额外的 pointer member（也就是 vptr ）会被编译器合成出来，内含相关之 class vtbl 的地址。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// widget.flip() 的转变</span></span><br><span class="line">( *widget.vptr[<span class="number">1</span>] )( &amp;widget )</span><br><span class="line"><span class="comment">// *	1 表示 filp() 在 virtual table 中的固定索引</span></span><br><span class="line"><span class="comment">// * 	&amp;widget 代表要交给“被调用的某个 flip() 函数实例”的this指针</span></span><br></pre></td></tr></table></figure>
+<p>编译器必须为每一个 “带有 Virtual Function” 的 class 的 object 的 vptr 设定初值，放纵适当的 virual table 地址。对于这个 class 所定义的每一个 constructor，编译器会安插一些代码来做这样的事情。 </p>
+<h3 id="“带有-Virtual-Base-Class”-的-Class"><a href="#“带有-Virtual-Base-Class”-的-Class" class="headerlink" title="“带有 Virtual Base Class” 的 Class"></a>“带有 Virtual Base Class” 的 Class</h3><p>class 派生自一个继承串链，其中有一个或更多的 virtual base classes，需要合成 nontrivial 的 default constructor。</p>
+<p>Virtual base class 的实现法在不同的编译器之间有极大的差异。然而，每一种实现法的共同点在于必须使 virtual base class 在其每一个 derived class object 中的位置，能够于执行期准备妥当。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> &#123;</span> <span class="keyword">public</span>: <span class="keyword">int</span> i; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> :</span> pubilc virual X &#123; <span class="keyword">public</span>: <span class="keyword">int</span> j; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> pubilc virual X &#123; <span class="keyword">public</span>: <span class="keyword">double</span> d; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> :</span> <span class="keyword">public</span> A, <span class="keyword">public</span> B &#123; <span class="keyword">public</span>: <span class="keyword">int</span> k &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无法在编译时期决定（resolve）出 pa-&gt;X::i 的位置</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">( <span class="keyword">const</span> A* pa)</span> </span>&#123; pa-&gt;i = <span class="number">1024</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    foo( <span class="keyword">new</span> A );</span><br><span class="line">    foo( <span class="keyword">new</span> C );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相当于下面的代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">( <span class="keyword">const</span> A* pa)</span> </span>&#123; pa-&gt;__vbcX-&gt;i = <span class="number">1024</span>; &#125;</span><br><span class="line"><span class="comment">// __vbcX 表示编译器产生的指针，指向 virtual base class X。</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>有 4 种情况，会造成“编译器必须为未声明 constructor 的 classes 合成一个 default constructor”。</p>
+<ul>
+<li>没有任何 constructor 的 class 内含一个有 default constructor 的 member object</li>
+<li>没有任何 constructor 的 class 派生自一个 “带有 Default Constructor” 的 base class</li>
+<li>当 class 声明（或继承）一个 virtual function</li>
+<li>class 派生自一个继承串链，其中有一个或更多的 virtual base classes</li>
+</ul>
+<p><strong>C++ Standard 把那些合成物称为 implicit nontrivial default constructors。</strong></p>
+<p>C++ 新手两个常见误解：</p>
+<ol>
+<li>任何 class 如果没有定义 default constructor，就会被合成出一个来。</li>
+<li>编译器合成出来的 default constructor 会显式设定 “class 内每一个 data member 的默认值”。</li>
+</ol>
+<h2 id="Copy-Constructor-的构造操作"><a href="#Copy-Constructor-的构造操作" class="headerlink" title="Copy Constructor 的构造操作"></a>Copy Constructor 的构造操作</h2><p>有三种情况，会以一个 object 的内容作为另一个 class object 的初值。<br><code>class X { ... };</code></p>
+<ul>
+<li><code>X xx = x</code></li>
+<li>作为参数交给某个函数 <code>foo( xx );</code></li>
+<li>作为函数返回值 <code>return xx;</code></li>
+</ul>
+<h3 id="Default-Memberwise-Initialization"><a href="#Default-Memberwise-Initialization" class="headerlink" title="Default Memberwise Initialization"></a>Default Memberwise Initialization</h3><p>Default constructors 和 copy constructors 在<strong>必要</strong>的时候<strong>才</strong>由编译器产生出来。<br>对于 copy constructors 必要的时候是指该 class 不展现 bitwise copy semantics 时。</p>
+<p>C++ Standard 把 copy constructors 区分为 trivial 和 nontrivial 两种。只有 nontrivial 的实例被合成于程序之中。</p>
+<h3 id="Bitwise-Copy-Semantics（位逐次拷贝）"><a href="#Bitwise-Copy-Semantics（位逐次拷贝）" class="headerlink" title="Bitwise Copy Semantics（位逐次拷贝）"></a>Bitwise Copy Semantics（位逐次拷贝）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下声明展现了 bitwise copy semantics</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bitwise</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Bitwise(<span class="keyword">int</span> a);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下声明未展现出 bitwise copy semantics</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NonBitwise</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="built_in">string</span> b;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	NonBitwise(v);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>对于后者，编译器必须合成出一个 copy constructor，<strong>以便调用 member class string object 的 copy constructor</strong>。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++ 伪码</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="title">NonBitwise</span><span class="params">(<span class="keyword">const</span> NonBitwise&amp; nb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    b.<span class="built_in">string</span>::<span class="built_in">string</span>(nb.b);</span><br><span class="line">    a = nb.a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="不要-Bitwise-Copy-Semantics-！"><a href="#不要-Bitwise-Copy-Semantics-！" class="headerlink" title="不要 Bitwise Copy Semantics ！"></a>不要 Bitwise Copy Semantics ！</h3><p>class 不展现出 ”bitwise copy semantics“ 的 4 种情况：</p>
+<ul>
+<li>当 class 内含一个 member object 而后者的 class 声明有一个 copy constructos 时（不论时被显式声明或是被合成而得）。</li>
+<li>当 class 继承自一个 base class 而后者存在一个 copy constructor 时（不论时被显式声明或是被合成而得）。</li>
+<li>当 class 声明了一个或多个 virtual functions 时。</li>
+<li>当 class 派生自一个继承串链，其中有一个或多个 virtual base classes 时。</li>
+</ul>
+<h3 id="重新设定-Virtual-Table-的指针"><a href="#重新设定-Virtual-Table-的指针" class="headerlink" title="重新设定 Virtual Table 的指针"></a>重新设定 Virtual Table 的指针</h3><p>当 class 声明了一个或多个 virtual functions 时，编译期间会有两个程序扩张操作：</p>
+<ul>
+<li>增加一个 virtual function table( vtbl )，内含每一个有作用的 virtual function 的地址。</li>
+<li>一个指向 virtual function table 的指针（ vptr ），安插在每一个 class object 内。</li>
+</ul>
+<h3 id="处理-Virtual-Base-Class-Subobject"><a href="#处理-Virtual-Base-Class-Subobject" class="headerlink" title="处理 Virtual Base Class Subobject"></a>处理 Virtual Base Class Subobject</h3><p>如果一个 class 以另一个 object 作为初值，而后者有一个 virtual base class subobject，那么也会使 “bitwise copy semantics” 失效。</p>
+<p>每一个编译器对于虚拟继承的支持承诺，都代表必须让“derived class object 中 virtual base class subobject 位置” 在执行期就准备妥当。维护“位置的完整性”是编译器的责任。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line">...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> <span class="keyword">virtual</span> A&#123;</span><br><span class="line">...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> :</span> <span class="keyword">public</span> B&#123;</span><br><span class="line">...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B ba;</span><br><span class="line">B bb = ba;</span><br><span class="line"><span class="comment">// 这种情况使用 bitwise 就够了</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C ca;</span><br><span class="line">B bb = ca;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">编译器需要合成一个 copy constructor，安插一些代码以设定 virtual base class pointer/offser 的初值（或只是简单地确定它没有被抹消），对每一个 memberwise 执行必要的初始化操作，以及执行其他的内存相关工作。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="程序转化语意学（Program-Transformation-Semantics）"><a href="#程序转化语意学（Program-Transformation-Semantics）" class="headerlink" title="程序转化语意学（Program Transformation Semantics）"></a>程序转化语意学（Program Transformation Semantics）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"X.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">X <span class="title">foo</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    X xx;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">return</span> xx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两个假设：</p>
+<ul>
+<li>每次 <code>foo()</code> 被调用，就传回 <code>xx</code> 的值。</li>
+<li>如果 <code>class X</code> 定义了一个 copy constructor，那么当 <code>foo()</code> 被调用时，保证该 copy constructor 也会被调用。</li>
+</ul>
+<ul>
+<li>第一个假设的真实性，必须视 <code>class X</code> 如何定义而定。</li>
+<li>第二个假设的真实性，虽然也部分地必须视 <code>class X</code> 如何定义而定，但最主要的还是视你的 C++ 编译器所提供的进取性优化层级（degree of aggressive optimization）而定。</li>
+</ul>
+<h3 id="显式的初始化操作（Explicit-Initialization）"><a href="#显式的初始化操作（Explicit-Initialization）" class="headerlink" title="显式的初始化操作（Explicit Initialization）"></a>显式的初始化操作（Explicit Initialization）</h3><p>在严谨的 C++ 用词中，“定义” 是指 “占用内存” 的行为。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">X <span class="title">x1</span><span class="params">( x0 )</span></span>;</span><br><span class="line">X x2 = x0;</span><br><span class="line">X x3 = X( x0 );</span><br></pre></td></tr></table></figure>
+<p>转化为 -&gt; </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">X x1;</span><br><span class="line">X x2;</span><br><span class="line">X x3;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译器安插 X copy construction 的调用操作</span></span><br><span class="line">X1.X::X( x0 );</span><br><span class="line">X2.X::X( x0 );</span><br><span class="line">X3.X::X( x0 );</span><br></pre></td></tr></table></figure>
+<h3 id="参数的初始化（Argument-Initialization）"><a href="#参数的初始化（Argument-Initialization）" class="headerlink" title="参数的初始化（Argument Initialization）"></a>参数的初始化（Argument Initialization）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">( X x0 )</span></span>;</span><br><span class="line"></span><br><span class="line">X xx;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">foo( xx );</span><br></pre></td></tr></table></figure>
+<p><strong>第一种编译器实现的转化代码</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">X __temp0;</span><br><span class="line"></span><br><span class="line">__temp0.X::X( xx );</span><br><span class="line">foo( __temp0 );</span><br></pre></td></tr></table></figure></p>
+<p>要求局部实例（local instance）x0 以 memberwise 的方式将 xx 当做初值。导入临时性 object，并调用 copy constructor 将它初始化，然后将此临时性 object 交给函数。但这里 <code>foo()</code> 函数声明将改变为 <code>void foo( X&amp; x0 )</code>。在函数执行完成后 <code>class X</code> 的 destrucor 将会被调用，对付那个临时性的 object 。</p>
+<p><strong>第二种编译器实现</strong><br>以 “拷贝建构”（copy construct）的方式把实际参数直接建构在其应该的位置上。</p>
+<h3 id="返回值的初始化（Return-Value-Initialization）"><a href="#返回值的初始化（Return-Value-Initialization）" class="headerlink" title="返回值的初始化（Return Value Initialization）"></a>返回值的初始化（Return Value Initialization）</h3><h4 id="cfront-中的双阶段转化"><a href="#cfront-中的双阶段转化" class="headerlink" title="cfront 中的双阶段转化"></a>cfront 中的双阶段转化</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">X <span class="title">bar</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	X xx;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	<span class="keyword">return</span> xx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>转化为 -&gt;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bar</span><span class="params">( X&amp; __result )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    X xx;</span><br><span class="line">    </span><br><span class="line">    xx.X::X();</span><br><span class="line">    <span class="comment">// ... </span></span><br><span class="line">    __result.X::X(xx);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>X xx = bar();</code> 的操作将被转化为 <code>X xx; bar( xx );</code>。</p>
+<p><code>bar().memfunc();</code> 可能被转化为 -&gt;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X __temp0;</span><br><span class="line">( bar( __temp0 ), __temp0 ).memfunc();</span><br></pre></td></tr></table></figure></p>
+<h3 id="在使用者层面做优化（Optimization-at-the-User-Level）"><a href="#在使用者层面做优化（Optimization-at-the-User-Level）" class="headerlink" title="在使用者层面做优化（Optimization at the User Level）"></a>在使用者层面做优化（Optimization at the User Level）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">X <span class="title">bar</span><span class="params">( <span class="keyword">const</span> T &amp;y, <span class="keyword">const</span> T &amp;z )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    X xx;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">return</span> xx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>bar()</code> 函数会要求 <code>xx</code> 被 “memberwise” 地拷贝到编译器所产生的 <code>__result</code> 之中。<br><em>Jonathan Shopiro</em> 提出定义另一个 constructor，可以直接计算 <code>xx</code> 的值。<br>上面的代码转化为 -&gt;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">X <span class="title">bar</span><span class="params">( <span class="keyword">const</span> T &amp;y, <span class="keyword">const</span> T &amp;z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> X( y,z );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译器会将其转化为 -&gt;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">X <span class="title">bar</span><span class="params">( X &amp;__result, <span class="keyword">const</span> T &amp;y, <span class="keyword">const</span> T &amp;z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	__result.X::X( y,z );</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>__result</code> 被直接计算出来，而不是经由 copy constructor 拷贝而得！</p>
+<h3 id="在编译器层面做优化（Optimization-at-the-Compiler-Level）"><a href="#在编译器层面做优化（Optimization-at-the-Compiler-Level）" class="headerlink" title="在编译器层面做优化（Optimization at the Compiler Level）"></a>在编译器层面做优化（Optimization at the Compiler Level）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">X <span class="title">bar</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	X xx;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	<span class="keyword">return</span> xx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>转化为 -&gt;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bar</span><span class="params">( X&amp; __result )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __result.X::X();</span><br><span class="line">	<span class="comment">// ... </span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种优化，有时候被称为 Named Return Value ( NRV ) 优化。NRV 优化如今被视为标准 C++ 编译器的一个义不容辞的优化操作。</p>
+<p>// 本书对 NRV 的优化性能测试有一些错误，这部分不做摘录。</p>
+<p>NRV 优化的争议：</p>
+<ul>
+<li>优化由编译器完成，而它是否真的被完成，并不是十分清楚。</li>
+<li>一旦函数变得比较复杂，优化也会变得比较难以实施。</li>
+<li>程序员不能够安全地规划自己的 copy constructor 的副作用。</li>
+</ul>
+<p>一般而言，面对 “以一个 class object 作为另一个 class object 的初值” 的情形，语言允许编译器有大量的自由发挥空间。</p>
+<h3 id="Copy-Constructor：要还是不要？"><a href="#Copy-Constructor：要还是不要？" class="headerlink" title="Copy Constructor：要还是不要？"></a>Copy Constructor：要还是不要？</h3><p>class 的 default copy constructor 被视为 trivial 的情况下不声明 explicit copy constructor 既快速又安全。在需要 NRV 优化时，可以考虑实现 copy constructor，可以使用 <code>memcpy()</code> 来拷贝提高效率。</p>
+<p>不管使用 <code>memcpy()</code> 还是 <code>memset()</code>，都只有在“classes 不含任何由编译器产生的那部 members ” 时才能有效运行。</p>
+<h2 id="成员们的初始化队伍（Member-Initialization-List）"><a href="#成员们的初始化队伍（Member-Initialization-List）" class="headerlink" title="成员们的初始化队伍（Member Initialization List）"></a>成员们的初始化队伍（Member Initialization List）</h2><p>必须使用 member initialization list 的情况</p>
+<ul>
+<li>当初始化一个 reference member 时；</li>
+<li>当初始化一个 const member 时；</li>
+<li>当调用一个 base class 的 constructor，而它拥有一组参数时；</li>
+<li>当调用一个 member class 的 constructor，而它拥有一组参数时。</li>
+</ul>
+<p>编译器会一一操作 initialization list，以适当顺序中 constructor 之内安插初始化操作，并且<strong>在任何 explicit user code 之前</strong>。</p>
+<p>在 initialization list 中使用 member function 使用是合法的，这是因为和此 object 相关的 this 指针已经被建构妥当。</p>
+<p>如果在 initialization list 中调用 derived class member function ，其返回值被当做 base class constructor 的一个参数。那不一定是个好主意，因为 derived class member function 可能要用到的 derived class member 在 base class 的 constructor 之后才被初始化。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.cnblogs.com/autosar/archive/2011/10/09/2204181.html" target="_blank" rel="noopener">关于NRV优化</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+
+
+
+
+
+
+
+<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/07/23/inside_cpp_obj_model_2/">「书摘」深度探索 C++ 对象模型（二）</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
+  <p><span>发布时间:</span>2018年07月23日 - 13:07</p>
+  <p><span>最后更新:</span>2018年07月23日 - 13:07</p>
+  <p><span>原始链接:</span><a href="/2018/07/23/inside_cpp_obj_model_2/" title="「书摘」深度探索 C++ 对象模型（二）">https://pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-SA 4.0)">署名-非商业性使用-相同方式分享 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){SA
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+</div>
+
+
+
+
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="pazyx.xyz 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="pazyx.xyz 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/21/mac_os_disaster/" rel="next" title="macOS 灾难">
+                <i class="fa fa-chevron-left"></i> macOS 灾难
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/EBFFFA.png"
+                alt="pazyx.xyz" />
+            
+              <p class="site-author-name" itemprop="name">pazyx.xyz</p>
+              <p class="site-description motion-element" itemprop="description">他大概会说你想得太多</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">134</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pa-zyx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/9953731/jntye" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="pazyx728@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://wszyx.org/" title="wszyx.org" target="_blank">wszyx.org</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wdxtub.com" title="小土刀" target="_blank">小土刀</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://120.79.224.249" title="金明的ACM小队" target="_blank">金明的ACM小队</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://biji.io" title="设计笔记" target="_blank">设计笔记</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数语义学"><span class="nav-number">1.</span> <span class="nav-text">构造函数语义学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Default-Constructor-的构造操作"><span class="nav-number">1.1.</span> <span class="nav-text">Default Constructor 的构造操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#“带有-Default-Constructor”-的-Member-Class-Object"><span class="nav-number">1.1.1.</span> <span class="nav-text">“带有 Default Constructor” 的 Member Class Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“带有-Default-Constructor”-的-Base-Class"><span class="nav-number">1.1.2.</span> <span class="nav-text">“带有 Default Constructor” 的 Base Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“带有-Virtual-Function”-的-Class"><span class="nav-number">1.1.3.</span> <span class="nav-text">“带有 Virtual Function” 的 Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“带有-Virtual-Base-Class”-的-Class"><span class="nav-number">1.1.4.</span> <span class="nav-text">“带有 Virtual Base Class” 的 Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.1.5.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Copy-Constructor-的构造操作"><span class="nav-number">1.2.</span> <span class="nav-text">Copy Constructor 的构造操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Default-Memberwise-Initialization"><span class="nav-number">1.2.1.</span> <span class="nav-text">Default Memberwise Initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitwise-Copy-Semantics（位逐次拷贝）"><span class="nav-number">1.2.2.</span> <span class="nav-text">Bitwise Copy Semantics（位逐次拷贝）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要-Bitwise-Copy-Semantics-！"><span class="nav-number">1.2.3.</span> <span class="nav-text">不要 Bitwise Copy Semantics ！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新设定-Virtual-Table-的指针"><span class="nav-number">1.2.4.</span> <span class="nav-text">重新设定 Virtual Table 的指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理-Virtual-Base-Class-Subobject"><span class="nav-number">1.2.5.</span> <span class="nav-text">处理 Virtual Base Class Subobject</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序转化语意学（Program-Transformation-Semantics）"><span class="nav-number">1.3.</span> <span class="nav-text">程序转化语意学（Program Transformation Semantics）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显式的初始化操作（Explicit-Initialization）"><span class="nav-number">1.3.1.</span> <span class="nav-text">显式的初始化操作（Explicit Initialization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数的初始化（Argument-Initialization）"><span class="nav-number">1.3.2.</span> <span class="nav-text">参数的初始化（Argument Initialization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值的初始化（Return-Value-Initialization）"><span class="nav-number">1.3.3.</span> <span class="nav-text">返回值的初始化（Return Value Initialization）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cfront-中的双阶段转化"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">cfront 中的双阶段转化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在使用者层面做优化（Optimization-at-the-User-Level）"><span class="nav-number">1.3.4.</span> <span class="nav-text">在使用者层面做优化（Optimization at the User Level）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在编译器层面做优化（Optimization-at-the-Compiler-Level）"><span class="nav-number">1.3.5.</span> <span class="nav-text">在编译器层面做优化（Optimization at the Compiler Level）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Copy-Constructor：要还是不要？"><span class="nav-number">1.3.6.</span> <span class="nav-text">Copy Constructor：要还是不要？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成员们的初始化队伍（Member-Initialization-List）"><span class="nav-number">1.4.</span> <span class="nav-text">成员们的初始化队伍（Member Initialization List）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pazyx.xyz</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">全站字数统计&#58;</span>
+    
+    <span title="全站字数统计">51.1k</span>
+  
+
+<!--
+
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/';
+          this.page.identifier = '2018/07/23/inside_cpp_obj_model_2/';
+          this.page.title = '「书摘」深度探索 C++ 对象模型（二）';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://pazyx-xyz.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7cTegp3KYMtc2W0V2u63CUlJ-gzGzoHsz", "bDS8nx2LWwUeyou9BfjypwGu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
