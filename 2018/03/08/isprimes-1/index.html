@@ -83,19 +83,19 @@
 
 
 
-<meta name="description" content="试除法对每个整数 i ，用 2 到 √i 的所有质数去试除它。  代码Ubuntu Pastebin : https://paste.ubuntu.com/p/wmGwPfGvGW/12345678910111213141516171819int primes[MAX_PRIMES];int trial_division(int N)&amp;#123;    int nPrimes = 0;    fo">
+<meta name="description" content="试除法对每个整数 i ，用 2 到 \(\sqrt{i}\) 的所有质数去试除它。  代码Ubuntu Pastebin : https://paste.ubuntu.com/p/wmGwPfGvGW/12345678910111213141516171819int primes[MAX_PRIMES];int trial_division(int N)&amp;#123;    int nPrimes">
 <meta name="keywords" content="算法,质数,求质数表,试除法,埃氏筛法,优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="求质数表1——朴素算法">
 <meta property="og:url" content="https://pazyx.xyz/2018/03/08/isprimes-1/index.html">
 <meta property="og:site_name" content="Microwave. Five minutes.">
-<meta property="og:description" content="试除法对每个整数 i ，用 2 到 √i 的所有质数去试除它。  代码Ubuntu Pastebin : https://paste.ubuntu.com/p/wmGwPfGvGW/12345678910111213141516171819int primes[MAX_PRIMES];int trial_division(int N)&amp;#123;    int nPrimes = 0;    fo">
+<meta property="og:description" content="试除法对每个整数 i ，用 2 到 \(\sqrt{i}\) 的所有质数去试除它。  代码Ubuntu Pastebin : https://paste.ubuntu.com/p/wmGwPfGvGW/12345678910111213141516171819int primes[MAX_PRIMES];int trial_division(int N)&amp;#123;    int nPrimes">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wszyx.org/wp-content/uploads/2018/03/Sieve_of_Eratosthenes_animation.gif">
-<meta property="og:updated_time" content="2018-07-04T17:34:37.680Z">
+<meta property="og:updated_time" content="2018-07-26T11:54:38.676Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="求质数表1——朴素算法">
-<meta name="twitter:description" content="试除法对每个整数 i ，用 2 到 √i 的所有质数去试除它。  代码Ubuntu Pastebin : https://paste.ubuntu.com/p/wmGwPfGvGW/12345678910111213141516171819int primes[MAX_PRIMES];int trial_division(int N)&amp;#123;    int nPrimes = 0;    fo">
+<meta name="twitter:description" content="试除法对每个整数 i ，用 2 到 \(\sqrt{i}\) 的所有质数去试除它。  代码Ubuntu Pastebin : https://paste.ubuntu.com/p/wmGwPfGvGW/12345678910111213141516171819int primes[MAX_PRIMES];int trial_division(int N)&amp;#123;    int nPrimes">
 <meta name="twitter:image" content="http://wszyx.org/wp-content/uploads/2018/03/Sieve_of_Eratosthenes_animation.gif">
 
 
@@ -393,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  518
+                  529
                 </span>
               
 
@@ -418,20 +418,20 @@
       
 
       
-        <h1 id="试除法"><a href="#试除法" class="headerlink" title="试除法"></a>试除法</h1><p><strong>对每个整数 i ，用 2 到 √i 的所有质数去试除它。</strong> </p>
+        <h1 id="试除法"><a href="#试除法" class="headerlink" title="试除法"></a>试除法</h1><p><strong>对每个整数 i ，用 2 到 \(\sqrt{i}\) 的所有质数去试除它。</strong> </p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/p/wmGwPfGvGW/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/wmGwPfGvGW/</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> primes[MAX_PRIMES];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trial_division</span><span class="params">(<span class="keyword">int</span> N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nPrimes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; i++)&#123;</span><br><span class="line">        <span class="keyword">bool</span> ok = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> u = <span class="number">0</span>; u &lt; nPrimes; u++)&#123;</span><br><span class="line">            <span class="keyword">int</span> p = primes[u];</span><br><span class="line">            <span class="keyword">if</span>(p * p &gt; i) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span>(i % p == <span class="number">0</span>)&#123;</span><br><span class="line">                ok = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(ok) primes[nPrimes++] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nPrimes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>O[ N√N / (logN)^2 ] 检查N个数每个数检查到它的平方根，1 / logN是质数的密度，只用质数去试除所以乘1 / logN，只有质数可以完全经受住考验再乘1 / logN。 O[ N√N / (logN)^2 ] ≈  N^1.5。</p>
-<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>N以内质数的密度为 1 / logN ，所以primes数组需要开到 O( N / logN)。  </p>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>\(O(\frac{N\sqrt{N}} { (logN)^2})\) 检查N个数每个数检查到它的平方根，\(\frac{1}{logN}\) 是质数的密度，只用质数去试除所以乘 \(\frac{1}{logN}\)，只有质数可以完全经受住考验再乘 \(\frac{1}{logN}\)。<br>$$O(\frac{N\sqrt{N}} { (logN)^2}) ≈  N^{1.5}$$</p>
+<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>N以内质数的密度为 \(\frac{1}{logN}\) ，所以 primes 数组需要开到 \(\frac{N}{logN}\)。  </p>
 <h1 id="埃氏筛法"><a href="#埃氏筛法" class="headerlink" title="埃氏筛法"></a>埃氏筛法</h1><p>埃拉托色尼筛选法(the Sieve of Eratosthenes)简称埃氏筛法，是古希腊数学家埃拉托色尼(Eratosthenes 274B.C.～194B.C.)提出的一种筛选法。 <strong>枚举每个因子，看哪些数可以整除它，划掉它。</strong> </p>
 <h2 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h2><p><img src="http://wszyx.org/wp-content/uploads/2018/03/Sieve_of_Eratosthenes_animation.gif" alt=""><br>图片来自<a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes" target="_blank" rel="noopener">维基百科</a></p>
 <h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/p/cymfGPHgMW/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/cymfGPHgMW/</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> flag[MAX_N + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">eratosthenes</span><span class="params">(<span class="keyword">int</span> N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>( flag, <span class="literal">true</span>, (N + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="keyword">bool</span>));</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> p = <span class="number">2</span>; p * p &lt;= N; p++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(flag[p])&#123;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> x = p * p; x &lt;= N; x += p)&#123;</span><br><span class="line">                flag[x] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> nPrimes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(flag[i])&#123;</span><br><span class="line">            primes[nPrimes++] = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nPrimes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="为什么x从-p-p-开始呢？"><a href="#为什么x从-p-p-开始呢？" class="headerlink" title="为什么x从 p * p 开始呢？"></a>为什么x从 p * p 开始呢？</h2><p>因为p <em> (p-i) ( 1 ≤ i ≤ p ) 的数已经在之前划掉过了，比如在检查 3 时，不需要划掉 3 </em> 2 因为在检查 2 的时候已经划过了。 <strong>为什么 p 到 √N 截止？</strong> 因为内层循环中的 x 是从 p * p 开始的，p 大于 √N 时就不能划掉更多的数了，没有意义。 </p>
-<h2 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>N/2 + N/3 + N/5 + N/7 + …… = O( N logN logN ) </p>
+<h2 id="为什么-x-从-p-p-开始呢？"><a href="#为什么-x-从-p-p-开始呢？" class="headerlink" title="为什么 x 从 p * p 开始呢？"></a>为什么 x 从 p * p 开始呢？</h2><p>因为数 p * (p-i) ( 1 ≤ i ≤ p ) 已经在之前划掉过了，比如在检查 3 时，不需要划掉 3 * 2 因为在检查 2 的时候已经划过了。 <strong>为什么 p 到 \(\sqrt{N}\)  截止？</strong> 因为内层循环中的 x 是从 p * p 开始的，\( p &gt; sqrt{N}\) 时就不能划掉更多的数了，没有意义。 </p>
+<h2 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>$$\frac{N}{2} + \frac{N}{3} + \frac{N}{5} + \frac{N}{7} + …… = O( N loglogN ) $$</p>
 <h3 id="证明参考"><a href="#证明参考" class="headerlink" title="证明参考"></a>证明参考</h3><ul>
 <li><a href="https://www.zhihu.com/question/21105642" target="_blank" rel="noopener">https://www.zhihu.com/question/21105642</a> </li>
 <li><a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes</a> </li>
 </ul>
-<h2 id="空间复杂度-1"><a href="#空间复杂度-1" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>N 个单位的 bool 数组，空间复杂度为 O(N) 。</p>
+<h2 id="空间复杂度-1"><a href="#空间复杂度-1" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>N 个单位的 bool 数组，空间复杂度为 \(O(N)\) 。</p>
 
       
     </div>
@@ -458,7 +458,7 @@
   <p><span>本文标题:</span><a href="/2018/03/08/isprimes-1/">求质数表1——朴素算法</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
   <p><span>发布时间:</span>2018年03月08日 - 09:03</p>
-  <p><span>最后更新:</span>2018年07月05日 - 01:07</p>
+  <p><span>最后更新:</span>2018年07月26日 - 19:07</p>
   <p><span>原始链接:</span><a href="/2018/03/08/isprimes-1/" title="求质数表1——朴素算法">https://pazyx.xyz/2018/03/08/isprimes-1/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://pazyx.xyz/2018/03/08/isprimes-1/"  aria-label="复制成功！"></i></span>
   </p>
@@ -723,7 +723,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-count">140</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -817,7 +817,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#试除法"><span class="nav-number">1.</span> <span class="nav-text">试除法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">1.2.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度"><span class="nav-number">1.3.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#埃氏筛法"><span class="nav-number">2.</span> <span class="nav-text">埃氏筛法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#动画演示"><span class="nav-number">2.1.</span> <span class="nav-text">动画演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么x从-p-p-开始呢？"><span class="nav-number">2.3.</span> <span class="nav-text">为什么x从 p * p 开始呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度-1"><span class="nav-number">2.4.</span> <span class="nav-text">时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#证明参考"><span class="nav-number">2.4.1.</span> <span class="nav-text">证明参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度-1"><span class="nav-number">2.5.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#试除法"><span class="nav-number">1.</span> <span class="nav-text">试除法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">1.2.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度"><span class="nav-number">1.3.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#埃氏筛法"><span class="nav-number">2.</span> <span class="nav-text">埃氏筛法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#动画演示"><span class="nav-number">2.1.</span> <span class="nav-text">动画演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么-x-从-p-p-开始呢？"><span class="nav-number">2.3.</span> <span class="nav-text">为什么 x 从 p * p 开始呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度-1"><span class="nav-number">2.4.</span> <span class="nav-text">时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#证明参考"><span class="nav-number">2.4.1.</span> <span class="nav-text">证明参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度-1"><span class="nav-number">2.5.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -851,7 +851,7 @@
     
       <span class="post-meta-item-text">全站字数统计&#58;</span>
     
-    <span title="全站字数统计">51.8k</span>
+    <span title="全站字数统计">52.2k</span>
   
 
 <!--
