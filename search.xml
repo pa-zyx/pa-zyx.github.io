@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[算法训练营解题总结（第一周）//ToDo]]></title>
+    <url>%2F2018%2F08%2F04%2Falgor_club_code_1%2F</url>
+    <content type="text"><![CDATA[题目大意 &amp; 代码实现栈简单的栈实现，我使用数组实现，可以使用 vector 代替数组。日常可以直接使用 STL 库中的 stack 类，但其无法进行 “call by rank” 的访问。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960#include &lt;bits/stdc++.h&gt;//#include &lt;iostream&gt;//#include &lt;string&gt;//#include &lt;cstdio&gt;using namespace std;// ================= 代码实现开始 =================/* 请在这里定义你需要的全局变量 */int mtop = -1;string mstack[100005];// 压入栈顶// name：被压入的人的姓名void push(string name) &#123; mtop++; mstack[mtop] = name; /* 请在这里设计你的算法 */&#125;// 弹出栈顶// 返回值：被弹出人的姓名string pop() &#123; if(mtop &gt; -1)&#123; mtop--; &#125; return mstack[mtop+1]; /* 请在这里设计你的算法 */&#125;// 询问栈中某个位置上的人的姓名（栈底位置为1，向栈顶方向的位置依次递增）// pos：询问的位置// 返回值：pos位置上人的姓名string query(int pos) &#123; /* 请在这里设计你的算法 */ return mstack[pos-1];&#125;// ================= 代码实现结束 =================int main() &#123; int n; scanf("%d", &amp;n); char name[20]; for (; n--; ) &#123; int op; scanf("%d", &amp;op); if (op == 1) &#123; scanf("%s", name); push(name); &#125; else if (op == 2) &#123; printf("%s\n", pop().c_str()); &#125; else &#123; int pos; scanf("%d", &amp;pos); printf("%s\n", query(pos).c_str()); &#125; &#125; return 0;&#125; 队列简单的队列实现，这个队列问题很大，就是元素出队后的空间无法回收，造成无法持续使用，占用空间大的问题。题目要求较低。应该使用链表或循环数组实现。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include &lt;bits/stdc++.h&gt;//#include &lt;iostream&gt;//#include &lt;string&gt;//#include &lt;cstdio&gt;using namespace std;// ================= 代码实现开始 =================/* 请在这里定义你需要的全局变量 */int q = 0;int h = 0;string mque[100005];// 队尾入队// name：入队人的姓名void enqueue(string name) &#123; mque[h] = name; h++; /* 请在这里设计你的算法 */&#125;// 队首出队// 返回值：队首的姓名string dequeue() &#123; q++; /* 请在这里设计你的算法 */ return mque[q-1];&#125;// 询问队列中某个位置上的人的姓名（队首位置为1，往后位置依次递增）// pos：询问的位置// 返回值：pos位置上人的姓名string query(int pos) &#123; return mque[q+pos-1]; /* 请在这里设计你的算法 */&#125;// ================= 代码实现结束 =================int main() &#123; int n; scanf("%d", &amp;n); char name[20]; for (; n--; ) &#123; int op; scanf("%d", &amp;op); if (op == 1) &#123; scanf("%s", name); enqueue(name); &#125; else if (op == 2) &#123; printf("%s\n", dequeue().c_str()); &#125; else &#123; int pos; scanf("%d", &amp;pos); printf("%s\n", query(pos).c_str()); &#125; &#125; return 0;&#125; 二叉树实现并维护二叉搜索树，并输出其前序和后序遍历。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091#include &lt;bits/stdc++.h&gt;//#include &lt;cstdio&gt;//#include &lt;iostream&gt;//#include &lt;vector&gt;//#include &lt;string.h&gt;using namespace std;const int N = 100005;struct node &#123; int val; node* l; node* r; node():val(0),l(nullptr),r(nullptr)&#123;&#125; &#125;;node* root = nullptr;void insert(int v, node*&amp; x)&#123; if(x == 0)&#123; x = new node(); //cout &lt;&lt; x &lt;&lt; endl; x-&gt;l = nullptr; x-&gt;r = nullptr; x-&gt;val = v; return; &#125; if (v &lt;= x-&gt;val) &#123; insert(v,x-&gt;l); &#125; else if (v &gt; x-&gt;val) &#123; insert(v,x-&gt;r); &#125; return;&#125;void dlr( node* x, vector&lt;int&gt; &amp;ans) &#123; if(x)&#123; ans.push_back(x-&gt;val); dlr(x-&gt;l,ans); dlr(x-&gt;r,ans); &#125;&#125;void lrd( node* x, vector&lt;int&gt; &amp;ans)&#123; if(x)&#123; lrd(x-&gt;l,ans); lrd(x-&gt;r,ans); ans.push_back(x-&gt;val); &#125;&#125;vector&lt;int&gt; getAnswer(int n, vector&lt;int&gt; sequence) &#123; for( int i = 0; i &lt; int(sequence.size()); ++i) insert(sequence[i],root); vector&lt;int&gt; ans; dlr(root,ans); lrd(root,ans); return ans;&#125;// ================= 代码实现结束 =================int main() &#123; int n; scanf("%d", &amp;n); vector&lt;int&gt; sequence; for (int i = 0; i &lt; n; ++i) &#123; int x; scanf("%d", &amp;x); sequence.push_back(x); &#125; vector&lt;int&gt; ans = getAnswer(n, sequence); //cout &lt;&lt; ans.size() &lt;&lt; endl; for (int i = 0; i &lt; n; ++i)&#123; printf("%d%c", ans[i], " \n"[i == n - 1]); &#125; for (int i = 0; i &lt; n; ++i)&#123; printf("%d%c", ans[n + i], " \n"[i == n - 1]); &#125; return 0;&#125; 数字盒子Hash Map 实现，由于我的问题，没有去实现，使用了STL库中的 map 类，周末会补充 Hash Map 的实现。 123456789101112131415161718192021222324252627282930313233343536373839404142434445#include &lt;bits/stdc++.h&gt;//#include &lt;map&gt;using namespace std;// ================= 代码实现开始 =================typedef long long ll;/* 请在这里定义你需要的全局变量 */// 执行操作时会调用这个函数// op：对应该次操作的 op（具体请见题目描述）// x：对应该次操作的 x（具体请见题目描述）// 返回值：如果输出为"Succeeded"，则这个函数返回 1，否则返回 0map&lt;ll,bool&gt; Map;bool check(int op, ll x) &#123; if(op == 1)&#123; if(Map[x])&#123; return false; &#125;else&#123; Map[x] = true; return true; &#125; &#125;else&#123; if(Map[x])&#123; Map[x] = false; return true; &#125; return Map[x]; &#125; /* 请在这里设计你的算法 */&#125;// ================= 代码实现结束 =================int main() &#123; int Q, op; ll x; scanf("%d", &amp;Q); while (Q--) &#123; scanf("%d%lld", &amp;op, &amp;x); puts(check(op, x) ? "Succeeded" : "Failed"); &#125; return 0;&#125; 重编码哈夫曼编码问题，合并森林。与 POJ 3253 Fence Repair 相似。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include &lt;bits/stdc++.h&gt;//#include &lt;queue&gt;using namespace std;// ================= 代码实现开始 =================typedef long long ll;/* 请在这里定义你需要的全局变量 */// 这是求解整个问题的函数// w：题目描述中的 w（所有）// n：题目描述中的 n// 返回值：答案priority_queue&lt;ll, vector&lt;ll&gt;, greater&lt;ll&gt; &gt; q; ll getAnswer(int n, vector&lt;ll&gt; w) &#123; for( int i = 0; i &lt; n; i++)&#123; //把n块木板的长度入队 q.push(w[i]); &#125; ll sum = 0; while(q.size() &gt; 1)&#123; //如果还没有合成一块木板就继续合并 ll minOne,minTwo; minOne = q.top(); q.pop(); minTwo = q.top(); q.pop(); //从队头拿出两个最短的木板 sum += (minOne + minTwo); //加上这次合并的开销 q.push(minOne+minTwo); //将合并后的木板入队 &#125; return sum;&#125;// ================= 代码实现结束 =================int main() &#123; int n; scanf("%d", &amp;n); vector&lt;long long&gt; w; for (int i = 0; i &lt; n; ++i) &#123; long long x; scanf("%lld", &amp;x); w.push_back(x); &#125; printf("%lld\n", getAnswer(n, w)); return 0;&#125; 成绩排序排序并输出逆序对数目，使用冒泡排序在每次交换记数。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495#include &lt;bits/stdc++.h&gt;using namespace std;// ================= 代码实现开始 =================/* 请在这里定义你需要的全局变量 */// 这是进行排序的函数// n：题目描述中的 n// A：各同学的算法训练营成绩// DS：各同学的数据结构训练营成绩// 返回值：将要输出的数字依次加入到返回值的数组中class student&#123;public: int id; int algorithm,dataStruct; int score; student()&#123;&#125; student(int i,int a,int d):id(i),algorithm(a),dataStruct(d),score(a+d)&#123;&#125;&#125;;bool operator &lt; (student a,student b)&#123; if(a.score &lt; b.score)&#123; return true; &#125;else if(a.score == b.score)&#123; if(a.algorithm &lt; b.algorithm)&#123; return true; &#125; &#125; return false;&#125;int BubbleSort(vector&lt;student&gt; &amp;a,int size)&#123; int cnt = 0; for( int i = size-1; i &gt;= 0; i--)&#123; bool flag = false; //记录在一趟排序中是否有交换 for( int j = 0; j &lt; i; j++)&#123; if(a[j] &lt; a[j+1])&#123; student temp = a[j]; a[j] = a[j+1]; a[j+1] = temp; //swap(a[j],a[j+1]); flag = true; cnt++; &#125; &#125; if(!flag) break; &#125; return cnt;&#125;vector&lt;int&gt; getAnswer(int n, vector&lt;int&gt; A, vector&lt;int&gt; DS) &#123; /* 请在这里设计你的算法 */ vector&lt;int&gt; ans; vector&lt;student&gt; temp; for( int i = 0; i &lt; n; i++)&#123; temp.push_back(student(i+1,A[i],DS[i])); &#125; int cnt = BubbleSort(temp,n); for(int i = 0; i &lt; n; i++)&#123; ans.push_back(temp[i].id); ans.push_back(temp[i].score); ans.push_back(temp[i].algorithm); ans.push_back(temp[i].dataStruct); &#125; ans.push_back(cnt); return ans;&#125;// ================= 代码实现结束 =================int main() &#123; int n; scanf("%d", &amp;n); vector&lt;int&gt; A, DS; for (int i = 0; i &lt; n; ++i) &#123; int a, ds; scanf("%d%d", &amp;a, &amp;ds); A.push_back(a); DS.push_back(ds); &#125; vector&lt;int&gt; ans = getAnswer(n, A, DS); int cnt = 0; for (int i = 0; i &lt; n; ++i) &#123; printf("%d %d %d %d\n", ans[cnt], ans[cnt + 1], ans[cnt + 2], ans[cnt + 3]); cnt += 4; &#125; printf("%d\n", ans[cnt]); return 0;&#125; 等式来源：NOI 2015 day1 T1 程序自动分析简单并查集题目，主意一下检查应该留到最后检查即可。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182#include &lt;bits/stdc++.h&gt;using namespace std;// ================= 代码实现开始 =================/* 请在这里定义你需要的全局变量 */// 给定n个变量以及m个约束，判定是否能找出一种赋值方案满足这m个约束条件// n：如题意// m：如题意// A：大小为m的数组，表示m条约束中的a// B：大小为m的数组，表示m条约束中的b// E：大小为m的数组，表示m条约束中的e// 返回值：若能找出一种方案，返回"Yes"；否则返回"No"（不包括引号）。int pre[500005];void init()&#123; for( int i = 1; i &lt;= 500004; i++)&#123; pre[i] = i; &#125;&#125;int get(int x)&#123; if(pre[x] == x)&#123; //x 节点就是根节点 return x; &#125; return pre[x] = get(pre[x]); //返回父节点的根节点，并另当前节点父节点直接为根节点&#125;void merge(int x,int y)&#123; x = get(x); y = get(y); if(x != y)&#123; // 不住同一个集合 pre[y] = x; &#125;&#125;string getAnswer(int n, int m, vector&lt;int&gt; A, vector&lt;int&gt; B, vector&lt;int&gt; E) &#123; /* 请在这里设计你的算法 */ init(); vector&lt;int&gt; zero; for( int i = 0; i &lt; m; i++)&#123; if(E[i])&#123; merge(A[i],B[i]); &#125;else&#123; zero.push_back(i); &#125; &#125; for( int i = 0; i &lt; zero.size(); i++)&#123; if(get(A[zero[i]]) == get(B[zero[i]]))&#123; return "No"; &#125; &#125; return "Yes";&#125;// ================= 代码实现结束 =================int main() &#123; int T; for (scanf("%d", &amp;T); T--; ) &#123; int n, m; scanf("%d%d", &amp;n, &amp;m); vector&lt;int&gt; A, B, E; for (int i = 0; i &lt; m; ++i) &#123; int a, b, e; scanf("%d%d%d", &amp;a, &amp;b, &amp;e); A.push_back(a); B.push_back(b); E.push_back(e); &#125; printf("%s\n", getAnswer(n, m, A, B, E).c_str()); &#125; return 0;&#125; 道路升级最大生成树问题，与最小生成树一样。使用 Kruskal 算法解决，需要简单实现一下并查集。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869#include &lt;bits/stdc++.h&gt;//#include &lt;vector&gt;//#include &lt;iostream&gt;//#include &lt;cstdio&gt;//#include &lt;cstring&gt;//#include &lt;algorithm&gt;using namespace std;const int MAX_N = 200050;const int MAX_M = 400050;struct edge &#123; int u, v, w; bool operator &lt; (const edge &amp;a)const &#123; return w &gt; a.w; &#125;&#125; e[MAX_M];int fa[MAX_N], n, m;int get(int x)&#123; if(fa[x] == x)&#123; return fa[x]; &#125; return fa[x] = get(fa[x]);&#125;vector&lt;int&gt; getAnswer(int n, int m, vector&lt;int&gt; U, vector&lt;int&gt; V) &#123; vector&lt;int&gt; re; for( int i = 0; i &lt; m; ++i)&#123; e[i].u = U[i]; e[i].v = V[i]; e[i].w = i+1; &#125; sort(e,e+m); for( int i = 1; i &lt;= n; ++i)&#123; fa[i] = i; &#125; for( int i = 0; i &lt; m; ++i)&#123; int x = get(e[i].u), y = get(e[i].v); if(x != y)&#123; fa[x] = y; re.push_back(e[i].w); &#125; &#125; sort(re.begin(), re.end()); return re;&#125;// ================= 代码实现结束 =================int main() &#123; int n, m; scanf("%d%d", &amp;n, &amp;m); vector&lt;int&gt; U, V; for (int i = 0; i &lt; m; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); U.push_back(u); V.push_back(v); &#125; vector&lt;int&gt; ans = getAnswer(n, m, U, V); printf("%d\n", int(ans.size())); for (int i = 0; i &lt; int(ans.size()); ++i) printf("%d\n", ans[i]); return 0;&#125; 收获输入输出挂输入输出挂是真的快！ 简单的数字输入输出挂，完整的见 -&gt; 这里1234567891011121314151617#include &lt;cstdio&gt; int Scan() &#123; //输入外挂 int res = 0, flag = 0; char ch; if((ch = getchar()) == '-') flag = 1; else if(ch &gt;= '0' &amp;&amp; ch &lt;= '9') res = ch - '0'; while((ch = getchar()) &gt;= '0' &amp;&amp; ch &lt;= '9') res = res * 10 + (ch - '0'); return flag ? -res : res;&#125; void Out(int a) &#123; //输出外挂 if(a &lt; 0) &#123; putchar('-'); a = -a; &#125; if(a &gt;= 10) Out(a / 10); putchar(a % 10 + '0');&#125; 输入输出分离助教给的解题模板真舒服，可以不用考虑输出问题，专心实现算法～～～代码可读性也提高不少，但竞赛中打的时间也许会增加一些，复杂度也会增加一些。 哈夫曼编码 &amp; POJ 3253哈夫曼编码就是贪心～在《挑战程序设计竞赛(第2版) 》中讲解的 POJ 3253 现在一看真是醍醐灌顶～～～ 学到一些算法实现 二叉树 Kruskal 算法 哈夫曼编码的 \(O(n)\) 实现 题目中数据范围分析技巧计算机每秒运算 \(10^8\) \(n = 10^6\) -&gt; \(O(n)\) \(n = 5 \times 10^5\) -&gt; \(O(n log n)\) \(n = 10^4\) -&gt; \(O(n^2)\) ToDoHash Map 的实现… 哈夫曼编码的 \(O(n)\) 实现使用栈和队列优化 成绩排序 优化\(O(n^2)\) -&gt; \(O(n log n)\) 排序 -&gt; 快排排序、归并排序求逆序对 -&gt; 归并排序、树状数组辅助统计 重编码 -&gt;【NOI2015】荷马史诗不同进制下的哈夫曼编码。【NOI2015】荷马史诗 参考资料 输入输出外挂 输入输出外挂总结 二叉树的C++简单实现]]></content>
+      <categories>
+        <category>泛 - 计算机</category>
+      </categories>
+      <tags>
+        <tag>并查集</tag>
+        <tag>队列</tag>
+        <tag>栈</tag>
+        <tag>二叉树</tag>
+        <tag>哈夫曼编码</tag>
+        <tag>Kruskal</tag>
+        <tag>Hash Map</tag>
+        <tag>输入输出挂</tag>
+        <tag>ToDo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[求质数表3——高级筛法]]></title>
     <url>%2F2018%2F07%2F26%2Fisprimes-3%2F</url>
     <content type="text"><![CDATA[增量式筛法之前的筛法都需要事先指定一个N，然后求N以内的质数，但没办法求N以上的质数。我们想要一种算法不用事先指定N一直求下去，如试除法就是增量式运行的。 增量式算法可以在简易欧拉筛进行改进的。简易欧拉筛限制它不能增量式运行的问题是在于它的空间。比如增量式运行筛选到 11 时你需要划掉 121 ，这样你就需要维持 N^2 的空间，这样就很成问题，想象如果 N 到1亿时，那空间将是不可接受的。我们将不再枚举p和f，而是依次检查每个数，检查到一个数时划去下一个数，并再下一个数处做标记。比如我们检查到 10 ，我们通过某种方式计算出它的下一个要被划掉的数为 15 ，我们划掉 15 并在 15 处做标记，保证检查到 15 时我们可以轻松的算出 25 。由 Bertrand’s postulate 这个数学结论得出相邻两个质数相差不会超过两倍，所以我们只需将数组维持在当前检查的数的两倍即可。这样空间复杂度就将为了 O(N) 。 这个标记需要干什么，它需要帮助我们在拿到一个数时迅速找出它的p和f。我们用一个数组保存当前被检查的数的最小质因子在质数表的位置即可。这样比如我们在拿到 15 时，我们找到它的最小质因子p为 3 ，15/3 算出 f 为 5，我们就可以用 f 乘下一个质数去找到 25 划掉它并继续传递标记了。标记从每个偶数处（因为第一个素数为 2 ）产生的，到列末尾消失（p 最大增长到 f 的最小质因子）。 代码Ubuntu Pastebin : https://paste.ubuntu.com/p/DtN2WPpppf/1234567891011121314151617181920212223242526int bengalloun(int N)&#123; int nPrimes = 0; flag[2] = true; for( int i = 2; i &lt;= N; i++)&#123; flag[i * 2 - 1] = true; //假设它为质数 flag[i * 2] = false; //偶数一定为合数 lpfindex[i * 2] = 0; //建立列首标记 if(flag[i])&#123; primes[nPrimes++] = i; //如果还没被筛掉加入质数表 &#125;else&#123; //如果是合数 int u = lpfindex[i]; int p = primes[u]; int f = i / p; //计算p和f if(f % p != 0)&#123; //如果没有到列尾就传递标记 int j = primes[u + 1] * f; flag[j] = false; lpfindex[j] = u + 1; &#125; &#125; &#125; return nPrimes;&#125; 复杂度分析时间复杂度与思想与简易欧拉筛相同，依然为O(N)。因为要为增量式运行做准备实际要比简易欧拉筛多花一倍的时间。 空间复杂度flag和lpfindex数组都为O(N)的复杂度。总体空间复杂度为O(N)。 分段式筛法对于现代计算机运算速度越来越快，时间复杂度可能问题不大，但空间复杂度是个问题。分段式筛法就是要解决这个问题。分段式筛法是在埃式筛法的基础上改进的， 代码Ubuntu Pastebin : https://paste.ubuntu.com/p/HzTG6HrbV2/123456789101112131415161718192021222324252627int segmented_eratosthenes(int N)&#123; int sqrtN = (int) sqrt(N); int n = eratosthenes(sqrtN); int nPrimes = n;// 使用埃式筛法求出前 √N 内的质数。 int L = sqrtN; // 分段求，L 为每段长度，取 √N for( int start = sqrtN + 1; start &lt;= N; start += L)&#123; if(start + L &gt; N) L = N - start + 1; memset(flag, true, L * sizeof(bool)); for( int u = 0; u &lt; n; u++)&#123; int p = primes[u]; if(p * p &gt;= start + L) break; // 枚举本段上限以内的质数 for( int i = (p - start % p) % p; i &lt; L; i += p)&#123; flag[i] = false; // 划掉本段中能被 p 整除的数 &#125; &#125; for( int i = 0; i &lt; L; i++)&#123; if(flag[i]) primes[nPrimes++] = start + i; // 找到本段中没有被划掉的数并将其收集到质数表中 &#125; &#125; return nPrimes;&#125; L 的取法空间\(\sqrt{N}\) 以内质数表占用了 \(O(\sqrt{N})\) 的空间。flag 数组占用 \(O(L)\) 的空间。若 \(L &gt; \sqrt{N}\) 空间复杂度将提高。 时间若 \(L &lt; \sqrt{N}\)，当 p 接近 \(\sqrt{N}\) 时，删除 p 的倍数就容易“扑空”。 所以 \(L = \sqrt{N}\) 时刚好。 复杂度分析时间复杂度本质上是埃式筛法，所以时间复杂度为 \(O(NloglogN)\)。内存占用小，避免了缓存不命中，实际上比埃式筛法要快。 空间复杂度\(O(\sqrt{N})\)]]></content>
@@ -125,11 +144,11 @@
       </categories>
       <tags>
         <tag>Cpp</tag>
-        <tag>构造函数</tag>
         <tag>运算符重载</tag>
         <tag>读书</tag>
         <tag>笔记</tag>
         <tag>Effective C++</tag>
+        <tag>构造函数</tag>
         <tag>拷贝构造函数</tag>
         <tag>缺省构造函数</tag>
         <tag>virtual 函数</tag>
@@ -145,10 +164,10 @@
         <category>编程语言 - Java</category>
       </categories>
       <tags>
-        <tag>Cpp</tag>
-        <tag>浮点数</tag>
         <tag>Java</tag>
+        <tag>Cpp</tag>
         <tag>整数</tag>
+        <tag>浮点数</tag>
         <tag>命名规则</tag>
         <tag>String</tag>
         <tag>string</tag>
@@ -259,12 +278,12 @@
         <category>泛 - 公告</category>
       </categories>
       <tags>
-        <tag>Cpp</tag>
         <tag>算法</tag>
         <tag>动态规划</tag>
         <tag>背包问题</tag>
         <tag>01背包</tag>
         <tag>公告</tag>
+        <tag>Cpp</tag>
         <tag>C</tag>
         <tag>完全背包</tag>
         <tag>计划</tag>
@@ -296,8 +315,8 @@
         <tag>算法</tag>
         <tag>ACM</tag>
         <tag>优化</tag>
-        <tag>优先队列</tag>
         <tag>Dijkstra</tag>
+        <tag>优先队列</tag>
         <tag>最短路径</tag>
         <tag>最小堆</tag>
       </tags>
@@ -485,8 +504,8 @@
         <category>编程语言 - Cpp</category>
       </categories>
       <tags>
-        <tag>Cpp</tag>
         <tag>汇编语言</tag>
+        <tag>Cpp</tag>
         <tag>构造函数</tag>
         <tag>拷贝构造函数</tag>
         <tag>缺省构造函数</tag>
