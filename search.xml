@@ -10,12 +10,12 @@
       <tags>
         <tag>Dijkstra</tag>
         <tag>ToDo</tag>
-        <tag>Bellman-Ford</tag>
-        <tag>欧拉回路</tag>
-        <tag>排序</tag>
-        <tag>匈牙利算法</tag>
         <tag>二分</tag>
+        <tag>匈牙利算法</tag>
+        <tag>排序</tag>
         <tag>归并排序</tag>
+        <tag>欧拉回路</tag>
+        <tag>Bellman-Ford</tag>
       </tags>
   </entry>
   <entry>
@@ -330,8 +330,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>ACM</tag>
         <tag>算法</tag>
+        <tag>ACM</tag>
         <tag>优化</tag>
         <tag>Dijkstra</tag>
         <tag>优先队列</tag>
@@ -538,8 +538,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>ACM</tag>
         <tag>算法</tag>
+        <tag>ACM</tag>
         <tag>题解</tag>
         <tag>DFS</tag>
         <tag>BFS</tag>
@@ -636,8 +636,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>ACM</tag>
         <tag>算法</tag>
+        <tag>ACM</tag>
         <tag>题解</tag>
         <tag>百练</tag>
         <tag>DFS</tag>
