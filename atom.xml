@@ -5,9 +5,9 @@
   <subtitle>他大概会说你想得太多</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://pazyx.xyz/"/>
+  <link href="https://blog.pazyx.xyz/"/>
   <updated>2018-08-11T16:27:52.833Z</updated>
-  <id>https://pazyx.xyz/</id>
+  <id>https://blog.pazyx.xyz/</id>
   
   <author>
     <name>pazyx.xyz</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>算法训练营解题总结（第二周）//ToDo</title>
-    <link href="https://pazyx.xyz/2018/08/12/algor_club_code_2/"/>
-    <id>https://pazyx.xyz/2018/08/12/algor_club_code_2/</id>
+    <link href="https://blog.pazyx.xyz/2018/08/12/algor_club_code_2/"/>
+    <id>https://blog.pazyx.xyz/2018/08/12/algor_club_code_2/</id>
     <published>2018-08-11T16:30:49.000Z</published>
     <updated>2018-08-11T16:27:52.833Z</updated>
     
@@ -34,31 +34,31 @@
     
     </summary>
     
-      <category term="泛 - 计算机" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <category term="泛 - 计算机" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
     
-      <category term="Dijkstra" scheme="https://pazyx.xyz/tags/Dijkstra/"/>
+      <category term="Dijkstra" scheme="https://blog.pazyx.xyz/tags/Dijkstra/"/>
     
-      <category term="ToDo" scheme="https://pazyx.xyz/tags/ToDo/"/>
+      <category term="ToDo" scheme="https://blog.pazyx.xyz/tags/ToDo/"/>
     
-      <category term="二分" scheme="https://pazyx.xyz/tags/%E4%BA%8C%E5%88%86/"/>
+      <category term="二分" scheme="https://blog.pazyx.xyz/tags/%E4%BA%8C%E5%88%86/"/>
     
-      <category term="匈牙利算法" scheme="https://pazyx.xyz/tags/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/"/>
+      <category term="匈牙利算法" scheme="https://blog.pazyx.xyz/tags/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/"/>
     
-      <category term="排序" scheme="https://pazyx.xyz/tags/%E6%8E%92%E5%BA%8F/"/>
+      <category term="排序" scheme="https://blog.pazyx.xyz/tags/%E6%8E%92%E5%BA%8F/"/>
     
-      <category term="归并排序" scheme="https://pazyx.xyz/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
+      <category term="归并排序" scheme="https://blog.pazyx.xyz/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
     
-      <category term="欧拉回路" scheme="https://pazyx.xyz/tags/%E6%AC%A7%E6%8B%89%E5%9B%9E%E8%B7%AF/"/>
+      <category term="欧拉回路" scheme="https://blog.pazyx.xyz/tags/%E6%AC%A7%E6%8B%89%E5%9B%9E%E8%B7%AF/"/>
     
-      <category term="Bellman-Ford" scheme="https://pazyx.xyz/tags/Bellman-Ford/"/>
+      <category term="Bellman-Ford" scheme="https://blog.pazyx.xyz/tags/Bellman-Ford/"/>
     
   </entry>
   
   <entry>
     <title>算法训练营解题总结（第一周）//ToDo</title>
-    <link href="https://pazyx.xyz/2018/08/04/algor_club_code_1/"/>
-    <id>https://pazyx.xyz/2018/08/04/algor_club_code_1/</id>
+    <link href="https://blog.pazyx.xyz/2018/08/04/algor_club_code_1/"/>
+    <id>https://blog.pazyx.xyz/2018/08/04/algor_club_code_1/</id>
     <published>2018-08-03T18:30:49.000Z</published>
     <updated>2018-08-03T18:31:58.213Z</updated>
     
@@ -73,33 +73,33 @@
     
     </summary>
     
-      <category term="泛 - 计算机" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <category term="泛 - 计算机" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
     
-      <category term="栈" scheme="https://pazyx.xyz/tags/%E6%A0%88/"/>
+      <category term="栈" scheme="https://blog.pazyx.xyz/tags/%E6%A0%88/"/>
     
-      <category term="队列" scheme="https://pazyx.xyz/tags/%E9%98%9F%E5%88%97/"/>
+      <category term="队列" scheme="https://blog.pazyx.xyz/tags/%E9%98%9F%E5%88%97/"/>
     
-      <category term="并查集" scheme="https://pazyx.xyz/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+      <category term="并查集" scheme="https://blog.pazyx.xyz/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
     
-      <category term="二叉树" scheme="https://pazyx.xyz/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+      <category term="二叉树" scheme="https://blog.pazyx.xyz/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
-      <category term="哈夫曼编码" scheme="https://pazyx.xyz/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/"/>
+      <category term="哈夫曼编码" scheme="https://blog.pazyx.xyz/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/"/>
     
-      <category term="Kruskal" scheme="https://pazyx.xyz/tags/Kruskal/"/>
+      <category term="Kruskal" scheme="https://blog.pazyx.xyz/tags/Kruskal/"/>
     
-      <category term="Hash Map" scheme="https://pazyx.xyz/tags/Hash-Map/"/>
+      <category term="Hash Map" scheme="https://blog.pazyx.xyz/tags/Hash-Map/"/>
     
-      <category term="输入输出挂" scheme="https://pazyx.xyz/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%8C%82/"/>
+      <category term="输入输出挂" scheme="https://blog.pazyx.xyz/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%8C%82/"/>
     
-      <category term="ToDo" scheme="https://pazyx.xyz/tags/ToDo/"/>
+      <category term="ToDo" scheme="https://blog.pazyx.xyz/tags/ToDo/"/>
     
   </entry>
   
   <entry>
     <title>求质数表3——高级筛法</title>
-    <link href="https://pazyx.xyz/2018/07/26/isprimes-3/"/>
-    <id>https://pazyx.xyz/2018/07/26/isprimes-3/</id>
+    <link href="https://blog.pazyx.xyz/2018/07/26/isprimes-3/"/>
+    <id>https://blog.pazyx.xyz/2018/07/26/isprimes-3/</id>
     <published>2018-07-26T11:36:26.000Z</published>
     <updated>2018-07-26T11:37:44.858Z</updated>
     
@@ -114,27 +114,27 @@
     
     </summary>
     
-      <category term="算法" scheme="https://pazyx.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://blog.pazyx.xyz/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="算法" scheme="https://pazyx.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://blog.pazyx.xyz/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="质数" scheme="https://pazyx.xyz/tags/%E8%B4%A8%E6%95%B0/"/>
+      <category term="质数" scheme="https://blog.pazyx.xyz/tags/%E8%B4%A8%E6%95%B0/"/>
     
-      <category term="求质数表" scheme="https://pazyx.xyz/tags/%E6%B1%82%E8%B4%A8%E6%95%B0%E8%A1%A8/"/>
+      <category term="求质数表" scheme="https://blog.pazyx.xyz/tags/%E6%B1%82%E8%B4%A8%E6%95%B0%E8%A1%A8/"/>
     
-      <category term="优化" scheme="https://pazyx.xyz/tags/%E4%BC%98%E5%8C%96/"/>
+      <category term="优化" scheme="https://blog.pazyx.xyz/tags/%E4%BC%98%E5%8C%96/"/>
     
-      <category term="增量式筛法" scheme="https://pazyx.xyz/tags/%E5%A2%9E%E9%87%8F%E5%BC%8F%E7%AD%9B%E6%B3%95/"/>
+      <category term="增量式筛法" scheme="https://blog.pazyx.xyz/tags/%E5%A2%9E%E9%87%8F%E5%BC%8F%E7%AD%9B%E6%B3%95/"/>
     
-      <category term="分段式筛法" scheme="https://pazyx.xyz/tags/%E5%88%86%E6%AE%B5%E5%BC%8F%E7%AD%9B%E6%B3%95/"/>
+      <category term="分段式筛法" scheme="https://blog.pazyx.xyz/tags/%E5%88%86%E6%AE%B5%E5%BC%8F%E7%AD%9B%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>「周记」0x02 幻觉</title>
-    <link href="https://pazyx.xyz/2018/07/24/weekly_2/"/>
-    <id>https://pazyx.xyz/2018/07/24/weekly_2/</id>
+    <link href="https://blog.pazyx.xyz/2018/07/24/weekly_2/"/>
+    <id>https://blog.pazyx.xyz/2018/07/24/weekly_2/</id>
     <published>2018-07-24T08:39:47.000Z</published>
     <updated>2018-07-24T09:03:29.847Z</updated>
     
@@ -150,21 +150,21 @@
     
     </summary>
     
-      <category term="泛 - 周记" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E5%91%A8%E8%AE%B0/"/>
+      <category term="泛 - 周记" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E5%91%A8%E8%AE%B0/"/>
     
     
-      <category term="周记" scheme="https://pazyx.xyz/tags/%E5%91%A8%E8%AE%B0/"/>
+      <category term="周记" scheme="https://blog.pazyx.xyz/tags/%E5%91%A8%E8%AE%B0/"/>
     
-      <category term="英语" scheme="https://pazyx.xyz/tags/%E8%8B%B1%E8%AF%AD/"/>
+      <category term="英语" scheme="https://blog.pazyx.xyz/tags/%E8%8B%B1%E8%AF%AD/"/>
     
-      <category term="大电影" scheme="https://pazyx.xyz/tags/%E5%A4%A7%E7%94%B5%E5%BD%B1/"/>
+      <category term="大电影" scheme="https://blog.pazyx.xyz/tags/%E5%A4%A7%E7%94%B5%E5%BD%B1/"/>
     
   </entry>
   
   <entry>
     <title>「书摘」深度探索 C++ 对象模型（二）</title>
-    <link href="https://pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/"/>
-    <id>https://pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/</id>
+    <link href="https://blog.pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/"/>
+    <id>https://blog.pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/</id>
     <published>2018-07-23T05:08:42.000Z</published>
     <updated>2018-07-23T05:42:53.231Z</updated>
     
@@ -183,31 +183,31 @@
     
     </summary>
     
-      <category term="泛 - 书摘" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E4%B9%A6%E6%91%98/"/>
+      <category term="泛 - 书摘" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E4%B9%A6%E6%91%98/"/>
     
     
-      <category term="Cpp" scheme="https://pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
     
-      <category term="构造函数" scheme="https://pazyx.xyz/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
+      <category term="构造函数" scheme="https://blog.pazyx.xyz/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
     
-      <category term="编译器优化" scheme="https://pazyx.xyz/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/"/>
+      <category term="编译器优化" scheme="https://blog.pazyx.xyz/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/"/>
     
-      <category term="拷贝构造函数" scheme="https://pazyx.xyz/tags/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
+      <category term="拷贝构造函数" scheme="https://blog.pazyx.xyz/tags/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
     
-      <category term="缺省构造函数" scheme="https://pazyx.xyz/tags/%E7%BC%BA%E7%9C%81%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
+      <category term="缺省构造函数" scheme="https://blog.pazyx.xyz/tags/%E7%BC%BA%E7%9C%81%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
     
-      <category term="Virtual Class" scheme="https://pazyx.xyz/tags/Virtual-Class/"/>
+      <category term="Virtual Class" scheme="https://blog.pazyx.xyz/tags/Virtual-Class/"/>
     
-      <category term="Virtual Base Class" scheme="https://pazyx.xyz/tags/Virtual-Base-Class/"/>
+      <category term="Virtual Base Class" scheme="https://blog.pazyx.xyz/tags/Virtual-Base-Class/"/>
     
-      <category term="NRV优化" scheme="https://pazyx.xyz/tags/NRV%E4%BC%98%E5%8C%96/"/>
+      <category term="NRV优化" scheme="https://blog.pazyx.xyz/tags/NRV%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>macOS 灾难</title>
-    <link href="https://pazyx.xyz/2018/07/21/mac_os_disaster/"/>
-    <id>https://pazyx.xyz/2018/07/21/mac_os_disaster/</id>
+    <link href="https://blog.pazyx.xyz/2018/07/21/mac_os_disaster/"/>
+    <id>https://blog.pazyx.xyz/2018/07/21/mac_os_disaster/</id>
     <published>2018-07-21T10:52:18.000Z</published>
     <updated>2018-07-21T14:19:51.393Z</updated>
     
@@ -222,19 +222,19 @@
     
     </summary>
     
-      <category term="泛 - 纪念" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E7%BA%AA%E5%BF%B5/"/>
+      <category term="泛 - 纪念" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E7%BA%AA%E5%BF%B5/"/>
     
     
-      <category term="灾难" scheme="https://pazyx.xyz/tags/%E7%81%BE%E9%9A%BE/"/>
+      <category term="灾难" scheme="https://blog.pazyx.xyz/tags/%E7%81%BE%E9%9A%BE/"/>
     
-      <category term="MacOS" scheme="https://pazyx.xyz/tags/MacOS/"/>
+      <category term="MacOS" scheme="https://blog.pazyx.xyz/tags/MacOS/"/>
     
   </entry>
   
   <entry>
     <title>Markdown 指南</title>
-    <link href="https://pazyx.xyz/2018/07/15/markdown_guide/"/>
-    <id>https://pazyx.xyz/2018/07/15/markdown_guide/</id>
+    <link href="https://blog.pazyx.xyz/2018/07/15/markdown_guide/"/>
+    <id>https://blog.pazyx.xyz/2018/07/15/markdown_guide/</id>
     <published>2018-07-14T16:53:18.000Z</published>
     <updated>2018-07-21T12:03:16.963Z</updated>
     
@@ -250,21 +250,21 @@
     
     </summary>
     
-      <category term="泛 - 计算机" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <category term="泛 - 计算机" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
     
-      <category term="Markdown" scheme="https://pazyx.xyz/tags/Markdown/"/>
+      <category term="Markdown" scheme="https://blog.pazyx.xyz/tags/Markdown/"/>
     
-      <category term="标记语言" scheme="https://pazyx.xyz/tags/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/"/>
+      <category term="标记语言" scheme="https://blog.pazyx.xyz/tags/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/"/>
     
-      <category term="写作工具" scheme="https://pazyx.xyz/tags/%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7/"/>
+      <category term="写作工具" scheme="https://blog.pazyx.xyz/tags/%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title>数学建模——动态规划</title>
-    <link href="https://pazyx.xyz/2018/07/14/mathematical_modeling_dp/"/>
-    <id>https://pazyx.xyz/2018/07/14/mathematical_modeling_dp/</id>
+    <link href="https://blog.pazyx.xyz/2018/07/14/mathematical_modeling_dp/"/>
+    <id>https://blog.pazyx.xyz/2018/07/14/mathematical_modeling_dp/</id>
     <published>2018-07-14T10:13:18.000Z</published>
     <updated>2018-07-26T11:16:41.074Z</updated>
     
@@ -279,23 +279,23 @@
     
     </summary>
     
-      <category term="数学" scheme="https://pazyx.xyz/categories/%E6%95%B0%E5%AD%A6/"/>
+      <category term="数学" scheme="https://blog.pazyx.xyz/categories/%E6%95%B0%E5%AD%A6/"/>
     
     
-      <category term="动态规划" scheme="https://pazyx.xyz/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://blog.pazyx.xyz/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="完全背包" scheme="https://pazyx.xyz/tags/%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85/"/>
+      <category term="完全背包" scheme="https://blog.pazyx.xyz/tags/%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85/"/>
     
-      <category term="数学建模" scheme="https://pazyx.xyz/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
+      <category term="数学建模" scheme="https://blog.pazyx.xyz/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
     
-      <category term="连续型动态规划" scheme="https://pazyx.xyz/tags/%E8%BF%9E%E7%BB%AD%E5%9E%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="连续型动态规划" scheme="https://blog.pazyx.xyz/tags/%E8%BF%9E%E7%BB%AD%E5%9E%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   
   <entry>
     <title>POJ 3254 Corn Fields（状压DP）</title>
-    <link href="https://pazyx.xyz/2018/07/07/poj-3254-corn-fields/"/>
-    <id>https://pazyx.xyz/2018/07/07/poj-3254-corn-fields/</id>
+    <link href="https://blog.pazyx.xyz/2018/07/07/poj-3254-corn-fields/"/>
+    <id>https://blog.pazyx.xyz/2018/07/07/poj-3254-corn-fields/</id>
     <published>2018-07-06T19:22:10.000Z</published>
     <updated>2018-07-13T13:55:29.480Z</updated>
     
@@ -311,25 +311,25 @@
     
     </summary>
     
-      <category term="题解" scheme="https://pazyx.xyz/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://blog.pazyx.xyz/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="算法" scheme="https://pazyx.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://blog.pazyx.xyz/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="动态规划" scheme="https://pazyx.xyz/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://blog.pazyx.xyz/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="题解" scheme="https://pazyx.xyz/tags/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://blog.pazyx.xyz/tags/%E9%A2%98%E8%A7%A3/"/>
     
-      <category term="POJ" scheme="https://pazyx.xyz/tags/POJ/"/>
+      <category term="POJ" scheme="https://blog.pazyx.xyz/tags/POJ/"/>
     
-      <category term="状压DP" scheme="https://pazyx.xyz/tags/%E7%8A%B6%E5%8E%8BDP/"/>
+      <category term="状压DP" scheme="https://blog.pazyx.xyz/tags/%E7%8A%B6%E5%8E%8BDP/"/>
     
   </entry>
   
   <entry>
     <title>「周记」0x01 可乐</title>
-    <link href="https://pazyx.xyz/2018/07/04/weekly_1/"/>
-    <id>https://pazyx.xyz/2018/07/04/weekly_1/</id>
+    <link href="https://blog.pazyx.xyz/2018/07/04/weekly_1/"/>
+    <id>https://blog.pazyx.xyz/2018/07/04/weekly_1/</id>
     <published>2018-07-04T13:39:47.000Z</published>
     <updated>2018-07-24T09:03:36.503Z</updated>
     
@@ -344,25 +344,25 @@
     
     </summary>
     
-      <category term="泛 - 周记" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E5%91%A8%E8%AE%B0/"/>
+      <category term="泛 - 周记" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E5%91%A8%E8%AE%B0/"/>
     
     
-      <category term="周记" scheme="https://pazyx.xyz/tags/%E5%91%A8%E8%AE%B0/"/>
+      <category term="周记" scheme="https://blog.pazyx.xyz/tags/%E5%91%A8%E8%AE%B0/"/>
     
-      <category term="可乐" scheme="https://pazyx.xyz/tags/%E5%8F%AF%E4%B9%90/"/>
+      <category term="可乐" scheme="https://blog.pazyx.xyz/tags/%E5%8F%AF%E4%B9%90/"/>
     
-      <category term="自由" scheme="https://pazyx.xyz/tags/%E8%87%AA%E7%94%B1/"/>
+      <category term="自由" scheme="https://blog.pazyx.xyz/tags/%E8%87%AA%E7%94%B1/"/>
     
-      <category term="波普" scheme="https://pazyx.xyz/tags/%E6%B3%A2%E6%99%AE/"/>
+      <category term="波普" scheme="https://blog.pazyx.xyz/tags/%E6%B3%A2%E6%99%AE/"/>
     
-      <category term="Andy Warhol" scheme="https://pazyx.xyz/tags/Andy-Warhol/"/>
+      <category term="Andy Warhol" scheme="https://blog.pazyx.xyz/tags/Andy-Warhol/"/>
     
   </entry>
   
   <entry>
     <title>「笔记」Effective C++ 读书笔记（二）</title>
-    <link href="https://pazyx.xyz/2018/07/03/effective-cpp02/"/>
-    <id>https://pazyx.xyz/2018/07/03/effective-cpp02/</id>
+    <link href="https://blog.pazyx.xyz/2018/07/03/effective-cpp02/"/>
+    <id>https://blog.pazyx.xyz/2018/07/03/effective-cpp02/</id>
     <published>2018-07-03T09:42:25.000Z</published>
     <updated>2018-07-20T12:30:47.950Z</updated>
     
@@ -377,37 +377,37 @@
     
     </summary>
     
-      <category term="泛 - 笔记" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E7%AC%94%E8%AE%B0/"/>
+      <category term="泛 - 笔记" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="Cpp" scheme="https://pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
     
-      <category term="读书" scheme="https://pazyx.xyz/tags/%E8%AF%BB%E4%B9%A6/"/>
+      <category term="读书" scheme="https://blog.pazyx.xyz/tags/%E8%AF%BB%E4%B9%A6/"/>
     
-      <category term="笔记" scheme="https://pazyx.xyz/tags/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://blog.pazyx.xyz/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="Effective C++" scheme="https://pazyx.xyz/tags/Effective-C/"/>
+      <category term="Effective C++" scheme="https://blog.pazyx.xyz/tags/Effective-C/"/>
     
-      <category term="构造函数" scheme="https://pazyx.xyz/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
+      <category term="构造函数" scheme="https://blog.pazyx.xyz/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
     
-      <category term="运算符重载" scheme="https://pazyx.xyz/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/"/>
+      <category term="运算符重载" scheme="https://blog.pazyx.xyz/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/"/>
     
-      <category term="拷贝构造函数" scheme="https://pazyx.xyz/tags/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
+      <category term="拷贝构造函数" scheme="https://blog.pazyx.xyz/tags/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
     
-      <category term="缺省构造函数" scheme="https://pazyx.xyz/tags/%E7%BC%BA%E7%9C%81%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
+      <category term="缺省构造函数" scheme="https://blog.pazyx.xyz/tags/%E7%BC%BA%E7%9C%81%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
     
-      <category term="virtual 函数" scheme="https://pazyx.xyz/tags/virtual-%E5%87%BD%E6%95%B0/"/>
+      <category term="virtual 函数" scheme="https://blog.pazyx.xyz/tags/virtual-%E5%87%BD%E6%95%B0/"/>
     
-      <category term="自我赋值" scheme="https://pazyx.xyz/tags/%E8%87%AA%E6%88%91%E8%B5%8B%E5%80%BC/"/>
+      <category term="自我赋值" scheme="https://blog.pazyx.xyz/tags/%E8%87%AA%E6%88%91%E8%B5%8B%E5%80%BC/"/>
     
-      <category term="异常" scheme="https://pazyx.xyz/tags/%E5%BC%82%E5%B8%B8/"/>
+      <category term="异常" scheme="https://blog.pazyx.xyz/tags/%E5%BC%82%E5%B8%B8/"/>
     
   </entry>
   
   <entry>
     <title>Java 与 C++ 细节差异 （一）</title>
-    <link href="https://pazyx.xyz/2018/07/01/cpptojava/"/>
-    <id>https://pazyx.xyz/2018/07/01/cpptojava/</id>
+    <link href="https://blog.pazyx.xyz/2018/07/01/cpptojava/"/>
+    <id>https://blog.pazyx.xyz/2018/07/01/cpptojava/</id>
     <published>2018-07-01T15:08:37.000Z</published>
     <updated>2018-07-04T17:34:10.250Z</updated>
     
@@ -425,29 +425,29 @@
     
     </summary>
     
-      <category term="编程语言 - Java" scheme="https://pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Java/"/>
+      <category term="编程语言 - Java" scheme="https://blog.pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Java/"/>
     
     
-      <category term="Cpp" scheme="https://pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
     
-      <category term="浮点数" scheme="https://pazyx.xyz/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/"/>
+      <category term="浮点数" scheme="https://blog.pazyx.xyz/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/"/>
     
-      <category term="Java" scheme="https://pazyx.xyz/tags/Java/"/>
+      <category term="Java" scheme="https://blog.pazyx.xyz/tags/Java/"/>
     
-      <category term="整数" scheme="https://pazyx.xyz/tags/%E6%95%B4%E6%95%B0/"/>
+      <category term="整数" scheme="https://blog.pazyx.xyz/tags/%E6%95%B4%E6%95%B0/"/>
     
-      <category term="命名规则" scheme="https://pazyx.xyz/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/"/>
+      <category term="命名规则" scheme="https://blog.pazyx.xyz/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/"/>
     
-      <category term="String" scheme="https://pazyx.xyz/tags/String/"/>
+      <category term="String" scheme="https://blog.pazyx.xyz/tags/String/"/>
     
-      <category term="string" scheme="https://pazyx.xyz/tags/string/"/>
+      <category term="string" scheme="https://blog.pazyx.xyz/tags/string/"/>
     
   </entry>
   
   <entry>
     <title>basic_ios 如何穿上它的 bool</title>
-    <link href="https://pazyx.xyz/2018/06/29/cin-return/"/>
-    <id>https://pazyx.xyz/2018/06/29/cin-return/</id>
+    <link href="https://blog.pazyx.xyz/2018/06/29/cin-return/"/>
+    <id>https://blog.pazyx.xyz/2018/06/29/cin-return/</id>
     <published>2018-06-28T17:19:17.000Z</published>
     <updated>2018-07-04T17:33:36.920Z</updated>
     
@@ -462,27 +462,27 @@
     
     </summary>
     
-      <category term="编程语言 - Cpp" scheme="https://pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Cpp/"/>
+      <category term="编程语言 - Cpp" scheme="https://blog.pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Cpp/"/>
     
     
-      <category term="Cpp" scheme="https://pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
     
-      <category term="bool" scheme="https://pazyx.xyz/tags/bool/"/>
+      <category term="bool" scheme="https://blog.pazyx.xyz/tags/bool/"/>
     
-      <category term="basic_ios" scheme="https://pazyx.xyz/tags/basic-ios/"/>
+      <category term="basic_ios" scheme="https://blog.pazyx.xyz/tags/basic-ios/"/>
     
-      <category term="运算符重载" scheme="https://pazyx.xyz/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/"/>
+      <category term="运算符重载" scheme="https://blog.pazyx.xyz/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/"/>
     
-      <category term="类型转换" scheme="https://pazyx.xyz/tags/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"/>
+      <category term="类型转换" scheme="https://blog.pazyx.xyz/tags/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"/>
     
-      <category term="Cpp演化" scheme="https://pazyx.xyz/tags/Cpp%E6%BC%94%E5%8C%96/"/>
+      <category term="Cpp演化" scheme="https://blog.pazyx.xyz/tags/Cpp%E6%BC%94%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>System.in</title>
-    <link href="https://pazyx.xyz/2018/06/16/System-in/"/>
-    <id>https://pazyx.xyz/2018/06/16/System-in/</id>
+    <link href="https://blog.pazyx.xyz/2018/06/16/System-in/"/>
+    <id>https://blog.pazyx.xyz/2018/06/16/System-in/</id>
     <published>2018-06-16T12:18:32.000Z</published>
     <updated>2018-07-21T14:19:57.067Z</updated>
     
@@ -497,29 +497,29 @@
     
     </summary>
     
-      <category term="泛 - 纪念" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E7%BA%AA%E5%BF%B5/"/>
+      <category term="泛 - 纪念" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E7%BA%AA%E5%BF%B5/"/>
     
     
-      <category term="ACM" scheme="https://pazyx.xyz/tags/ACM/"/>
+      <category term="ACM" scheme="https://blog.pazyx.xyz/tags/ACM/"/>
     
-      <category term="省赛" scheme="https://pazyx.xyz/tags/%E7%9C%81%E8%B5%9B/"/>
+      <category term="省赛" scheme="https://blog.pazyx.xyz/tags/%E7%9C%81%E8%B5%9B/"/>
     
-      <category term="ACM题目" scheme="https://pazyx.xyz/tags/ACM%E9%A2%98%E7%9B%AE/"/>
+      <category term="ACM题目" scheme="https://blog.pazyx.xyz/tags/ACM%E9%A2%98%E7%9B%AE/"/>
     
-      <category term="纪念" scheme="https://pazyx.xyz/tags/%E7%BA%AA%E5%BF%B5/"/>
+      <category term="纪念" scheme="https://blog.pazyx.xyz/tags/%E7%BA%AA%E5%BF%B5/"/>
     
-      <category term="Java" scheme="https://pazyx.xyz/tags/Java/"/>
+      <category term="Java" scheme="https://blog.pazyx.xyz/tags/Java/"/>
     
-      <category term="Scanner" scheme="https://pazyx.xyz/tags/Scanner/"/>
+      <category term="Scanner" scheme="https://blog.pazyx.xyz/tags/Scanner/"/>
     
-      <category term="System.in" scheme="https://pazyx.xyz/tags/System-in/"/>
+      <category term="System.in" scheme="https://blog.pazyx.xyz/tags/System-in/"/>
     
   </entry>
   
   <entry>
     <title>GCC LD DD 命令选项</title>
-    <link href="https://pazyx.xyz/2018/05/11/gcc-ld-dd-cmd/"/>
-    <id>https://pazyx.xyz/2018/05/11/gcc-ld-dd-cmd/</id>
+    <link href="https://blog.pazyx.xyz/2018/05/11/gcc-ld-dd-cmd/"/>
+    <id>https://blog.pazyx.xyz/2018/05/11/gcc-ld-dd-cmd/</id>
     <published>2018-05-11T15:36:31.000Z</published>
     <updated>2018-07-06T20:08:56.120Z</updated>
     
@@ -535,29 +535,29 @@
     
     </summary>
     
-      <category term="泛 - 计算机" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <category term="泛 - 计算机" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
     
-      <category term="Linux" scheme="https://pazyx.xyz/tags/Linux/"/>
+      <category term="Linux" scheme="https://blog.pazyx.xyz/tags/Linux/"/>
     
-      <category term="C" scheme="https://pazyx.xyz/tags/C/"/>
+      <category term="C" scheme="https://blog.pazyx.xyz/tags/C/"/>
     
-      <category term="gcc" scheme="https://pazyx.xyz/tags/gcc/"/>
+      <category term="gcc" scheme="https://blog.pazyx.xyz/tags/gcc/"/>
     
-      <category term="ld" scheme="https://pazyx.xyz/tags/ld/"/>
+      <category term="ld" scheme="https://blog.pazyx.xyz/tags/ld/"/>
     
-      <category term="dd" scheme="https://pazyx.xyz/tags/dd/"/>
+      <category term="dd" scheme="https://blog.pazyx.xyz/tags/dd/"/>
     
-      <category term="操作系统" scheme="https://pazyx.xyz/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://blog.pazyx.xyz/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="linker" scheme="https://pazyx.xyz/tags/linker/"/>
+      <category term="linker" scheme="https://blog.pazyx.xyz/tags/linker/"/>
     
   </entry>
   
   <entry>
     <title>X86 计算机启动流程</title>
-    <link href="https://pazyx.xyz/2018/05/03/x86-cpu-boot/"/>
-    <id>https://pazyx.xyz/2018/05/03/x86-cpu-boot/</id>
+    <link href="https://blog.pazyx.xyz/2018/05/03/x86-cpu-boot/"/>
+    <id>https://blog.pazyx.xyz/2018/05/03/x86-cpu-boot/</id>
     <published>2018-05-03T11:56:37.000Z</published>
     <updated>2018-07-06T20:09:30.560Z</updated>
     
@@ -572,33 +572,33 @@
     
     </summary>
     
-      <category term="泛 - 计算机" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <category term="泛 - 计算机" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
     
-      <category term="操作系统" scheme="https://pazyx.xyz/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://blog.pazyx.xyz/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="寄存器" scheme="https://pazyx.xyz/tags/%E5%AF%84%E5%AD%98%E5%99%A8/"/>
+      <category term="寄存器" scheme="https://blog.pazyx.xyz/tags/%E5%AF%84%E5%AD%98%E5%99%A8/"/>
     
-      <category term="CPU" scheme="https://pazyx.xyz/tags/CPU/"/>
+      <category term="CPU" scheme="https://blog.pazyx.xyz/tags/CPU/"/>
     
-      <category term="硬件" scheme="https://pazyx.xyz/tags/%E7%A1%AC%E4%BB%B6/"/>
+      <category term="硬件" scheme="https://blog.pazyx.xyz/tags/%E7%A1%AC%E4%BB%B6/"/>
     
-      <category term="bootloader" scheme="https://pazyx.xyz/tags/bootloader/"/>
+      <category term="bootloader" scheme="https://blog.pazyx.xyz/tags/bootloader/"/>
     
-      <category term="BIOS" scheme="https://pazyx.xyz/tags/BIOS/"/>
+      <category term="BIOS" scheme="https://blog.pazyx.xyz/tags/BIOS/"/>
     
-      <category term="启动流程" scheme="https://pazyx.xyz/tags/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
+      <category term="启动流程" scheme="https://blog.pazyx.xyz/tags/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
     
-      <category term="X86" scheme="https://pazyx.xyz/tags/X86/"/>
+      <category term="X86" scheme="https://blog.pazyx.xyz/tags/X86/"/>
     
-      <category term="Intel" scheme="https://pazyx.xyz/tags/Intel/"/>
+      <category term="Intel" scheme="https://blog.pazyx.xyz/tags/Intel/"/>
     
   </entry>
   
   <entry>
     <title>AT&amp;T 与 Intel 汇编主要语法差异</title>
-    <link href="https://pazyx.xyz/2018/04/23/att-intel-differents/"/>
-    <id>https://pazyx.xyz/2018/04/23/att-intel-differents/</id>
+    <link href="https://blog.pazyx.xyz/2018/04/23/att-intel-differents/"/>
+    <id>https://blog.pazyx.xyz/2018/04/23/att-intel-differents/</id>
     <published>2018-04-23T13:51:49.000Z</published>
     <updated>2018-07-20T09:01:51.660Z</updated>
     
@@ -613,19 +613,19 @@
     
     </summary>
     
-      <category term="编程语言 - Assembly" scheme="https://pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Assembly/"/>
+      <category term="编程语言 - Assembly" scheme="https://blog.pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Assembly/"/>
     
     
-      <category term="汇编语言" scheme="https://pazyx.xyz/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
+      <category term="汇编语言" scheme="https://blog.pazyx.xyz/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
     
-      <category term="编程语言" scheme="https://pazyx.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+      <category term="编程语言" scheme="https://blog.pazyx.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   
   <entry>
     <title>C++类与对象总结（四）访问属性</title>
-    <link href="https://pazyx.xyz/2018/04/15/cpp-class-4/"/>
-    <id>https://pazyx.xyz/2018/04/15/cpp-class-4/</id>
+    <link href="https://blog.pazyx.xyz/2018/04/15/cpp-class-4/"/>
+    <id>https://blog.pazyx.xyz/2018/04/15/cpp-class-4/</id>
     <published>2018-04-15T15:28:33.000Z</published>
     <updated>2018-07-04T17:34:05.580Z</updated>
     
@@ -640,27 +640,27 @@
     
     </summary>
     
-      <category term="编程语言 - Cpp" scheme="https://pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Cpp/"/>
+      <category term="编程语言 - Cpp" scheme="https://blog.pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Cpp/"/>
     
     
-      <category term="Cpp" scheme="https://pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
     
-      <category term="访问属性" scheme="https://pazyx.xyz/tags/%E8%AE%BF%E9%97%AE%E5%B1%9E%E6%80%A7/"/>
+      <category term="访问属性" scheme="https://blog.pazyx.xyz/tags/%E8%AE%BF%E9%97%AE%E5%B1%9E%E6%80%A7/"/>
     
-      <category term="对象组合" scheme="https://pazyx.xyz/tags/%E5%AF%B9%E8%B1%A1%E7%BB%84%E5%90%88/"/>
+      <category term="对象组合" scheme="https://blog.pazyx.xyz/tags/%E5%AF%B9%E8%B1%A1%E7%BB%84%E5%90%88/"/>
     
-      <category term="继承" scheme="https://pazyx.xyz/tags/%E7%BB%A7%E6%89%BF/"/>
+      <category term="继承" scheme="https://blog.pazyx.xyz/tags/%E7%BB%A7%E6%89%BF/"/>
     
-      <category term="多态" scheme="https://pazyx.xyz/tags/%E5%A4%9A%E6%80%81/"/>
+      <category term="多态" scheme="https://blog.pazyx.xyz/tags/%E5%A4%9A%E6%80%81/"/>
     
-      <category term="可见性" scheme="https://pazyx.xyz/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/"/>
+      <category term="可见性" scheme="https://blog.pazyx.xyz/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/"/>
     
   </entry>
   
   <entry>
     <title>「公告」 近期文章中的错误and博客计划</title>
-    <link href="https://pazyx.xyz/2018/04/06/notice-1/"/>
-    <id>https://pazyx.xyz/2018/04/06/notice-1/</id>
+    <link href="https://blog.pazyx.xyz/2018/04/06/notice-1/"/>
+    <id>https://blog.pazyx.xyz/2018/04/06/notice-1/</id>
     <published>2018-04-06T07:38:42.000Z</published>
     <updated>2018-07-06T20:09:01.840Z</updated>
     
@@ -675,37 +675,37 @@
     
     </summary>
     
-      <category term="泛 - 公告" scheme="https://pazyx.xyz/categories/%E6%B3%9B-%E5%85%AC%E5%91%8A/"/>
+      <category term="泛 - 公告" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E5%85%AC%E5%91%8A/"/>
     
     
-      <category term="Cpp" scheme="https://pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
     
-      <category term="算法" scheme="https://pazyx.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://blog.pazyx.xyz/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="动态规划" scheme="https://pazyx.xyz/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://blog.pazyx.xyz/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="背包问题" scheme="https://pazyx.xyz/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
+      <category term="背包问题" scheme="https://blog.pazyx.xyz/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
     
-      <category term="01背包" scheme="https://pazyx.xyz/tags/01%E8%83%8C%E5%8C%85/"/>
+      <category term="01背包" scheme="https://blog.pazyx.xyz/tags/01%E8%83%8C%E5%8C%85/"/>
     
-      <category term="公告" scheme="https://pazyx.xyz/tags/%E5%85%AC%E5%91%8A/"/>
+      <category term="公告" scheme="https://blog.pazyx.xyz/tags/%E5%85%AC%E5%91%8A/"/>
     
-      <category term="C" scheme="https://pazyx.xyz/tags/C/"/>
+      <category term="C" scheme="https://blog.pazyx.xyz/tags/C/"/>
     
-      <category term="完全背包" scheme="https://pazyx.xyz/tags/%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85/"/>
+      <category term="完全背包" scheme="https://blog.pazyx.xyz/tags/%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85/"/>
     
-      <category term="计划" scheme="https://pazyx.xyz/tags/%E8%AE%A1%E5%88%92/"/>
+      <category term="计划" scheme="https://blog.pazyx.xyz/tags/%E8%AE%A1%E5%88%92/"/>
     
-      <category term="Dijkstra" scheme="https://pazyx.xyz/tags/Dijkstra/"/>
+      <category term="Dijkstra" scheme="https://blog.pazyx.xyz/tags/Dijkstra/"/>
     
-      <category term="KMP" scheme="https://pazyx.xyz/tags/KMP/"/>
+      <category term="KMP" scheme="https://blog.pazyx.xyz/tags/KMP/"/>
     
   </entry>
   
   <entry>
     <title>C/C++程序中的内存分配</title>
-    <link href="https://pazyx.xyz/2018/04/03/ccppmemory/"/>
-    <id>https://pazyx.xyz/2018/04/03/ccppmemory/</id>
+    <link href="https://blog.pazyx.xyz/2018/04/03/ccppmemory/"/>
+    <id>https://blog.pazyx.xyz/2018/04/03/ccppmemory/</id>
     <published>2018-04-03T09:28:07.000Z</published>
     <updated>2018-07-04T17:33:32.050Z</updated>
     
@@ -720,14 +720,14 @@
     
     </summary>
     
-      <category term="编程语言 - Cpp" scheme="https://pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Cpp/"/>
+      <category term="编程语言 - Cpp" scheme="https://blog.pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Cpp/"/>
     
     
-      <category term="Cpp" scheme="https://pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
     
-      <category term="C" scheme="https://pazyx.xyz/tags/C/"/>
+      <category term="C" scheme="https://blog.pazyx.xyz/tags/C/"/>
     
-      <category term="内存分配" scheme="https://pazyx.xyz/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"/>
+      <category term="内存分配" scheme="https://blog.pazyx.xyz/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"/>
     
   </entry>
   
