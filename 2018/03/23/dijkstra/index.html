@@ -92,7 +92,7 @@
 <meta property="og:description" content="概述最短路径问题有众多的算法，对于无权图的最短路径 DFS与BFS 就可以轻松解决。而对于有权图来说就相对复杂一些，接下来要介绍的就是一种求有权图的单源最短路径的算法—— Dijkstra 算法。需要注意的是这里的 Dijkstra 算法要求图中不能出现负值圈和负权边，出现负值圈会造成程序的无限循环，而出现负权边会得出错误结果。 负权边的错例：Dijkstra 的局限 思想无权图可以认为是特殊的有">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog.pazyx.xyz/2018/03/23/dijkstra/1.png">
-<meta property="og:updated_time" content="2018-12-14T10:20:27.317Z">
+<meta property="og:updated_time" content="2018-12-14T11:16:06.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最短路算法1——Dijkstra">
 <meta name="twitter:description" content="概述最短路径问题有众多的算法，对于无权图的最短路径 DFS与BFS 就可以轻松解决。而对于有权图来说就相对复杂一些，接下来要介绍的就是一种求有权图的单源最短路径的算法—— Dijkstra 算法。需要注意的是这里的 Dijkstra 算法要求图中不能出现负值圈和负权边，出现负值圈会造成程序的无限循环，而出现负权边会得出错误结果。 负权边的错例：Dijkstra 的局限 思想无权图可以认为是特殊的有">
@@ -439,7 +439,7 @@
 <li>利用优先队列优化：虽然节点会多次入队，但每条边最多导致一次入队，所以其时间复杂度为  $O( E \log E )$。</li>
 <li>利用最小堆优化：利用最小堆之后我们不用在内层需要进行 $O(V)$ 的扫描了，获得最近的结点的操作时间复杂度变为 $O(\log V)$，而每次更新 <code>dist</code> 数组的操作因为要删除再插入堆中复杂度从 $O(1)$ 变为 $O(\log V)$。总体的时间复杂度为 $O( V \log V + E \log V )$。</li>
 </ul>
-<p><strong>对于一个稀疏图来说利用最小堆做优化会效率会高很多，而对于一个稠密图来说两者效率是差不多的。利用优先队列的优化方式编程复杂度相对最小堆优化的方式会低一些，方便快速实现该算法。</strong></p>
+<p><strong>对于一个稀疏图来说利用最小堆做优化后效率会高很多，而对于一个稠密图来说两者效率是差不多的。利用优先队列的优化方式编程复杂度相对最小堆优化的方式会低一些，方便快速实现该算法。</strong></p>
 
       
     </div>
@@ -466,7 +466,7 @@
   <p><span>本文标题:</span><a href="/2018/03/23/dijkstra/">最短路算法1——Dijkstra</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
   <p><span>发布时间:</span>2018年03月23日 - 02:03</p>
-  <p><span>最后更新:</span>2018年12月14日 - 18:12</p>
+  <p><span>最后更新:</span>2018年12月14日 - 19:12</p>
   <p><span>原始链接:</span><a href="/2018/03/23/dijkstra/" title="最短路算法1——Dijkstra">https://blog.pazyx.xyz/2018/03/23/dijkstra/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.pazyx.xyz/2018/03/23/dijkstra/"  aria-label="复制成功！"></i></span>
   </p>
