@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.pazyx.xyz/"/>
-  <updated>2018-12-11T23:30:48.237Z</updated>
+  <updated>2018-12-18T16:02:58.784Z</updated>
   <id>https://blog.pazyx.xyz/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「笔记」Effective C++ 读书笔记（三）</title>
+    <link href="https://blog.pazyx.xyz/2018/12/19/effective-cpp03/"/>
+    <id>https://blog.pazyx.xyz/2018/12/19/effective-cpp03/</id>
+    <published>2018-12-18T16:02:25.000Z</published>
+    <updated>2018-12-18T16:02:58.784Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="注意！"><a href="#注意！" class="headerlink" title="注意！"></a>注意！</h1><p>这只是我的读书笔记，帮助我记录。其中可能有一些不严谨的解释或没有做很详细的解释，大家学习还是建议直接看书（虽然书中也有不严谨的解释）。</p><h1 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a>资源管理</h1><h2 id="条款-13：以对象管理资源"><a href="#条款-13：以对象管理资源" class="headerlink" title="条款 13：以对象管理资源"></a>条款 13：以对象管理资源</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">Investment* pInv = creteInvestment();<span class="comment">// 调用 factory 函数</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">delete</span> pInv;<span class="comment">// 释放 pInv 所指对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>...</code> 可能存在过早的 <code>return</code> 语句，或抛出某些异常，<code>delete</code> 语句将不会被执行。类似的 <code>goto</code> 语句或循环中的 <code>continue</code> 和 <code>break</code>。</p><p>使用智能指针，利用栈中对象的析构函数自动对其 <code>delete</code>。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">auto_ptr</span>&lt;Investment&gt; pInv(createInvestment());</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><strong>获得资源后立刻放进管理对象（managing object）</strong></li><li><strong>管理对象（managing object）运用析构函数确保资源被释放</strong></li></ul><p>常使用的 RAII classes ：<code>tr1::shared_ptr</code> 和 <code>auto_ptr</code> 。</p><h2 id="条款-14：在资源管理类中小心-copying-行为"><a href="#条款-14：在资源管理类中小心-copying-行为" class="headerlink" title="条款 14：在资源管理类中小心 copying 行为"></a>条款 14：在资源管理类中小心 <em>copying</em> 行为</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lock</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">explicit Lock(Mutex* pm) : mutexPtr(pm)</span><br><span class="line">&#123;</span><br><span class="line">lock(muterPtr);</span><br><span class="line">&#125;</span><br><span class="line">~Lock()</span><br><span class="line">&#123;</span><br><span class="line">        unlock(mutexPtr);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">Mutex *mutexPtr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Mutex m;</span><br><span class="line"></span><br><span class="line"><span class="function">Lock <span class="title">ml1</span><span class="params">(&amp;m)</span></span>;</span><br><span class="line"><span class="function">Lock <span class="title">ml2</span><span class="params">(ml1)</span></span>;</span><br></pre></td></tr></table></figure><p>RAII classes 应被禁止复制或采用“引用计数法（reference-count）”。</p><h3 id="禁止复制"><a href="#禁止复制" class="headerlink" title="禁止复制"></a>禁止复制</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lock</span>:</span> <span class="keyword">private</span> Uncopyable</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="“引用计数法（reference-count）"><a href="#“引用计数法（reference-count）" class="headerlink" title="“引用计数法（reference-count）"></a>“引用计数法（reference-count）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lock</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">explicit Lock(Mutex* pm) : mutexPtr(pm, unlock)</span><br><span class="line">&#123;</span><br><span class="line">lock(muterPtr.get());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="built_in">std</span>::tr1::<span class="built_in">shared_ptr</span>&lt;Mutex&gt; mutexPtr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>进行“深度拷贝”，复制底部资源</li><li>转移底部资源的拥有权，如：<code>auto_ptr</code></li></ul><p><code>Coping</code> 函数包括 <code>copy</code> 构造函数和 <code>copy assignment</code>操作符。</p><h2 id="条款-15：在资源管理类中提供对原始资源的访问"><a href="#条款-15：在资源管理类中提供对原始资源的访问" class="headerlink" title="条款 15：在资源管理类中提供对原始资源的访问"></a>条款 15：在资源管理类中提供对原始资源的访问</h2><p>每个 RAII class 应该提供一个 “取得其所管理之资源” 的方法。<br>对原始资源的访问可能经由显式转换或隐式转换。显式转换比较安全，但隐式转换对客户比较方便。</p><h2 id="条款-16：成对使用-new-和-delete-时要采取相同形式"><a href="#条款-16：成对使用-new-和-delete-时要采取相同形式" class="headerlink" title="条款 16：成对使用 new 和 delete 时要采取相同形式"></a>条款 16：成对使用 new 和 delete 时要采取相同形式</h2><p>使用 <code>new</code> 要严格搭配 <code>delete</code>，如使用 <code>delete[]</code> 为未定义的行为，可能多次调用析构函数。<br>使用 <code>new[]</code> 要严格搭配 <code>delete[]</code>。<br>谨慎对数组类型 <code>typedef</code> 。 </p><h2 id="条款-17：以独立语句将-newed-对象置入智能指针"><a href="#条款-17：以独立语句将-newed-对象置入智能指针" class="headerlink" title="条款 17：以独立语句将 newed 对象置入智能指针"></a>条款 17：以独立语句将 newed 对象置入智能指针</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">priority</span><span class="params">()</span></span>;</span><br><span class="line">void processWidget(std::tr1::shared_ptr&lt;Widget&gt;, priority());</span><br></pre></td></tr></table></figure><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">processWidget(<span class="built_in">std</span>::tr1::<span class="built_in">shared_ptr</span>&lt;Widget&gt;(<span class="keyword">new</span> Widget), priority());</span><br><span class="line"><span class="comment">// 进入函数前做了以下三件事</span></span><br><span class="line"><span class="comment">// 执行 "new Widget"</span></span><br><span class="line"><span class="comment">// 调用 tr1::shared_ptr 构造函数</span></span><br><span class="line"><span class="comment">// 调用 priority()</span></span><br></pre></td></tr></table></figure><p>编译器对这三件事的完成次序上弹性很大。<br>如在 <code>priority()</code> 抛出了异常，<code>new Widget</code> 返回的指针将可能遗失，因为它尚未被置入 <code>std::tr1::shared_ptr</code> 内。</p><p>避免这类问题只需分离语句，控制执行顺序。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::tr1::<span class="built_in">shared_ptr</span>&lt;Widget&gt; pw(<span class="keyword">new</span> Widget);</span><br><span class="line">processWidget(pw, priority);</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;注意！&quot;&gt;&lt;a href=&quot;#注意！&quot; class=&quot;headerlink&quot; title=&quot;注意！&quot;&gt;&lt;/a&gt;注意！&lt;/h1&gt;&lt;p&gt;这只是我的读书笔记，帮助我记录。其中可能有一些不严谨的解释或没有做很详细的解释，大家学习还是建议直接看书（虽然书中也有不严谨的解释）
+      
+    
+    </summary>
+    
+      <category term="泛 - 笔记" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
+    
+      <category term="读书" scheme="https://blog.pazyx.xyz/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+      <category term="笔记" scheme="https://blog.pazyx.xyz/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Effective C++" scheme="https://blog.pazyx.xyz/tags/Effective-C/"/>
+    
+      <category term="智能指针" scheme="https://blog.pazyx.xyz/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"/>
+    
+  </entry>
   
   <entry>
     <title>「书摘」自控力</title>
@@ -679,33 +712,6 @@
       <category term="X86" scheme="https://blog.pazyx.xyz/tags/X86/"/>
     
       <category term="Intel" scheme="https://blog.pazyx.xyz/tags/Intel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AT&amp;T 与 Intel 汇编主要语法差异</title>
-    <link href="https://blog.pazyx.xyz/2018/04/23/att-intel-differents/"/>
-    <id>https://blog.pazyx.xyz/2018/04/23/att-intel-differents/</id>
-    <published>2018-04-23T13:51:49.000Z</published>
-    <updated>2018-08-17T17:49:51.717Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="操作数顺序"><a href="#操作数顺序" class="headerlink" title="操作数顺序"></a>操作数顺序</h1><p>在一般的二元指令（如 mov、add …）中，两个操作数分为源操作数和目的操作数。AT&amp;T 与 Intel操作数的顺序正好相反。</p><ul><li>“Op-code dst src” in <strong>Intel</strong> syntax.</li><li>“Op-code src dst” in <strong>AT&amp;T</strong> syntax.</li></ul><h1 id="寄存器名称"><a href="#寄存器名称" class="headerlink" title="寄存器名称"></a>寄存器名称</h1><p>AT&amp;T 语法中寄存器名称需要加前缀 ’%’ ，而 Intel 不需要。</p><h1 id="立即数"><a href="#立即数" class="headerlink" title="立即数"></a>立即数</h1><p>AT&amp;T 语法中立即数需要加前缀 ’$’ ，对于静态 ‘C’ 变量也一样。Intel的语法标准不需要。</p><h1 id="操作数大小"><a href="#操作数大小" class="headerlink" title="操作数大小"></a>操作数大小</h1><p>AT&amp;T 语法中，操作数大小由指令的最后一个字符决定，“b”、“w” 和 “l” 的指令后缀分别表示字节(8位)、word(16位)和长(32位)内存引用。 Intel 语法中，由操作数的前缀 ’byte ptr’, ’word ptr’, 和 ’dword ptr’ 决定。</p><ul><li>“mov al, byte ptr foo” in <strong>Intel</strong> syntax</li><li>“movb foo, %al” in <strong>AT&amp;T</strong> syntax</li></ul><h1 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h1><p>AT&amp;T 语法中基指寄存器被 ( ) 括起来，而 Intel 语法中使用 [ ] 。 <strong>地址表示：</strong></p><ul><li>section:[base + index*scale + disp] in <strong>Intel</strong> syntax</li><li>section:disp(base, index, scale) in <strong>AT&amp;T</strong> syntax</li></ul><ul><li>section：段地址</li><li>disp：偏移地址</li><li>index：变址</li><li>scale：比例因子</li></ul><p><strong>计算公式：[EA = base + ( index * scale ) + disp]</strong></p><h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><table><thead><tr><th>Intel Code</th><th>AT&amp;T Code</th></tr></thead><tbody><tr><td><code>mov eax,1</code></td><td><code>movl $1,%eax</code></td></tr><tr><td><code>mov ebx,0ffh</code></td><td><code>movl $0xff,%ebx</code></td></tr><tr><td><code>int 80h</code></td><td><code>int $0x80</code></td></tr><tr><td><code>mov ebx,eax</code></td><td><code>movl %eax,%ebx</code></td></tr><tr><td><code>mov eax,[ecx]</code></td><td><code>movl (%ecx),%eax</code></td></tr><tr><td><code>mov eax,[ebx+3]</code></td><td><code>movl 3(%ebx),%eax</code></td></tr><tr><td><code>mov eax,[ebx+20h]</code></td><td><code>movl 0x20(%ebx),%eax</code></td></tr><tr><td><code>add eax,[ebx+ecx*2h]</code></td><td><code>addl (%ebx,%ecx,0x2),%eax</code></td></tr><tr><td><code>lea eax,[ebx+ecx]</code></td><td><code>leal (%ebx,%ecx),%eax</code></td></tr><tr><td><code>sub eax,[ebx+ecx*4h-20h]</code></td><td><code>subl -0x20(%ebx,%ecx,0x4),%eax</code></td></tr></tbody></table><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li>GCC-Inline-Assembly-HOWTO : <a href="http://ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html#s3" target="_blank" rel="noopener">http://ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html#s3</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;操作数顺序&quot;&gt;&lt;a href=&quot;#操作数顺序&quot; class=&quot;headerlink&quot; title=&quot;操作数顺序&quot;&gt;&lt;/a&gt;操作数顺序&lt;/h1&gt;&lt;p&gt;在一般的二元指令（如 mov、add …）中，两个操作数分为源操作数和目的操作数。AT&amp;amp;T 与 Intel操
-      
-    
-    </summary>
-    
-      <category term="编程语言 - Assembly" scheme="https://blog.pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Assembly/"/>
-    
-    
-      <category term="汇编语言" scheme="https://blog.pazyx.xyz/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="编程语言" scheme="https://blog.pazyx.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   
