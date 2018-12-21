@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="5gXbjwP2M2lldOIIKUxUCHGm0ZeANFXrPV6LcJ_UpZo" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/EBFFFA.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Cpp," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Microwave. Five minutes." type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X();class Z : public virtual X();class A : public Y, public Z(); Y 和 Z 的大小与机器（字长）有关，也和编译器有关，具体受以下三个因素的影响：  语言本身所造成的额外负">
+<meta name="keywords" content="Cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「书摘」深度探索 C++ 对象模型（三）">
+<meta property="og:url" content="https://blog.pazyx.xyz/2018/12/21/inside_cpp_obj_model_3/index.html">
+<meta property="og:site_name" content="Microwave. Five minutes.">
+<meta property="og:description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X();class Z : public virtual X();class A : public Y, public Z(); Y 和 Z 的大小与机器（字长）有关，也和编译器有关，具体受以下三个因素的影响：  语言本身所造成的额外负">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-21T12:23:05.895Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「书摘」深度探索 C++ 对象模型（三）">
+<meta name="twitter:description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X();class Z : public virtual X();class A : public Y, public Z(); Y 和 Z 的大小与机器（字长）有关，也和编译器有关，具体受以下三个因素的影响：  语言本身所造成的额外负">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpI"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.pazyx.xyz/2018/12/21/inside_cpp_obj_model_3/"/>
+
+
+
+
+
+  <title>「书摘」深度探索 C++ 对象模型（三） | Microwave. Five minutes.</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-121622821-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Microwave. Five minutes.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">他大概会说你想得太多</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-programming">
+          <a href="/programming" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Programming
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-other">
+          <a href="/other" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Other
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-bookmarks">
+          <a href="/bookmarks" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Bookmarks
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.pazyx.xyz/2018/12/21/inside_cpp_obj_model_3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pazyx.xyz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EBFFFA.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Microwave. Five minutes.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「书摘」深度探索 C++ 对象模型（三）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-21T20:23:42+08:00">
+                2018-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/泛-书摘/" itemprop="url" rel="index">
+                    <span itemprop="name">泛 - 书摘</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/21/inside_cpp_obj_model_3/" class="leancloud_visitors" data-flag-title="「书摘」深度探索 C++ 对象模型（三）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,945
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Data-语意学-The-Semantics-of-Data"><a href="#Data-语意学-The-Semantics-of-Data" class="headerlink" title="Data 语意学 (The Semantics of Data)"></a>Data 语意学 (The Semantics of Data)</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> &#123;</span>&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Y</span> :</span> <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="title">X</span><span class="params">()</span></span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Z</span> :</span> <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="title">X</span><span class="params">()</span></span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> :</span> <span class="keyword">public</span> Y, <span class="function"><span class="keyword">public</span> <span class="title">Z</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>Y</code> 和 <code>Z</code> 的大小与机器（字长）有关，也和编译器有关，具体受以下三个因素的影响：</p>
+<ul>
+<li>语言本身所造成的额外负担（overhea）</li>
+<li>编译器对于特殊情况所提供的优化处理</li>
+<li>Alignment 的限制</li>
+</ul>
+<p><code>class A</code> 的大小由下列几点决定：</p>
+<ul>
+<li>被大家共享的唯一一个 <code>class X</code> 实例，大小为 1 <code>byte</code>。</li>
+<li><code>Base class Y</code> 和 <code>Base class Y</code> 的大小，减去“因 virtual base class X 而配置” 的大小，结果式 4 <code>bytes</code>。</li>
+<li><code>class A</code> 自己的大小：0 <code>byte</code>。</li>
+<li><code>class A</code> 的 alignment 数量（如果有的化）。<br>结果为 12 <code>bytes</code></li>
+</ul>
+<p>”特别对 empty virual base class 做了处理“ 的编译器，class X 实例的那 1 <code>byte</code> 将被拿掉，class A 的大小将是 8 <code>bytes</code>。</p>
+<p>继承得到的数据的存放顺序，C++标准没有强制定义其间的排列顺序。</p>
+<h2 id="Data-Member-的绑定-The-Binding-of-a-Data-Member"><a href="#Data-Member-的绑定-The-Binding-of-a-Data-Member" class="headerlink" title="Data Member 的绑定 (The Binding of a Data Member)"></a>Data Member 的绑定 (The Binding of a Data Member)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> x;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point3d</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// 对于函数本体的分析将延迟，直至 class 声明的右大括号出现才开始。</span></span><br><span class="line">	<span class="function"><span class="keyword">float</span> <span class="title">X</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> x; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">float</span> x;</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 分析在这里进行</span></span><br></pre></td></tr></table></figure>
+<p>member function 的 argument list 会在第一次遭遇时被适当地决议完成。extern 和 nested type names 之间的非直觉绑定操作还是会发生。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> length;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point3d</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mumble</span><span class="params">( length val )</span> </span>&#123; _val = val; &#125;	<span class="comment">// length 为 int</span></span><br><span class="line">    <span class="function">length <span class="title">mumble</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> _val; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">float</span> length;</span><br><span class="line">    length _val;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>采用防御性程序风格改进后<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> length;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point3d</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">float</span> length;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mumble</span><span class="params">( length val )</span> </span>&#123; _val = val; &#125;	<span class="comment">// length 为 float</span></span><br><span class="line">    <span class="function">length <span class="title">mumble</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> _val; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    length _val;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><strong>请总是把 “nested type 声明” 放在 class 的起始处。</strong> </p>
+<h2 id="Data-Member-的布局-Data-Member-Layout"><a href="#Data-Member-的布局-Data-Member-Layout" class="headerlink" title="Data Member 的布局 (Data Member Layout)"></a>Data Member 的布局 (Data Member Layout)</h2><p>C++ Standard 要求，在同一个 access section（也就是 private。public，protected 等区段）中，members 的排列只需符合“较晚出现的 members 在 class object 中有较高的地址”这一条件即可。</p>
+<p>判断哪个 section 先出现的 template function：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">class_type</span>, <span class="title">class</span> <span class="title">data_type1</span>, <span class="title">class</span> <span class="title">data_type2</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">char</span>* <span class="title">access_order</span>( </span></span><br><span class="line"><span class="class">	<span class="title">data_type1</span> <span class="title">class_type</span>:</span>:*mem1, </span><br><span class="line">	data_type2 class_type::*mem2 )</span><br><span class="line">&#123;</span><br><span class="line">    assert (mem1 != mem2);</span><br><span class="line">    <span class="keyword">return</span> mem1 &lt; mem2 </span><br><span class="line">    	? <span class="string">"member 1 occurs first"</span> </span><br><span class="line">    	: <span class="string">"member 1 occurs first"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>调用：<code>access_order( &amp;Point3d::z, &amp;Point3d::y );</code></p>
+<h2 id="Data-Member-的存取"><a href="#Data-Member-的存取" class="headerlink" title="Data Member 的存取"></a>Data Member 的存取</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Point origin;</span><br><span class="line">Point *pt = &amp;origin;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">origin.x = <span class="number">0.0</span>;</span><br><span class="line">pt-&gt;x = <span class="number">0.0</span>;</span><br></pre></td></tr></table></figure>
+<p>通过 <code>origin</code> 存取，和通过 <code>pt</code> 存取的差异将在本节得出答案。</p>
+<h3 id="Static-Data-Member"><a href="#Static-Data-Member" class="headerlink" title="Static Data Member"></a>Static Data Member</h3><p>每个 static member 的存取许可，以及与 class 的关联，并不会招致任何空间上或执行时间上的额外负担，不论是在个别的 class objects 还是在 static data member 本身。</p>
+<h3 id="Nonstatic-Data-Member"><a href="#Nonstatic-Data-Member" class="headerlink" title="Nonstatic Data Member"></a>Nonstatic Data Member</h3><p>Nonstatic Data Member 直接存放在每一个 class object 之中。除非经由显式的（explicit）或隐式的（implicit）class object，否则没有办法直接存取它们。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Point <span class="number">3</span>d</span><br><span class="line">Point <span class="number">3</span>d::translate( <span class="keyword">const</span> Point3d &amp;pt)&#123;</span><br><span class="line">    x += pt.x;</span><br><span class="line">    y += pt.y;</span><br><span class="line">    z += pt.z;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>表面上所看到的对于 <code>x</code>,<code>y</code>,<code>z</code> 的直接存取，事实上是经由一个“implicit class object”（由 <code>this</code> 指针表达）完成的。事实上这个函数的参数是：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Point <span class="number">3</span>d</span><br><span class="line">Point <span class="number">3</span>d::translate( Point3d *<span class="keyword">const</span> <span class="keyword">this</span>, <span class="keyword">const</span> Point3d &amp;pt)&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;x += pt.x;</span><br><span class="line">    <span class="keyword">this</span>-&gt;y += pt.y;</span><br><span class="line">    <span class="keyword">this</span>-&gt;z += pt.z;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>欲对一个 nonstatic data member 进行存取操作，编译器需要把 class object 的起始地址加上 data member 的偏移位置（offset）。<br><code>origin._y = 0.0;</code> 会转化为 <code>&amp;origin + (&amp;Point3d::_y - 1);</code>。<br>请注意其中的 <code>-1</code>操作。指向 data member 的指针，其 offset 值总是被加上 1，这样可以使编译系统区分出“一个指向 data member 的指针，用以指出 class 的第一个 member” 和 “一个指向 data members 的指针，没有指出任何 member” 两种情况。</p>
+<p>每一个 nonstatic data member 的偏移位置（offset）在编译时期即可获知，甚至如果 member 属于一个 base class subobject（派生自单一或多重继承串链）也是一样的。存取一个 nonstatic data member ，其效率和存取一个 C struct member 或 一个 nonderived class 的 member 是一样的。</p>
+<h4 id="Nonstatic-Data-Member-在虚拟继承中"><a href="#Nonstatic-Data-Member-在虚拟继承中" class="headerlink" title="Nonstatic Data Member 在虚拟继承中"></a>Nonstatic Data Member 在虚拟继承中</h4><p>虚拟继承将为“经由 base class subobject 存取 class member“ 导入一层新的间接性：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Point3d *pt3d;</span><br><span class="line">pt3d-&gt;_x = <span class="number">0.0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>其执行效率在 <code>_x</code> 是一个 struct member、一个 class member、单一继承、多重继承的情况下都完全相同。但如果 <code>_x</code> 是一个 virtual base class 的 member ，存取速度会稍慢一点。</p>
+<p><code>origin._y = 0.0;</code> 会转化为 <code>&amp;origin + (&amp;Point3d::_y - 1);</code><br>当 <code>Point3d</code> 是一个 derived class，而其继承结构中有一个 virtual base class，并且被存取的 member（如本例的 <code>x</code> ）是一个从该 virtual base class 继承而来的 member 时，就会有重大的差异。<br>这时候我们不能说 <code>pt</code> 必然指向哪一种 class type（因此，我们也就不知道编译时期这个 member 真正的 offset 位置），所以这个存取操作必须延迟至执行期，经由一个额外的间接导引，才能够解决。但如果使用 <code>origin</code> ，就不会有这些问题，members 的 offset 位置在编译时期就固定了。</p>
+<h2 id="“继承”-与-Data-Member"><a href="#“继承”-与-Data-Member" class="headerlink" title="“继承” 与 Data Member"></a>“继承” 与 Data Member</h2><p>derived class members 和 base class(es) members 的排列顺序，则并未在 C++ Standard 中强制指定；理论上编译器可以自由安排。在大多数编译器上头，base class members 总是先出现，但属于 virtual base class 的除外（一般而言，任何一条通则一旦碰上 virtual base class 就没辙了，这里亦不例外）。</p>
+<h3 id="只要继承不要多态-Inheritance-without-Polymorphism"><a href="#只要继承不要多态-Inheritance-without-Polymorphism" class="headerlink" title="只要继承不要多态 (Inheritance without Polymorphism)"></a>只要继承不要多态 (Inheritance without Polymorphism)</h3><p>一般而言，具体继承（concrete inheritance）相对虚拟继承（virtual inheritance）并不会增加空间或存取时间上的额外负担。</p>
+<p><strong>C++语言保证“出现在 derived class 中的 base class subobject 有其完整原样性”。</strong><br>因为要保证 bitwise 拷贝的正确性。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Concrete</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> val;</span><br><span class="line">	<span class="keyword">char</span> c1;</span><br><span class="line">	<span class="keyword">char</span> c2;</span><br><span class="line">	<span class="keyword">char</span> c3;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>val</code> 占用 4 <code>bytes</code>；</li>
+<li><code>c1</code>、<code>c2</code>和<code>c3</code> 各占用 1 <code>bytes</code>；</li>
+<li>alignment（调整到 word 边界）需要 1 <code>byte</code>。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Concrete1</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> val;</span><br><span class="line">	<span class="keyword">char</span> c1;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Concrete2</span> :</span> <span class="keyword">public</span> Concrete1 &#123;</span><br><span class="line">	<span class="keyword">char</span> c2;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Concrete3</span> :</span> <span class="keyword">public</span> Concrete2 &#123;</span><br><span class="line">	<span class="keyword">char</span> c3;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Concrete1</code> 占用 8 <code>bytes</code>，包括填补用的 3 <code>bytes</code>。</li>
+<li><code>Concrete2</code> 占用 12 <code>bytes</code>，填补 3 <code>bytes</code>。</li>
+<li><code>Concrete3</code> 占用 16 <code>bytes</code>，填补 3 <code>bytes</code>。</li>
+</ul>
+<h3 id="加上多态-Adding-Polymorphism"><a href="#加上多态-Adding-Polymorphism" class="headerlink" title="加上多态 (Adding Polymorphism)"></a>加上多态 (Adding Polymorphism)</h3><p>Polymorphism 带来空间和存取时间上的额外负担</p>
+<ul>
+<li>导入一个 virtual table，用来存取它所声明的每一个 virtual functions 的地址。这个 table 的元素个数一般而言是被声明的 virtual functions 的个数，再加上一个或两个 slots（用以支持 runtime tyoe identifition）。</li>
+<li>在每一个 class object 中导入一个 <code>vptr</code>，提供执行器的链接，使每一个 object 能够找到相应的 virtual table。</li>
+<li>加强 constructor，使它能够为 <code>vptr</code> 设定初值，让它指向 class 所对应的 virtual table。这可能意味着在 derived class 和每一个 base class 的 constructor 中，重新设定 <code>vptr</code> 的值。其情况视编译器优化的积极性而定。</li>
+<li>加强 destructor，使它能够抹消“指向 class 之相关 virtual table” 的 <code>vptr</code>。<code>vptr</code> 很可能已经在 derived class destructor 中被设定为 derived class 的 virtual table 的地址。destructor 的调用的顺序上反向的：从 derived class 到 base class，一个积极的优化编译器可以压抑那些大量的制定操作。</li>
+</ul>
+<p><code>vptr</code> 放在前端，代价是丧失了 C 语言兼容性。</p>
+<h3 id="多重继承-Multiple-Inheritance"><a href="#多重继承-Multiple-Inheritance" class="headerlink" title="多重继承 (Multiple Inheritance)"></a>多重继承 (Multiple Inheritance)</h3><p>……</p>
+<h3 id="虚拟继承-Virtual-Inheritance"><a href="#虚拟继承-Virtual-Inheritance" class="headerlink" title="虚拟继承 (Virtual Inheritance)"></a>虚拟继承 (Virtual Inheritance)</h3><p>虚拟继承的两个问题</p>
+<ul>
+<li>每一个对象必须针对其每一个 virtual base class 背负一个额外的指针，然而理想上我们希望 class object 有固定负担，不因为其 virtual base classes 的个数而有所变化。</li>
+<li>由于虚拟继承串链的加长，导致间接存取层次的增加。我们希望有固定的存取时间，不因为虚拟派生的深度而改变。</li>
+</ul>
+<p>第一个问题两种解决办法：</p>
+<ul>
+<li>Microsoft 编译器引入的 virtual base class table。</li>
+<li>在 virtual function table 中放置 virtual base class 的 offset（不是地址），在 Sun 编译器中，virtual function table 可经由正值或负值来索引，如果是正值索引到 virtual function ，如果是负值索引到 virtual base class offset。</li>
+</ul>
+<p>第二个问题，它们经由拷贝操作取得所有的 nested  virtual base class 指针，放到的 derived class object 之中。</p>
+<h2 id="对象成员的效率-Object-Member-Efficiency"><a href="#对象成员的效率-Object-Member-Efficiency" class="headerlink" title="对象成员的效率 (Object Member Efficiency)"></a>对象成员的效率 (Object Member Efficiency)</h2><p>聚合（aggregtion）<br>封装（encapsulation）<br>继承（inheritance）</p>
+<p><strong>不断加强抽象化程度后，数据的存取效率</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>优化</th>
+<th>未优化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个别的局部变量</td>
+<td>0.80</td>
+<td>1.42</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>局部数组</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CC</td>
+<td>0.80</td>
+<td>2.55</td>
+</tr>
+<tr>
+<td>NCC</td>
+<td>0.80</td>
+<td>1.42</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>struct 之中有 public 成员</td>
+<td>0.80</td>
+<td>1.42</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>class 之中有 inline Get 函数</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CC</td>
+<td>0.80</td>
+<td>2.56</td>
+</tr>
+<tr>
+<td>NCC</td>
+<td>0.80</td>
+<td>3.10</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>class 之中有 inline Get &amp; Set 函数</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CC</td>
+<td>0.80</td>
+<td>1.74</td>
+</tr>
+<tr>
+<td>NCC</td>
+<td>0.80</td>
+<td>2.87</td>
+</tr>
+</tbody>
+</table>
+<p>如果把优化开关打开，“封装”就不会带来执行器的效率成本，使用 inline 存取函数亦然。</p>
+<p>为什么在 CC 之下存取数组，几乎比 NCC 慢两倍？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// CC assembler output</span><br><span class="line"># 13 pB[ x ] = pA[ x ] - pB[ x ];</span><br><span class="line">	add $25, $sp, 20</span><br><span class="line">	1.s $f4, 0($25)</span><br><span class="line">	addu $24, $sp, 8</span><br><span class="line">	1.s $f6, 8($24)</span><br><span class="line">	sub.s $f8, $f4, $f6</span><br><span class="line">	s.s $f8, 0($24)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// NCC assembler output</span><br><span class="line"># 13 pB[ x ] = pA[ x ] - pB[ x ];</span><br><span class="line">	1.s $f4, 20($25)</span><br><span class="line">	1.s $f6, 16($24)</span><br><span class="line">	sub.s $f8, $f4, $f6</span><br><span class="line">	s.s $f8, 0($24)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>1.s</code> 加载一个单精度浮点数</li>
+<li><code>s.s</code> 存储一个单精度浮点数</li>
+<li><code>sub.s</code> 将两个单精度浮点数相减</li>
+</ul>
+<p><strong>在继承模型之下的数据存取</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>优化</th>
+<th>未优化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单一继承</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>直接存取</td>
+<td>0.80</td>
+<td>1.42</td>
+</tr>
+<tr>
+<td>使用 inline 函数</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CC</td>
+<td>0.80</td>
+<td>2.55</td>
+</tr>
+<tr>
+<td>NCC</td>
+<td>0.80</td>
+<td>3.10</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>虚拟继承（单层）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>直接存取</td>
+<td>1.60</td>
+<td>1.94</td>
+</tr>
+<tr>
+<td>使用 inline 函数</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CC</td>
+<td>1.60</td>
+<td>2.75</td>
+</tr>
+<tr>
+<td>NCC</td>
+<td>1.60</td>
+<td>3.30</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>虚拟继承（双层）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>直接存取</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CC</td>
+<td>2.25</td>
+<td>2.74</td>
+</tr>
+<tr>
+<td>NCC</td>
+<td>3.04</td>
+<td>3.68</td>
+</tr>
+<tr>
+<td>使用 inline 函数</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CC</td>
+<td>2.25</td>
+<td>3.22</td>
+</tr>
+<tr>
+<td>NCC</td>
+<td>2.50</td>
+<td>3.81</td>
+</tr>
+</tbody>
+</table>
+<h2 id="指向-Data-Member-的指针-Pointer-to-Data-Members"><a href="#指向-Data-Member-的指针-Pointer-to-Data-Members" class="headerlink" title="指向 Data Member 的指针 (Pointer to Data Members)"></a>指向 Data Member 的指针 (Pointer to Data Members)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point3d</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">virtual</span> ~Point3d();</span><br><span class="line">    <span class="keyword">static</span> Point3d origin;</span><br><span class="line">    <span class="keyword">float</span> x, y, z;</span><br><span class="line">&#125;;</span><br><span class="line">&amp;Point3d::z <span class="comment">// 得到 z 在 class object 中的 offset</span></span><br></pre></td></tr></table></figure>
+<p>输出 offset<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%p\n"</span>,&amp;Point3d::x);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%p\n"</span>,&amp;Point3d::y);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%p\n"</span>,&amp;Point3d::z);</span><br></pre></td></tr></table></figure></p>
+<p>早期一些编译器 <code>&amp;Point3d::z</code> 这个操作的值为 <code>z</code> 的 offset + 1。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> Point3d::*p1 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">float</span> Point3d::*p2 = &amp;Point3d:x;</span><br><span class="line"><span class="comment">// Point3d::* 的意思是 "指向 Point3d data member" 的指针类型</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(p1 == p2) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">" p1 &amp; p2 contain the same value -- "</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">" they must address the same member!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对 offset 加 1，方便区分 <code>NULL</code> 和第一个 data member。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Base1</span>&#123;</span> <span class="keyword">int</span> val1; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Base2</span>&#123;</span> <span class="keyword">int</span> val2; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Derived</span> :</span> Base1, Base2&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">( <span class="keyword">int</span> Derived::*dmp, Derived *pd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pd-&gt;*dmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">( Derived *pd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// bmp 为 1</span></span><br><span class="line">    <span class="keyword">int</span> Base2::*bmp = &amp;Base2::val2;</span><br><span class="line">	<span class="comment">// bmp == 1</span></span><br><span class="line">	<span class="comment">// 但在 Derived 中， val2 == 5</span></span><br><span class="line">    func1(bmp,pd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 经由编译器内部转换</span></span><br><span class="line">func1( bmp + <span class="keyword">sizeof</span>( Base1 ), pd );</span><br></pre></td></tr></table></figure>
+<p>一般而言，我们不能够保证 <code>bmp</code> 不是 0，因此必须注意这一点：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func1( bmp ? bmp + <span class="keyword">sizeof</span>( Base1 ) : <span class="number">0</span>, pd );</span><br></pre></td></tr></table></figure></p>
+<p><strong>我的测试程序：</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Base1</span>&#123;</span> <span class="keyword">int</span> val1; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Base2</span>&#123;</span> <span class="keyword">int</span> val2; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Derived</span> :</span> Base1, Base2&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func1</span><span class="params">( <span class="keyword">int</span> Derived::*dmp, Derived *pd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%p\n"</span>,dmp);</span><br><span class="line">    <span class="keyword">return</span> pd-&gt;*dmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func2</span><span class="params">( Derived *pd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> Base2::*bmp = &amp;Base2::val2;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%p\n"</span>,bmp);</span><br><span class="line">    <span class="keyword">return</span> func1(bmp,pd);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Derived xx;</span><br><span class="line"></span><br><span class="line">    xx.val1 = <span class="number">11</span>;</span><br><span class="line">    xx.val2 = <span class="number">22</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; func2(&amp;xx) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="“指向-Data-Member-的指针”-的效率问题"><a href="#“指向-Data-Member-的指针”-的效率问题" class="headerlink" title="“指向 Data Member 的指针” 的效率问题"></a>“指向 Data Member 的指针” 的效率问题</h3><p><strong>存取 Nonstatic Data Member</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>优化</th>
+<th>未优化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接存取</td>
+<td>0.80</td>
+<td>1.42</td>
+</tr>
+<tr>
+<td>指针指向已绑定的 Member</td>
+<td>0.80</td>
+<td>3.04</td>
+</tr>
+<tr>
+<td>指针指向 Data Member</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CC</td>
+<td>0.80</td>
+<td>5.34</td>
+</tr>
+<tr>
+<td>NCC</td>
+<td>4.04</td>
+<td>5.34</td>
+</tr>
+</tbody>
+</table>
+<p><strong>“指向 Data Member 的指针”存取方式</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>优化</th>
+<th>未优化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>没有继承</td>
+<td>0.80</td>
+<td>5.34</td>
+</tr>
+<tr>
+<td>单一继承（三层）</td>
+<td>0.80</td>
+<td>5.34</td>
+</tr>
+<tr>
+<td>虚拟继承（单层）</td>
+<td>1.60</td>
+<td>5.44</td>
+</tr>
+<tr>
+<td>虚拟继承（双层）</td>
+<td>2.14</td>
+<td>5.51</td>
+</tr>
+</tbody>
+</table>
+<p>在两个编译器中，每次存取 <code>Point::x</code>，像这样： <code>pB.*bx</code> 会被转换为：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;pB-&gt;__vbcPoint + ( bx - <span class="number">1</span> )</span><br></pre></td></tr></table></figure></p>
+<p>而不是转换为最直接的：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;pB + ( bx - <span class="number">1</span> )</span><br></pre></td></tr></table></figure></p>
+<p>额外的间接性会降低“把所有的处理都搬移到寄存器中执行”的优化能力。</p>
+
+      
+    </div>
+    
+    
+    
+
+
+
+
+
+
+
+
+<div>
+      
+        
+      
+</div>
+
+
+
+
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="pazyx.xyz 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="pazyx.xyz 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+
+
+
+
+
+            <a href="/tags/Cpp/" rel="tag"><i class="fa fa-tag"></i> Cpp</a>
+
+
+
+
+
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/19/effective-cpp03/" rel="next" title="「笔记」Effective C++ 读书笔记（三）">
+                <i class="fa fa-chevron-left"></i> 「笔记」Effective C++ 读书笔记（三）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/EBFFFA.png"
+                alt="pazyx.xyz" />
+            
+              <p class="site-author-name" itemprop="name">pazyx.xyz</p>
+              <p class="site-description motion-element" itemprop="description">他大概会说你想得太多</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pa-zyx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/9953731/jntye" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:pazyx728@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://wszyx.org/" title="wszyx.org" target="_blank">wszyx.org</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wdxtub.com" title="小土刀" target="_blank">小土刀</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://biji.io" title="设计笔记" target="_blank">设计笔记</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-语意学-The-Semantics-of-Data"><span class="nav-number">1.</span> <span class="nav-text">Data 语意学 (The Semantics of Data)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Member-的绑定-The-Binding-of-a-Data-Member"><span class="nav-number">1.1.</span> <span class="nav-text">Data Member 的绑定 (The Binding of a Data Member)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Member-的布局-Data-Member-Layout"><span class="nav-number">1.2.</span> <span class="nav-text">Data Member 的布局 (Data Member Layout)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Member-的存取"><span class="nav-number">1.3.</span> <span class="nav-text">Data Member 的存取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Static-Data-Member"><span class="nav-number">1.3.1.</span> <span class="nav-text">Static Data Member</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nonstatic-Data-Member"><span class="nav-number">1.3.2.</span> <span class="nav-text">Nonstatic Data Member</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Nonstatic-Data-Member-在虚拟继承中"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">Nonstatic Data Member 在虚拟继承中</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“继承”-与-Data-Member"><span class="nav-number">1.4.</span> <span class="nav-text">“继承” 与 Data Member</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#只要继承不要多态-Inheritance-without-Polymorphism"><span class="nav-number">1.4.1.</span> <span class="nav-text">只要继承不要多态 (Inheritance without Polymorphism)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加上多态-Adding-Polymorphism"><span class="nav-number">1.4.2.</span> <span class="nav-text">加上多态 (Adding Polymorphism)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多重继承-Multiple-Inheritance"><span class="nav-number">1.4.3.</span> <span class="nav-text">多重继承 (Multiple Inheritance)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟继承-Virtual-Inheritance"><span class="nav-number">1.4.4.</span> <span class="nav-text">虚拟继承 (Virtual Inheritance)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象成员的效率-Object-Member-Efficiency"><span class="nav-number">1.5.</span> <span class="nav-text">对象成员的效率 (Object Member Efficiency)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指向-Data-Member-的指针-Pointer-to-Data-Members"><span class="nav-number">1.6.</span> <span class="nav-text">指向 Data Member 的指针 (Pointer to Data Members)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#“指向-Data-Member-的指针”-的效率问题"><span class="nav-number">1.6.1.</span> <span class="nav-text">“指向 Data Member 的指针” 的效率问题</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pazyx.xyz</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">全站字数统计&#58;</span>
+    
+    <span title="全站字数统计">75.6k</span>
+  
+
+<!--
+
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7cTegp3KYMtc2W0V2u63CUlJ-gzGzoHsz", "bDS8nx2LWwUeyou9BfjypwGu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
