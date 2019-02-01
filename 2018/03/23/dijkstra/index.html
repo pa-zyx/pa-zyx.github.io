@@ -92,7 +92,7 @@
 <meta property="og:description" content="概述最短路径问题有众多的算法，对于无权图的最短路径 DFS与BFS 就可以轻松解决。而对于有权图来说就相对复杂一些，接下来要介绍的就是一种求有权图的单源最短路径的算法—— Dijkstra 算法。需要注意的是这里的 Dijkstra 算法要求图中不能出现负值圈和负权边，出现负值圈在 Dijkstra 算法的某些优化下会造成程序的无限循环（可处理），而出现负权边会得出错误结果。 负权边的错例：Dij">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog.pazyx.xyz/2018/03/23/dijkstra/1.png">
-<meta property="og:updated_time" content="2019-02-01T18:30:28.893Z">
+<meta property="og:updated_time" content="2019-02-01T18:41:55.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最短路算法1——Dijkstra">
 <meta name="twitter:description" content="概述最短路径问题有众多的算法，对于无权图的最短路径 DFS与BFS 就可以轻松解决。而对于有权图来说就相对复杂一些，接下来要介绍的就是一种求有权图的单源最短路径的算法—— Dijkstra 算法。需要注意的是这里的 Dijkstra 算法要求图中不能出现负值圈和负权边，出现负值圈在 Dijkstra 算法的某些优化下会造成程序的无限循环（可处理），而出现负权边会得出错误结果。 负权边的错例：Dij">
@@ -393,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,599
+                  2,600
                 </span>
               
 
@@ -448,7 +448,7 @@
 <li>利用最小堆优化：利用最小堆之后我们不用在内层需要进行 $O(V)$ 的扫描了，获得最近的结点的操作时间复杂度变为 $O(\log V)$，而每次更新 <code>dist</code> 数组的操作因为要删除再插入堆中复杂度从 $O(1)$ 变为 $O(\log V)$。总体的时间复杂度为 $O( V \log V + E \log V )$。</li>
 </ul>
 <p><strong>对于一个稀疏图来说利用最小堆做优化后效率会高很多，而对于一个稠密图来说两者效率是差不多的。利用优先队列的优化方式编程复杂度相对最小堆优化的方式会低一些，方便快速实现该算法。</strong></p>
-<h1 id="Demo-amp-Keynote"><a href="#Demo-amp-Keynote" class="headerlink" title="Demo &amp; Keynote"></a>Demo &amp; Keynote</h1><p>我讲解 Dijkstra 算法的课件中附有算法的动画演示，希望对大家理解 Dijkstra 算法有所帮助。<br>HTML版本在 GitHub Pages 托管，可 <a href="https://pa-zyx.github.io/DijkstraKeynote/assets/player/KeynoteDHTMLPlayer.html" target="_blank" rel="noopener">在线放映</a> 或 <a href="https://github.com/pa-zyx/DijkstraKeynote" target="_blank" rel="noopener">下载</a>。<br>如需 Keynote 版本请联系我  <a href="mailto:pazyx728@gmail.com" target="_blank" rel="noopener">pazyx728@gmail.com</a><br>课件采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">署名(BY)-非商业性(NC)-相同方式分享(SA)</a>协议发布，请大家维护互联网底线。</p>
+<h1 id="Demo-amp-Keynote"><a href="#Demo-amp-Keynote" class="headerlink" title="Demo &amp; Keynote"></a>Demo &amp; Keynote</h1><p>我讲解 Dijkstra 算法用的课件中附有算法的动画演示，希望对大家理解 Dijkstra 算法有所帮助。<br>HTML版本在 GitHub Pages 托管，可 <a href="https://pa-zyx.github.io/DijkstraKeynote/assets/player/KeynoteDHTMLPlayer.html" target="_blank" rel="noopener">在线放映</a> 或 <a href="https://github.com/pa-zyx/DijkstraKeynote" target="_blank" rel="noopener">下载</a>。<br>如需 Keynote 版本请联系我  <a href="mailto:pazyx728@gmail.com" target="_blank" rel="noopener">pazyx728@gmail.com</a><br>课件采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">署名(BY)-非商业性(NC)-相同方式分享(SA)</a>协议发布，请大家维护互联网底线。</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
 <li>[1]邓俊辉.数据结构（C++语言版）[M].北京:清华大学出版社,2013.</li>
 <li>[2]陈越.最短路径算法-讲义.[DB/OL].<a href="https://www.icourse163.org/learn/ZJU-93001?tid=1002261004#/learn/content?type=detail&amp;id=1003011856&amp;cid=1003525172" target="_blank" rel="noopener">数据结构（浙江大学）</a>,2018.</li>
