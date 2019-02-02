@@ -92,7 +92,7 @@
 <meta property="og:description" content="概述最短路径问题有众多的算法，对于无权图的最短路径 DFS与BFS 就可以轻松解决。而对于有权图来说就相对复杂一些，接下来要介绍的就是一种求有权图的单源最短路径的算法—— Dijkstra 算法。需要注意的是这里的 Dijkstra 算法要求图中不能出现负值圈和负权边，出现负值圈在 Dijkstra 算法的某些优化下会造成程序的无限循环（可处理），而出现负权边会得出错误结果。 负权边的错例：Dij">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog.pazyx.xyz/2018/03/23/dijkstra/1.png">
-<meta property="og:updated_time" content="2019-02-01T23:46:50.006Z">
+<meta property="og:updated_time" content="2019-02-02T00:39:09.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最短路算法1——Dijkstra">
 <meta name="twitter:description" content="概述最短路径问题有众多的算法，对于无权图的最短路径 DFS与BFS 就可以轻松解决。而对于有权图来说就相对复杂一些，接下来要介绍的就是一种求有权图的单源最短路径的算法—— Dijkstra 算法。需要注意的是这里的 Dijkstra 算法要求图中不能出现负值圈和负权边，出现负值圈在 Dijkstra 算法的某些优化下会造成程序的无限循环（可处理），而出现负权边会得出错误结果。 负权边的错例：Dij">
@@ -430,7 +430,7 @@
 <li>更新该点的邻接点</li>
 <li>循环 $1,2$ 直至所有连通点均被收录</li>
 </ol>
-<p><code>dist</code> 数组中保存着什么？它保存的是从起点开始经过已被收录的点到达每个点的最短距离，初始状态下没有任何点被收录所以全为正无穷。 当程序将一个最近的点收录进来时，该点是有可能会影响其他的点到起始点的距离。<br><img src="/2018/03/23/dijkstra/1.png" alt=""><br>比如这个图，从 $1$ 走到 $3$。我们先收录了 $1$ 点，更新 $2$ 的距离为 $1$ ，$3$ 的距离为 $5$，下一步我们将收录 $2$ ，收录之后就会影响到它的<strong>邻接点</strong>（也就是 $3$ ）的距离。我们会把 $3$ 的距离更新为 $2$ 。这就是 47-55 行的意义。</p>
+<p><code>dist</code> 数组中保存着什么？它保存的是从起点开始经过已被收录的点到达每个点的最短距离，初始状态下没有任何点被收录所以全为正无穷。 当程序将一个最近的点收录进来时，该点是有可能会影响其他的点到起始点的距离。<br><img src="/2018/03/23/dijkstra/1.png" alt=""><br>比如这个图，从 $1$ 走到 $3$。我们先收录了 $1$ 点，更新 $2$ 的距离为 $1$ ，$3$ 的距离为 $5$，下一步我们将收录 $2$ ，收录之后就会影响到它的<strong>邻接点</strong>（也就是 $3$ ）的距离。我们会把 $3$ 的距离更新为 $2$ 。这就是 36-44 行的意义。</p>
 <ul>
 <li><strong>初始化问题：</strong> 一开始将所有点的距离初始化为正无穷，将路径数组初始化为 $-1$。如果最终某点的距离仍为正无穷或路径数组仍为 $-1$，说明该点到起始点之间不连通。 </li>
 <li><strong>重边问题：</strong>如果图用邻接表来表示的话不会有重边问题，而邻接矩阵的话如果两点间有很多条边，它只会保存最后插入的边。如果是最短路问题的话我们可以在插入边时检查当前这条边的权重是否小于之前插入的边，是则插入覆盖，否则不插入当前边。 </li>
@@ -445,7 +445,7 @@
 <ul>
 <li>完全没有优化：每个顶点被收录一次，所以外层的 while 循环是 $O(V)$ 的，while中每次需要遍历一次所有的顶点，又是一个 $O(V)$ 的扫描。再加上每条边都要被访问一次时间复杂度为  $O(V^2 + E)$。</li>
 <li>利用优先队列优化：虽然节点会多次入队，但每条边最多导致一次入队，所以其时间复杂度为  $O( E \log E )$。</li>
-<li>利用最小堆优化：利用最小堆之后我们不用在内层需要进行 $O(V)$ 的扫描了，获得最近的结点的操作时间复杂度变为 $O(\log V)$，而每次更新 <code>dist</code> 数组的操作因为要删除再插入堆中复杂度从 $O(1)$ 变为 $O(\log V)$。总体的时间复杂度为 $O( (V + E) \log V )$。</li>
+<li>利用最小堆优化：利用最小堆之后我们不用在内层需要进行 $O(V)​$ 的扫描了，获得最近的结点的操作时间复杂度变为 $O(\log V)​$，而每次更新 <code>dist</code> 数组的操作因为要删除再插入堆中复杂度从 $O(1)​$ 变为 $O(\log V)​$。总体的时间复杂度为 $O( (V + E) \log V )​$。</li>
 </ul>
 <p><strong>对于一个稀疏图来说利用最小堆做优化后效率会高很多，而对于一个稠密图来说两者效率是差不多的。利用优先队列的优化方式编程复杂度相对最小堆优化的方式会低一些，方便快速实现该算法。</strong></p>
 <h1 id="Demo-amp-Keynote"><a href="#Demo-amp-Keynote" class="headerlink" title="Demo &amp; Keynote"></a>Demo &amp; Keynote</h1><p>我讲解 Dijkstra 算法用的课件中附有算法的动画演示，希望对大家理解 Dijkstra 算法有所帮助。<br>HTML版本在 GitHub Pages 托管，可 <a href="https://pa-zyx.github.io/DijkstraKeynote/assets/player/KeynoteDHTMLPlayer.html" target="_blank" rel="noopener">在线放映</a> 或 <a href="https://github.com/pa-zyx/DijkstraKeynote" target="_blank" rel="noopener">下载</a>。<br>如需 Keynote 版本请联系我  <a href="mailto:pazyx728@gmail.com" target="_blank" rel="noopener">pazyx728@gmail.com</a><br>课件采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">署名(BY)-非商业性(NC)-相同方式分享(SA)</a>协议发布，请大家维护互联网底线。</p>
@@ -480,7 +480,7 @@
   <p><span>本文标题:</span><a href="/2018/03/23/dijkstra/">最短路算法1——Dijkstra</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
   <p><span>发布时间:</span>2018年03月23日 - 02:03</p>
-  <p><span>最后更新:</span>2019年02月02日 - 07:02</p>
+  <p><span>最后更新:</span>2019年02月02日 - 08:02</p>
   <p><span>原始链接:</span><a href="/2018/03/23/dijkstra/" title="最短路算法1——Dijkstra">https://blog.pazyx.xyz/2018/03/23/dijkstra/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.pazyx.xyz/2018/03/23/dijkstra/"  aria-label="复制成功！"></i></span>
   </p>
