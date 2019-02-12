@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Microwave. Five minutes.">
 <meta property="og:description" content="题目链接：http://bailian.openjudge.cn/practice/2815/  城堡问题总时间限制：1000ms     内存限制：65536kB 描述123456789101112131415    1   2   3   4   5   6   7    #############################1 #   |   #   |   #   |   |   #">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-04T17:33:18.220Z">
+<meta property="og:updated_time" content="2019-02-10T02:29:37.184Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百练 2815 城堡问题（DFS极大连通子图）">
 <meta name="twitter:description" content="题目链接：http://bailian.openjudge.cn/practice/2815/  城堡问题总时间限制：1000ms     内存限制：65536kB 描述123456789101112131415    1   2   3   4   5   6   7    #############################1 #   |   #   |   #   |   |   #">
@@ -225,22 +225,22 @@
         </li>
       
         
+        <li class="menu-item menu-item-poems">
+          <a href="/poems" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Poems
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-other">
           <a href="/other" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
             
             Other
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-bookmarks">
-          <a href="/bookmarks" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
-            
-            Bookmarks
           </a>
         </li>
       
@@ -419,7 +419,7 @@
         <p><strong> 题目链接：<a href="http://bailian.openjudge.cn/practice/2815/" target="_blank" rel="noopener">http://bailian.openjudge.cn/practice/2815/</a> </strong></p>
 <h1 id="城堡问题"><a href="#城堡问题" class="headerlink" title="城堡问题"></a>城堡问题</h1><p><strong>总时间限制：1000ms     内存限制：65536kB</strong></p>
 <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    1   2   3   4   5   6   7  </span><br><span class="line">  #############################</span><br><span class="line">1 #   |   #   |   #   |   |   #</span><br><span class="line">  #####---#####---#---#####---#</span><br><span class="line">2 #   #   |   #   #   #   #   #</span><br><span class="line">  #---#####---#####---#####---#</span><br><span class="line">3 #   |   |   #   #   #   #   #</span><br><span class="line">  #---#########---#####---#---#</span><br><span class="line">4 #   #   |   |   |   |   #   #</span><br><span class="line">  #############################</span><br><span class="line">          (图 1)</span><br><span class="line"></span><br><span class="line">  #  = Wall   </span><br><span class="line">  |  = No wall</span><br><span class="line">  \-  = No wall</span><br></pre></td></tr></table></figure>
-<p>图1是一个城堡的地形图。请你编写一个程序，计算城堡一共有多少房间，最大的房间有多大。城堡被分割成mn(m≤50，n≤50)个方块，每个方块可以有0~4面墙。</p>
+<p>图 1 是一个城堡的地形图。请你编写一个程序，计算城堡一共有多少房间，最大的房间有多大。城堡被分割成mn(m≤50，n≤50)个方块，每个方块可以有0~4面墙。</p>
 <h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>程序从标准输入设备读入数据。第一行是两个整数，分别是南北向、东西向的方块数。在接下来的输入行里，每个方块用一个数字(0≤p≤50)描述。用一个数字表示方块周围的墙，1表示西墙，2表示北墙，4表示东墙，8表示南墙。每个方块用代表其周围墙的数字之和表示。城堡的内墙被计算两次，方块(1,1)的南墙同时也是方块(2,1)的北墙。输入的数据保证城堡至少有两个房间。</p>
 <h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>城堡的房间数、城堡中最大房间所包括的方块数。结果显示在标准输出设备上。</p>
 <h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><p>4<br>7<br>11 6 11 6 3 10 6<br>7 9 6 13 5 15 5<br>1 10 12 7 13 7 5<br>13 11 10 8 10 12 13</p>
@@ -453,7 +453,7 @@
   <p><span>本文标题:</span><a href="/2018/01/15/bl-2815/">百练 2815 城堡问题（DFS极大连通子图）</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
   <p><span>发布时间:</span>2018年01月15日 - 21:01</p>
-  <p><span>最后更新:</span>2018年07月05日 - 01:07</p>
+  <p><span>最后更新:</span>2019年02月10日 - 10:02</p>
   <p><span>原始链接:</span><a href="/2018/01/15/bl-2815/" title="百练 2815 城堡问题（DFS极大连通子图）">https://blog.pazyx.xyz/2018/01/15/bl-2815/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.pazyx.xyz/2018/01/15/bl-2815/"  aria-label="复制成功！"></i></span>
   </p>

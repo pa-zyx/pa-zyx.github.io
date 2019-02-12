@@ -92,7 +92,7 @@
 <meta property="og:description" content="冒泡排序冒泡排序是一种实现起来很简单的排序算法，适合初学者入门。 由于它的时间复杂度较高在实际使用中很少用到。但它也有存在的价值，比如待排序列存储在一个单向链表中时其他的排序算法实现起来就相对比较困难，而且冒泡排序相等的元素不会进行交换所以它也是一种稳定的排序算法。 演示冒泡排序在每一趟排序中从上到下拿两个相同元素比较如果不符合我们的预期就交换它（比如要求从小到大排序，如果相邻两个元素不满足前面小">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog.pazyx.xyz/2018/01/18/bubble-sort/1.png">
-<meta property="og:updated_time" content="2018-07-04T17:33:24.950Z">
+<meta property="og:updated_time" content="2019-02-10T02:30:25.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法1——冒泡排序">
 <meta name="twitter:description" content="冒泡排序冒泡排序是一种实现起来很简单的排序算法，适合初学者入门。 由于它的时间复杂度较高在实际使用中很少用到。但它也有存在的价值，比如待排序列存储在一个单向链表中时其他的排序算法实现起来就相对比较困难，而且冒泡排序相等的元素不会进行交换所以它也是一种稳定的排序算法。 演示冒泡排序在每一趟排序中从上到下拿两个相同元素比较如果不符合我们的预期就交换它（比如要求从小到大排序，如果相邻两个元素不满足前面小">
@@ -227,22 +227,22 @@
         </li>
       
         
+        <li class="menu-item menu-item-poems">
+          <a href="/poems" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
+            
+            Poems
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-other">
           <a href="/other" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
             
             Other
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-bookmarks">
-          <a href="/bookmarks" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-stop-circle"></i> <br />
-            
-            Bookmarks
           </a>
         </li>
       
@@ -393,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  488
+                  486
                 </span>
               
 
@@ -420,7 +420,7 @@
       
         <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>冒泡排序是一种实现起来很简单的排序算法，适合初学者入门。 由于它的时间复杂度较高在实际使用中很少用到。但它也有存在的价值，比如待排序列存储在一个单向链表中时其他的排序算法实现起来就相对比较困难，而且冒泡排序相等的元素不会进行交换所以它也是一种稳定的排序算法。</p>
 <h2 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h2><p><img src="/2018/01/18/bubble-sort/1.png" alt=""><br>冒泡排序在每一趟排序中从上到下拿两个相同元素比较如果不符合我们的预期就交换它（比如要求从小到大排序，如果相邻两个元素不满足前面小后面大就交换它），在完成一趟排序后可以确定最下面的元素一定是最大的（按从小到大排序）。每一趟排序可以确定一个元素的位置，我们通过n-1趟排序就可以将数据排好序。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/26535079/" target="_blank" rel="noopener">https://paste.ubuntu.com/26535079/</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = size<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[j] &gt; a[j+<span class="number">1</span>])&#123;</span><br><span class="line">                swap(a[j],a[j+<span class="number">1</span>]);</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/26535079/" target="_blank" rel="noopener">https://paste.ubuntu.com/26535079/</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = size<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[j] &gt; a[j+<span class="number">1</span>])&#123;</span><br><span class="line">                swap(a[j],a[j+<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>实际上该代码还可以再进行优化，如果在一趟排序中没有交换过就说明序列已经有序，我们就不需要再比较下去。</p>
 <h2 id="优化后的代码"><a href="#优化后的代码" class="headerlink" title="优化后的代码"></a>优化后的代码</h2><p>Ubuntu Pastebin : <a href="https://paste.ubuntu.com/26535087/" target="_blank" rel="noopener">https://paste.ubuntu.com/26535087/</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = size<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">false</span>;          <span class="comment">//记录在一趟排序中是否有交换</span></span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[j] &gt; a[j+<span class="number">1</span>])&#123;</span><br><span class="line">                swap(a[j],a[j+<span class="number">1</span>]);</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!flag) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>由此我们可以分析得出最好情况（已有序）下其时间复杂度为O(n)，在最坏情况（逆序）下时间复杂度为O(n^2)。</p>
@@ -450,7 +450,7 @@
   <p><span>本文标题:</span><a href="/2018/01/18/bubble-sort/">排序算法1——冒泡排序</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 pazyx.xyz 的个人博客">pazyx.xyz</a></p>
   <p><span>发布时间:</span>2018年01月18日 - 23:01</p>
-  <p><span>最后更新:</span>2018年07月05日 - 01:07</p>
+  <p><span>最后更新:</span>2019年02月10日 - 10:02</p>
   <p><span>原始链接:</span><a href="/2018/01/18/bubble-sort/" title="排序算法1——冒泡排序">https://blog.pazyx.xyz/2018/01/18/bubble-sort/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.pazyx.xyz/2018/01/18/bubble-sort/"  aria-label="复制成功！"></i></span>
   </p>
