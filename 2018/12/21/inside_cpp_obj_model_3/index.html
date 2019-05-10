@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X();class Z : public virtual X();class A : public Y, public Z(); Y 和 Z 的大小与机器（字长）有关，也和编译器有关，具体受以下三个因素的影响：  语言本身所造成的额外负">
+<meta name="description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X&amp;#123;&amp;#125;;class Z : public virtual X&amp;#123;&amp;#125;;class A : public Y, public Z&amp;#123;&amp;#125;; Y 和 Z 的大小与机器（字长）有关，也和编译">
 <meta name="keywords" content="Cpp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「书摘」《深度探索 C++ 对象模型》（三）">
 <meta property="og:url" content="https://blog.pazyx.xyz/2018/12/21/inside_cpp_obj_model_3/index.html">
 <meta property="og:site_name" content="Microwave. Five minutes.">
-<meta property="og:description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X();class Z : public virtual X();class A : public Y, public Z(); Y 和 Z 的大小与机器（字长）有关，也和编译器有关，具体受以下三个因素的影响：  语言本身所造成的额外负">
+<meta property="og:description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X&amp;#123;&amp;#125;;class Z : public virtual X&amp;#123;&amp;#125;;class A : public Y, public Z&amp;#123;&amp;#125;; Y 和 Z 的大小与机器（字长）有关，也和编译">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-21T12:28:55.796Z">
+<meta property="og:updated_time" content="2019-05-10T11:01:25.999Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「书摘」《深度探索 C++ 对象模型》（三）">
-<meta name="twitter:description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X();class Z : public virtual X();class A : public Y, public Z(); Y 和 Z 的大小与机器（字长）有关，也和编译器有关，具体受以下三个因素的影响：  语言本身所造成的额外负">
+<meta name="twitter:description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X&amp;#123;&amp;#125;;class Z : public virtual X&amp;#123;&amp;#125;;class A : public Y, public Z&amp;#123;&amp;#125;; Y 和 Z 的大小与机器（字长）有关，也和编译">
 
 
 
@@ -416,7 +416,7 @@
       
 
       
-        <h1 id="Data-语意学-The-Semantics-of-Data"><a href="#Data-语意学-The-Semantics-of-Data" class="headerlink" title="Data 语意学 (The Semantics of Data)"></a>Data 语意学 (The Semantics of Data)</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> &#123;</span>&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Y</span> :</span> <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="title">X</span><span class="params">()</span></span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Z</span> :</span> <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="title">X</span><span class="params">()</span></span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> :</span> <span class="keyword">public</span> Y, <span class="function"><span class="keyword">public</span> <span class="title">Z</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+        <h1 id="Data-语意学-The-Semantics-of-Data"><a href="#Data-语意学-The-Semantics-of-Data" class="headerlink" title="Data 语意学 (The Semantics of Data)"></a>Data 语意学 (The Semantics of Data)</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> &#123;</span>&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Y</span> :</span> <span class="keyword">public</span> <span class="keyword">virtual</span> X&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Z</span> :</span> <span class="keyword">public</span> <span class="keyword">virtual</span> X&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> :</span> <span class="keyword">public</span> Y, <span class="keyword">public</span> Z&#123;&#125;;</span><br></pre></td></tr></table></figure>
 <p><code>Y</code> 和 <code>Z</code> 的大小与机器（字长）有关，也和编译器有关，具体受以下三个因素的影响：</p>
 <ul>
 <li>语言本身所造成的额外负担（overhea）</li>
