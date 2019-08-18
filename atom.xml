@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.pazyx.xyz/"/>
-  <updated>2019-04-29T14:13:51.978Z</updated>
+  <updated>2019-08-18T05:26:59.317Z</updated>
   <id>https://blog.pazyx.xyz/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Apache2 服务器配置 HTTPS</title>
+    <link href="https://blog.pazyx.xyz/2019/08/18/ssl/"/>
+    <id>https://blog.pazyx.xyz/2019/08/18/ssl/</id>
+    <published>2019-08-18T05:12:41.000Z</published>
+    <updated>2019-08-18T05:26:59.317Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>由于多次配置 SSL 证书，每次间隔时间较长，每次都忘记怎么搞。。。特地总结一下，延缓阿兹海默。</p><p>这份教程只针对 Apache2 服务器，且已写好配置文件的选手。</p><p>大概分以下几个步骤：</p><ul><li>申请证书</li><li>验证域名所有权</li><li>下载证书转换格式</li><li>将证书传入服务器</li><li>修改配置文件</li><li>载入配置文件</li><li>重启 Apache</li></ul><h1 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h1><p>推荐 <a href="https://freessl.cn" target="_blank" rel="noopener">FreeSSL</a>，其中有两款免费证书：TrustAsia 的一年单域名证书、Let’s Encrypt的 90 天通配符证书。</p><p>如果子域名较少推荐选择前者，我用的子域名比较多选择后者，文件较少但 90 天要配置一次。</p><h1 id="验证域名所有权"><a href="#验证域名所有权" class="headerlink" title="验证域名所有权"></a>验证域名所有权</h1><p>根据 FreeSSL 网站的提示，在解析域名的网站按要求添加 TXT 记录即可。</p><h1 id="下载证书转换格式"><a href="#下载证书转换格式" class="headerlink" title="下载证书转换格式"></a>下载证书转换格式</h1><p>下载到证书后会发现是三个文件，而 Apache2 只需要两个文件，最终需要一个 <code>.key</code> 和一个 <code>.pem</code>的文件。</p><p>你将下载到如下三个文件：</p><ul><li><code>.key</code>文件，证书私钥</li><li><code>CA_xxx.crt</code>，CA 中间证书</li><li><code>域名.crt</code>，服务器证书</li></ul><p>其中 <code>.key</code> 文件就是最终需要的 <code>.key</code> 文件，而 <code>.pem</code> 文件需要自己创建再将 <code>CA_xxx.crt</code> 和 <code>域名.crt</code> 按顺序粘贴进去。</p><h1 id="将证书传入服务器"><a href="#将证书传入服务器" class="headerlink" title="将证书传入服务器"></a>将证书传入服务器</h1><p>使用 <code>scp</code> 将证书上传至服务器，当然这需要配置好 <code>ssh</code>。</p><p>命令格式和示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp file_source file_target</span><br><span class="line">scp ./pazyx_xyz.pem git@pazyx.xyz:~/</span><br></pre></td></tr></table></figure></p><p>我一般是将文件传入 home 目录后再 <code>ssh</code>登录到服务器将文件从 home 目录放到 <code>/etc/apache2/ssl/</code> 目录下，以免权限受限。</p><h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><p>配置文件为 <code>/etc/apache2/site-available/default-ssl.conf</code><br>如何配置略，因为我也忘了，随便改一改就是了。</p><h1 id="载入配置文件"><a href="#载入配置文件" class="headerlink" title="载入配置文件"></a>载入配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a2ensite default-ssl</span><br></pre></td></tr></table></figure><h1 id="重启-Apache"><a href="#重启-Apache" class="headerlink" title="重启 Apache"></a>重启 Apache</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service apache2 restart</span><br></pre></td></tr></table></figure><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="https://www.jianshu.com/p/9e75d4068236" target="_blank" rel="noopener">Apache配置ssl</a></li><li><a href="https://help.aliyun.com/knowledge_detail/88447.html?spm=5176.2000002.0.0.51c93a1a65rvG5" target="_blank" rel="noopener">免费证书下载的两个文件的说明</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;由于多次配置 SSL 证书，每次间隔时间较长，每次都忘记怎么搞。。。特地总结一下，延缓阿兹海默。&lt;/p&gt;
+&lt;p&gt;这份教程只针对 Apache
+      
+    
+    </summary>
+    
+      <category term="笔记" scheme="https://blog.pazyx.xyz/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="SSL" scheme="https://blog.pazyx.xyz/tags/SSL/"/>
+    
+      <category term="HTTPS" scheme="https://blog.pazyx.xyz/tags/HTTPS/"/>
+    
+      <category term="Apache" scheme="https://blog.pazyx.xyz/tags/Apache/"/>
+    
+  </entry>
   
   <entry>
     <title>「题解」kuangbin 最小生成树</title>
@@ -520,7 +550,7 @@
     <link href="https://blog.pazyx.xyz/2018/07/14/mathematical_modeling_dp/"/>
     <id>https://blog.pazyx.xyz/2018/07/14/mathematical_modeling_dp/</id>
     <published>2018-07-14T10:13:18.000Z</published>
-    <updated>2018-07-26T11:16:41.074Z</updated>
+    <updated>2019-07-26T11:49:34.705Z</updated>
     
     <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>之前在学算法时接触过不少动态规划的题目，但最近实践周在上数学建模的课，发现自己在动态规划算法上欠缺很多。步骤不规范、思路不清晰、数学推导欠缺，大多数时候我都是靠直觉推状态转移方程的。这篇我希望从数学建模的角度重新总结一下动态规划（算法中的动态规划也会继续更新，最近将更新状压DP）。<br>算法竞赛和数学建模竞赛中动态规划，在数据和方程的表示上有很大不同。<br>算法竞赛中一般以数组单元的形式表示一个状态并用其推导状态转移方程，并且不对指标函数与最优值函数的单独推导。其形式更接近伪代码，方便将模型快速转换为代码。<br>数学建模竞赛中步骤相当严谨很多，各个方程相互独立，各个方程也更注重数学的严谨性。</p><hr><h1 id="标准步骤"><a href="#标准步骤" class="headerlink" title="标准步骤"></a>标准步骤</h1><ul><li>阶段</li><li>状态变量（无后效性） \(s_k\)</li><li>决策变量  \(x_k\)</li><li>状态转移方程  \(s_{k+1} = T_k(s_k,x_k)\)</li><li>指标函数  \(V_{k,n} = V_{k,n}(s_k,x_k,s_{k+1},…,s_{n+1},k = 1,2,…,n\)</li><li>最优值函数  \[f_k(s_k) = \max_{\{x_k,…,x_n\}} V_{k,n}\]</li><li>边界条件</li></ul><h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>一个简单的完全背包问题，其算法我在<a href="/2018/03/01/cp-bp/">动态规划B2——完全背包</a>给出。</p><p>有一个容量为 V 的背包和 N 种物品。每种物品的价值为 \(W_k\) 体积为 \(C_k\) ，每种物品有无限件，问最大背包价值。</p><h3 id="阶段"><a href="#阶段" class="headerlink" title="阶段"></a>阶段</h3><p>N 种物品按编号排序，视为 N 个阶段。</p><h3 id="状态变量"><a href="#状态变量" class="headerlink" title="状态变量"></a>状态变量</h3><p>\(s_k\) 第 k 阶段初可装载的质量</p><h3 id="决策变量"><a href="#决策变量" class="headerlink" title="决策变量"></a>决策变量</h3><p>装入第k种物品的数量：\(x_i\)</p><h3 id="状态转移方程"><a href="#状态转移方程" class="headerlink" title="状态转移方程"></a>状态转移方程</h3><p>\[s_{k+1} = s_k - C_kx_k\] </p><h3 id="指标函数"><a href="#指标函数" class="headerlink" title="指标函数"></a>指标函数</h3><p>装入的第 k 种物品到第 N 种物品总价值：\(v_k\) </p><h3 id="最优值函数"><a href="#最优值函数" class="headerlink" title="最优值函数"></a>最优值函数</h3><p>\[f_k(s_k) = \max_{0≤x_k≤[s_k/a_k]} \{C_kx_k + f_k(s_{k+1})\ \ (k = 1…n)\]</p><h3 id="边界条件"><a href="#边界条件" class="headerlink" title="边界条件"></a>边界条件</h3><ul><li>\(s_1 = V\)</li><li>\(f_{n+1}(s_{n+1}) = 0\)</li></ul><h3 id="与算法竞赛中的动态规划对比"><a href="#与算法竞赛中的动态规划对比" class="headerlink" title="与算法竞赛中的动态规划对比"></a>与算法竞赛中的动态规划对比</h3><ul><li>算法竞赛<br>\[F[i, v] = max \{ F[i − 1, v − kC_i] + kW_i \ \  0 ≤ kC_i ≤ v \} \]</li><li>数学建模竞赛<br>$$<br>\begin{cases}<br>f_k(s_k) = \max_{0≤x_k≤[s_k/a_k]} \{C_kx_k + f_k(s_{k+1})\} &amp;\text{(k = 1…n)} \\<br>f_{n+1}(s_{n+1}) = 0<br>\end{cases}<br>$$</li></ul><hr><h1 id="连续型动态规划"><a href="#连续型动态规划" class="headerlink" title="连续型动态规划"></a>连续型动态规划</h1><p>在大多数算法竞赛的题目中，决策点都是离散的。而在数学建模竞赛中可能出现连续型的动态规划问题，这种题目写出具体算法相当困难，多大需要笔算。</p><h2 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h2><p>100 台某种机器可在高低两种不同的负荷下进行生产，设机器在高负荷下生产的产量函数为 g = 9x ，其中 x 为投入生产的机器数量，季度完好率为 a = 0.65 。在低负荷下生产的产量函数为 h = 4y ，其中 y 为投入生产的机器数量,季度完好率为 b = 0.95 。</p><h3 id="建模"><a href="#建模" class="headerlink" title="建模"></a>建模</h3><ul><li>把4个季度看成是4个阶段，用k表示。</li><li>状态变量\(s_k\)：表示第k季度初拥有的完好机器数量。(\(s_1\) = 100)</li><li>决策变量\(x_k\)：表示第k季度分配高负荷下生产的机器数量，于是\(s_k-x_k\)为该季度分配在低负荷下生产的机器数量。\(s_k\),\(x_k\)为连续变量，其小数部分表示一台机器正常工作时间所占的比例。允许决策集合:\(D_k(s_k) = \{ x_k \ \ |\ \ 0≤x_k≤s_k \}\)</li><li>状态转移方程：\[s_{k+1} = ax_k + b( s_k - x_k ) = 0.65x_k + (s_k - x_k ) \ \ (k = 1,2,3,4) \]</li><li>指标函数：\(v_k\) 表示第 k 季度的产量 \(v_k = 9x_k + 4(s_k+x_k)\)</li><li>最优值函数：<br>$$<br>\begin{cases}<br>f_k(s_k) = \max_{0≤x_k≤s_k} \{ v_k + f_{k+1}(s_{k+1}) \} = \max_{0≤x_k≤s_k} \{ 9x_k + 4(s_k-x_k) + f_{k+1}(s_{k+1}) \}\\<br>f_5(s_5) = 0<br>\end{cases}<br>$$</li></ul><h3 id="解"><a href="#解" class="headerlink" title="解"></a>解</h3><p><strong>当 k = 4 时</strong></p><p>$$<br>\begin{align}<br>f_4(s_4)&amp; = \max_{0≤x_4≤s_4} \{ 9x_4 + 4(s_4-x_4) + f_5(s_5) \} \\<br>&amp; = \max_{0≤x_4≤s_4} \{ 9x_4 + 4(s_4-x_4) \} \\<br>&amp; = \max_{0≤x_4≤s_4} \{ 5x_4 + 4s_4 \}<br>\end{align}<br>$$<br>\[x^*_4 = s_4 ,f_4(s_4) = 9s_4\]</p><p><strong>当 k = 3 时</strong></p><p>$$<br>\begin{align}<br>f_3(s_3)&amp; = \max_{0≤x_3≤s_3} \{ 9x_3 + 4(s_3-x_3) + f_4(s_4) \} \\<br>&amp; = \max_{0≤x_3≤s_3} \{ 9x_3 + 4(s_3-x_3)+9[0.65x_3+0.95(s_3-x_3)] \} \\<br>&amp; = \max_{0≤x_3≤s_3} \{ 2.3x_3 + 12.55s_3 \}<br>\end{align}<br>$$<br>\[x^*_3 = s_3 ,f_3(s_3) = 14.85s_3\]</p><p><strong>当 k = 2 时</strong></p><p>$$<br>\begin{align}<br>f_2(s_2)&amp; = \max_{0≤x_2≤s_2} \{ 9x_2 + 4(s_2-x_2) + f_3(s_3) \} \\<br>&amp; = \max_{0≤x_2≤s_2} \{ 9x_2 + 4(s_2-x_2)+14.85[0.65x_2+0.95(s_2-x_2)] \} \\<br>&amp; = \max_{0≤x_2≤s_2} \{ 0.545x_2 + 18.1075s_3 \}<br>\end{align}<br>$$<br>\[x^*_2 = s_2 ,f_2(s_2) = 18.6525s_2\]</p><p><strong>当 k = 1 时</strong></p><p>$$<br>\begin{align}<br>f_1(s_1)&amp; = \max_{0≤x_1≤s_1} \{ 9x_1 + 4(s_1-x_1) + f_2(s_2) \} \\<br>&amp; = \max_{0≤x_1≤s_1} \{ 9x_1 + 4(s_1-x_1)+18.6525[0.65x_1+0.95(s_1-x_1)] \} \\<br>&amp; = \max_{0≤x_1≤s_1} \{ -0.596x_1 + 21.72s_1 \}<br>\end{align}<br>$$</p><p>\[ x^*_1 = 0 , s_1 = 100 , y^*_1 = s_1 - x^*_1 = 100 , f_1(s_1) = 21.72s_1 = 2172 \]</p><p><strong>反推</strong></p><p>$$<br>\begin{cases}<br>s_2 &amp; = 0.65x_1 + 0.95(s_1 - x_1) = 95; x_2^* = s_2 = 95,y_2^* = 0 \\<br>s_3 &amp; = 0.65x_2 + 0.95(s_2 - x_2) = 61.75,取整得61,x_3^* = s_3 = 61,y_3^* = 0 \\<br>s_4 &amp; = 0.65x_3 + 0.95(s_3 - x_3) = 39.65,取整得39,x_4^* = s_4 = 39,y_4^* = 0<br>\end{cases}<br>$$</p>]]></content>
     
@@ -655,46 +685,6 @@
       <category term="自我赋值" scheme="https://blog.pazyx.xyz/tags/%E8%87%AA%E6%88%91%E8%B5%8B%E5%80%BC/"/>
     
       <category term="异常" scheme="https://blog.pazyx.xyz/tags/%E5%BC%82%E5%B8%B8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java 与 C++ 细节差异 （一）</title>
-    <link href="https://blog.pazyx.xyz/2018/07/01/cpptojava/"/>
-    <id>https://blog.pazyx.xyz/2018/07/01/cpptojava/</id>
-    <published>2018-07-01T15:08:37.000Z</published>
-    <updated>2018-07-04T17:34:10.250Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><p>相比 C++，Java提供了三种注释方式分别为</p><ul><li><code>//</code> 单行注释</li><li><code>/* ... */</code> 多行注释 </li><li><code>/** ... */</code> 文档注释<br>前两种与 C++ 相同，最后一种可以自动将注释内容生成文档。供使用者直接查看。</li></ul><hr><h1 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h1><h2 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h2><table><thead><tr><th>Java</th><th>存储空间</th><th>C++</th><th>存储空间</th></tr></thead><tbody><tr><td>int</td><td>4 字节</td><td>int</td><td>至少 4 字节，且大于等于 short</td></tr><tr><td>short</td><td>2 字节</td><td>short</td><td>至少 2 字节</td></tr><tr><td>long</td><td>8 字节</td><td>long</td><td>至少 4 字节，且大于等于 int</td></tr><tr><td>byte</td><td>1 字节</td><td></td><td></td></tr><tr><td></td><td></td><td>long long</td><td>至少 8 字节，且大于等于 long</td></tr></tbody></table><p>Java 提供了 4 种整数类型，与 C++ 相比 Java 的规范更为严格。可以看出 C++ 更在乎效率，而 Java 更在乎可移植性。</p><p>十六进制数和八进制数两种语言均可以使用  0x 和 0 为前缀来表示，而 Java 还提供了前缀 0b 来表示二进制数。</p><h2 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h2><table><thead><tr><th>Java</th><th>存储空间</th><th>C++</th><th>存储空间</th></tr></thead><tbody><tr><td>float</td><td>4 字节</td><td>float</td><td>4 字节</td></tr><tr><td>double</td><td>8 字节</td><td>double</td><td>8 字节</td></tr><tr><td></td><td></td><td>long double ( Intel )</td><td>16 字节</td></tr></tbody></table><p>两者都遵循  IEEE-754 标准</p><p>C++ 直接提供了 80 位的扩展精度浮点数，而 Java 没有提供。<br>Java 没有提供的原因还是对可移植性的考虑，值得注意的是如果 JVM 运行在 Intel 的处理器上时，浮点数的中间运算结果默认是采用扩展精度存储的。这是因为截断会使效率大幅降低，但 Java 也提供了截断的可能性，使用 <code>strictfp</code> 关键字标记的方法（函数）必须严格的对中间结果截断，保证在任何处理器环境的结果的一致性。<br>例：<code>public static strictfp void main(String[] args)</code></p><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>Java 禁止使用未初始化的<strong>本地变量</strong>，C++ 可以。</p><h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>修饰符不同，Java 使用 final 修饰常量，但 const 也是 Java 的保留字。</p><table><thead><tr><th>Java</th><th>C++</th></tr></thead><tbody><tr><td><code>final type</code></td><td><code>const type</code></td></tr></tbody></table><p>常量可以不在定义出初始化，但必须保证在第一次使用前被初始化，且只初始化一次。</p><hr><h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>Java 没有 C++ 中在栈区分配到数组，你不可以写出这样的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br></pre></td></tr></table></figure></p><p>所有的数组，都需要使用 <code>new</code> 在堆上分配空间。</p><p>Java 提供了两种定义数组的方式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[size];</span><br><span class="line"><span class="keyword">int</span> a[] = <span class="keyword">new</span> <span class="keyword">int</span>[size];</span><br></pre></td></tr></table></figure></p><p>如果你没有初始化数组，Java 会帮你做数组的初始化。数字数组将所有元素初始化为 0 ，boolean 数组初始化为 false，对象数组初始化为 null 。</p><p>Java 中 <code>[]</code>运算符被定义为检查数组边界，而且 Java 没有指针运算，不可以通过 <code>a + 1</code> 得到下一个元素。</p><hr><h1 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h1><table><thead><tr><th>Java</th><th>C++</th></tr></thead><tbody><tr><td>一个以字母开头的由字母或数字组成的序列，字母包括{‘A’ ~ ‘Z’、’a’ ~ ‘z’、’_’、’$’ 或在某种语言中代表字母的任何 Unicode 字符 }。</td><td>一个由数字，下划线，小写和大写拉丁字母，和大多数 Unicode 字符组成的任意长度的序列。有效的标识符必须以一个非数字字符（拉丁语字母，下划线或 Unicode 非数字字符）开头。</td></tr></tbody></table><p>注：<br>Java 中在某种语言中代表字母的任何 Unicode 字符，比如德国用户可以用 ä 。可以使用 Character 类的 isJavaIdentifierStart 和 isJavaIdentifierPart 方法检测。</p><p>C++ 中大多数 Unicode 字符是指除下表中的字符以外的 Unicode 字符。</p><table><thead><tr><th>代码点</th><th>说明</th></tr></thead><tbody><tr><td>U+0300 - U+036F</td><td>组合用抑音符 - 组合用拉丁文小写字母 X</td></tr><tr><td>U+1DC0 - U+1DFF</td><td>组合用带点抑音符 - 组合用下右箭头尖和向下箭头尖</td></tr><tr><td>U+20D0 - U+20FF</td><td>组合用上左鱼叉 - 组合用上星号</td></tr><tr><td>U+FE20 - U+FE2F</td><td>组合用连字左半 - 组合用西里尔文 Titlo 右半</td></tr></tbody></table><hr><h1 id="重名问题"><a href="#重名问题" class="headerlink" title="重名问题"></a>重名问题</h1><p>在 C++ 中你可以写出这样的代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>这样进入大括号后，外层的整数 a 就被隐藏了，看不到了无法访问了，出大括号就可以继续访问外层的整数 a 了。</p><p>而在 Java 中编译器是不允许你写出这样的代码的。<br>Java 和 C++ 大体上相同，本地变量的生存期是由其所在的大括号决定的。它们两者的不同之处在于 Java 是完全不允许在一个变量的生存期内出现另一个重名的变量，而 C++ 允许在内层定义新的重名变量隐藏外层变量。</p><p>例：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">int</span> a;</span><br></pre></td></tr></table></figure></p><p>这样的代码在两种语言中都是错误的。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a;</span><br></pre></td></tr></table></figure><p>这样的代码在两种语言中都是正确的。</p><p>二者唯一的差别就是我在最开始的那个例子，Java 在外层 a 的生存期还没结束前不可以定义新的重名变量，而 C++ 可以。</p><hr><h1 id="String-与-string"><a href="#String-与-string" class="headerlink" title="String 与 string"></a>String 与 string</h1><p>String 和 string 分别为 Java 和 C++ 库里的字符串，虽然只是差一个字母大小写，实际上它们有着巨大的差异。<br>string 更像是 char 的数组，它的每个单位都是可以直接这样 <code>s[index]</code> 访问的，而且可以进行修改。<br>String 就没有那么方便了，Java 没有运算符重载只能通过 <code>s.charAt( index )</code> 来转换成 <code>char</code> 再读。<strong>注意！String 没有提供写操作的方法。String 在 Java 中是一种不可修改的字符串。</strong></p><p>这实际上是效率优化上的不同想法，C++ 中每个 string 的对象都独占一块内存空间，Java 的 String 不可修改就可以将多个相同的字符串变量共享一块内存空间，复制操作效率也变得很高。但这样就要在字符串比较时特别注意，Java 的对象变量都是对象的管理者，且 Java 没有运算符重载，如果你有两个 String 的对象 a 和 b ，<code>a == b</code> 只是在判断它们管理的是不是一块内存空间。Java 相同字符串的共享内存空间的分配方案也不是 100% 的，它只是在合适的情况下共享空间，所以两个内容相同的字符串也不一定指向同一个内存空间。它的比较有时相等有时不相等都是很有可能的，所以不要那么做！<br>比较操作 <code>a.equals(b)</code> 使用 String 的 equals 方法即可。</p><p>那到底怎么修改字符串呢？你可以使用 <code>+</code> 运算符和 <code>substring</code> 方法进行拼接和切割字符串最后再赋值给原字符串。但这会有很大的开销，因为中间结果要生成很多不可改变的 String 对象。可以使用 StringBuilder 或者 StringBuffer。</p><hr><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://zh.cppreference.com/w/cpp/language/types" target="_blank" rel="noopener">C++ 基础类型标准</a><br><a href="https://zh.cppreference.com/w/cpp/language/identifiers" target="_blank" rel="noopener">C++ 标识符标准</a><br><a href="https://docs.oracle.com/javase/specs/" target="_blank" rel="noopener">The Java® Language Specification</a><br>Java 核心技术 卷I —— Cay S. Horstmann、Gary Cornell<br>深入理解 Java 虚拟机 —— 周志明</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;注释&quot;&gt;&lt;a href=&quot;#注释&quot; class=&quot;headerlink&quot; title=&quot;注释&quot;&gt;&lt;/a&gt;注释&lt;/h1&gt;&lt;p&gt;相比 C++，Java提供了三种注释方式分别为&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;//&lt;/code&gt; 单行注释&lt;/li&gt;
-&lt;li&gt;&lt;co
-      
-    
-    </summary>
-    
-      <category term="编程语言 - Java" scheme="https://blog.pazyx.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-Java/"/>
-    
-    
-      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
-    
-      <category term="浮点数" scheme="https://blog.pazyx.xyz/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/"/>
-    
-      <category term="Java" scheme="https://blog.pazyx.xyz/tags/Java/"/>
-    
-      <category term="整数" scheme="https://blog.pazyx.xyz/tags/%E6%95%B4%E6%95%B0/"/>
-    
-      <category term="命名规则" scheme="https://blog.pazyx.xyz/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/"/>
-    
-      <category term="String" scheme="https://blog.pazyx.xyz/tags/String/"/>
-    
-      <category term="string" scheme="https://blog.pazyx.xyz/tags/string/"/>
     
   </entry>
   
