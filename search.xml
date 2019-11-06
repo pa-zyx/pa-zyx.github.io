@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「笔记」Oracle Database 期中考笔记]]></title>
+    <url>%2F2019%2F11%2F06%2Foracle_midterm_notes%2F</url>
+    <content type="text"><![CDATA[DDL建表1234567891011121314CREATE TABLE staff ( PRIMARY KEY (staff_num), staff_num INTEGER DEFAULT 1 NOT NULL, first_name VARCHAR2(100) NOT NULL, leader_num INTEGER NOT NULL, CONSTRAINT staff_first_name_uq UNIQUE (first_name), CONSTRAINT staff_leader_num_ck CHECK(leader_num &gt;= 1 AND leader_num &lt; 100), CONSTRAINT staff_leader_fk FOREIGN KEY(first_name) REFERENCES staff2(first_name)); 只复制表结构1CREATE TABLE staff_temp like staff; 复制表结构及数据1CREATE TABLE staff_temp as select * from staff; 删表1DROP TABLE staff; 修改表添加列12ALTER TABLE staffADD new_column_name INTEGER; 删除列12ALTER TABLE staffDROP COLUMN drop_column_name; 修改列12ALTER TABLE staffMODIFY modify_column_name INTEGER; 添加约束1234567891011121314151617181920-- 添加 CHECK 约束ALTER TABLE staffADD CONSTRAINT staff_first_name_ck CHECK (first_name in (&apos;a&apos;,&apos;b&apos;,&apos;c&apos;));-- 添加 UNIQUE 约束ALTER TABLE staffADD CONSTRAINT staff_first_name_uq UNIQUE (first_name);-- 添加 FOREIGN KEY 约束ALTER TABLE staffADD CONSTRAINT staff_leader_fk FOREIGN KEY(first_name) REFERENCES staff2(first_name); -- 添加 NOT NULL 约束 (使用 MODIFY !!!)ALTER TABLE staffMODIFY first_name CONSTRAINT staff_first_name_nn NOT NULL;ALTER TABLE staffMODIFY first_name NOT NULL; 删除、禁用、启用约束1234567891011-- 删除ALTER TABLE staffDROP CONSTRAINT staff_first_name_nn;-- 禁用ALTER TABLE staffDISABLE CONSTRAINT staff_first_name_nn;-- 启用ALTER TABLE staffENABLE CONSTRAINT staff_first_name_nn; 清空表DELETE 12DELETE staff;COMMIT; TRUNCATE 1TRUNCATE TABLE staff; TRUNCATE DELETE 清空表格 T F 语句类型 DDL DML 自动提交 T F 可回滚 F T 释放储存空间 T F 推荐使用 T F 注释12345COMMENT ON TABLE table_name is &apos;表注释&apos;;COMMENT ON TABLE staff is &apos;员工表&apos;;COMMENT ON COLUMN column_name is &apos;列注释&apos;;COMMENT ON COLUMN staff_num is &apos;员工号&apos;; 重命名表1RENAME staff TO staff2; DML查询基本顺序1234567SELECT avg(group_column) FROMtable_a INNER JOIN table_bUSING(join_column)WHERE join_column &gt; 1GROUP BY group_columnHAVING avg(group_column) &gt; 10ORDER BY oreder_column DESC; WITH123456789101112131415161718WITH t AS ( SELECT equipment_name,damage*speed*(1+durability/100) val FROM equipments WHERE durability IS NOT NULL AND attack_id IS NOT null UNION ALL SELECT equipment_name,durability*dr_ratio*2 FROM equipments WHERE durability IS NOT null AND attack_id IS NULL)SELECT equipment_name,valFROM tWHERE val &gt; ( SELECT AVG(val) FROM t)ORDER BY val DESC; IN TABLE1234567SELECT npc_name,attack_type,npc_hpFROM npcs inner join attack_types USING(attack_id)WHERE (attack_id,npc_hp) in ( SELECT attack_id,max(npc_hp) FROM npcs GROUP BY attack_id); 连接1234567891011-- 内连接FROM products INNER JOIN product_typesUSING (product_type_id);-- 外连接FROM products (LEFT | RIGHT | FULL) OUTER JOIN product_typesUSING (product_type_id);-- 自连接FROM employees w INNER JOIN employees mON w.manager_id = m.employee_id; 杂项12345where equipment_name like &apos;%铁_&apos;group by cid,cnamenvl(gname,&apos;无&apos;) 函数插入数据12INSERT INTO staff VALUES(1,&apos;fn&apos;,10);INSERT INTO staff(staff_num,first_name,leader_num) VALUES(1,&apos;fn&apos;,10); 删除数据12DELETE FROM staffWHERE staff_num = 1; 修改数据12UPDATE staff SET staff_num = 3, first_name = &apos;xxx&apos;WHERE staff_num = 1; PL/SQL1234567891011121314151617181920212223set serveroutput ondeclarecursor c_countries IS select cname,cid from countries;v_cid countries.cid%type;v_city_cnt integer;v_gener_cnt integer;begin for v_c IN c_countries LOOP v_cid := v_c.cid; select count(*) into v_city_cnt from cities where cid = v_cid; select count(*) into v_gener_cnt from generals where cid = v_cid and cityid is not null; IF gener_cnt &gt; 2 THEN DBMS_OUTPUT.PUT_LINE(v_c.cname ||&apos;有&apos;||v_city_cnt||&apos;座城市，&apos;||v_gener_cnt||&apos;名现役武将&apos;); END IF; END LOOP;end;/]]></content>
+      <categories>
+        <category>计算机</category>
+      </categories>
+      <tags>
+        <tag>Oracle</tag>
+        <tag>数据库</tag>
+        <tag>SQL</tag>
+        <tag>PL/SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Apache2 服务器配置 HTTPS]]></title>
     <url>%2F2019%2F08%2F18%2Fssl%2F</url>
     <content type="text"><![CDATA[概述由于多次配置 SSL 证书，每次间隔时间较长，每次都忘记怎么搞。。。特地总结一下，延缓阿兹海默。 这份教程只针对 Apache2 服务器，且已写好配置文件的选手。 大概分以下几个步骤： 申请证书 验证域名所有权 下载证书转换格式 将证书传入服务器 修改配置文件 载入配置文件 重启 Apache 申请证书推荐 FreeSSL，其中有两款免费证书：TrustAsia 的一年单域名证书、Let’s Encrypt的 90 天通配符证书。 如果子域名较少推荐选择前者，我用的子域名比较多选择后者，文件较少但 90 天要配置一次。 验证域名所有权根据 FreeSSL 网站的提示，在解析域名的网站按要求添加 TXT 记录即可。 下载证书转换格式下载到证书后会发现是三个文件，而 Apache2 只需要两个文件，最终需要一个 .key 和一个 .pem的文件。 你将下载到如下三个文件： .key文件，证书私钥 CA_xxx.crt，CA 中间证书 域名.crt，服务器证书 其中 .key 文件就是最终需要的 .key 文件，而 .pem 文件需要自己创建再将 CA_xxx.crt 和 域名.crt 按顺序粘贴进去。 将证书传入服务器使用 scp 将证书上传至服务器，当然这需要配置好 ssh。 命令格式和示例如下：12scp file_source file_targetscp ./pazyx_xyz.pem git@pazyx.xyz:~/ 我一般是将文件传入 home 目录后再 ssh登录到服务器将文件从 home 目录放到 /etc/apache2/ssl/ 目录下，以免权限受限。 修改配置文件配置文件为 /etc/apache2/site-available/default-ssl.conf如何配置略，因为我也忘了，随便改一改就是了。 载入配置文件1a2ensite default-ssl 重启 Apache1sudo service apache2 restart 参考资料 Apache配置ssl 免费证书下载的两个文件的说明]]></content>
@@ -242,10 +256,10 @@
         <category>数学</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
-        <tag>完全背包</tag>
         <tag>数学建模</tag>
+        <tag>动态规划</tag>
         <tag>连续型动态规划</tag>
+        <tag>完全背包</tag>
       </tags>
   </entry>
   <entry>
@@ -256,8 +270,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>动态规划</tag>
+        <tag>算法</tag>
         <tag>题解</tag>
         <tag>POJ</tag>
         <tag>状压DP</tag>
@@ -341,9 +355,9 @@
       </categories>
       <tags>
         <tag>ACM</tag>
+        <tag>纪念</tag>
         <tag>省赛</tag>
         <tag>ACM题目</tag>
-        <tag>纪念</tag>
         <tag>Java</tag>
         <tag>Scanner</tag>
         <tag>System.in</tag>
@@ -422,13 +436,13 @@
       </categories>
       <tags>
         <tag>Cpp</tag>
-        <tag>算法</tag>
         <tag>动态规划</tag>
+        <tag>完全背包</tag>
+        <tag>算法</tag>
         <tag>背包问题</tag>
         <tag>01背包</tag>
         <tag>公告</tag>
         <tag>C</tag>
-        <tag>完全背包</tag>
         <tag>计划</tag>
         <tag>Dijkstra</tag>
         <tag>KMP</tag>
@@ -562,10 +576,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>动态规划</tag>
-        <tag>背包问题</tag>
         <tag>完全背包</tag>
+        <tag>算法</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -576,8 +590,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>动态规划</tag>
+        <tag>算法</tag>
         <tag>背包问题</tag>
         <tag>01背包</tag>
       </tags>
