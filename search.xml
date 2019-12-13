@@ -90,8 +90,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>DFS</tag>
         <tag>Cpp</tag>
+        <tag>DFS</tag>
         <tag>Dijkstra</tag>
         <tag>Kruskal</tag>
         <tag>Prim</tag>
@@ -105,8 +105,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>DFS</tag>
         <tag>Cpp</tag>
+        <tag>DFS</tag>
         <tag>Dijkstra</tag>
         <tag>SPFA</tag>
         <tag>Kruskal</tag>
@@ -220,8 +220,8 @@
         <category>泛 - 计算机</category>
       </categories>
       <tags>
-        <tag>并查集</tag>
         <tag>队列</tag>
+        <tag>并查集</tag>
         <tag>栈</tag>
         <tag>二叉树</tag>
         <tag>哈夫曼编码</tag>
@@ -311,10 +311,10 @@
         <category>数学</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
-        <tag>完全背包</tag>
         <tag>数学建模</tag>
+        <tag>动态规划</tag>
         <tag>连续型动态规划</tag>
+        <tag>完全背包</tag>
       </tags>
   </entry>
   <entry>
@@ -325,8 +325,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>动态规划</tag>
+        <tag>算法</tag>
         <tag>题解</tag>
         <tag>POJ</tag>
         <tag>状压DP</tag>
@@ -356,16 +356,16 @@
       </categories>
       <tags>
         <tag>Cpp</tag>
-        <tag>运算符重载</tag>
+        <tag>构造函数</tag>
         <tag>读书</tag>
         <tag>笔记</tag>
+        <tag>异常</tag>
+        <tag>运算符重载</tag>
         <tag>Effective C++</tag>
-        <tag>构造函数</tag>
         <tag>拷贝构造函数</tag>
         <tag>缺省构造函数</tag>
         <tag>virtual 函数</tag>
         <tag>自我赋值</tag>
-        <tag>异常</tag>
       </tags>
   </entry>
   <entry>
@@ -376,10 +376,10 @@
         <category>编程语言 - Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>Cpp</tag>
-        <tag>整数</tag>
         <tag>浮点数</tag>
+        <tag>Java</tag>
+        <tag>整数</tag>
         <tag>命名规则</tag>
         <tag>String</tag>
         <tag>string</tag>
@@ -426,12 +426,12 @@
         <category>泛 - 计算机</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
         <tag>C</tag>
+        <tag>操作系统</tag>
+        <tag>Linux</tag>
         <tag>gcc</tag>
         <tag>ld</tag>
         <tag>dd</tag>
-        <tag>操作系统</tag>
         <tag>linker</tag>
       </tags>
   </entry>
@@ -490,14 +490,14 @@
         <category>泛 - 公告</category>
       </categories>
       <tags>
-        <tag>算法</tag>
+        <tag>C</tag>
+        <tag>Cpp</tag>
         <tag>动态规划</tag>
+        <tag>完全背包</tag>
+        <tag>算法</tag>
         <tag>背包问题</tag>
         <tag>01背包</tag>
         <tag>公告</tag>
-        <tag>Cpp</tag>
-        <tag>完全背包</tag>
-        <tag>C</tag>
         <tag>计划</tag>
         <tag>Dijkstra</tag>
         <tag>KMP</tag>
@@ -547,9 +547,9 @@
         <tag>算法</tag>
         <tag>质数</tag>
         <tag>求质数表</tag>
+        <tag>优化</tag>
         <tag>欧拉筛法</tag>
         <tag>简易欧拉筛法</tag>
-        <tag>优化</tag>
       </tags>
   </entry>
   <entry>
@@ -563,9 +563,9 @@
         <tag>算法</tag>
         <tag>质数</tag>
         <tag>求质数表</tag>
-        <tag>优化</tag>
         <tag>试除法</tag>
         <tag>埃氏筛法</tag>
+        <tag>优化</tag>
       </tags>
   </entry>
   <entry>
@@ -618,10 +618,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>动态规划</tag>
-        <tag>背包问题</tag>
         <tag>完全背包</tag>
+        <tag>算法</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -632,8 +632,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>动态规划</tag>
+        <tag>算法</tag>
         <tag>背包问题</tag>
         <tag>01背包</tag>
       </tags>
@@ -703,8 +703,8 @@
         <category>编程语言 - Cpp</category>
       </categories>
       <tags>
-        <tag>汇编语言</tag>
         <tag>Cpp</tag>
+        <tag>汇编语言</tag>
         <tag>构造函数</tag>
         <tag>拷贝构造函数</tag>
         <tag>缺省构造函数</tag>
@@ -720,8 +720,8 @@
       </categories>
       <tags>
         <tag>算法</tag>
-        <tag>ACM</tag>
         <tag>题解</tag>
+        <tag>ACM</tag>
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>图搜索</tag>
@@ -801,12 +801,12 @@
       <tags>
         <tag>算法</tag>
         <tag>题解</tag>
+        <tag>队列</tag>
         <tag>BFS</tag>
         <tag>图</tag>
         <tag>最短路径</tag>
         <tag>XUJCOJ</tag>
         <tag>多状态</tag>
-        <tag>队列</tag>
       </tags>
   </entry>
   <entry>
@@ -818,8 +818,8 @@
       </categories>
       <tags>
         <tag>算法</tag>
-        <tag>ACM</tag>
         <tag>题解</tag>
+        <tag>ACM</tag>
         <tag>百练</tag>
         <tag>DFS</tag>
         <tag>极大连通子图</tag>
