@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Microwave. Five minutes.">
 <meta property="og:description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X&amp;#123;&amp;#125;;class Z : public virtual X&amp;#123;&amp;#125;;class A : public Y, public Z&amp;#123;&amp;#125;; Y 和 Z 的大小与机器（字长）有关，也和编译">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-10T11:01:25.999Z">
+<meta property="og:updated_time" content="2019-12-17T08:16:33.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「书摘」《深度探索 C++ 对象模型》（三）">
 <meta name="twitter:description" content="Data 语意学 (The Semantics of Data)1234class X &amp;#123;&amp;#125;;class Y : public virtual X&amp;#123;&amp;#125;;class Z : public virtual X&amp;#123;&amp;#125;;class A : public Y, public Z&amp;#123;&amp;#125;; Y 和 Z 的大小与机器（字长）有关，也和编译">
@@ -426,11 +426,11 @@
 <p><code>class A</code> 的大小由下列几点决定：</p>
 <ul>
 <li>被大家共享的唯一一个 <code>class X</code> 实例，大小为 1 <code>byte</code>。</li>
-<li><code>Base class Y</code> 和 <code>Base class Y</code> 的大小，减去“因 virtual base class X 而配置” 的大小，结果式 4 <code>bytes</code>。</li>
+<li><code>Base class Y</code> 和 <code>Base class Z</code> 的大小，减去“因 virtual base class X 而配置” 的大小，结果式 4 <code>bytes</code>。</li>
 <li><code>class A</code> 自己的大小：0 <code>byte</code>。</li>
 <li><code>class A</code> 的 alignment 数量（如果有的化）。<br>结果为 12 <code>bytes</code></li>
 </ul>
-<p>”特别对 empty virual base class 做了处理“ 的编译器，class X 实例的那 1 <code>byte</code> 将被拿掉，class A 的大小将是 8 <code>bytes</code>。</p>
+<p>”特别对 empty virtual base class 做了处理“ 的编译器，class X 实例的那 1 <code>byte</code> 将被拿掉，class A 的大小将是 8 <code>bytes</code>。</p>
 <p>继承得到的数据的存放顺序，C++标准没有强制定义其间的排列顺序。</p>
 <h2 id="Data-Member-的绑定-The-Binding-of-a-Data-Member"><a href="#Data-Member-的绑定-The-Binding-of-a-Data-Member" class="headerlink" title="Data Member 的绑定 (The Binding of a Data Member)"></a>Data Member 的绑定 (The Binding of a Data Member)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> x;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point3d</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// 对于函数本体的分析将延迟，直至 class 声明的右大括号出现才开始。</span></span><br><span class="line">	<span class="function"><span class="keyword">float</span> <span class="title">X</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> x; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">float</span> x;</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 分析在这里进行</span></span><br></pre></td></tr></table></figure>
 <p>member function 的 argument list 会在第一次遭遇时被适当地决议完成。extern 和 nested type names 之间的非直觉绑定操作还是会发生。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> length;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point3d</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mumble</span><span class="params">( length val )</span> </span>&#123; _val = val; &#125;	<span class="comment">// length 为 int</span></span><br><span class="line">    <span class="function">length <span class="title">mumble</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> _val; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">float</span> length;</span><br><span class="line">    length _val;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
@@ -950,7 +950,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1100,7 +1100,7 @@
     
       <span class="post-meta-item-text">全站字数统计&#58;</span>
     
-    <span title="全站字数统计">99.3k</span>
+    <span title="全站字数统计">99.6k</span>
   
 
 <!--
