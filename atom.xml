@@ -5,12 +5,12 @@
   <subtitle>他大概会说你想得太多</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://blog.pazyx.xyz/"/>
+  <link href="https://blog.zyx.sh/"/>
   <updated>2019-12-12T05:40:08.962Z</updated>
-  <id>https://blog.pazyx.xyz/</id>
+  <id>https://blog.zyx.sh/</id>
   
   <author>
-    <name>pazyx.xyz</name>
+    <name>赵砚潇</name>
     
   </author>
   
@@ -18,8 +18,8 @@
   
   <entry>
     <title>「笔记」Oracle Database 期末考笔记</title>
-    <link href="https://blog.pazyx.xyz/2019/12/12/oracle_endterm_notes/"/>
-    <id>https://blog.pazyx.xyz/2019/12/12/oracle_endterm_notes/</id>
+    <link href="https://blog.zyx.sh/2019/12/12/oracle_endterm_notes/"/>
+    <id>https://blog.zyx.sh/2019/12/12/oracle_endterm_notes/</id>
     <published>2019-12-12T06:43:18.000Z</published>
     <updated>2019-12-12T05:40:08.962Z</updated>
     
@@ -34,29 +34,58 @@
     
     </summary>
     
-      <category term="计算机" scheme="https://blog.pazyx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <category term="计算机" scheme="https://blog.zyx.sh/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
     
-      <category term="异常" scheme="https://blog.pazyx.xyz/tags/%E5%BC%82%E5%B8%B8/"/>
+      <category term="异常" scheme="https://blog.zyx.sh/tags/%E5%BC%82%E5%B8%B8/"/>
     
-      <category term="Oracle" scheme="https://blog.pazyx.xyz/tags/Oracle/"/>
+      <category term="Oracle" scheme="https://blog.zyx.sh/tags/Oracle/"/>
     
-      <category term="数据库" scheme="https://blog.pazyx.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://blog.zyx.sh/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="SQL" scheme="https://blog.pazyx.xyz/tags/SQL/"/>
+      <category term="SQL" scheme="https://blog.zyx.sh/tags/SQL/"/>
     
-      <category term="PL/SQL" scheme="https://blog.pazyx.xyz/tags/PL-SQL/"/>
+      <category term="PL/SQL" scheme="https://blog.zyx.sh/tags/PL-SQL/"/>
     
-      <category term="触发器" scheme="https://blog.pazyx.xyz/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/"/>
+      <category term="触发器" scheme="https://blog.zyx.sh/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「朝花夕拾」0x05 选择</title>
+    <link href="https://blog.zyx.sh/2019/12/10/diary_5/"/>
+    <id>https://blog.zyx.sh/2019/12/10/diary_5/</id>
+    <published>2019-12-09T21:21:35.000Z</published>
+    <updated>2020-11-17T00:06:21.173Z</updated>
+    
+    <content type="html"><![CDATA[<p>这周厦门再次入夏，又可以短袖了。</p><p>晚上跟室友夜谈，突然想明白学校食堂的问题，</p><p>回想起高中的食堂，我经历过两个高中，食堂不算美味，但也挺想去食堂吃的，只是偶尔点个外卖或者吃个泡面。而到了大学，刚来的时候没感觉到与高中的差别，现在越来越意识到这食堂问题很大，它限制了同学们的选择。</p><p>高中时的食堂，基本都是选窗口点餐，窗口很多，面、米线、炸鸡、手抓饼和黄焖鸡都有，最差的窗口应该就是打饭的窗口了。</p><p>大学的食堂，打饭变成了最大的窗口，一般的楼层基本只有打饭的窗口。小吃就非常少。我吃的很不开心。</p><p>打饭窗口严重限制了人们的选择，排队到你时，你必须立即作出选择，面对眼花缭乱的菜你难免作出错误的选择，即便选的菜比较好吃，那也不一定是你最舒服的选择，那是在阿姨和后面同学的压力下作出的选择。所以我每次去食堂吃饭都不太高兴，因为自己很难做出选择。有时还有想点土豆牛肉，点成冬瓜牛肉了，我从不吃冬瓜！！！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这周厦门再次入夏，又可以短袖了。&lt;/p&gt;
+&lt;p&gt;晚上跟室友夜谈，突然想明白学校食堂的问题，&lt;/p&gt;
+&lt;p&gt;回想起高中的食堂，我经历过两个高中，食堂不算美味，但也挺想去食堂吃的，只是偶尔点个外卖或者吃个泡面。而到了大学，刚来的时候没感觉到与高中的差别，现在越来越意识到这食堂问
+      
+    
+    </summary>
+    
+      <category term="泛 - 记" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E8%AE%B0/"/>
+    
+    
+      <category term="记" scheme="https://blog.zyx.sh/tags/%E8%AE%B0/"/>
+    
+      <category term="251" scheme="https://blog.zyx.sh/tags/251/"/>
     
   </entry>
   
   <entry>
     <title>「笔记」概率论与数理统计——数字特征</title>
-    <link href="https://blog.pazyx.xyz/2019/12/08/probability_num_chara_notes/"/>
-    <id>https://blog.pazyx.xyz/2019/12/08/probability_num_chara_notes/</id>
+    <link href="https://blog.zyx.sh/2019/12/08/probability_num_chara_notes/"/>
+    <id>https://blog.zyx.sh/2019/12/08/probability_num_chara_notes/</id>
     <published>2019-12-08T15:08:42.000Z</published>
-    <updated>2019-12-12T04:49:49.118Z</updated>
+    <updated>2020-03-09T11:53:06.943Z</updated>
     
     <content type="html"><![CDATA[<h2 id="随机变量的数字特征"><a href="#随机变量的数字特征" class="headerlink" title="随机变量的数字特征"></a>随机变量的数字特征</h2><h3 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>$$<br>\begin{align}<br>&amp; x \sim p_i \implies EX = \sum_i x_i P_i\\<br>&amp; x \sim f(x) \implies EX = \int_{-\infty}^{+\infty} xf(x)\, \mathrm{d}x \\<br>\\<br>&amp; x \sim p_i , Y = g(x) \implies EY = \sum_i g(x_i) P_i \\<br>&amp; x \sim f(x) , Y = g(x) \implies EY = \int_{-\infty}^{+\infty} g(x)f(x)\, \mathrm{d}x<br>\\<br>\end{align}<br>$$</p><h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><p>$$<br>E \left(\sum_{i=1}^n a_i X_i\right) = \sum_{i=1}^n a_i E X_i \\<br>Ec = c \; , \; E(EX) = EX \\<br>E(aX+c) = aEX + c \; , \; E(X \pm Y) = EX \pm EY<br>$$</p><p>若 $X,Y$ 独立<br>$$<br>EXY = EX \cdot EY<br>$$</p><h3 id="方差"><a href="#方差" class="headerlink" title="方差"></a>方差</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>$$<br>Dx = E\left[\left(X-EX\right)^2\right] = E(X^2) - (EX)^2 \\<br>\Downarrow \\<br>E(X^2) = (EX)^2 + DX \\<br>\Downarrow \\<br>E(X^2) \geq (EX)^2<br>$$</p><h4 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h4><p>$$<br>Dc = 0 \; , \; D(aX + b) = a^2 DX \\<br>D(X \pm Y) = DX + DY \pm 2Cov(X,Y) \\<br>$$</p><p>$$<br>\begin{cases}<br>&amp; D(X \pm Y) = DX + DY \pm 2Cov(X,Y)\\<br>&amp; D\left(\sum_{i=1}^n X_i\right) = \sum_{i=1}^n DX_i + 2\sum_{i=1}^n \sum_{j=1}^n cov(X_i,Y_i)<br>\end{cases}<br>$$</p><p>若 $X,Y$ 独立<br>$$<br>D(aX+bY) = a^2 DX + b^2 DY<br>$$</p><h3 id="协方差"><a href="#协方差" class="headerlink" title="协方差"></a>协方差</h3><h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h4><p>$$<br>Cov(X,Y) = E\left[(X-EX)(Y-EY)\right] = E(XY) - EX \cdot EY<br>$$</p><p>$$<br>E(XY) =<br>\begin{cases}<br>&amp; \sum_i \sum_j x_i y_j P{X = x_i,Y = y_i} \;{(离散)} \\<br>&amp; \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}xyf(x,y) \mathrm{d}x \mathrm{d}y \;{(连续)}<br>\end{cases}<br>$$</p><h4 id="相关系数"><a href="#相关系数" class="headerlink" title="相关系数"></a>相关系数</h4><p>$$<br>\rho_{XY} = \frac{Cov(X,Y)}{\sqrt{DX}\sqrt{DY}} \; , \; |\rho_{XY}| \leq 1<br>$$</p><h4 id="性质-2"><a href="#性质-2" class="headerlink" title="性质"></a>性质</h4><p>$$<br>Cov(X,X) = DX \; , \; \rho_{XX} = 1 \\<br>Cov(X,Y) = Cov(Y,X) \\<br>Cov(X,c) = 0 \; , \; Cov(aX+b,Y) = aCov(X,Y)\\<br>Cov(X_1 + X_2,Y) = Cov(X_1,Y) + Cov(X_2,Y)<br>$$</p><p>若 $Y = aX+b$，则<br>$$<br>\rho_{XY} =<br>\begin{cases}<br>1 &amp; \quad a &gt; 0\\<br>-1 &amp; \quad a &lt; 0<br>\end{cases}<br>$$</p><h3 id="常用分布的期望和方差列表"><a href="#常用分布的期望和方差列表" class="headerlink" title="常用分布的期望和方差列表"></a>常用分布的期望和方差列表</h3><table><thead><tr><th>分布</th><th>分布列 $p_k$ 或概率密度 $f(x)$</th></tr></thead><tbody><tr><td>$0 - 1$ 分布 $B(1,p)$</td><td>$P\{X=k\}=p^k(1-p)^{1-k},k=0,1$</td></tr><tr><td>二项分布 $B(n,p)$</td><td>$P\{X=k\} = C^k_n p^k(1-p)^{n-k},k=0,1,\dots,n$</td></tr><tr><td>泊松分布 $P(\lambda)$</td><td>$P\{X=k\}=\frac{\lambda^k}{k!}e^{-\lambda},k=0,1,\dots$</td></tr><tr><td>几何分布 $G(p)$</td><td>$P\{X=k\} = (1-p)^{k-1}p,k=1,2,\cdots$</td></tr><tr><td>正态分布 $N(\mu,\sigma^2)$</td><td>$f(x) = \frac{1}{\sqrt{2\pi}\sigma}exp\left\{-\frac{(x-\mu)^2}{2\sigma^2}\right\} , -\infty &lt; x &lt; +\infty$</td></tr><tr><td>均匀分布 $U(a,b)$</td><td>$f(x) = \frac{1}{b-a},a &lt; x &lt; b$</td></tr><tr><td>指数分布 $E(\lambda)$</td><td>$f(x) = \lambda e^{-\lambda x},x&gt;0$</td></tr></tbody></table><table><thead><tr><th>分布</th><th>期望</th><th>方差</th></tr></thead><tbody><tr><td>$0 - 1$ 分布 $B(1,p)$</td><td>$p$</td><td>$p(1-p)$</td></tr><tr><td>二项分布 $B(n,p)$</td><td>$np$</td><td>$np(1-p)$</td></tr><tr><td>泊松分布 $P(\lambda)$</td><td>$\lambda$</td><td>$\lambda$</td></tr><tr><td>几何分布 $G(p)$</td><td>$\frac{1}{p}$</td><td>$\frac{1-p}{p^2}$</td></tr><tr><td>正态分布 $N(\mu,\sigma^2)$</td><td>$\mu$</td><td>$\sigma^2$</td></tr><tr><td>均匀分布 $U(a,b)$</td><td>$\frac{a+b}{2}$</td><td>$\frac{(b-a)^2}{12}$</td></tr><tr><td>指数分布 $E(\lambda)$</td><td>$\frac{1}{\lambda}$</td><td>$\frac{1}{\lambda^2}$</td></tr></tbody></table>]]></content>
     
@@ -69,25 +98,25 @@
     
     </summary>
     
-      <category term="数学" scheme="https://blog.pazyx.xyz/categories/%E6%95%B0%E5%AD%A6/"/>
+      <category term="数学" scheme="https://blog.zyx.sh/categories/%E6%95%B0%E5%AD%A6/"/>
     
     
-      <category term="期望" scheme="https://blog.pazyx.xyz/tags/%E6%9C%9F%E6%9C%9B/"/>
+      <category term="期望" scheme="https://blog.zyx.sh/tags/%E6%9C%9F%E6%9C%9B/"/>
     
-      <category term="方差" scheme="https://blog.pazyx.xyz/tags/%E6%96%B9%E5%B7%AE/"/>
+      <category term="方差" scheme="https://blog.zyx.sh/tags/%E6%96%B9%E5%B7%AE/"/>
     
-      <category term="协方差" scheme="https://blog.pazyx.xyz/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE/"/>
+      <category term="协方差" scheme="https://blog.zyx.sh/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE/"/>
     
-      <category term="概率论" scheme="https://blog.pazyx.xyz/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
+      <category term="概率论" scheme="https://blog.zyx.sh/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
     
-      <category term="数字特征" scheme="https://blog.pazyx.xyz/tags/%E6%95%B0%E5%AD%97%E7%89%B9%E5%BE%81/"/>
+      <category term="数字特征" scheme="https://blog.zyx.sh/tags/%E6%95%B0%E5%AD%97%E7%89%B9%E5%BE%81/"/>
     
   </entry>
   
   <entry>
     <title>「朝花夕拾」0x04 重启</title>
-    <link href="https://blog.pazyx.xyz/2019/12/07/diary_4/"/>
-    <id>https://blog.pazyx.xyz/2019/12/07/diary_4/</id>
+    <link href="https://blog.zyx.sh/2019/12/07/diary_4/"/>
+    <id>https://blog.zyx.sh/2019/12/07/diary_4/</id>
     <published>2019-12-06T20:13:47.000Z</published>
     <updated>2019-12-06T19:59:30.910Z</updated>
     
@@ -103,48 +132,19 @@
     
     </summary>
     
-      <category term="泛 - 记" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%B0/"/>
+      <category term="泛 - 记" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E8%AE%B0/"/>
     
     
-      <category term="记" scheme="https://blog.pazyx.xyz/tags/%E8%AE%B0/"/>
+      <category term="记" scheme="https://blog.zyx.sh/tags/%E8%AE%B0/"/>
     
-      <category term="251" scheme="https://blog.pazyx.xyz/tags/251/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「朝花夕拾」0x05 选择</title>
-    <link href="https://blog.pazyx.xyz/2019/12/07/diary_5/"/>
-    <id>https://blog.pazyx.xyz/2019/12/07/diary_5/</id>
-    <published>2019-12-06T20:13:47.000Z</published>
-    <updated>2019-12-16T03:41:56.397Z</updated>
-    
-    <content type="html"><![CDATA[<p>这周厦门再次入夏，又可以短袖了。</p><p>晚上跟室友夜谈，突然想明白学校食堂的问题，</p><p>回想起高中的食堂，我经历过两个高中，食堂不算美味，但也挺想去食堂吃的，只是偶尔点个外卖或者吃个泡面。而到了大学，刚来的时候没感觉到与高中的差别，现在越来越意识到这食堂问题很大，它限制了同学们的选择。</p><p>高中时的食堂，基本都是选窗口点餐，窗口很多，面、米线、炸鸡、手抓饼和黄焖鸡都有，最差的窗口应该就是打饭的窗口了。</p><p>大学的食堂，打饭变成了最大的窗口，一般的楼层基本只有打饭的窗口。小吃就非常少。我吃的很不开心。</p><p>打饭窗口严重限制了人们的选择，排队到你时，你必须立即作出选择，面对眼花缭乱的菜你难免作出错误的选择，即便选的菜比较好吃，那也不一定是你最舒服的选择，那是在阿姨和后面同学的压力下作出的选择。所以我每次去食堂吃饭都不太高兴，因为自己很难做出选择。有时还有想点土豆牛肉，点成冬瓜牛肉了，我从不吃冬瓜！！！</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;这周厦门再次入夏，又可以短袖了。&lt;/p&gt;
-&lt;p&gt;晚上跟室友夜谈，突然想明白学校食堂的问题，&lt;/p&gt;
-&lt;p&gt;回想起高中的食堂，我经历过两个高中，食堂不算美味，但也挺想去食堂吃的，只是偶尔点个外卖或者吃个泡面。而到了大学，刚来的时候没感觉到与高中的差别，现在越来越意识到这食堂问
-      
-    
-    </summary>
-    
-      <category term="泛 - 记" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%B0/"/>
-    
-    
-      <category term="记" scheme="https://blog.pazyx.xyz/tags/%E8%AE%B0/"/>
-    
-      <category term="251" scheme="https://blog.pazyx.xyz/tags/251/"/>
+      <category term="251" scheme="https://blog.zyx.sh/tags/251/"/>
     
   </entry>
   
   <entry>
     <title>「朝花夕拾」写在19年11月10日</title>
-    <link href="https://blog.pazyx.xyz/2019/11/10/end/"/>
-    <id>https://blog.pazyx.xyz/2019/11/10/end/</id>
+    <link href="https://blog.zyx.sh/2019/11/10/end/"/>
+    <id>https://blog.zyx.sh/2019/11/10/end/</id>
     <published>2019-11-10T15:13:55.000Z</published>
     <updated>2019-12-06T17:11:42.545Z</updated>
     
@@ -159,19 +159,19 @@
     
     </summary>
     
-      <category term="泛 - 记" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%B0/"/>
+      <category term="泛 - 记" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E8%AE%B0/"/>
     
     
-      <category term="ICPC" scheme="https://blog.pazyx.xyz/tags/ICPC/"/>
+      <category term="ICPC" scheme="https://blog.zyx.sh/tags/ICPC/"/>
     
-      <category term="心得" scheme="https://blog.pazyx.xyz/tags/%E5%BF%83%E5%BE%97/"/>
+      <category term="心得" scheme="https://blog.zyx.sh/tags/%E5%BF%83%E5%BE%97/"/>
     
   </entry>
   
   <entry>
     <title>「笔记」Oracle Database 期中考笔记</title>
-    <link href="https://blog.pazyx.xyz/2019/11/06/oracle_midterm_notes/"/>
-    <id>https://blog.pazyx.xyz/2019/11/06/oracle_midterm_notes/</id>
+    <link href="https://blog.zyx.sh/2019/11/06/oracle_midterm_notes/"/>
+    <id>https://blog.zyx.sh/2019/11/06/oracle_midterm_notes/</id>
     <published>2019-11-06T06:43:18.000Z</published>
     <updated>2019-12-10T15:09:51.188Z</updated>
     
@@ -186,23 +186,23 @@
     
     </summary>
     
-      <category term="计算机" scheme="https://blog.pazyx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <category term="计算机" scheme="https://blog.zyx.sh/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
     
-      <category term="Oracle" scheme="https://blog.pazyx.xyz/tags/Oracle/"/>
+      <category term="Oracle" scheme="https://blog.zyx.sh/tags/Oracle/"/>
     
-      <category term="数据库" scheme="https://blog.pazyx.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://blog.zyx.sh/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="SQL" scheme="https://blog.pazyx.xyz/tags/SQL/"/>
+      <category term="SQL" scheme="https://blog.zyx.sh/tags/SQL/"/>
     
-      <category term="PL/SQL" scheme="https://blog.pazyx.xyz/tags/PL-SQL/"/>
+      <category term="PL/SQL" scheme="https://blog.zyx.sh/tags/PL-SQL/"/>
     
   </entry>
   
   <entry>
     <title>Apache2 服务器配置 HTTPS</title>
-    <link href="https://blog.pazyx.xyz/2019/08/18/ssl/"/>
-    <id>https://blog.pazyx.xyz/2019/08/18/ssl/</id>
+    <link href="https://blog.zyx.sh/2019/08/18/ssl/"/>
+    <id>https://blog.zyx.sh/2019/08/18/ssl/</id>
     <published>2019-08-18T05:12:41.000Z</published>
     <updated>2019-11-21T01:57:42.244Z</updated>
     
@@ -218,21 +218,21 @@
     
     </summary>
     
-      <category term="笔记" scheme="https://blog.pazyx.xyz/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://blog.zyx.sh/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="SSL" scheme="https://blog.pazyx.xyz/tags/SSL/"/>
+      <category term="SSL" scheme="https://blog.zyx.sh/tags/SSL/"/>
     
-      <category term="HTTPS" scheme="https://blog.pazyx.xyz/tags/HTTPS/"/>
+      <category term="HTTPS" scheme="https://blog.zyx.sh/tags/HTTPS/"/>
     
-      <category term="Apache" scheme="https://blog.pazyx.xyz/tags/Apache/"/>
+      <category term="Apache" scheme="https://blog.zyx.sh/tags/Apache/"/>
     
   </entry>
   
   <entry>
     <title>「题解」kuangbin 最小生成树</title>
-    <link href="https://blog.pazyx.xyz/2019/04/29/kuangbin_MST/"/>
-    <id>https://blog.pazyx.xyz/2019/04/29/kuangbin_MST/</id>
+    <link href="https://blog.zyx.sh/2019/04/29/kuangbin_MST/"/>
+    <id>https://blog.zyx.sh/2019/04/29/kuangbin_MST/</id>
     <published>2019-04-29T13:23:42.000Z</published>
     <updated>2019-04-29T14:13:51.978Z</updated>
     
@@ -249,25 +249,25 @@
     
     </summary>
     
-      <category term="题解" scheme="https://blog.pazyx.xyz/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://blog.zyx.sh/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.zyx.sh/tags/Cpp/"/>
     
-      <category term="DFS" scheme="https://blog.pazyx.xyz/tags/DFS/"/>
+      <category term="DFS" scheme="https://blog.zyx.sh/tags/DFS/"/>
     
-      <category term="Dijkstra" scheme="https://blog.pazyx.xyz/tags/Dijkstra/"/>
+      <category term="Dijkstra" scheme="https://blog.zyx.sh/tags/Dijkstra/"/>
     
-      <category term="Kruskal" scheme="https://blog.pazyx.xyz/tags/Kruskal/"/>
+      <category term="Kruskal" scheme="https://blog.zyx.sh/tags/Kruskal/"/>
     
-      <category term="Prim" scheme="https://blog.pazyx.xyz/tags/Prim/"/>
+      <category term="Prim" scheme="https://blog.zyx.sh/tags/Prim/"/>
     
   </entry>
   
   <entry>
     <title>「题解」kuangbin 最短路</title>
-    <link href="https://blog.pazyx.xyz/2019/04/29/kuangbin_short_path/"/>
-    <id>https://blog.pazyx.xyz/2019/04/29/kuangbin_short_path/</id>
+    <link href="https://blog.zyx.sh/2019/04/29/kuangbin_short_path/"/>
+    <id>https://blog.zyx.sh/2019/04/29/kuangbin_short_path/</id>
     <published>2019-04-29T12:23:42.000Z</published>
     <updated>2019-04-29T14:17:14.437Z</updated>
     
@@ -284,29 +284,29 @@
     
     </summary>
     
-      <category term="题解" scheme="https://blog.pazyx.xyz/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://blog.zyx.sh/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.zyx.sh/tags/Cpp/"/>
     
-      <category term="DFS" scheme="https://blog.pazyx.xyz/tags/DFS/"/>
+      <category term="DFS" scheme="https://blog.zyx.sh/tags/DFS/"/>
     
-      <category term="Dijkstra" scheme="https://blog.pazyx.xyz/tags/Dijkstra/"/>
+      <category term="Dijkstra" scheme="https://blog.zyx.sh/tags/Dijkstra/"/>
     
-      <category term="SPFA" scheme="https://blog.pazyx.xyz/tags/SPFA/"/>
+      <category term="SPFA" scheme="https://blog.zyx.sh/tags/SPFA/"/>
     
-      <category term="Kruskal" scheme="https://blog.pazyx.xyz/tags/Kruskal/"/>
+      <category term="Kruskal" scheme="https://blog.zyx.sh/tags/Kruskal/"/>
     
-      <category term="Floyd" scheme="https://blog.pazyx.xyz/tags/Floyd/"/>
+      <category term="Floyd" scheme="https://blog.zyx.sh/tags/Floyd/"/>
     
-      <category term="最短路" scheme="https://blog.pazyx.xyz/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/"/>
+      <category term="最短路" scheme="https://blog.zyx.sh/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/"/>
     
   </entry>
   
   <entry>
     <title>最短路算法2——SPFA</title>
-    <link href="https://blog.pazyx.xyz/2019/02/02/spfa/"/>
-    <id>https://blog.pazyx.xyz/2019/02/02/spfa/</id>
+    <link href="https://blog.zyx.sh/2019/02/02/spfa/"/>
+    <id>https://blog.zyx.sh/2019/02/02/spfa/</id>
     <published>2019-02-02T00:12:41.000Z</published>
     <updated>2019-02-02T09:07:05.073Z</updated>
     
@@ -321,27 +321,27 @@
     
     </summary>
     
-      <category term="算法" scheme="https://blog.pazyx.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://blog.zyx.sh/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="算法" scheme="https://blog.pazyx.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://blog.zyx.sh/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="ACM" scheme="https://blog.pazyx.xyz/tags/ACM/"/>
+      <category term="ACM" scheme="https://blog.zyx.sh/tags/ACM/"/>
     
-      <category term="优先队列" scheme="https://blog.pazyx.xyz/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/"/>
+      <category term="优先队列" scheme="https://blog.zyx.sh/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/"/>
     
-      <category term="SPFA" scheme="https://blog.pazyx.xyz/tags/SPFA/"/>
+      <category term="SPFA" scheme="https://blog.zyx.sh/tags/SPFA/"/>
     
-      <category term="Bellman-Ford" scheme="https://blog.pazyx.xyz/tags/Bellman-Ford/"/>
+      <category term="Bellman-Ford" scheme="https://blog.zyx.sh/tags/Bellman-Ford/"/>
     
-      <category term="最短路径" scheme="https://blog.pazyx.xyz/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"/>
+      <category term="最短路径" scheme="https://blog.zyx.sh/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"/>
     
   </entry>
   
   <entry>
     <title>「书摘」《深度探索 C++ 对象模型》（三）</title>
-    <link href="https://blog.pazyx.xyz/2018/12/21/inside_cpp_obj_model_3/"/>
-    <id>https://blog.pazyx.xyz/2018/12/21/inside_cpp_obj_model_3/</id>
+    <link href="https://blog.zyx.sh/2018/12/21/inside_cpp_obj_model_3/"/>
+    <id>https://blog.zyx.sh/2018/12/21/inside_cpp_obj_model_3/</id>
     <published>2018-12-21T12:23:42.000Z</published>
     <updated>2019-12-17T08:16:33.020Z</updated>
     
@@ -356,17 +356,17 @@
     
     </summary>
     
-      <category term="泛 - 书摘" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E4%B9%A6%E6%91%98/"/>
+      <category term="泛 - 书摘" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E4%B9%A6%E6%91%98/"/>
     
     
-      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.zyx.sh/tags/Cpp/"/>
     
   </entry>
   
   <entry>
     <title>「笔记」《Effective C++》 读书笔记（三）</title>
-    <link href="https://blog.pazyx.xyz/2018/12/19/effective-cpp03/"/>
-    <id>https://blog.pazyx.xyz/2018/12/19/effective-cpp03/</id>
+    <link href="https://blog.zyx.sh/2018/12/19/effective-cpp03/"/>
+    <id>https://blog.zyx.sh/2018/12/19/effective-cpp03/</id>
     <published>2018-12-18T16:02:25.000Z</published>
     <updated>2019-05-10T11:04:36.901Z</updated>
     
@@ -381,25 +381,25 @@
     
     </summary>
     
-      <category term="泛 - 笔记" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E7%AC%94%E8%AE%B0/"/>
+      <category term="泛 - 笔记" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.zyx.sh/tags/Cpp/"/>
     
-      <category term="读书" scheme="https://blog.pazyx.xyz/tags/%E8%AF%BB%E4%B9%A6/"/>
+      <category term="读书" scheme="https://blog.zyx.sh/tags/%E8%AF%BB%E4%B9%A6/"/>
     
-      <category term="笔记" scheme="https://blog.pazyx.xyz/tags/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://blog.zyx.sh/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="Effective C++" scheme="https://blog.pazyx.xyz/tags/Effective-C/"/>
+      <category term="Effective C++" scheme="https://blog.zyx.sh/tags/Effective-C/"/>
     
-      <category term="智能指针" scheme="https://blog.pazyx.xyz/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"/>
+      <category term="智能指针" scheme="https://blog.zyx.sh/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
     <title>「书摘」《自控力》</title>
-    <link href="https://blog.pazyx.xyz/2018/12/12/books-1/"/>
-    <id>https://blog.pazyx.xyz/2018/12/12/books-1/</id>
+    <link href="https://blog.zyx.sh/2018/12/12/books-1/"/>
+    <id>https://blog.zyx.sh/2018/12/12/books-1/</id>
     <published>2018-12-11T23:31:20.000Z</published>
     <updated>2018-12-21T12:28:20.587Z</updated>
     
@@ -414,17 +414,17 @@
     
     </summary>
     
-      <category term="泛 - 书摘" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E4%B9%A6%E6%91%98/"/>
+      <category term="泛 - 书摘" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E4%B9%A6%E6%91%98/"/>
     
     
-      <category term="自控力" scheme="https://blog.pazyx.xyz/tags/%E8%87%AA%E6%8E%A7%E5%8A%9B/"/>
+      <category term="自控力" scheme="https://blog.zyx.sh/tags/%E8%87%AA%E6%8E%A7%E5%8A%9B/"/>
     
   </entry>
   
   <entry>
     <title>吃草 - 打铁</title>
-    <link href="https://blog.pazyx.xyz/2018/11/06/2018_icpc_qingdao_regional/"/>
-    <id>https://blog.pazyx.xyz/2018/11/06/2018_icpc_qingdao_regional/</id>
+    <link href="https://blog.zyx.sh/2018/11/06/2018_icpc_qingdao_regional/"/>
+    <id>https://blog.zyx.sh/2018/11/06/2018_icpc_qingdao_regional/</id>
     <published>2018-11-05T16:00:24.000Z</published>
     <updated>2018-11-06T00:19:27.220Z</updated>
     
@@ -439,23 +439,23 @@
     
     </summary>
     
-      <category term="泛 - 纪念" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E7%BA%AA%E5%BF%B5/"/>
+      <category term="泛 - 纪念" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E7%BA%AA%E5%BF%B5/"/>
     
     
-      <category term="ACM" scheme="https://blog.pazyx.xyz/tags/ACM/"/>
+      <category term="ACM" scheme="https://blog.zyx.sh/tags/ACM/"/>
     
-      <category term="纪念" scheme="https://blog.pazyx.xyz/tags/%E7%BA%AA%E5%BF%B5/"/>
+      <category term="纪念" scheme="https://blog.zyx.sh/tags/%E7%BA%AA%E5%BF%B5/"/>
     
-      <category term="ICPC" scheme="https://blog.pazyx.xyz/tags/ICPC/"/>
+      <category term="ICPC" scheme="https://blog.zyx.sh/tags/ICPC/"/>
     
-      <category term="青岛" scheme="https://blog.pazyx.xyz/tags/%E9%9D%92%E5%B2%9B/"/>
+      <category term="青岛" scheme="https://blog.zyx.sh/tags/%E9%9D%92%E5%B2%9B/"/>
     
   </entry>
   
   <entry>
     <title>「朝花夕拾」0x03 二零一八年十月二十九日凌晨人民喝不到冰镇可乐</title>
-    <link href="https://blog.pazyx.xyz/2018/10/29/diary_3/"/>
-    <id>https://blog.pazyx.xyz/2018/10/29/diary_3/</id>
+    <link href="https://blog.zyx.sh/2018/10/29/diary_3/"/>
+    <id>https://blog.zyx.sh/2018/10/29/diary_3/</id>
     <published>2018-10-28T16:13:47.000Z</published>
     <updated>2019-12-06T17:15:29.672Z</updated>
     
@@ -472,21 +472,21 @@
     
     </summary>
     
-      <category term="泛 - 记" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%B0/"/>
+      <category term="泛 - 记" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E8%AE%B0/"/>
     
     
-      <category term="记" scheme="https://blog.pazyx.xyz/tags/%E8%AE%B0/"/>
+      <category term="记" scheme="https://blog.zyx.sh/tags/%E8%AE%B0/"/>
     
-      <category term="可乐" scheme="https://blog.pazyx.xyz/tags/%E5%8F%AF%E4%B9%90/"/>
+      <category term="可乐" scheme="https://blog.zyx.sh/tags/%E5%8F%AF%E4%B9%90/"/>
     
-      <category term="自由" scheme="https://blog.pazyx.xyz/tags/%E8%87%AA%E7%94%B1/"/>
+      <category term="自由" scheme="https://blog.zyx.sh/tags/%E8%87%AA%E7%94%B1/"/>
     
   </entry>
   
   <entry>
     <title>算法训练营解题总结（第二周）//ToDo</title>
-    <link href="https://blog.pazyx.xyz/2018/08/12/algor_club_code_2/"/>
-    <id>https://blog.pazyx.xyz/2018/08/12/algor_club_code_2/</id>
+    <link href="https://blog.zyx.sh/2018/08/12/algor_club_code_2/"/>
+    <id>https://blog.zyx.sh/2018/08/12/algor_club_code_2/</id>
     <published>2018-08-11T16:30:49.000Z</published>
     <updated>2018-12-14T04:46:24.478Z</updated>
     
@@ -501,31 +501,31 @@
     
     </summary>
     
-      <category term="泛 - 计算机" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <category term="泛 - 计算机" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
     
-      <category term="Dijkstra" scheme="https://blog.pazyx.xyz/tags/Dijkstra/"/>
+      <category term="Dijkstra" scheme="https://blog.zyx.sh/tags/Dijkstra/"/>
     
-      <category term="Bellman-Ford" scheme="https://blog.pazyx.xyz/tags/Bellman-Ford/"/>
+      <category term="Bellman-Ford" scheme="https://blog.zyx.sh/tags/Bellman-Ford/"/>
     
-      <category term="ToDo" scheme="https://blog.pazyx.xyz/tags/ToDo/"/>
+      <category term="ToDo" scheme="https://blog.zyx.sh/tags/ToDo/"/>
     
-      <category term="二分" scheme="https://blog.pazyx.xyz/tags/%E4%BA%8C%E5%88%86/"/>
+      <category term="二分" scheme="https://blog.zyx.sh/tags/%E4%BA%8C%E5%88%86/"/>
     
-      <category term="匈牙利算法" scheme="https://blog.pazyx.xyz/tags/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/"/>
+      <category term="匈牙利算法" scheme="https://blog.zyx.sh/tags/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/"/>
     
-      <category term="排序" scheme="https://blog.pazyx.xyz/tags/%E6%8E%92%E5%BA%8F/"/>
+      <category term="排序" scheme="https://blog.zyx.sh/tags/%E6%8E%92%E5%BA%8F/"/>
     
-      <category term="归并排序" scheme="https://blog.pazyx.xyz/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
+      <category term="归并排序" scheme="https://blog.zyx.sh/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
     
-      <category term="欧拉回路" scheme="https://blog.pazyx.xyz/tags/%E6%AC%A7%E6%8B%89%E5%9B%9E%E8%B7%AF/"/>
+      <category term="欧拉回路" scheme="https://blog.zyx.sh/tags/%E6%AC%A7%E6%8B%89%E5%9B%9E%E8%B7%AF/"/>
     
   </entry>
   
   <entry>
     <title>算法训练营解题总结（第一周）//ToDo</title>
-    <link href="https://blog.pazyx.xyz/2018/08/04/algor_club_code_1/"/>
-    <id>https://blog.pazyx.xyz/2018/08/04/algor_club_code_1/</id>
+    <link href="https://blog.zyx.sh/2018/08/04/algor_club_code_1/"/>
+    <id>https://blog.zyx.sh/2018/08/04/algor_club_code_1/</id>
     <published>2018-08-03T18:30:49.000Z</published>
     <updated>2018-08-03T18:31:58.213Z</updated>
     
@@ -540,33 +540,33 @@
     
     </summary>
     
-      <category term="泛 - 计算机" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <category term="泛 - 计算机" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
     
-      <category term="队列" scheme="https://blog.pazyx.xyz/tags/%E9%98%9F%E5%88%97/"/>
+      <category term="队列" scheme="https://blog.zyx.sh/tags/%E9%98%9F%E5%88%97/"/>
     
-      <category term="并查集" scheme="https://blog.pazyx.xyz/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+      <category term="并查集" scheme="https://blog.zyx.sh/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
     
-      <category term="栈" scheme="https://blog.pazyx.xyz/tags/%E6%A0%88/"/>
+      <category term="栈" scheme="https://blog.zyx.sh/tags/%E6%A0%88/"/>
     
-      <category term="二叉树" scheme="https://blog.pazyx.xyz/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+      <category term="二叉树" scheme="https://blog.zyx.sh/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
-      <category term="哈夫曼编码" scheme="https://blog.pazyx.xyz/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/"/>
+      <category term="哈夫曼编码" scheme="https://blog.zyx.sh/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/"/>
     
-      <category term="Kruskal" scheme="https://blog.pazyx.xyz/tags/Kruskal/"/>
+      <category term="Kruskal" scheme="https://blog.zyx.sh/tags/Kruskal/"/>
     
-      <category term="Hash Map" scheme="https://blog.pazyx.xyz/tags/Hash-Map/"/>
+      <category term="Hash Map" scheme="https://blog.zyx.sh/tags/Hash-Map/"/>
     
-      <category term="输入输出挂" scheme="https://blog.pazyx.xyz/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%8C%82/"/>
+      <category term="输入输出挂" scheme="https://blog.zyx.sh/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%8C%82/"/>
     
-      <category term="ToDo" scheme="https://blog.pazyx.xyz/tags/ToDo/"/>
+      <category term="ToDo" scheme="https://blog.zyx.sh/tags/ToDo/"/>
     
   </entry>
   
   <entry>
     <title>求质数表3——高级筛法</title>
-    <link href="https://blog.pazyx.xyz/2018/07/26/isprimes-3/"/>
-    <id>https://blog.pazyx.xyz/2018/07/26/isprimes-3/</id>
+    <link href="https://blog.zyx.sh/2018/07/26/isprimes-3/"/>
+    <id>https://blog.zyx.sh/2018/07/26/isprimes-3/</id>
     <published>2018-07-26T11:36:26.000Z</published>
     <updated>2018-07-26T11:37:44.858Z</updated>
     
@@ -581,27 +581,27 @@
     
     </summary>
     
-      <category term="算法" scheme="https://blog.pazyx.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://blog.zyx.sh/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="算法" scheme="https://blog.pazyx.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://blog.zyx.sh/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="质数" scheme="https://blog.pazyx.xyz/tags/%E8%B4%A8%E6%95%B0/"/>
+      <category term="质数" scheme="https://blog.zyx.sh/tags/%E8%B4%A8%E6%95%B0/"/>
     
-      <category term="求质数表" scheme="https://blog.pazyx.xyz/tags/%E6%B1%82%E8%B4%A8%E6%95%B0%E8%A1%A8/"/>
+      <category term="求质数表" scheme="https://blog.zyx.sh/tags/%E6%B1%82%E8%B4%A8%E6%95%B0%E8%A1%A8/"/>
     
-      <category term="优化" scheme="https://blog.pazyx.xyz/tags/%E4%BC%98%E5%8C%96/"/>
+      <category term="优化" scheme="https://blog.zyx.sh/tags/%E4%BC%98%E5%8C%96/"/>
     
-      <category term="增量式筛法" scheme="https://blog.pazyx.xyz/tags/%E5%A2%9E%E9%87%8F%E5%BC%8F%E7%AD%9B%E6%B3%95/"/>
+      <category term="增量式筛法" scheme="https://blog.zyx.sh/tags/%E5%A2%9E%E9%87%8F%E5%BC%8F%E7%AD%9B%E6%B3%95/"/>
     
-      <category term="分段式筛法" scheme="https://blog.pazyx.xyz/tags/%E5%88%86%E6%AE%B5%E5%BC%8F%E7%AD%9B%E6%B3%95/"/>
+      <category term="分段式筛法" scheme="https://blog.zyx.sh/tags/%E5%88%86%E6%AE%B5%E5%BC%8F%E7%AD%9B%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>「朝花夕拾」0x02 幻觉</title>
-    <link href="https://blog.pazyx.xyz/2018/07/24/diary_2/"/>
-    <id>https://blog.pazyx.xyz/2018/07/24/diary_2/</id>
+    <link href="https://blog.zyx.sh/2018/07/24/diary_2/"/>
+    <id>https://blog.zyx.sh/2018/07/24/diary_2/</id>
     <published>2018-07-24T08:39:47.000Z</published>
     <updated>2019-12-06T17:15:20.136Z</updated>
     
@@ -617,21 +617,21 @@
     
     </summary>
     
-      <category term="泛 - 记" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E8%AE%B0/"/>
+      <category term="泛 - 记" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E8%AE%B0/"/>
     
     
-      <category term="记" scheme="https://blog.pazyx.xyz/tags/%E8%AE%B0/"/>
+      <category term="记" scheme="https://blog.zyx.sh/tags/%E8%AE%B0/"/>
     
-      <category term="英语" scheme="https://blog.pazyx.xyz/tags/%E8%8B%B1%E8%AF%AD/"/>
+      <category term="英语" scheme="https://blog.zyx.sh/tags/%E8%8B%B1%E8%AF%AD/"/>
     
-      <category term="大电影" scheme="https://blog.pazyx.xyz/tags/%E5%A4%A7%E7%94%B5%E5%BD%B1/"/>
+      <category term="大电影" scheme="https://blog.zyx.sh/tags/%E5%A4%A7%E7%94%B5%E5%BD%B1/"/>
     
   </entry>
   
   <entry>
     <title>「书摘」《深度探索 C++ 对象模型》（二）</title>
-    <link href="https://blog.pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/"/>
-    <id>https://blog.pazyx.xyz/2018/07/23/inside_cpp_obj_model_2/</id>
+    <link href="https://blog.zyx.sh/2018/07/23/inside_cpp_obj_model_2/"/>
+    <id>https://blog.zyx.sh/2018/07/23/inside_cpp_obj_model_2/</id>
     <published>2018-07-23T05:08:42.000Z</published>
     <updated>2018-12-21T12:28:50.092Z</updated>
     
@@ -650,24 +650,24 @@
     
     </summary>
     
-      <category term="泛 - 书摘" scheme="https://blog.pazyx.xyz/categories/%E6%B3%9B-%E4%B9%A6%E6%91%98/"/>
+      <category term="泛 - 书摘" scheme="https://blog.zyx.sh/categories/%E6%B3%9B-%E4%B9%A6%E6%91%98/"/>
     
     
-      <category term="Cpp" scheme="https://blog.pazyx.xyz/tags/Cpp/"/>
+      <category term="Cpp" scheme="https://blog.zyx.sh/tags/Cpp/"/>
     
-      <category term="构造函数" scheme="https://blog.pazyx.xyz/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
+      <category term="构造函数" scheme="https://blog.zyx.sh/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
     
-      <category term="拷贝构造函数" scheme="https://blog.pazyx.xyz/tags/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
+      <category term="拷贝构造函数" scheme="https://blog.zyx.sh/tags/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
     
-      <category term="缺省构造函数" scheme="https://blog.pazyx.xyz/tags/%E7%BC%BA%E7%9C%81%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
+      <category term="缺省构造函数" scheme="https://blog.zyx.sh/tags/%E7%BC%BA%E7%9C%81%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"/>
     
-      <category term="编译器优化" scheme="https://blog.pazyx.xyz/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/"/>
+      <category term="编译器优化" scheme="https://blog.zyx.sh/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/"/>
     
-      <category term="Virtual Class" scheme="https://blog.pazyx.xyz/tags/Virtual-Class/"/>
+      <category term="Virtual Class" scheme="https://blog.zyx.sh/tags/Virtual-Class/"/>
     
-      <category term="Virtual Base Class" scheme="https://blog.pazyx.xyz/tags/Virtual-Base-Class/"/>
+      <category term="Virtual Base Class" scheme="https://blog.zyx.sh/tags/Virtual-Base-Class/"/>
     
-      <category term="NRV优化" scheme="https://blog.pazyx.xyz/tags/NRV%E4%BC%98%E5%8C%96/"/>
+      <category term="NRV优化" scheme="https://blog.zyx.sh/tags/NRV%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
