@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「朝花夕拾」0x06 离谱]]></title>
+    <url>%2F2020%2F11%2F29%2Flp%2F</url>
+    <content type="text"><![CDATA[二零二零年十一月二十八日是离谱的一天！ 耗子尾汁，好好反思。]]></content>
+      <categories>
+        <category>泛 - 记</category>
+      </categories>
+      <tags>
+        <tag>记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[「笔记」Oracle Database 期末考笔记]]></title>
     <url>%2F2019%2F12%2F12%2Foracle_endterm_notes%2F</url>
     <content type="text"><![CDATA[异常123456789BEGIN...EXCEPTION WHEN ZERO_DIVIDE THEN DBMS_OUTPUT.PUT_LINE(&apos;DIvision by zero&apos;); WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE(&apos;An exception occurred&apos;);END;/ OTHERS 异常可处理所有异常，但必须在 EXCEPTION 块中所有特定异常之后。遇到异常后执行完异常处理代码后，程序会退出此代码块。 过程123456create or replace procedure helloasbegin dbms_output.put_line(&apos;Hello World!&apos;);end;/ 12345678910create or replace procedure hello(v_employee_id in employees.employee_id%type)as v_salary employees.salary%type;begin select salary into v_salary from employees where employee_id=v_employee_id; dbms_output.put_line(v_salary);end;/ 参数模式 IN: 参数默认模式，过程体中不能改变 IN 参数的值 OUT: 只在过程体内部赋值，忽略传入值，必须为变量 IN OUT: 在过程体内部赋值，保留传入值，可以修改，必须为变量 执行过程1234567891011SQL&gt; exec procedure_nameSQL&gt; exec procedure_name(v_name)SQL&gt; exec procedure_name(:v_name) --外部变量begin...procedure_name;procedure_name(v_name);...end;/ 定义外部变量12SQL&gt; variable v_name v_typeSQL&gt; print v_name 删除过程1DROP PROCEDURE procedure_name; 函数12345678910create or replace function circle_area(p_radius number)return numberas v_pi number := 3.1416; v_area number;begin v_area := v_pi * power(p_radius,2); return v_area;end circle_area;/ 删除函数1DROP FUNCTION function_name; 触发器在 DML 语句之前或之后被激活。 语句级触发器：对于整条语句只执行一次触发器过程。 行级触发器：对于每行的操作各执行一次触发器过程。 123456789101112CREATE [OR REPLACE] TRIGGER trigger_name&#123;BEFORE | AFTER | INSTEAD OF | FOR&#125; trigger_even-- 之前、之后、代替、11g复合触发器ON table_name[FOR EACH ROW] -- 行级触发器[&#123;FORWARD | REVERSE&#125; CROSSEDITION] -- 11g[&#123;FORWARD | REVERSE&#125; schema.other_trigger] -- 11g[&#123;ENABLE | DISABLE&#125;] -- 11g[WHEN tigger_condition]BEGIN trigger_bodyEND tigger_name; trigger_even UPDATE INSERT DELETE UPDATE OF col_name DELETE OR INSERT OR UPDATE OF col_name old &amp; new DML OLD NEW INSRET NULL insert value UPDATE value before update value after update DELETE value before delete NULL trigger_body 内使用 old 或 new 时，需加 : 使用外部变量，:old、 :new。 禁用和启用触发器12ALTER TRIGGER trigger_name DISABLE;ALTER TRIGGER trigger_name ENABLE; 删除触发器1DROP TRIGGER trigger_name;]]></content>
@@ -254,9 +265,9 @@
         <tag>算法</tag>
         <tag>质数</tag>
         <tag>求质数表</tag>
-        <tag>优化</tag>
         <tag>增量式筛法</tag>
         <tag>分段式筛法</tag>
+        <tag>优化</tag>
       </tags>
   </entry>
   <entry>
@@ -368,9 +379,9 @@
       </categories>
       <tags>
         <tag>Cpp</tag>
+        <tag>构造函数</tag>
         <tag>读书</tag>
         <tag>笔记</tag>
-        <tag>构造函数</tag>
         <tag>异常</tag>
         <tag>运算符重载</tag>
         <tag>Effective C++</tag>
@@ -575,9 +586,9 @@
         <tag>算法</tag>
         <tag>质数</tag>
         <tag>求质数表</tag>
+        <tag>优化</tag>
         <tag>试除法</tag>
         <tag>埃氏筛法</tag>
-        <tag>优化</tag>
       </tags>
   </entry>
   <entry>
