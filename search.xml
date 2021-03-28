@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「笔记」C++面向对象高级开发（下）]]></title>
+    <url>%2F2021%2F01%2F24%2Fcpp_houjie2%2F</url>
+    <content type="text"><![CDATA[conversion function &amp; non-explicit-one-argument ctor conversion function 将该类型转换为其他类型 non-explicit-one-argument ctor 将其他类型的对象转换为该类型 12345678910111213141516class Fraction&#123;public: Fraction(int num, int den = 1) : m_numerator(num), m_denominnator(den)&#123; &#125; operator double() const &#123; return (double)((double)m_numerator / (double)m_denominnator); &#125; Fraction operator+(const Fraction&amp; f)&#123; return Fraction(...); &#125;private: int m_numerator; int m_denminator;&#125;;Fraction f(3,5);Fraction d2 = f+4; //[Error] ambiguous pointer-like classes &amp; function-like classes1234567891011121314template&lt;class T&gt;class shared_ptr&#123;public: T&amp; operator*() const&#123; return *px; &#125; T* operator-&gt;() const&#123; return px; &#125; shared_ptr(T* p) : px(p)&#123; &#125;private: T* px;...&#125;shared_ptr&lt;Foo&gt; sp(new Foo);Foo f(*sp);sp-&gt;method(); // = px-&gt;method() '-&gt;'运算符传递性 1234template &lt;class T&gt;strict minus&#123; T operator()(const T&amp; x,const T&amp; y) const &#123; return x - y; &#125;&#125; member template需要用多个派生类来构造多个基类 1234567891011121314template &lt;class T1,class T2&gt;struct pair&#123; typedef T1 first_type; typedef T2 second_type; T1 first; T2 second; pair() : first(T1()),second(T2()) &#123; &#125; pair(const T1&amp; a,const T2&amp; b) : first(a), second(b) &#123; &#125; template &lt;class U1, class U2&gt; pair(const pair&lt;U1, U2&gt;&amp; p) : first(p.first), second(p.second) &#123; &#125;&#125; template specialization &amp; partial specialization123template &lt;class Key&gt; struct hash &#123; &#125;template &lt;char&gt; struct hash &#123; ... &#125;;;template &lt;int&gt; struct hash &#123; ... &#125;; 编译器会先找特化模板，未找到会使用泛化模板。（类似“重载”模板） 123456template&lt;typename T, typename Alloc=...&gt;class vector&#123;...&#125;template&lt;typename Alloc=...&gt;class vector&lt;bool, Alloc&gt;&#123;...&#125; // 个数偏特化// 个数偏特化，只能从左往右进行偏特化 12345template &lt;typename T&gt;class C&#123; ... &#125;;template &lt;typename T&gt;class C&lt;T*&gt;&#123; ... &#125;; // 范围偏特化]]></content>
+      <categories>
+        <category>泛 - 笔记</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>读书</tag>
+        <tag>笔记</tag>
+        <tag>Effective C++</tag>
+        <tag>多重范型</tag>
+        <tag>const</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[「朝花夕拾」0x06 离谱]]></title>
     <url>%2F2020%2F11%2F29%2Flp%2F</url>
     <content type="text"><![CDATA[二零二零年十一月二十八日是离谱的一天！ 耗子尾汁，好好反思。]]></content>
